@@ -4,7 +4,7 @@ CWD="$1"
 echo "$1"
 
 TIMESTAMP=`date "+%Y.%m.%d-%H:%M:%S"` #add %3N as we want millisecond too
-files=(".zshrc" ".zprofile" ".config/nvim", ".config/tmux")
+files=(".zshrc" ".zprofile" ".config/nvim" ".config/tmux")
 
 ___git_ac="git --git-dir=$CWD/.git --work-tree=$CWD"
 
