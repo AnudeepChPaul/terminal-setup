@@ -13,8 +13,8 @@ for file in ${files[@]}; do
     eval $___git_ac add "$project_dir/${file}"
 done
 
-cp -avR ~/.config/nvim $project_dir/.config
-cp -avR ~/.config/tmux $project_dir/.config
+cp -aR ~/.config/nvim $project_dir/.config
+cp -aR ~/.config/tmux $project_dir/.config
 
 eval $___git_ac add "$project_dir"
 
