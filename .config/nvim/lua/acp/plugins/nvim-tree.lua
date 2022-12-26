@@ -11,8 +11,10 @@ vim.g.loaded_netrwPlugin = 1
 -- change color for arrows in tree to light blue
 vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
 
+local lib = require("nvim-tree.lib")
+
 local function cd_dot_cb(node)
-	tree.change_dir(vim.fn.getcwd(-1))
+	nvimtree.change_dir(vim.fn.getcwd(-1))
 	if node.name ~= ".." then
 		lib.set_index_and_redraw(node.absolute_path)
 	end
@@ -20,7 +22,13 @@ end
 
 -- configure nvim-tree
 nvimtree.setup({
-
+	view = {
+		mappings = {
+			list = {
+				{ key = ".", action = "cd_dot", action_cb = cd_dot_cb },
+			},
+		},
+	},
 	-- change folder arrow icons
 	renderer = {
 		icons = {
