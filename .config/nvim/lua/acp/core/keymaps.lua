@@ -7,7 +7,7 @@ local keymap = vim.keymap -- for conciseness
 -- General Keymaps
 ---------------------
 
--- nouse up/down/left/right arrow
+-- No use up/down/left/right arrow
 keymap.set("n", "<Up>", "nomap")
 keymap.set("n", "<Down>", "nomap")
 keymap.set("n", "<Left>", "nomap")
@@ -35,8 +35,8 @@ keymap.set("n", "sx", ":close<CR>") -- close current split window
 keymap.set("n", "tx", ":tabclose<CR>") -- close current tab
 
 keymap.set("n", "tt", ":tabnew<CR>") -- open new tab
-keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
-keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
+keymap.set("n", "tn", ":tabn<CR>") --  go to next tab
+keymap.set("n", "tp", ":tabp<CR>") --  go to previous tab
 
 ----------------------
 -- Plugin Keybinds
@@ -46,7 +46,7 @@ keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximization
 
 -- nvim-tree
-keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
+keymap.set("n", "fe", ":NvimTreeToggle<CR>") -- toggle file explorer
 
 -- telescope
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
