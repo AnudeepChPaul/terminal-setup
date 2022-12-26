@@ -1,3 +1,5 @@
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # setting up PATH variables
 export GO_PATH=/Users/acp/go
 export MAVEN_PATH=/Users/acp/bin/apache-maven-3.8.6/
@@ -22,8 +24,8 @@ alias ..="cd .."
 alias sc="code"
 alias s="sudo"
 alias sn="sudo nano"
-alias sv="sudo vim"
-alias v="vim"
+alias sv="sudo nvim"
+alias v="nvim"
 alias gc="git clone"
 alias d3="cd /Users/acp/Projects"
 alias conf="sv -O ~/.zprofile ~/.zshrc"
@@ -42,6 +44,8 @@ alias dcra='docker container rm $(docker container ls -q)'
 alias dnra='docker network rm $(docker network ls -q)'
 alias o="ack --sort-files --color"
 alias l="ls -alp"
+alias lg='lazygit'
+alias ll='exa --all --long --icons --git --header'
 
 # Setting up nvm
 export NVM_DIR="$HOME/.nvm"
@@ -57,8 +61,8 @@ export HISTCONTROL=ignorespace:erasedups
 
 # Setting up shorthands for big boys
 _r() {
-    source ~/.zprofile
     source ~/.zshrc
+    source ~/.zprofile
     tmux source ~/.config/tmux/.tmux.conf
     echo "Reloaded!"
 }
@@ -73,7 +77,7 @@ _f() {
     dir=$(find . -type f -maxdepth $depth | egrep -v "${TREE__GLOBAL_IGNORE}" | fzf --preview "${FZF__PREVIEW__COMMAND}")
 
     if [[ -f "$dir" ]]; then
-        eval "vim $dir"
+        eval "v $dir"
     fi
 }
 
@@ -104,7 +108,7 @@ _a() {
     if [[ -d $dir ]]; then
         eval "cd $dir"
     elif [[ -f $1 ]]; then
-        eval "vim $dir"
+        eval "v $dir"
     else
         echo "$1 is not valid"
     fi
@@ -147,6 +151,15 @@ _run_nginx() {
     nginx -c ~/Desktop/nginx_config/nginx.conf
 }
 
+_tn() {
+  tmux new -s $1 || tmux attach -t $1
+}
+
+_ide () {
+  tmux split-window -v -p 30
+  tmux split-window -h -p 66
+  tmux split-window -h -p 50
+}
 
 
 # Added by Toolbox App
