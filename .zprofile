@@ -45,7 +45,7 @@ alias dnra='docker network rm $(docker network ls -q)'
 alias o="ack --sort-files --color"
 alias l="ls -alp"
 alias vg='lazygit'
-alias ll='exa --all --long --icons --git --header'
+alias ll='exa --all --long --icons --header'
 
 # Setting up nvm
 export NVM_DIR="$HOME/.nvm"
