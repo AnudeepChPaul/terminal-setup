@@ -4,7 +4,7 @@ project_dir="$1"
 echo "$1"
 
 TIMESTAMP=`date "+%Y.%m.%d-%H:%M:%S"`
-files=(".zshrc" ".zprofile" ".config/nvim" ".config/tmux")
+files=(".zshrc" ".zprofile")
 
 ___git_ac="git --git-dir=$project_dir/.git --work-tree=$project_dir"
 
@@ -12,6 +12,9 @@ for file in ${files[@]}; do
     cp -fr "$HOME/${file}" "$project_dir/${file}" && echo "${file} copied"
     eval $___git_ac add "$project_dir/${file}"
 done
+
+cp -f -r ~/.config/nvim $project_dir/.config/nvim
+cp -f -r ~/.config/tmux $project_dir/.config/tmux
 
 eval $___git_ac add "$project_dir/auto_checkin.sh"
 
