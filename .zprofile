@@ -1,5 +1,3 @@
-export BASH_SILENCE_DEPRECATION_WARNING=1
-
 # setting up PATH variables
 export GO_PATH=/Users/acp/go
 export MAVEN_PATH=/Users/acp/bin/apache-maven-3.8.6/
@@ -61,7 +59,7 @@ export HISTCONTROL=ignorespace:erasedups
 _r() {
     source ~/.zprofile
     source ~/.zshrc
-    tmux source ~/.tmux.conf
+    tmux source ~/.config/tmux/.tmux.conf
     echo "Reloaded!"
 }
 
