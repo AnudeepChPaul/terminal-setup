@@ -44,7 +44,7 @@ alias dcra='docker container rm $(docker container ls -q)'
 alias dnra='docker network rm $(docker network ls -q)'
 alias o="ack --sort-files --color"
 alias l="ls -alp"
-alias lg='lazygit'
+alias vg='lazygit'
 alias ll='exa --all --long --icons --git --header'
 
 # Setting up nvm
