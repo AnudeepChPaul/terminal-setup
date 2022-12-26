@@ -1,19 +1,19 @@
 #!/bin/bash
 
-CWD="$1"
+project_dir="$1"
 echo "$1"
 
 TIMESTAMP=`date "+%Y.%m.%d-%H:%M:%S"` #add %3N as we want millisecond too
 files=(".zshrc" ".zprofile" ".config/nvim" ".config/tmux")
 
-___git_ac="git --git-dir=$CWD/.git --work-tree=$CWD"
+___git_ac="git --git-dir=$project_dir/.git --work-tree=$project_dir"
 
 for file in ${files[@]}; do
-    cp -fr "$HOME/${file}" "$CWD/${file}" && echo "${file} copied"
-    eval $___git_ac add "$CWD/${file}"
+    cp -fr "$HOME/${file}" "$project_dir/${file}" && echo "${file} copied"
+    eval $___git_ac add "$project_dir/${file}"
 done
 
-eval $___git_ac add "$CWD/auto_checkin.sh"
+eval $___git_ac add "$project_dir/auto_checkin.sh"
 
 eval "$___git_ac commit -m '[$TIMESTAMP] [Backup] Auto backing up changes' &> /dev/null"
 eval "$___git_ac pull --rebase"
