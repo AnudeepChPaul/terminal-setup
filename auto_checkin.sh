@@ -13,8 +13,8 @@ for file in ${files[@]}; do
     eval $___git_ac add "$project_dir/${file}"
 done
 
-cp -f -r ~/.config/nvim $project_dir/.config/nvim
-cp -f -r ~/.config/tmux $project_dir/.config/tmux
+cp -avR ~/.config/nvim $project_dir/.config
+cp -avR ~/.config/tmux $project_dir/.config
 
 eval $___git_ac add "$project_dir/auto_checkin.sh"
 
