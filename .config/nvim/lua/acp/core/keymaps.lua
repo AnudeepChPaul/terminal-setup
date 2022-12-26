@@ -7,27 +7,34 @@ local keymap = vim.keymap -- for conciseness
 -- General Keymaps
 ---------------------
 
+-- nouse up/down/left/right arrow
+keymap.set("n", "<Up>", "nomap")
+keymap.set("n", "<Down>", "nomap")
+keymap.set("n", "<Left>", "nomap")
+keymap.set("n", "<Right>", "nomap")
+
 -- use jk to exit insert mode
 keymap.set("i", "jk", "<ESC>")
 
 -- clear search highlights
-keymap.set("n", "<leader>nh", ":nohl<CR>")
+keymap.set("n", "nh", ":nohl<CR>")
 
 -- delete single character without copying into register
 keymap.set("n", "x", '"_x')
 
 -- increment/decrement numbers
-keymap.set("n", "<leader>+", "<C-a>") -- increment
-keymap.set("n", "<leader>-", "<C-x>") -- decrement
+keymap.set("n", "+", "<C-a>") -- increment
+keymap.set("n", "-", "<C-x>") -- decrement
 
 -- window management
-keymap.set("n", "<leader>sv", "<C-w>v") -- split window vertically
-keymap.set("n", "<leader>sh", "<C-w>s") -- split window horizontally
-keymap.set("n", "<leader>se", "<C-w>=") -- make split windows equal width & height
-keymap.set("n", "<leader>sx", ":close<CR>") -- close current split window
+keymap.set("n", "ss", "<C-w>v") -- split window vertically
+keymap.set("n", "sh", "<C-w>s") -- split window horizontally
+keymap.set("n", "se", "<C-w>=") -- make split windows equal width & height
 
-keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
-keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
+keymap.set("n", "sx", ":close<CR>") -- close current split window
+keymap.set("n", "tx", ":tabclose<CR>") -- close current tab
+
+keymap.set("n", "tt", ":tabnew<CR>") -- open new tab
 keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 
