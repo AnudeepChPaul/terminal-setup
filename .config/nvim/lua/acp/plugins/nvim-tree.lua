@@ -11,13 +11,15 @@ vim.g.loaded_netrwPlugin = 1
 -- change color for arrows in tree to light blue
 vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
 
+-- Accessing neo-vim for custom commands
 local api = require("nvim-tree.api")
 
-local function cd_dot_cb(node)
-	api.tree.change_root_to_node(node)
-	--  if node.name ~= ".." then
-	--		lib.set_index_and_redraw(node.absolute_path)
-	--	end
+local function scope_to_node()
+	api.tree.change_root_to_node()
+end
+
+local function scope_to_parent()
+	api.tree.change_root_to_parent()
 end
 
 -- configure nvim-tree
@@ -25,7 +27,8 @@ nvimtree.setup({
 	view = {
 		mappings = {
 			list = {
-				{ key = ".", action = "cd_dot", action_cb = cd_dot_cb },
+				{ key = ">", action = "scope_to_node", action_cb = scope_to_node },
+				{ key = "<", action = "scope_to_parent", action_cb = scope_to_parent },
 			},
 		},
 	},
