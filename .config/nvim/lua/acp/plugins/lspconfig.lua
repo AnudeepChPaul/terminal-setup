@@ -28,7 +28,7 @@ end
 -- import typescript plugin safely
 -- local typescript_setup, typescript = pcall(require, "typescript")
 -- if not typescript_setup then
---	return
+--  return
 -- end
 
 local keymap = vim.keymap -- for conciseness
@@ -118,10 +118,10 @@ lspconfig["html"].setup({
 
 -- configure typescript server with plugin
 -- typescript.setup({
---	server = {
---		capabilities = capabilities,
---		on_attach = on_attach,
---	},
+--  server = {
+--    capabilities = capabilities,
+--    on_attach = on_attach,
+--  },
 --})
 
 -- configure css server
@@ -173,11 +173,11 @@ for type, icon in pairs(signs) do
 end
 
 --vim.diagnostic.config({
---	virtual_text = {
---		prefix = "●",
---	},
---	update_in_insert = true,
---	float = {
---		source = "always", -- Or "if_many"
---	},
+--  virtual_text = {
+--    prefix = "●",
+--  },
+--  update_in_insert = true,
+--  float = {
+--    source = "always", -- Or "if_many"
+--  },
 --})
