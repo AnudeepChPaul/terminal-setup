@@ -16,7 +16,7 @@ done
 cp -avR ~/.config/nvim $project_dir/.config
 cp -avR ~/.config/tmux $project_dir/.config
 
-eval $___git_ac add "$project_dir/auto_checkin.sh"
+eval $___git_ac add "$project_dir"
 
 eval "$___git_ac commit -m '[$TIMESTAMP] [Backup] Auto backing up changes' &> /dev/null"
 eval "$___git_ac pull --rebase"
