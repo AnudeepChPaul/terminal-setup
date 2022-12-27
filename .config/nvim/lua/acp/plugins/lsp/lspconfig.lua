@@ -43,7 +43,7 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>n", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
 	vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
 	vim.keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
-	vim.keymap.set("n", "<leader>f", format_on_force(bufnr), opts)
+	vim.keymap.set("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true})<CR>", opts)
 	-- typescript specific keymaps (e.g. rename file and update imports)
 	if client.name == "tsserver" then
 		vim.keymap.set("n", "rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
