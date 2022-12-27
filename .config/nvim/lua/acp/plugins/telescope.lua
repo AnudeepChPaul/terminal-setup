@@ -10,6 +10,17 @@ if not actions_setup then
 	return
 end
 
+local telescopeConfig = require("telescope.config")
+
+-- Clone the default Telescope configuration
+local vimgrep_arguments = { table.unpack(telescopeConfig.values.vimgrep_arguments) }
+
+table.insert(vimgrep_arguments, "--hidden")
+table.insert(vimgrep_arguments, "--glob")
+table.insert(vimgrep_arguments, "!**/.git/*")
+table.insert(vimgrep_arguments, "!**/package-lock.json")
+table.insert(vimgrep_arguments, "!**/yarn.lock")
+
 -- configure telescope
 telescope.setup({
 	-- configure custom mappings
