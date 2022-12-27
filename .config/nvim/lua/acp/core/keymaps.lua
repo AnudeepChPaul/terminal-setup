@@ -43,10 +43,10 @@ keymap.set("", "sk", "<C-w>k")
 keymap.set("", "sj", "<C-w>j")
 keymap.set("", "sl", "<C-w>l")
 
-keymap.set("n", "<C-w><left>", "<C-w><")
-keymap.set("n", "<C-w><right>", "<C-w>>")
-keymap.set("n", "<C-w><up>", "<C-w>+")
-keymap.set("n", "<C-w><down>", "<C-w>-")
+keymap.set("n", "<M-left>", "<C-w><")
+keymap.set("n", "<M-right>", "<C-w>>")
+keymap.set("n", "<M-up>", "<C-w>+")
+keymap.set("n", "<M-down>", "<C-w>-")
 
 ----------------------
 -- Plugin Keybinds
@@ -72,4 +72,4 @@ keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git bra
 keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
 
 -- restart lsp server (not on youtube nvim video)
-keymap.set("n", "lrs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+keymap.set("n", "rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
