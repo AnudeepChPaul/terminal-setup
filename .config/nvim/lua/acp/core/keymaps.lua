@@ -27,6 +27,7 @@ keymap.set("n", "dw", 'vb"_d')
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
+
 -- increment/decrement numbers
 keymap.set("n", "+", "<C-a>") -- increment
 keymap.set("n", "-", "<C-x>") -- decrement
