@@ -27,7 +27,7 @@ telescope.setup({
 			theme = "dropdown",
 		},
 		live_grep = {
-			theme = "cursor",
+			theme = "dropdown",
 		},
 	},
 })
