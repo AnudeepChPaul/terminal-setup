@@ -1,8 +1,8 @@
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # setting up PATH variables
-export GO_PATH=/Users/acp/go
-export MAVEN_PATH=/Users/acp/bin/apache-maven-3.8.6/
+export GO_PATH=$HOME/go
+export MAVEN_PATH=$HOME/bin/apache-maven-3.8.6/
 export PYTHON_PATH=/usr/local/bin/python
 export PLATFORM_TOOLS_PATH="$HOME/bin/platform-tools"
 export ROVER_HOME_PATH="$HOME/.rover"
@@ -27,7 +27,7 @@ alias sn="sudo nano"
 alias sv="sudo nvim"
 alias v="nvim"
 alias gc="git clone"
-alias d3="cd /Users/acp/Projects"
+alias d3="cd $HOME/Projects"
 alias conf="sv -O ~/.zprofile ~/.zshrc"
 alias de="docker exec -u root -it"
 alias dils="docker image ls"
@@ -162,6 +162,6 @@ _ide () {
 
 
 # Added by Toolbox App
-export PATH="$PATH:/Users/acp/Library/Application Support/JetBrains/Toolbox/scripts"
+export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 
 
