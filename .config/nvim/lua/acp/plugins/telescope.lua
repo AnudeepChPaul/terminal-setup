@@ -25,6 +25,7 @@ table.insert(vimgrep_arguments, "!**/yarn.lock")
 telescope.setup({
 	-- configure custom mappings
 	defaults = {
+		vimgrep_arguments = vimgrep_arguments,
 		mappings = {
 			i = {
 				["<C-k>"] = actions.move_selection_previous, -- move to prev result
