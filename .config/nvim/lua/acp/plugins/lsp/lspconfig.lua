@@ -36,7 +36,7 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
 	vim.keymap.set("n", "<leader>f", function()
 		vim.lsp.buf.format({ async = true })
-	end, bufopts)
+	end, opts)
 	-- typescript specific keymaps (e.g. rename file and update imports)
 	if client.name == "tsserver" then
 		vim.keymap.set("n", "rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
