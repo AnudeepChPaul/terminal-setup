@@ -164,5 +164,4 @@ _ide () {
 # Added by Toolbox App
 export PATH="$PATH:/Users/acp/Library/Application Support/JetBrains/Toolbox/scripts"
 
-source "/Users/acp/.rover/env"
 
