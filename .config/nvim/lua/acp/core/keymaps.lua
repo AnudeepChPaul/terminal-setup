@@ -43,10 +43,10 @@ keymap.set("", "sk", "<C-w>k")
 keymap.set("", "sj", "<C-w>j")
 keymap.set("", "sl", "<C-w>l")
 
-keymap.set("n", "<M-left>", "<C-w><")
-keymap.set("n", "<M-right>", "<C-w>>")
-keymap.set("n", "<M-up>", "<C-w>+")
-keymap.set("n", "<M-down>", "<C-w>-")
+keymap.set("n", "<M-h>", "<C-w><")
+keymap.set("n", "<M-l>", "<C-w>>")
+keymap.set("n", "<M-k>", "<C-w>+")
+keymap.set("n", "<M-j>", "<C-w>-")
 
 ----------------------
 -- Plugin Keybinds
