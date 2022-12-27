@@ -116,7 +116,7 @@ _a() {
 
 h() {
     cmd=$(history | fzf +s --tac | sed 's/ *[0-9]* *//')
-    history -s $cmd
+    history $cmd
     eval $cmd
 }
 
