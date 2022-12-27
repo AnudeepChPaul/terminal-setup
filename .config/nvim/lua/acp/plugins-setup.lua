@@ -35,8 +35,13 @@ return packer.startup(function(use)
 
 	use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme
 	use("EdenEast/nightfox.nvim") -- nightfox color scheme
-
+	use({
+		"svrana/neosolarized.nvim",
+		requires = { "tjdevries/colorbuddy.nvim" },
+	})
+	use("akinsho/nvim-bufferline.lua") -- bufferline for tab
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
+	use("norcalli/nvim-colorizer.lua")
 
 	use("szw/vim-maximizer") -- maximizes and restores current window
 
@@ -104,3 +109,4 @@ return packer.startup(function(use)
 	if packer_bootstrap then
 		require("packer").sync()
 	end
+end)
