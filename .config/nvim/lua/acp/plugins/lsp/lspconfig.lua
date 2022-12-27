@@ -16,15 +16,6 @@ if not typescript_setup then
 	return
 end
 
-local format_on_force = function(buffer)
-	return function()
-		vim.lsp.buf.format({
-			buffer = buffer,
-			async = true,
-		})
-	end
-end
-
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
 	-- keybind options
