@@ -62,8 +62,7 @@ export HISTCONTROL=ignorespace:erasedups
 # Setting up shorthands for big boys
 _r() {
     source ~/.zshrc
-    source ~/.zprofile
-    # tmux source ~/.config/tmux/.tmux.conf
+    tmux source ~/.config/tmux/tmux.conf
     echo "Reloaded!"
 }
 
