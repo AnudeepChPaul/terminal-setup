@@ -104,6 +104,11 @@ _G.packer_plugins = {
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["colorbuddy.nvim"] = {
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/colorbuddy.nvim",
+    url = "https://github.com/tjdevries/colorbuddy.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -144,6 +149,11 @@ _G.packer_plugins = {
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["neosolarized.nvim"] = {
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/neosolarized.nvim",
+    url = "https://github.com/svrana/neosolarized.nvim"
+  },
   ["nightfox.nvim"] = {
     loaded = true,
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
@@ -159,10 +169,20 @@ _G.packer_plugins = {
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
   },
+  ["nvim-bufferline.lua"] = {
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nvim-bufferline.lua",
+    url = "https://github.com/akinsho/nvim-bufferline.lua"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-colorizer.lua"] = {
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -205,6 +225,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
     url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+  },
+  ["telescope-live-grep-args.nvim"] = {
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/telescope-live-grep-args.nvim",
+    url = "https://github.com/nvim-telescope/telescope-live-grep-args.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
