@@ -38,6 +38,16 @@ keymap.set("n", "tt", ":tabnew<CR>") -- open new tab
 keymap.set("n", "tn", ":tabn<CR>") --  go to next tab
 keymap.set("n", "tp", ":tabp<CR>") --  go to previous tab
 
+keymap.set("", "sh", "<C-w>h")
+keymap.set("", "sk", "<C-w>k")
+keymap.set("", "sj", "<C-w>j")
+keymap.set("", "sl", "<C-w>l")
+
+keymap.set("n", "<C-w><left>", "<C-w><")
+keymap.set("n", "<C-w><right>", "<C-w>>")
+keymap.set("n", "<C-w><up>", "<C-w>+")
+keymap.set("n", "<C-w><down>", "<C-w>-")
+
 ----------------------
 -- Plugin Keybinds
 ----------------------
