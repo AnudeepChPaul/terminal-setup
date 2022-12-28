@@ -54,6 +54,8 @@ keymap.set("n", "<M-l>", "<C-w>>")
 keymap.set("n", "<M-k>", "<C-w>+")
 keymap.set("n", "<M-j>", "<C-w>-")
 
+keymap.set("n", "mk", ":m-2<CR>")
+keymap.set("n", "mj", ":m+1<CR>")
 ----------------------
 -- Plugin Keybinds
 ----------------------
