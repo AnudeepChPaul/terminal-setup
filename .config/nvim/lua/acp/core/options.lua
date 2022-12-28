@@ -8,6 +8,7 @@ vim.opt.title = true
 vim.opt.backup = false
 vim.opt.laststatus = 2
 vim.opt.scrolloff = 10
+vim.opt.virtualedit = "onemore"
 
 -- Line Numbers
 vim.opt.relativenumber = false
