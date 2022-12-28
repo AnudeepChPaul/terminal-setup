@@ -94,3 +94,16 @@ VISUAL mode
 `gc` - Toggles the region using linewise comment
 `gb` - Toggles the region using blockwise comment
 ]]
+
+--[[ Surround Shortcuts
+VISUAL Mode
+Press a capital V (for linewise visual mode) followed by S<p class="important">
+  <p class="important">
+    <em>Hello</em> world!
+  </p>
+
+NORMAL mode
+cs followed by char to replace followed by char to change it to
+'Hello world!' --> cs'<div> --> <div>Hello World!</div>
+To remove the delimiters entirely, press ds". "Hello World" --> ds" --> Hello World
+]]
