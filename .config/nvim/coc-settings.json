@@ -1,0 +1,8 @@
+{
+  "languageserver": {
+    "kite": {
+      "command": "/Applications/Kite.app/Contents/MacOS/kite-lsp",
+      "filetypes": ["python", "go", "javascript", "typescript"]
+    }
+  }
+}

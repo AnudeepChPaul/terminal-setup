@@ -108,8 +108,3 @@ lspconfig["sumneko_lua"].setup({
 	},
 })
 
-lspconfig.register_server({
-	name = "kite",
-	cmd = "~/.local/share/kite/current/kite-lsp --editor=vim",
-	whitelist = { "php", "javascript", "python", "bash", "typescript" },
-})
