@@ -63,11 +63,12 @@ return packer.startup(function(use)
 
 	-- fuzzy finding w/ telescope
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
-	use({ "nvim-telescope/telescope.nvim", 
-    requires = {
-      { "nvim-telescope/telescope-live-grep-args.nvim" },
-    },
-  }) -- fuzzy finder
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = {
+			{ "nvim-telescope/telescope-live-grep-args.nvim" },
+		},
+	}) -- fuzzy finder
 
 	-- autocompletion
 	use("hrsh7th/nvim-cmp") -- completion plugin
@@ -109,6 +110,7 @@ return packer.startup(function(use)
 
 	-- git integration
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
+	use("dinhhuy258/git.nvim")
 
 	if packer_bootstrap then
 		require("packer").sync()
