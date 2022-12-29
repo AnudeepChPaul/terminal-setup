@@ -10,10 +10,10 @@ end
 ---------------------
 
 -- No use up/down/left/right arrow
-Map("n", "<Up>", "nomap")
-Map("n", "<Down>", "nomap")
-Map("n", "<Left>", "nomap")
-Map("n", "<Right>", "nomap")
+Map("n", "<Up>", "")
+Map("n", "<Down>", "")
+Map("n", "<Left>", "")
+Map("n", "<Right>", "")
 
 -- use jk to exit insert mode
 Map("i", "jk", "<ESC>")
@@ -44,10 +44,10 @@ Map("n", "wx", ":bd<CR>") -- close current buffer
 
 Map("n", "tt", ":new<CR>") -- open new tab
 
-Map("", "sh", "<C-w>h")
-Map("", "sk", "<C-w>k")
-Map("", "sj", "<C-w>j")
-Map("", "sl", "<C-w>l")
+Map("", "sh", "<C-w>h") -- Switch to panel left
+Map("", "sk", "<C-w>k") -- Switch to panel up
+Map("", "sj", "<C-w>j") -- Switch to panel down
+Map("", "sl", "<C-w>l") -- Switch to panel right
 
 Map("n", "<S-h>", "<C-w><")
 Map("n", "<S-l>", "<C-w>>")
@@ -63,6 +63,7 @@ Map("v", "<", "<gv")
 Map("v", ">", ">gv")
 
 Map("n", "<leader>lw", ":set list!<CR>")
+Map("n", "<leader>lr", ":set rnu!<CR>")
 
 local opts = { noremap = true, silent = true }
 
