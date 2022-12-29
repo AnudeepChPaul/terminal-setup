@@ -30,7 +30,7 @@ nvimtree.setup({
       list = {
         { key = ">", action = "scope_to_node", action_cb = scope_to_node },
         { key = "<", action = "scope_to_parent", action_cb = scope_to_parent },
-        { key = "<leader>h", action = "toggle_ignore", action_cb = scope_to_parent },
+        { key = "!", action = "toggle_ignore", action_cb = toggle_ignore },
       },
     },
   },
