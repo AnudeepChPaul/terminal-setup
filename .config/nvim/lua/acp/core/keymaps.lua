@@ -1,6 +1,10 @@
 -- set leader key to space
 vim.g.mapleader = ","
 
+local function Map(...)
+  vim.keymap.set(...)
+end
+
 ---------------------
 -- General Keymaps
 ---------------------
@@ -66,8 +70,8 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
-vim.keymap.set("n", "<Tab>", ":bnext", opts)
-vim.keymap.set("n", "<S-Tab>", ":bprevious", opts)
+vim.keymap.set("n", "<TAB>", ":bnext<CR>", opts)
+vim.keymap.set("n", "<S-TAB>", ":bprevious<CR>", opts)
 
 ----------------------
 -- Plugin Keybinds
