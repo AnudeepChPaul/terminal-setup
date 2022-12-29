@@ -1,6 +1,10 @@
 -- set leader key to space
 vim.g.mapleader = ","
 
+function show_whitespace()
+	vim.api.nvim_command(":set list")
+end
+
 ---------------------
 -- General Keymaps
 ---------------------
@@ -52,6 +56,7 @@ vim.keymap.set("n", "<S-j>", "<C-w>-")
 
 vim.keymap.set("n", "M", ":m+1<CR>")
 vim.keymap.set("n", "m", ":m-2<CR>")
+
 ----------------------
 -- Plugin Keybinds
 ----------------------
