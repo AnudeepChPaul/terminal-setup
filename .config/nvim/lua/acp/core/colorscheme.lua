@@ -9,6 +9,7 @@ end
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "PortalBorder", { bg = "none" })
 
 local color_status, colorizer = pcall(require, "colorizer")
 if not color_status then
