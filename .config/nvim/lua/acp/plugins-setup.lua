@@ -44,7 +44,7 @@ return packer.startup(function(use)
   use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
   use("numToStr/Comment.nvim") -- commenting with gc
   use("nvim-tree/nvim-tree.lua") -- file explorer
-  use("nvim-tree/nvim-web-devicons") -- vs-code like icons
+  -- use("nvim-tree/nvim-web-devicons") -- vs-code like icons
   use("nvim-lualine/lualine.nvim") -- statusline
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
   use({
