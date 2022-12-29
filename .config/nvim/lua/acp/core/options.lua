@@ -9,6 +9,7 @@ vim.opt.backup = false
 vim.opt.laststatus = 2
 vim.opt.scrolloff = 10
 vim.opt.virtualedit = "onemore"
+vim.opt.wrap = false
 
 -- Line Numbers
 vim.opt.relativenumber = false
@@ -20,8 +21,7 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
-vim.opt.wrap = false
-vim.opt.smarttab = true
+--[[ vim.opt.smarttab = true ]]
 vim.opt.breakindent = true
 vim.opt.smartindent = true
 vim.opt.listchars = "tab:<>,space:·"
