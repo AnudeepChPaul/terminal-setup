@@ -30,15 +30,9 @@ end
 return packer.startup(function(use)
 	-- packer can manage itself
 	use("wbthomason/packer.nvim")
-
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-	-- use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme
 	use("EdenEast/nightfox.nvim") -- nightfox color scheme
-	--[[ use({
-		"svrana/neosolarized.nvim",
-		requires = { "tjdevries/colorbuddy.nvim" },
-	}) ]]
 	use("akinsho/nvim-bufferline.lua") -- bufferline for tab
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
 	use("norcalli/nvim-colorizer.lua")
@@ -62,11 +56,10 @@ return packer.startup(function(use)
 	use("hrsh7th/nvim-cmp") -- completion plugin
 	use("hrsh7th/cmp-buffer") -- source for text in buffer
 	use("hrsh7th/cmp-path") -- source for file system paths
+	use("mbbill/undotree") -- Undotree visualizes the undo history
 
 	-- snippets
 	use("L3MON4D3/LuaSnip") -- snippet engine
-	use("saadparwaiz1/cmp_luasnip") -- for autocompletion
-	use("rafamadriz/friendly-snippets") -- useful snippets
 
 	-- managing & installing lsp servers, linters & formatters
 	use("williamboman/mason.nvim") -- in charge of managing lsp servers, linters & formatters
@@ -97,7 +90,6 @@ return packer.startup(function(use)
 	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
 
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
-	use("dinhhuy258/git.nvim") -- git integration
 
 	if packer_bootstrap then
 		require("packer").sync()
