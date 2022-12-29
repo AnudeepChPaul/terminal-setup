@@ -45,7 +45,7 @@ vim.opt.cursorline = true
 
 -- Appearance
 vim.opt.termguicolors = true
-vim.opt.background = "none"
+vim.opt.background = "dark"
 vim.opt.signcolumn = "yes"
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
