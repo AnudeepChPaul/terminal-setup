@@ -5,11 +5,16 @@ vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
 
 vim.opt.title = true
-vim.opt.backup = false
 vim.opt.laststatus = 2
 vim.opt.scrolloff = 10
 vim.opt.virtualedit = "onemore"
 vim.opt.wrap = false
+vim.opt.guicursor = ""
+
+vim.opt.backup = false
+vim.opt.swapfile = false
+vim.opt.undofile = true
+vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
 
 -- Line Numbers
 vim.opt.relativenumber = false
@@ -32,14 +37,15 @@ vim.opt.backspace = "indent,eol,start"
 -- Search Settings
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
 
 -- Cursor Settings
 vim.opt.cursorline = true
 
 -- Appearance
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
+vim.opt.background = "none"
 vim.opt.signcolumn = "yes"
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
