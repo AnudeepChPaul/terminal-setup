@@ -51,9 +51,13 @@ vim.keymap.set("n", "<S-k>", "<C-w>+")
 vim.keymap.set("n", "<S-j>", "<C-w>-")
 
 vim.keymap.set("n", "M", ":m+1<CR>")
-vim.keymap.set("v", "M", ":m+1<CR>")
 vim.keymap.set("n", "m", ":m-2<CR>")
-vim.keymap.set("v", "m", ":m-2<CR>")
+vim.keymap.set("v", "M", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "m", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+
 vim.keymap.set("n", "<leader>lw", ":set list!<CR>")
 
 local opts = { noremap = true, silent = true }
