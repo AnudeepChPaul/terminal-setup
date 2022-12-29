@@ -19,6 +19,10 @@ local function scope_to_parent()
   api.tree.change_root_to_parent()
 end
 
+local function toggle_ignore()
+  api.tree.toggle_gitignore_filter()
+end
+
 -- configure nvim-tree
 nvimtree.setup({
   view = {
@@ -26,6 +30,7 @@ nvimtree.setup({
       list = {
         { key = ">", action = "scope_to_node", action_cb = scope_to_node },
         { key = "<", action = "scope_to_parent", action_cb = scope_to_parent },
+        { key = "!", action = "toggle_ignore", action_cb = scope_to_parent },
       },
     },
   },
