@@ -36,7 +36,7 @@ vim.keymap.set("n", "ss", "<C-w>s") -- split window horizontally
 vim.keymap.set("n", "se", "<C-w>=") -- make split windows equal width & height
 
 vim.keymap.set("n", "sx", ":close<CR>") -- close current split window
-vim.keymap.set("n", "tx", ":bd<CR>") -- close current tab
+vim.keymap.set("n", "wx", ":bd<CR>") -- close current buffer
 
 vim.keymap.set("n", "tt", ":new<CR>") -- open new tab
 
