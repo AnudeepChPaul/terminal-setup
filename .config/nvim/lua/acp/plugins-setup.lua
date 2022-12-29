@@ -36,7 +36,7 @@ return packer.startup(function(use)
   use("rose-pine/neovim", { as = "rose-pine" }) -- rose pine color theme
   -- use("akinsho/nvim-bufferline.lua") -- bufferline for tab
   use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
-  use("norcalli/nvim-colorizer.lua")
+  -- use("norcalli/nvim-colorizer.lua")
 
   use("szw/vim-maximizer") -- maximizes and restores current window
 

@@ -1,7 +1,8 @@
 -- set leader key to space
 vim.g.mapleader = ","
-local function Map(...)
-  vim.keymap.set(...)
+
+local function Map(key, left, right)
+  vim.keymap.set(key, left, right, { noremap = true })
 end
 
 ---------------------
