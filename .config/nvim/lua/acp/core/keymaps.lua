@@ -56,6 +56,7 @@ Map("n", "<S-j>", "<C-w>-")
 
 Map("n", "M", ":m+1<CR>")
 Map("n", "m", ":m-2<CR>")
+
 Map("v", "M", ":m '>+1<CR>gv=gv")
 Map("v", "m", ":m '<-2<CR>gv=gv")
 
