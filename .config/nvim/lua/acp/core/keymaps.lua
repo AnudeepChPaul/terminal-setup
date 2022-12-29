@@ -55,6 +55,7 @@ vim.keymap.set("n", "m", ":m-2<CR>")
 ----------------------
 -- Plugin Keybinds
 ----------------------
+vim.keymap.set("n", "<leader>u", ":UndoTreeToggle<CR>")
 
 -- vim-maximizer
 vim.keymap.set("n", "sm", ":MaximizerToggle<CR>") -- toggle split window maximization
