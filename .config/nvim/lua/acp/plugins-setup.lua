@@ -34,7 +34,7 @@ return packer.startup(function(use)
 
   -- use("EdenEast/nightfox.nvim") -- nightfox color scheme
   use("rose-pine/neovim", { as = "rose-pine" }) -- rose pine color theme
-  use("akinsho/nvim-bufferline.lua") -- bufferline for tab
+  -- use("akinsho/nvim-bufferline.lua") -- bufferline for tab
   use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
   use("norcalli/nvim-colorizer.lua")
 
