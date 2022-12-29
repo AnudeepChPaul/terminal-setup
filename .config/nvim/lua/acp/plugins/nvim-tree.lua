@@ -20,7 +20,7 @@ local function scope_to_parent()
 end
 
 local function toggle_ignore()
-  api.tree.toggle_hidden_filter()
+  api.tree.toggle_gitignore_filter()
 end
 
 -- configure nvim-tree
