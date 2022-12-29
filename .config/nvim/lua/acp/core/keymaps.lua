@@ -10,96 +10,100 @@ end
 ---------------------
 
 -- No use up/down/left/right arrow
-vim.keymap.set("n", "<Up>", "nomap")
-vim.keymap.set("n", "<Down>", "nomap")
-vim.keymap.set("n", "<Left>", "nomap")
-vim.keymap.set("n", "<Right>", "nomap")
+Map("n", "<Up>", "nomap")
+Map("n", "<Down>", "nomap")
+Map("n", "<Left>", "nomap")
+Map("n", "<Right>", "nomap")
 
 -- use jk to exit insert mode
-vim.keymap.set("i", "jk", "<ESC>")
+Map("i", "jk", "<ESC>")
 
 -- clear search highlights
-vim.keymap.set("n", "<leader>nh", ":nohl<CR>")
+Map("n", "<leader>nh", ":nohl<CR>")
 
 -- delete single character without copying into register
-vim.keymap.set("n", "x", '"_x')
+Map("n", "x", '"_x')
 
 -- Delete a word backwards
-vim.keymap.set("n", "dw", 'vb"_d')
+Map("n", "dw", 'vb"_d')
 
 -- Select all
-vim.keymap.set("n", "<C-a>", "gg<S-v>G")
+Map("n", "<C-a>", "gg<S-v>G")
 
 -- increment/decrement numbers
-vim.keymap.set("n", "+", "<C-a>") -- increment
-vim.keymap.set("n", "-", "<C-x>") -- decrement
+Map("n", "+", "<C-a>") -- increment
+Map("n", "-", "<C-x>") -- decrement
 
 -- window management
-vim.keymap.set("n", "sv", "<C-w>v") -- split window vertically
-vim.keymap.set("n", "ss", "<C-w>s") -- split window horizontally
-vim.keymap.set("n", "se", "<C-w>=") -- make split windows equal width & height
+Map("n", "sv", "<C-w>v") -- split window vertically
+Map("n", "ss", "<C-w>s") -- split window horizontally
+Map("n", "se", "<C-w>=") -- make split windows equal width & height
 
-vim.keymap.set("n", "sx", ":close<CR>") -- close current split window
-vim.keymap.set("n", "wx", ":bd<CR>") -- close current buffer
+Map("n", "sx", ":close<CR>") -- close current split window
+Map("n", "wx", ":bd<CR>") -- close current buffer
 
-vim.keymap.set("n", "tt", ":new<CR>") -- open new tab
+Map("n", "tt", ":new<CR>") -- open new tab
 
-vim.keymap.set("", "sh", "<C-w>h")
-vim.keymap.set("", "sk", "<C-w>k")
-vim.keymap.set("", "sj", "<C-w>j")
-vim.keymap.set("", "sl", "<C-w>l")
+Map("", "sh", "<C-w>h")
+Map("", "sk", "<C-w>k")
+Map("", "sj", "<C-w>j")
+Map("", "sl", "<C-w>l")
 
-vim.keymap.set("n", "<S-h>", "<C-w><")
-vim.keymap.set("n", "<S-l>", "<C-w>>")
-vim.keymap.set("n", "<S-k>", "<C-w>+")
-vim.keymap.set("n", "<S-j>", "<C-w>-")
+Map("n", "<S-h>", "<C-w><")
+Map("n", "<S-l>", "<C-w>>")
+Map("n", "<S-k>", "<C-w>+")
+Map("n", "<S-j>", "<C-w>-")
 
-vim.keymap.set("n", "M", ":m+1<CR>")
-vim.keymap.set("n", "m", ":m-2<CR>")
-vim.keymap.set("v", "M", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "m", ":m '<-2<CR>gv=gv")
+Map("n", "M", ":m+1<CR>")
+Map("n", "m", ":m-2<CR>")
+Map("v", "M", ":m '>+1<CR>gv=gv")
+Map("v", "m", ":m '<-2<CR>gv=gv")
 
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+Map("v", "<", "<gv")
+Map("v", ">", ">gv")
 
-vim.keymap.set("n", "<leader>lw", ":set list!<CR>")
+Map("n", "<leader>lw", ":set list!<CR>")
 
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+Map("n", "<leader>e", vim.diagnostic.open_float, opts)
+Map("n", "[d", vim.diagnostic.goto_prev, opts)
+Map("n", "]d", vim.diagnostic.goto_next, opts)
 
-vim.keymap.set("n", "<TAB>", ":bnext<CR>", opts)
-vim.keymap.set("n", "<S-TAB>", ":bprevious<CR>", opts)
-
+Map("n", "<TAB>", ":bnext<CR>", opts)
+Map("n", "<S-TAB>", ":bprevious<CR>", opts)
+Map("n", "J", "mzJ`z")
+Map("n", "<C-d>", "<C-d>zz")
+Map("n", "<C-u>", "<C-u>zz")
+Map("n", "n", "nzzzv")
+Map("n", "N", "Nzzzv")
 ----------------------
 -- Plugin Keybinds
 ----------------------
-vim.keymap.set("", "<leader>u", "<cmd>UndotreeToggle<CR>")
+Map("", "<leader>u", "<cmd>UndotreeToggle<CR>")
 
 -- vim-maximizer
-vim.keymap.set("n", "sm", ":MaximizerToggle<CR>") -- toggle split window maximization
+Map("n", "sm", ":MaximizerToggle<CR>") -- toggle split window maximization
 
 -- nvim-tree
-vim.keymap.set("n", "fe", ":NvimTreeToggle<CR>") -- toggle file explorer
+Map("n", "fe", ":NvimTreeToggle<CR>") -- toggle file explorer
 
 -- telescope
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
-vim.keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
-vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
-vim.keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
-vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
+Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
+Map("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
+Map("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+Map("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
+Map("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
+Map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
 
 -- telescope git commands (not on youtube nvim video)
-vim.keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits (use <cr> to checkout) ["gc" for git commits]
-vim.keymap.set("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>") -- list git commits for current file/buffer (use <cr> to checkout) ["gfc" for git file commits]
-vim.keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git branches (use <cr> to checkout) ["gb" for git branch]
-vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
+Map("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits (use <cr> to checkout) ["gc" for git commits]
+Map("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>") -- list git commits for current file/buffer (use <cr> to checkout) ["gfc" for git file commits]
+Map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git branches (use <cr> to checkout) ["gb" for git branch]
+Map("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
 
 -- restart lsp server (not on youtube nvim video)
-vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+Map("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 
 --[[ Comment shortcuts
 NORMAL mode
