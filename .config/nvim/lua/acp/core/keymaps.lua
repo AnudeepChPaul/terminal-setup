@@ -1,10 +1,6 @@
 -- set leader key to space
 vim.g.mapleader = ","
 
-function show_whitespace()
-	vim.api.nvim_command(":set list")
-end
-
 ---------------------
 -- General Keymaps
 ---------------------
