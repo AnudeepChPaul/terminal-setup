@@ -42,6 +42,7 @@ null_ls.setup({
 						end,
 						bufnr = bufnr,
 					})
+					vim.api.nvim_command(":retab")
 				end,
 			})
 		end
