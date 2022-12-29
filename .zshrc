@@ -121,3 +121,5 @@ source ~/.zprofile
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+bindkey -s ^f "tmux-sessionizer\n"
+

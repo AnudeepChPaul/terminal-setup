@@ -10,10 +10,12 @@ end
 ---------------------
 
 -- No use up/down/left/right arrow
-Map("n", "<Up>", "")
-Map("n", "<Down>", "")
-Map("n", "<Left>", "")
-Map("n", "<Right>", "")
+Map("n", "<Up>", "<nop>")
+Map("n", "<Down>", "<nop>")
+Map("n", "<Left>", "<nop>")
+Map("n", "<Right>", "<nop>")
+Map("n", "<Right>", "<nop>")
+Map("n", "Q", "<nop>")
 
 -- use jk to exit insert mode
 Map("i", "jk", "<ESC>")
@@ -49,10 +51,10 @@ Map("", "sk", "<C-w>k") -- Switch to panel up
 Map("", "sj", "<C-w>j") -- Switch to panel down
 Map("", "sl", "<C-w>l") -- Switch to panel right
 
-Map("n", "<S-h>", "<C-w><")
-Map("n", "<S-l>", "<C-w>>")
-Map("n", "<S-k>", "<C-w>+")
-Map("n", "<S-j>", "<C-w>-")
+Map("n", "<S-Left>", "<C-w><")
+Map("n", "<S-Right>", "<C-w>>")
+Map("n", "<S-Up>", "<C-w>+")
+Map("n", "<S-Down>", "<C-w>-")
 
 Map("n", "M", ":m+1<CR>")
 Map("n", "m", ":m-2<CR>")
@@ -66,19 +68,21 @@ Map("v", ">", ">gv")
 Map("n", "<leader>lw", ":set list!<CR>")
 Map("n", "<leader>lr", ":set rnu!<CR>")
 
-local opts = { noremap = true, silent = true }
+Map("n", "<leader>e", vim.diagnostic.open_float)
+Map("n", "[d", vim.diagnostic.goto_prev)
+Map("n", "]d", vim.diagnostic.goto_next)
 
-Map("n", "<leader>e", vim.diagnostic.open_float, opts)
-Map("n", "[d", vim.diagnostic.goto_prev, opts)
-Map("n", "]d", vim.diagnostic.goto_next, opts)
+Map("n", "<TAB>", ":bnext<CR>")
+Map("n", "<S-TAB>", ":bprevious<CR>")
 
-Map("n", "<TAB>", ":bnext<CR>", opts)
-Map("n", "<S-TAB>", ":bprevious<CR>", opts)
+Map("x", "<leader>p", '"_dP')
 Map("n", "J", "mzJ`z")
 Map("n", "<C-d>", "<C-d>zz")
 Map("n", "<C-u>", "<C-u>zz")
 Map("n", "n", "nzzzv")
 Map("n", "N", "Nzzzv")
+Map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
 ----------------------
 -- Plugin Keybinds
 ----------------------
