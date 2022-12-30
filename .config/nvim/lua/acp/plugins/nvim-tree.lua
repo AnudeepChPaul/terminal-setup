@@ -23,6 +23,10 @@ local function toggle_ignore()
   api.tree.toggle_gitignore_filter()
 end
 
+local function toggle_hidden()
+  api.tree.toggle_hidden_filter()
+end
+
 -- configure nvim-tree
 nvimtree.setup({
   view = {
@@ -31,6 +35,7 @@ nvimtree.setup({
         { key = ">", action = "scope_to_node", action_cb = scope_to_node },
         { key = "<", action = "scope_to_parent", action_cb = scope_to_parent },
         { key = "!", action = "toggle_ignore", action_cb = toggle_ignore },
+        { key = "@", action = "toggle_hidden", action_cb = toggle_hidden },
       },
     },
   },
