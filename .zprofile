@@ -158,7 +158,7 @@ _tn() {
 
 _ide () {
   tmux split-window -v -p 30
-  tmux split-window -h -p 60
+  tmux split-window -h -p 40
 }
 
 # Fig post block. Keep at the bottom of this file.
