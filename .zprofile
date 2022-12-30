@@ -9,7 +9,7 @@ export PYTHON_PATH=/usr/local/bin/python
 export PLATFORM_TOOLS_PATH="$HOME/bin/platform-tools"
 export ROVER_HOME_PATH="$HOME/.rover"
 
-export PATH=$PATH:$GO_PATH/bin:$HOME/bin:$HOME/.local/bin/:/usr/local/bin:$HOME/bin/redis-6.2.6/src:$PYTHON_PATH:$MAVEN_PATH/bin:$PLATFORM_TOOLS_PATH
+export PATH=$PATH:$GO_PATH/bin:$HOME/bin:/usr/local/bin:$HOME/bin/redis-6.2.6/src:$PYTHON_PATH:$MAVEN_PATH/bin:$PLATFORM_TOOLS_PATH
 export PATH="$PATH:$ROVER_HOME_PATH/bin"
 
 # Homebrew setup
@@ -158,8 +158,7 @@ _tn() {
 
 _ide () {
   tmux split-window -v -p 30
-  tmux split-window -h -p 66
-  tmux split-window -h -p 50
+  tmux split-window -h -p 60
 }
 
 # Fig post block. Keep at the bottom of this file.
