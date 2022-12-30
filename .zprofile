@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zprofile.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.pre.zsh"
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # setting up PATH variables
@@ -160,4 +162,5 @@ _ide () {
   tmux split-window -h -p 50
 }
 
-
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zprofile.post.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.post.zsh"
