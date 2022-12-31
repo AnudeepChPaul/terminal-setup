@@ -76,12 +76,13 @@ Map("n", "<TAB>", ":bnext<CR>")
 Map("n", "<S-TAB>", ":bprevious<CR>")
 
 Map("x", "<leader>p", '"_dP')
-Map("n", "J", "mzJ`z")
-Map("n", "<C-d>", "<C-d>zz")
-Map("n", "<C-u>", "<C-u>zz")
+Map("n", "J", "mzJ`z") -- Bring the bottom line to end of upper line without changing cursor position
+Map("n", "<C-d>", "<C-d>zz") -- Scrolls down keeping cursor in the middle of the screen
+Map("n", "<C-u>", "<C-u>zz") --
 Map("n", "n", "nzzzv")
 Map("n", "N", "Nzzzv")
 Map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+Map("n", "<leader>r", ":substitute/")
 
 ----------------------
 -- Plugin Keybinds
