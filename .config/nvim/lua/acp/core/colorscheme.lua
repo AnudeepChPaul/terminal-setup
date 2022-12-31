@@ -7,17 +7,10 @@ if not status then
   return
 end
 
-vim.cmd([[
-  autocmd!
-  hi  Normal guibg=none
-]])
-
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "PortalBorder", { bg = "none" })
-vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
-vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
-vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
 vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
 
 --[[ local color_status, colorizer = pcall(require, "colorizer")
