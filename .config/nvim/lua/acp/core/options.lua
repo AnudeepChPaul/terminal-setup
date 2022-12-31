@@ -37,7 +37,7 @@ vim.opt.backspace = "indent,eol,start"
 -- Search Settings
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 -- Cursor Settings
@@ -45,7 +45,7 @@ vim.opt.cursorline = true
 
 -- Appearance
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
+vim.opt.background = ""
 vim.opt.signcolumn = "yes"
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
