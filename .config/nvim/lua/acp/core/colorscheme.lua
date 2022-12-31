@@ -9,7 +9,7 @@ end
 
 vim.cmd([[
   autocmd!
-  Normal guibg="#0a0a0a"
+  hi  Normal guibg=none
 ]])
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
