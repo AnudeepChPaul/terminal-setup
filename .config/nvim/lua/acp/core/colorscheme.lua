@@ -7,9 +7,9 @@ if not status then
   return
 end
 
-vim.api.nvim_command([[
+vim.cmd([[
   autocmd!
-  autocmd WinEnter * vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+  Normal guibg="#0a0a0a"
 ]])
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
