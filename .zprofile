@@ -61,6 +61,10 @@ export TREE__GLOBAL_IGNORE=".git|node_modules|.history|webpack|.next|.idea|.grad
 export FZF__SMART__PREVIEW__COMMAND="[ -d {} ] && $FZF__DIR__PREVIEW__COMMAND || $FZF__PREVIEW__COMMAND"
 export HISTCONTROL=ignorespace:erasedups
 
+_uninstall_homebrew() {
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)"
+}
+
 # Setting up shorthands for big boys
 _r() {
     source ~/.zshrc
