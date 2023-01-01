@@ -167,3 +167,17 @@ _ide () {
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zprofile.post.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.post.zsh"
+
+##
+# Your previous /Users/anudeepchandrapaul/.zprofile file was backed up as /Users/anudeepchandrapaul/.zprofile.macports-saved_2023-01-01_at_18:51:31
+##
+
+# MacPorts Installer addition on 2023-01-01_at_18:51:31: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+
+# MacPorts Installer addition on 2023-01-01_at_18:51:31: adding an appropriate MANPATH variable for use with MacPorts.
+export MANPATH="/opt/local/share/man:$MANPATH"
+# Finished adapting your MANPATH environment variable for use with MacPorts.
+
