@@ -72,6 +72,8 @@ Map("n", "<leader>e", vim.diagnostic.open_float)
 Map("n", "[d", vim.diagnostic.goto_prev)
 Map("n", "]d", vim.diagnostic.goto_next)
 
+Map("n", "ff", ":$put _<CR>")
+
 Map("n", "<TAB>", ":bnext<CR>")
 Map("n", "<S-TAB>", ":bprevious<CR>")
 
