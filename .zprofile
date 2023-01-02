@@ -1,5 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zprofile.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.pre.zsh"
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # setting up PATH variables
@@ -165,9 +163,6 @@ _ide () {
   tmux split-window -h -p 40
 }
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zprofile.post.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.post.zsh"
-
 ##
 # Your previous /Users/anudeepchandrapaul/.zprofile file was backed up as /Users/anudeepchandrapaul/.zprofile.macports-saved_2023-01-01_at_18:51:31
 ##
@@ -180,4 +175,3 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # MacPorts Installer addition on 2023-01-01_at_18:51:31: adding an appropriate MANPATH variable for use with MacPorts.
 export MANPATH="/opt/local/share/man:$MANPATH"
 # Finished adapting your MANPATH environment variable for use with MacPorts.
-
