@@ -5,8 +5,8 @@ local telescope_setup, telescope = pcall(require, "telescope")
 local actions_setup, actions = pcall(require, "telescope.actions")
 
 local lga_actions = require("telescope-live-grep-args.actions")
-local telescopeConfig = require("telescope.config")
 --[[
+local telescopeConfig = require("telescope.config")
 local vimgrep_arguments = telescopeConfig.values.vimgrep_arguments
 
 table.insert(vimgrep_arguments, "--hidden")
@@ -77,10 +77,10 @@ telescope.setup({
         "--glob",
         "!**/node_modules/*",
       },
-      prompt_prefix = "🔍  ",
+      prompt_prefix = " 🔍  ",
     },
     live_grep = {
-      prompt_prefix = "🔍  ",
+      prompt_prefix = " 🔍  ",
       -- find_command = {
       --   "rg",
       --   "--hidden",
