@@ -18,6 +18,8 @@ set -gx theme_display_user yes
 set -gx theme_hide_hostname no
 set -gx theme_hostname always
 
+set -gx GHQ_ROOT "$HOME/Projects"
+
 set -gx FZF_DEFAULT_OPTS "--tac --layout=reverse --info=inline --border --margin=1 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'"
 set -gx FZF_DEFAULT_COMMAND "ls -a"
 set -gx FZF__PREVIEW__COMMAND 'bat --style=numbers --color=always --line-range :500 {}'
@@ -80,4 +82,7 @@ function find_directories -d "Find directories"
     commandline ''
   end
 end
+
+
+test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
 
