@@ -32,43 +32,22 @@ return packer.startup(function(use)
   use("wbthomason/packer.nvim")
   use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-  -- use("EdenEast/nightfox.nvim") -- nightfox color scheme
-  use("rose-pine/neovim", { as = "rose-pine" }) -- rose pine color theme
-  -- use("akinsho/nvim-bufferline.lua") -- bufferline for tab
-  use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
-  -- use("norcalli/nvim-colorizer.lua")
-
-  use("szw/vim-maximizer") -- maximizes and restores current window
-
-  -- essential plugins
-  use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
-  use("numToStr/Comment.nvim") -- commenting with gc
-  use("nvim-tree/nvim-tree.lua") -- file explorer
-  -- use("nvim-tree/nvim-web-devicons") -- vs-code like icons
-  use("nvim-lualine/lualine.nvim") -- statusline
-  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
-  use({
-    "nvim-telescope/telescope.nvim",
-    requires = {
-      { "nvim-telescope/telescope-live-grep-args.nvim" },
-    },
-  }) -- fuzzy finder
-  -- autocompletion
-  use("hrsh7th/nvim-cmp") -- completion plugin
-  use("hrsh7th/cmp-buffer") -- source for text in buffer
-  use("hrsh7th/cmp-path") -- source for file system paths
-  use("mbbill/undotree") -- Undotree visualizes the undo history
-
-  -- snippets
-  use("L3MON4D3/LuaSnip") -- snippet engine
-
   -- managing & installing lsp servers, linters & formatters
-  use("williamboman/mason.nvim") -- in charge of managing lsp servers, linters & formatters
-  use("williamboman/mason-lspconfig.nvim") -- bridges gap b/w mason & lspconfig
+  use({ -- LSP Configuration & Plugins
+    "neovim/nvim-lspconfig",
+    requires = {
+      -- Automatically install LSPs to stdpath for neovim
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
 
-  -- configuring lsp servers
-  use("neovim/nvim-lspconfig") -- easily configure language servers
-  use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
+      -- Useful status updates for LSP
+      "j-hui/fidget.nvim",
+
+      -- Additional lua configuration, makes nvim stuff amazing
+      "folke/neodev.nvim",
+    },
+  })
+
   use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
   use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
   use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
@@ -86,10 +65,45 @@ return packer.startup(function(use)
     end,
   }) -- treesitter configuration
 
-  -- auto closing
+  use({ -- Autocompletion
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-path", -- source for file system paths
+      "mbbill/undotree", -- Undotree visualizes the undo history
+      "hrsh7th/cmp-buffer", -- source for text in buffer
+    },
+  })
+
+  use({
+    "nvim-telescope/telescope.nvim",
+    requires = {
+      { "nvim-telescope/telescope-live-grep-args.nvim" },
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- dependency for better sorting performance
+    },
+  }) -- fuzzy finder
+  -- autocompletion
+
+  -- use("EdenEast/nightfox.nvim") -- nightfox color scheme
+  use("rose-pine/neovim", { as = "rose-pine" }) -- rose pine color theme
+  -- use("akinsho/nvim-bufferline.lua") -- bufferline for tab
+
+  -- use("norcalli/nvim-colorizer.lua")
+  use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
+  use("szw/vim-maximizer") -- maximizes and restores current window
+
+  -- essential plugins
+  use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
+  use("numToStr/Comment.nvim") -- commenting with gc
+  use("nvim-tree/nvim-tree.lua") -- file explorer
+  -- use("nvim-tree/nvim-web-devicons") -- vs-code like icons
+
+  -- configuring lsp servers
   use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
   use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
-
+  use("nvim-lualine/lualine.nvim") -- statusline
   use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 
   if packer_bootstrap then

@@ -8,7 +8,7 @@ vim.opt.title = true
 vim.opt.laststatus = 2
 vim.opt.scrolloff = 10
 vim.opt.virtualedit = "onemore"
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.guicursor = ""
 
 vim.opt.backup = false
