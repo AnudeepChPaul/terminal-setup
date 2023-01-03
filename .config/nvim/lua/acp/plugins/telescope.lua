@@ -5,12 +5,25 @@ local telescope_setup, telescope = pcall(require, "telescope")
 local actions_setup, actions = pcall(require, "telescope.actions")
 
 local lga_actions = require("telescope-live-grep-args.actions")
+local telescopeConfig = require("telescope.config")
+--[[
+local vimgrep_arguments = telescopeConfig.values.vimgrep_arguments
+
+table.insert(vimgrep_arguments, "--hidden")
+table.insert(vimgrep_arguments, "--glob")
+table.insert(vimgrep_arguments, "!**/.git/*")
+table.insert(vimgrep_arguments, "--glob*")
+table.insert(vimgrep_arguments, "!**/*.lock")
+table.insert(vimgrep_arguments, "--glob*")
+table.insert(vimgrep_arguments, "!**/package-lock.json")
+table.insert(vimgrep_arguments, "--glob*")
+table.insert(vimgrep_arguments, "!**/node_modules/*") ]]
 
 -- configure telescope
 telescope.setup({
   extensions = {
     live_grep_args = {
-      auto_quoting = true,
+      auto_quoting = false,
       mappings = { -- extend mappings
         i = {
           ["<C-o>"] = lga_actions.quote_prompt(),
@@ -22,6 +35,23 @@ telescope.setup({
 
   -- configure custom mappings
   defaults = {
+    vimgrep_arguments = {
+      "rg",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--hidden",
+      "--no-ignore",
+      "--glob",
+      "!**/.git/*",
+      "--glob",
+      "!**/*.lock",
+      "--glob",
+      "!**/package-lock.json",
+      "--glob",
+      "!**/node_modules/*",
+    },
     mappings = {
       i = {
         ["<C-k>"] = actions.move_selection_previous, -- move to prev result
@@ -32,7 +62,38 @@ telescope.setup({
   },
   pickers = {
     find_files = {
-      theme = "dropdown",
+      -- theme = "dropdown",
+      find_command = {
+        "rg",
+        "--files",
+        "--hidden",
+        "--no-ignore",
+        "--glob",
+        "!**/.git/*",
+        "--glob",
+        "!**/*.lock",
+        "--glob",
+        "!**/package-lock.json",
+        "--glob",
+        "!**/node_modules/*",
+      },
+      prompt_prefix = "🔍  ",
+    },
+    live_grep = {
+      prompt_prefix = "🔍  ",
+      -- find_command = {
+      --   "rg",
+      --   "--hidden",
+      --   "--no-ignore",
+      --   "--glob",
+      --   "!**/.git/*",
+      --   "--glob",
+      --   "!**/*.lock",
+      --   "--glob",
+      --   "!**/package-lock.json",
+      --   "--glob",
+      --   "!**/node_modules/*",
+      -- },
     },
   },
 })
