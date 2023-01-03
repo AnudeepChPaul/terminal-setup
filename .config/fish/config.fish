@@ -12,11 +12,11 @@ set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "$HOMEBREW_PREFIX/share/in
 set -gx TERM xterm-256color
 
 # theme
-set -g theme_color_scheme terminal-dark
-set -g fish_prompt_pwd_dir_length 1
-set -g theme_display_user yes
-set -g theme_hide_hostname no
-set -g theme_hostname always
+set -gx theme_color_scheme terminal-dark
+set -gx fish_prompt_pwd_dir_length 1
+set -gx theme_display_user yes
+set -gx theme_hide_hostname no
+set -gx theme_hostname always
 
 set -gx FZF_DEFAULT_OPTS "--tac --layout=reverse --info=inline --border --margin=1 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'"
 set -gx FZF_DEFAULT_COMMAND "ls -a"
@@ -72,11 +72,12 @@ end
 
 function find_directories -d "Find directories" 
   set depth 1
-  set found_directory (find . -type d -maxdepth $depth -name '*'| fzf --preview "$FZF__DIR__PREVIEW__COMMAND")
+  find . -type d -maxdepth $depth -name '*'| fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read foo
 
-  if test -n "$found_directory"
-    cd "$found_directory"
+  if [ $foo ]
+    commandline cd "$foo"
+  else
+    commandline ''
   end
 end
 
-load_nvm > /dev/stderr
