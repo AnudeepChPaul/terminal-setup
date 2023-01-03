@@ -96,6 +96,7 @@ Map("n", "sm", ":MaximizerToggle<CR>") -- toggle split window maximization
 
 -- nvim-tree
 Map("n", "fe", ":NvimTreeToggle<CR>") -- toggle file explorer
+Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current working directory, respects .gitignore
 
 -- telescope
 Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore

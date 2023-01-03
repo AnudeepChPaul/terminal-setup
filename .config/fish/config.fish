@@ -1,5 +1,7 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
+  echo "Inside interactive"
+  bind \cf find_immediate_directories
 end
 
 set -gx HOMEBREW_PREFIX "/opt/homebrew";
@@ -24,7 +26,7 @@ set -gx FZF_DEFAULT_OPTS "--tac --layout=reverse --info=inline --border --margin
 set -gx FZF_DEFAULT_COMMAND "ls -a"
 set -gx FZF__PREVIEW__COMMAND 'bat --style=numbers --color=always --line-range :500 {}'
 set -gx FZF__DIR__PREVIEW__COMMAND 'tree -aC -I "$TREE__GLOBAL_IGNORE" {} | head -700'
-set -gx TREE__GLOBAL_IGNORE ".git|node_modules|.history|webpack|.next|.idea|.gradle|.vscode"
+set -gx TREE__GLOBAL_IGNORE ".git|node_modules|.history|webpack|.next|.idea|.gradle|.vscode|.Trash"
 set -gx FZF__SMART__PREVIEW__COMMAND "[ -d {} ] && $FZF__DIR__PREVIEW__COMMAND || $FZF__PREVIEW__COMMAND"
 
 # aliases
@@ -58,7 +60,9 @@ alias o "ack --sort-files --color"
 alias l "ls -alp"
 alias vg 'lazygit'
 
-
+function _uninstall_homebrew -d "script to uninstall homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)"
+end
 
 function ll -d "Uses exa to return dirs & files"
   exa --all --long --header $argv
@@ -72,17 +76,58 @@ function vi -d "Neovim"
   nvim $argv
 end
 
-function find_directories -d "Find directories" 
-  set depth 1
-  find . -type d -maxdepth $depth -name '*'| fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read foo
-
-  if [ $foo ]
-    commandline cd "$foo"
+function find_immediate_directories -d "Ls into directories with fuzzy search"
+  ls -aA |  egrep -v "$TREE__GLOBAL_IGNORE" | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read foo
+  
+  if test $foo
+    builtin cd "$foo"
+    commandline -r ''
+    commandline -f repaint
   else
     commandline ''
   end
 end
 
+function find_directories -d "Find directories" -a input depth
+  if test -n "$depth"
+    set ndepth "$depth"
+  else 
+    set ndepth "1"
+  end
+
+
+  if test "$input"
+    set keyword "*$input*"
+  else 
+    set keyword "*"
+  end
+
+  find . -type d -maxdepth $ndepth -name $keyword | egrep -v "$TREE__GLOBAL_IGNORE" | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read foo
+
+  if test "$foo"
+    builtin cd "$foo"
+    commandline -r ""
+    commandline -f repaint
+  else
+    commandline ''
+  end
+end
+
+function _port -d "Find port with lsof & netstat" -a port_id
+  echo "LSOF"
+  lsof -nP -i:$port_id
+  echo "NETSTAT"
+  netstat -avn | grep $port_id
+end
+
+function _tn -d "Create or attach into a tmux session" -a session_name
+  tmux new -s $session_name || tmux attach -t $session_name
+end
+
+function _ide
+  tmux split-window -v -p 30
+  tmux split-window -h -p 40
+end
 
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
 

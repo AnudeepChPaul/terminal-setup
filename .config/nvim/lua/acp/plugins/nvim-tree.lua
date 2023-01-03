@@ -64,4 +64,16 @@ nvimtree.setup({
       global = true,
     },
   },
+  git = {
+    enable = true,
+    ignore = false,
+    show_on_dirs = true,
+    show_on_open_dirs = true,
+    timeout = 400,
+  },
+  modified = {
+    enable = false,
+    show_on_dirs = true,
+    show_on_open_dirs = true,
+  },
 })
