@@ -22,10 +22,10 @@ if not cmp_nvim_lsp_status then
 end
 
 -- import typescript plugin safely
--- local typescript_setup, typescript = pcall(require, "typescript")
--- if not typescript_setup then
---  return
--- end
+local typescript_setup, typescript = pcall(require, "typescript")
+if not typescript_setup then
+  return
+end
 
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
@@ -111,12 +111,12 @@ lspconfig["html"].setup({
 })
 
 -- configure typescript server with plugin
--- typescript.setup({
---  server = {
---    capabilities = capabilities,
---    on_attach = on_attach,
---  },
---})
+typescript.setup({
+  server = {
+    capabilities = capabilities,
+    on_attach = on_attach,
+  },
+})
 
 -- configure css server
 lspconfig["cssls"].setup({
