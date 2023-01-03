@@ -1,6 +1,5 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
-  echo "Inside interactive"
   bind \cf find_immediate_directories
 end
 
