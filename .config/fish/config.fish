@@ -146,12 +146,11 @@ function tmux_session_handler
   if test -n "$selected_dir"
     exit 0
   end
-
-  if pggrep "tmux" 
-    _tn "$selected_dir"
-    commandline -r ""
-    commandline -f repaint
-  end
+  
+  
+  _tn "$selected_dir"
+  commandline -r ""
+  commandline -f repaint
 end
 
 
