@@ -4,6 +4,7 @@ if status is-interactive
   bind \cg tmux_session_handler
 end
 
+set -gx EDITOR "nvim";
 set -gx HOMEBREW_PREFIX "/opt/homebrew";
 set -gx HOMEBREW_CELLAR "$HOMEBREW_PREFIX/Cellar";
 set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX";
