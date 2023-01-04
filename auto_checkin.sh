@@ -20,7 +20,7 @@ cp -aR ~/.config/fish/config.fish $project_dir/.config/fish/
 cp -aR ~/.config/fish/functions/nvm.fish $project_dir/.config/fish/functions/
 cp -aR ~/.config/fish/functions/load_nvm.fish $project_dir/.config/fish/functions/
 cp -aR ~/.config/fish/functions/nvm_find_nvmrc.fish $project_dir/.config/fish/functions/
-cp -aR ~/.config/fish/functions/fish_user_key_bindings.fish $project_dir/.config/fish/functions/
+# cp -aR ~/.config/fish/functions/fish_user_key_bindings.fish $project_dir/.config/fish/functions/
 
 
 eval $___git_ac add "$project_dir"
