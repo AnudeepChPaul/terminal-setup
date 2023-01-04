@@ -120,13 +120,37 @@ function _port -d "Find port with lsof & netstat" -a port_id
 end
 
 function _tn -d "Create or attach into a tmux session" -a session_name
-  tmux new -s $session_name || tmux attach -t $session_name
+  if test "$TMUX"
+    tmux switch-client -t $session_name
+  else 
+    tmux new -s $session_name || tmux attach -t $session_name
+  end
 end
 
 function _ide
   tmux split-window -v -p 30
   tmux split-window -h -p 40
 end
+
+
+function tmux_session_handler
+  find ~/Projects -mindepth 1 -maxdepth 1 -type d | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | basename | tr . _ | read foo
+
+  if test -n "$foo"
+    exit 0
+  end
+  
+  set selected_dir (basename "$foo" | tr . _)
+  
+  if test -n "$selected_dir"
+    exit 0
+  end
+
+  if pggrep "tmux" 
+    _tn "$selected_dir"
+  end
+end
+
 
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
 
