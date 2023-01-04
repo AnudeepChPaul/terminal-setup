@@ -1,6 +1,7 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
   bind \cf find_immediate_directories
+  bind \cg tmux_session_handler
 end
 
 set -gx HOMEBREW_PREFIX "/opt/homebrew";
@@ -148,6 +149,8 @@ function tmux_session_handler
 
   if pggrep "tmux" 
     _tn "$selected_dir"
+    commandline -r ""
+    commandline -f repaint
   end
 end
 
