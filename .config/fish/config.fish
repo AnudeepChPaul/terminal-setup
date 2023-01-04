@@ -135,7 +135,7 @@ function _ide
 end
 
 
-function tmux_session_handler
+function tmux_session_handler -d "When performs with a keystroke (Ctrl + G), this opens fuzzy finder and takes you to tmux session of the selected Dir"
   find ~/Projects -mindepth 1 -maxdepth 1 -type d | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | basename | tr . _ | read foo
 
   if test -n "$foo"
