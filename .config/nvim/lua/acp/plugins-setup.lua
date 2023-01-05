@@ -82,6 +82,7 @@ return packer.startup(function(use)
     requires = {
       { "nvim-telescope/telescope-live-grep-args.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- dependency for better sorting performance
+      { "kdheepak/lazygit.nvim" },
     },
   }) -- fuzzy finder
   -- autocompletion

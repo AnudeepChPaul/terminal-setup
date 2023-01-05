@@ -1,5 +1,5 @@
 -- set leader key to space
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 
 local function Map(key, left, right)
   vim.keymap.set(key, left, right, { noremap = true })
@@ -17,14 +17,17 @@ Map("n", "<Right>", "<nop>")
 Map("n", "<Right>", "<nop>")
 Map("n", "Q", "<nop>")
 
--- use jk to exit insert mode
-Map("i", "jk", "<ESC>")
+-- use Ctrl+\ to exit insert mode
+Map("i", "<C-\\>", "<ESC>")
+Map("i", "<C-c>", "<ESC>")
 
 -- clear search highlights
 Map("n", "<leader>nh", ":nohl<CR>")
 
 -- delete single character without copying into register
 Map("n", "x", '"_x')
+
+Map("n", "Y", "yg$") -- split window vertically
 
 -- Delete a word backwards
 Map("n", "dw", 'vb"_d')
@@ -56,6 +59,9 @@ Map("n", "<S-Right>", "<C-w>>")
 Map("n", "<S-Up>", "<C-w>+")
 Map("n", "<S-Down>", "<C-w>-")
 
+Map("n", "j", "jzz")
+Map("n", "k", "kzz")
+
 Map("n", "m", ":m+1<CR>")
 Map("n", "M", ":m-2<CR>")
 
@@ -80,9 +86,11 @@ Map("n", "<S-TAB>", ":bprevious<CR>")
 Map("x", "<leader>p", '"_dP')
 Map("n", "J", "mzJ`z") -- Bring the bottom line to end of upper line without changing cursor position
 Map("n", "<C-d>", "<C-d>zz") -- Scrolls down keeping cursor in the middle of the screen
-Map("n", "<C-u>", "<C-u>zz") --
+Map("n", "<C-u>", "<C-u>zz") --Scrolls down keeping cursor in the middle of the screen
+
 Map("n", "n", "nzzzv")
 Map("n", "N", "Nzzzv")
+
 Map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 Map("n", "<leader>r", ":substitute/")
 
@@ -95,7 +103,7 @@ Map("", "<leader>u", "<cmd>UndotreeToggle<CR>")
 Map("n", "sm", ":MaximizerToggle<CR>") -- toggle split window maximization
 
 -- nvim-tree
-Map("n", "fe", ":NvimTreeToggle<CR>") -- toggle file explorer
+Map("n", "<leader>fe", ":NvimTreeToggle<CR>") -- toggle file explorer
 Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current working directory, respects .gitignore
 
 -- telescope
@@ -105,6 +113,8 @@ Map("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live
 Map("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 Map("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
 Map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
+
+Map("n", "<leader>gg", "<cmd>LazyGit<CR>")
 
 -- telescope git commands (not on youtube nvim video)
 Map("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits (use <cr> to checkout) ["gc" for git commits]

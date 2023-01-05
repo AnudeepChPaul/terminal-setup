@@ -17,7 +17,7 @@ vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.config/undodir"
 
 -- Line Numbers
-vim.opt.relativenumber = false
+vim.opt.relativenumber = true
 vim.opt.number = true
 vim.wo.number = true
 

@@ -1,10 +1,9 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
-  bind \cf find_immediate_directories
+  bind \cf find_directories
   bind \cg tmux_session_handler
 end
 
-set -gx EDITOR "nvim";
 set -gx HOMEBREW_PREFIX "/opt/homebrew";
 set -gx HOMEBREW_CELLAR "$HOMEBREW_PREFIX/Cellar";
 set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX";
@@ -23,7 +22,7 @@ set -gx theme_hostname always
 
 set -gx GHQ_ROOT "$HOME/Projects"
 
-set -gx FZF_DEFAULT_OPTS "--tac --layout=reverse --info=inline --border --margin=1 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'"
+set -gx FZF_DEFAULT_OPTS "--tac --layout=reverse --info=inline --border --margin=2 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'"
 set -gx FZF_DEFAULT_COMMAND "ls -a"
 set -gx FZF__PREVIEW__COMMAND 'bat --style=numbers --color=always --line-range :500 {}'
 set -gx FZF__DIR__PREVIEW__COMMAND 'tree -aC -I "$TREE__GLOBAL_IGNORE" {} | head -700'
@@ -77,41 +76,26 @@ function vi -d "Neovim"
   nvim $argv
 end
 
-function find_immediate_directories -d "Ls into directories with fuzzy search"
-  ls -aA |  egrep -v "$TREE__GLOBAL_IGNORE" | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read foo
+function find_directories -d "Find directories"
+
+  find . -type d -maxdepth 1 -mindepth 1 | fzf --preview "$FZF__SMART__PREVIEW__COMMAND" \
+    --prompt "Find Directory> " --ansi \
+    --bind 'ctrl-d:reload(find . -type d -maxdepth 1 -mindepth 1)+change-prompt(Find Directory> )' \
+    --bind 'ctrl-a:reload(find . -maxdepth 1 -mindepth 1)+change-prompt(Find All> )' \
+    --bind 'ctrl-l:reload(ls -alp)+change-prompt(ls mode> )' \
+    --bind 'ctrl-f:reload(find . -type f)+change-prompt(Find files> )' \
+    --header '/ D: Directory | A: All | L: ls mode | F: Files | O: Execute' | read foo
   
-  if test $foo
-    builtin cd "$foo"
-    commandline -r ''
-    commandline -f repaint
-  else
+  if test -z "$foo"
     commandline ''
-  end
-end
-
-function find_directories -d "Find directories" -a input depth
-  if test -n "$depth"
-    set ndepth "$depth"
-  else 
-    set ndepth "1"
-  end
-
-
-  if test "$input"
-    set keyword "*$input*"
-  else 
-    set keyword "*"
-  end
-
-  find . -type d -maxdepth $ndepth -name $keyword | egrep -v "$TREE__GLOBAL_IGNORE" | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read foo
-
-  if test "$foo"
+    return
+  else
     builtin cd "$foo"
     commandline -r ""
     commandline -f repaint
-  else
-    commandline ''
   end
+
+  find_directories
 end
 
 function _port -d "Find port with lsof & netstat" -a port_id
@@ -135,22 +119,23 @@ function _ide
 end
 
 
-function tmux_session_handler -d "When performs with a keystroke (Ctrl + G), this opens fuzzy finder and takes you to tmux session of the selected Dir"
-  find ~/Projects -mindepth 1 -maxdepth 1 -type d | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | basename | tr . _ | read foo
+function tmux_session_handler
+  if test -z $PROJECT_DIR
+    commandline -f repaint
+    return;
+  end
+  
+  find $PROJECT_DIR -mindepth 1 -maxdepth 1 -type d | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read foo
 
-  if test -n "$foo"
-    exit 0
+  basename "$foo" 2> /dev/null | tr . _ | read selected_dir
+  
+  if test -z "$selected_dir"
+    commandline -f repaint
+    return;
   end
-  
-  set selected_dir (basename "$foo" | tr . _)
-  
-  if test -n "$selected_dir"
-    exit 0
-  end
-  
-  
+
+  builtin cd $foo
   _tn "$selected_dir"
-  commandline -r ""
   commandline -f repaint
 end
 
