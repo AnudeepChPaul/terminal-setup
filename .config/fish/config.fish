@@ -1,10 +1,11 @@
+source ~/.config/fish/env.fish
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
   bind \cf find_directories
-  bind \cg tmux_session_handler
+  bind \cg tmux_manager
 end
 
-source ~/.config/fish/env.fish
 
 # aliases
 alias g git
@@ -81,11 +82,17 @@ function _port -d "Find port with lsof & netstat" -a port_id
   netstat -avn | grep $port_id
 end
 
+function _ide
+  tmux split-window -v -p 30
+  tmux split-window -h -p 40
+end
+
 function _tn -d "Create or attach into a tmux session" -a session_name session_dir
-  set applied_session_name "Main"
   if test -z $session_name
-    set applied_session_name "Main"
+    builtin echo "Session name don't exists"
+    return;
   end
+  set applied_session_name $session_name
 
   builtin echo "Trying to handle tmux with $applied_session_name"
   set tmux_running (pgrep tmux)
@@ -112,13 +119,8 @@ function _tn -d "Create or attach into a tmux session" -a session_name session_d
   # end
 end
 
-function _ide
-  tmux split-window -v -p 30
-  tmux split-window -h -p 40
-end
 
-
-function tmux_session_handler
+function tmux_manager
   if test -z $PROJECTS_DIR
     commandline -f repaint
     return;

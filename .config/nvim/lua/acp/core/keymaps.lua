@@ -63,6 +63,7 @@ Map("n", "<S-Down>", "<C-w>-")
 -- Map("n", "k", "kzz")
 
 Map("n", "q", ":m+1<CR>")
+Map("n", "<leader>q", 'V"-y"-p') -- duplicates a line
 Map("n", "Q", ":m-2<CR>")
 
 Map("v", "q", ":m '>+1<CR>gv=gv")
@@ -103,7 +104,7 @@ Map("", "<leader>u", "<cmd>UndotreeToggle<CR>")
 Map("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximization
 
 -- nvim-tree
-Map("n", "<leader>fe", ":NvimTreeToggle<CR>") -- toggle file explorer
+Map("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current working directory, respects .gitignore
 
 -- telescope
