@@ -55,16 +55,17 @@ function vi -d "Neovim"
 end
 
 function find_directories -d "Find directories interactive mode"
-  find . -type d -maxdepth 1 -mindepth 1 | fzf --preview "$FZF__SMART__PREVIEW__COMMAND" \
+  find . -type d -maxdepth 1 -mindepth 1 | fzf --preview $FZF__SMART__PREVIEW__COMMAND \
     --prompt "Find Directory> " --ansi \
     --bind 'ctrl-d:reload(find . -type d -maxdepth 1 -mindepth 1)+change-prompt(Find Directory> )' \
     --bind 'ctrl-a:reload(find . -maxdepth 1 -mindepth 1)+change-prompt(Find All> )' \
     --bind 'ctrl-l:reload(ls -alp)+change-prompt(ls mode> )' \
     --bind 'ctrl-f:reload(find . -type f)+change-prompt(Find files> )' \
-    --header '/ D: Directory | A: All | L: ls mode | F: Files | O: Execute' | read foo
+    --header '/ D: Directory | A: All | L: ls mode | F: Files' | read foo
   
   if test -z "$foo"
     commandline ''
+    commandline -f repaint
     return
   else
     builtin cd "$foo"
@@ -106,38 +107,33 @@ function _tn -d "Create or attach into a tmux session" -a session_name session_d
   
   if not tmux has-session -t $applied_session_name 2> /dev/null
     builtin echo "Existing tmux session don't exists! Creating a new session"
-    command tmux new-session -s $applied_session_name -c $session_dir
+    command tmux new-session -s $applied_session_name -c $session_dir -d; tmux switchc -t $applied_session_name;
     commandline -f repaint
     return;
   end
 
   builtin echo "TMUX switch a client!"
-  command tmux attach -dt $applied_session_name
-  commandline -f repaint
-  # if not command tmux switch-client -t Main 2> /dev/null
-  #   builtin echo "Attaching to client"
-  # end
+  command tmux attach -t $applied_session_name || tmux switchc -t $applied_session_name;
+  commandline -f repaint;
 end
 
 
 function tmux_manager
-  if test -z $PROJECTS_DIR
+  if test -z "$PROJECTS_DIR"
     commandline -f repaint
     return;
   end
   
-  find $PROJECTS_DIR -mindepth 1 -maxdepth 1 -type d | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read selected_item
+  find $PROJECTS_DIR -mindepth 1 -maxdepth 1 -type d | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read selected_
 
-  basename "$selected_item" 2> /dev/null | tr . _ | read selected_dir
+  basename "$selected_" 2> /dev/null | tr . _ | read selected_dir
   
   if test -z "$selected_dir"
     commandline -f repaint
     return;
   end
 
-  builtin cd $selected_item
-  builtin echo "Changed Dir"
-  commandline "_tn $selected_dir $selected_item" 
+  commandline "_tn $selected_dir $selected_" 
   commandline -f execute
 end
 
