@@ -4,30 +4,7 @@ if status is-interactive
   bind \cg tmux_session_handler
 end
 
-set -gx HOMEBREW_PREFIX "/opt/homebrew";
-set -gx HOMEBREW_CELLAR "$HOMEBREW_PREFIX/Cellar";
-set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX";
-set -q PATH; or set PATH ''; set -gx PATH "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin" $PATH;
-set -q MANPATH; or set MANPATH ''; set -gx MANPATH "$HOMEBREW_PREFIX/share/man" $MANPATH;
-set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "$HOMEBREW_PREFIX/share/info" $INFOPATH;
-
-set -gx TERM xterm-256color
-
-# theme
-set -gx theme_color_scheme terminal-dark
-set -gx fish_prompt_pwd_dir_length 1
-set -gx theme_display_user yes
-set -gx theme_hide_hostname no
-set -gx theme_hostname always
-
-set -gx GHQ_ROOT "$HOME/Projects"
-
-set -gx FZF_DEFAULT_OPTS "--tac --layout=reverse --info=inline --border --margin=2 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'"
-set -gx FZF_DEFAULT_COMMAND "ls -a"
-set -gx FZF__PREVIEW__COMMAND 'bat --style=numbers --color=always --line-range :500 {}'
-set -gx FZF__DIR__PREVIEW__COMMAND 'tree -aC -I "$TREE__GLOBAL_IGNORE" {} | head -700'
-set -gx TREE__GLOBAL_IGNORE ".git|node_modules|.history|webpack|.next|.idea|.gradle|.vscode|.Trash"
-set -gx FZF__SMART__PREVIEW__COMMAND "[ -d {} ] && $FZF__DIR__PREVIEW__COMMAND || $FZF__PREVIEW__COMMAND"
+source ~/.config/fish/env.fish
 
 # aliases
 alias g git
@@ -41,7 +18,7 @@ alias sv "sudo nvim"
 alias v "nvim"
 alias g "git"
 alias gc "git clone"
-alias d3 "cd $HOME/Projects"
+alias d3 "cd $GHQ_ROOT"
 alias conf "sv -O ~/.zprofile ~/.zshrc"
 alias de "docker exec -u root -it"
 alias dils "docker image ls"
@@ -76,8 +53,7 @@ function vi -d "Neovim"
   nvim $argv
 end
 
-function find_directories -d "Find directories"
-
+function find_directories -d "Find directories interactive mode"
   find . -type d -maxdepth 1 -mindepth 1 | fzf --preview "$FZF__SMART__PREVIEW__COMMAND" \
     --prompt "Find Directory> " --ansi \
     --bind 'ctrl-d:reload(find . -type d -maxdepth 1 -mindepth 1)+change-prompt(Find Directory> )' \
@@ -105,12 +81,35 @@ function _port -d "Find port with lsof & netstat" -a port_id
   netstat -avn | grep $port_id
 end
 
-function _tn -d "Create or attach into a tmux session" -a session_name
-  if test "$TMUX"
-    tmux switch-client -t $session_name
-  else 
-    tmux new -s $session_name || tmux attach -t $session_name
+function _tn -d "Create or attach into a tmux session" -a session_name session_dir
+  set applied_session_name "Main"
+  if test -z $session_name
+    set applied_session_name "Main"
   end
+
+  builtin echo "Trying to handle tmux with $applied_session_name"
+  set tmux_running (pgrep tmux)
+  
+  if test -z "$TMUX"; and test -z "$tmux_running";
+    builtin echo "Tmux is running but not within a TMUX session"
+    command tmux new-session -s $applied_session_name -c $session_dir
+    commandline -f repaint
+    return;
+  end
+  
+  if not tmux has-session -t $applied_session_name 2> /dev/null
+    builtin echo "Existing tmux session don't exists! Creating a new session"
+    command tmux new-session -s $applied_session_name -c $session_dir
+    commandline -f repaint
+    return;
+  end
+
+  builtin echo "TMUX switch a client!"
+  command tmux attach -dt $applied_session_name
+  commandline -f repaint
+  # if not command tmux switch-client -t Main 2> /dev/null
+  #   builtin echo "Attaching to client"
+  # end
 end
 
 function _ide
@@ -120,23 +119,24 @@ end
 
 
 function tmux_session_handler
-  if test -z $PROJECT_DIR
+  if test -z $PROJECTS_DIR
     commandline -f repaint
     return;
   end
   
-  find $PROJECT_DIR -mindepth 1 -maxdepth 1 -type d | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read foo
+  find $PROJECTS_DIR -mindepth 1 -maxdepth 1 -type d | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read selected_item
 
-  basename "$foo" 2> /dev/null | tr . _ | read selected_dir
+  basename "$selected_item" 2> /dev/null | tr . _ | read selected_dir
   
   if test -z "$selected_dir"
     commandline -f repaint
     return;
   end
 
-  builtin cd $foo
-  _tn "$selected_dir"
-  commandline -f repaint
+  builtin cd $selected_item
+  builtin echo "Changed Dir"
+  commandline "_tn $selected_dir $selected_item" 
+  commandline -f execute
 end
 
 

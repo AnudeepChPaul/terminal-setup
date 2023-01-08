@@ -44,10 +44,10 @@ Map("n", "sv", "<C-w>v") -- split window vertically
 Map("n", "ss", "<C-w>s") -- split window horizontally
 Map("n", "se", "<C-w>=") -- make split windows equal width & height
 
-Map("n", "sx", ":close<CR>") -- close current split window
-Map("n", "wx", ":bd<CR>") -- close current buffer
+Map("n", "<leader>sx", ":close<CR>") -- close current split window
+Map("n", "<leader>wx", ":bd<CR>") -- close current buffer
 
-Map("n", "tt", ":new<CR>") -- open new tab
+Map("n", "<leader>tt", ":new<CR>") -- open new tab
 
 Map("", "sh", "<C-w>h") -- Switch to panel left
 Map("", "sk", "<C-w>k") -- Switch to panel up
@@ -59,14 +59,14 @@ Map("n", "<S-Right>", "<C-w>>")
 Map("n", "<S-Up>", "<C-w>+")
 Map("n", "<S-Down>", "<C-w>-")
 
-Map("n", "j", "jzz")
-Map("n", "k", "kzz")
+-- Map("n", "j", "jzz")
+-- Map("n", "k", "kzz")
 
-Map("n", "m", ":m+1<CR>")
-Map("n", "M", ":m-2<CR>")
+Map("n", "q", ":m+1<CR>")
+Map("n", "Q", ":m-2<CR>")
 
-Map("v", "m", ":m '>+1<CR>gv=gv")
-Map("v", "M", ":m '<-2<CR>gv=gv")
+Map("v", "q", ":m '>+1<CR>gv=gv")
+Map("v", "Q", ":m '<-2<CR>gv=gv")
 
 Map("v", "<", "<gv")
 Map("v", ">", ">gv")
@@ -78,7 +78,7 @@ Map("n", "<leader>e", vim.diagnostic.open_float)
 Map("n", "[d", vim.diagnostic.goto_prev)
 Map("n", "]d", vim.diagnostic.goto_next)
 
-Map("n", "ff", ":$put _<CR>")
+-- Map("n", "ff", ":$put _<CR>")
 
 Map("n", "<TAB>", ":bnext<CR>")
 Map("n", "<S-TAB>", ":bprevious<CR>")
@@ -100,7 +100,7 @@ Map("n", "<leader>r", ":substitute/")
 Map("", "<leader>u", "<cmd>UndotreeToggle<CR>")
 
 -- vim-maximizer
-Map("n", "sm", ":MaximizerToggle<CR>") -- toggle split window maximization
+Map("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximization
 
 -- nvim-tree
 Map("n", "<leader>fe", ":NvimTreeToggle<CR>") -- toggle file explorer
