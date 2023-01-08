@@ -25,8 +25,8 @@ cp -aR ~/.config/fish/functions/nvm_find_nvmrc.fish   $project_dir/.config/fish/
 eval $___git_ac add "$project_dir"
 
 eval "$___git_ac commit -m '[$TIMESTAMP] [Backup] Auto backing up changes' &> /dev/null"
-# eval "$___git_ac pull --rebase"
-# eval "$___git_ac push"
+eval "$___git_ac pull --rebase"
+eval "$___git_ac push"
 
 unset ___git_ac
 

@@ -84,7 +84,7 @@ end
 
 function _ide
   tmux split-window -v -p 30
-  tmux split-window -h -p 40
+  tmux split-window -h -p 50
 end
 
 function _tn -d "Create or attach into a tmux session" -a session_name session_dir
