@@ -95,24 +95,18 @@ function _tn -d "Create or attach into a tmux session" -a session_name session_d
   end
   set applied_session_name $session_name
 
-  builtin echo "Trying to handle tmux with $applied_session_name"
   set tmux_running (pgrep tmux)
   
   if test -z "$TMUX"; and test -z "$tmux_running";
-    builtin echo "Tmux is running but not within a TMUX session"
     command tmux new-session -s $applied_session_name -c $session_dir
     commandline -f repaint
     return;
   end
   
   if not tmux has-session -t $applied_session_name 2> /dev/null
-    builtin echo "Existing tmux session don't exists! Creating a new session"
-    command tmux new-session -s $applied_session_name -c $session_dir -d; tmux switchc -t $applied_session_name;
-    commandline -f repaint
-    return;
+    command tmux new-session -s $applied_session_name -c $session_dir -d
   end
 
-  builtin echo "TMUX switch a client!"
   command tmux attach -t $applied_session_name || tmux switchc -t $applied_session_name;
   commandline -f repaint;
 end
