@@ -16,7 +16,7 @@ done
 cp -aR ~/.config/nvim $project_dir/.config
 
 cp -aR ~/.config/tmux/tmux.conf                       $project_dir/.config/tmux/
-cp -aR ~/.config/custom_scripts                       $project_dir/.config/custom_scripts
+cp -aR ~/.config/custom_scripts/**                       $project_dir/.config/custom_scripts
 
 cp -aR ~/.config/fish/config.fish                     $project_dir/.config/fish/
 
