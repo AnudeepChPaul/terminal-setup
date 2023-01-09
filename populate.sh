@@ -6,7 +6,7 @@ cp -f -r ./.config/tmux/* ~/.config/tmux
 cp -f -r .zprofile ~
 cp -f -r .zshrc ~
 
-cp -aR .config/custom_scripts                                 ~/.config/custom_scripts
+cp -aR .config/custom_scripts/**                                 ~/.config/custom_scripts
 
 cp -aR .config/fish/env.fish                               ~/.config/fish/
 cp -aR .config/fish/config.fish                               ~/.config/fish/
