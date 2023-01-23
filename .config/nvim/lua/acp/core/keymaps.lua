@@ -111,6 +111,19 @@ Map("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximizati
 Map("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current working directory, respects .gitignore
 
+-- LSP Saga
+Map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+Map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+Map("n", "K", "<Cmd>Lspsaga hover_doc ++quiet<CR>", opts)
+Map("n", "<leader>gd", "<Cmd>Lspsaga lsp_finder<CR>", opts)
+Map("i", "<leader>k", "<Cmd>Lspsaga signature_help<CR>", opts)
+Map("n", "<leader>gp", "<Cmd>Lspsaga peek_definition<CR>", opts)
+Map("n", "<leader>rn", "<Cmd>Lspsaga rename<CR>", opts)
+Map("n", "<leader>rnn", "<cmd>Lspsaga rename ++project<CR>", opts)
+Map({"n","v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
+Map("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>", opts)
+Map("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>", opts)
+
 -- telescope
 Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
 Map("n", "<leader>fl", "<cmd>Telescope quickfix<cr>") -- find files within current working directory, respects .gitignore
