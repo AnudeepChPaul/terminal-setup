@@ -81,6 +81,10 @@ Map("n", "]d", vim.diagnostic.goto_next)
 
 -- Map("n", "ff", ":$put _<CR>")
 
+-- Quick fix list navigation
+Map("n", "<C-[>", ":cn<CR>")
+Map("n", "<C-]>", ":cp<CR>")
+
 Map("n", "<TAB>", ":bnext<CR>")
 Map("n", "<S-TAB>", ":bprevious<CR>")
 
@@ -109,6 +113,7 @@ Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current work
 
 -- telescope
 Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
+Map("n", "<leader>fl", "<cmd>Telescope quickfix<cr>") -- find files within current working directory, respects .gitignore
 Map("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
 Map("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 Map("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
