@@ -114,7 +114,7 @@ Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current work
 -- LSP Saga
 Map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 Map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-Map("n", "K", "<Cmd>Lspsaga hover_doc ++quiet<CR>", opts)
+Map("n", "K", "<Cmd>Lspsaga hover_doc ++quiet ++keep<CR>", opts)
 Map("n", "<leader>gd", "<Cmd>Lspsaga lsp_finder<CR>", opts)
 Map("i", "<leader>k", "<Cmd>Lspsaga signature_help<CR>", opts)
 Map("n", "<leader>gp", "<Cmd>Lspsaga peek_definition<CR>", opts)
