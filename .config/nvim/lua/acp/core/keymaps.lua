@@ -66,8 +66,8 @@ Map("n", "q", ":m+1<CR>")
 Map("n", "<leader>q", 'V"-y"-p') -- duplicates a line
 Map("n", "Q", ":m-2<CR>")
 
-Map("v", "q", ":m '>+1<CR>gv=gv")
-Map("v", "Q", ":m '<-2<CR>gv=gv")
+Map("v", "m", ":m '>+1<CR>gv=gv")
+Map("v", "M", ":m '<-2<CR>gv=gv")
 
 Map("v", "<", "<gv")
 Map("v", ">", ">gv")
