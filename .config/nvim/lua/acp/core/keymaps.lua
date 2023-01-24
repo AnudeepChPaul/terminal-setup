@@ -138,14 +138,13 @@ Map("n", "ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables (not in
 
 -- telescope
 Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
-Map("n", "<leader>fl", "<cmd>Telescope quickfix<cr>") -- find files within current working directory, respects .gitignore
-Map("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
-Map("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+Map("n", "<leader>fq", "<cmd>Telescope quickfix<cr>") -- find files within current working directory, respects .gitignore
+Map("n", "<leader>fg", "<cmd>Telescope git_files<cr>") -- find string in current working directory as you type
+Map("n", "<leader>fs", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 Map("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 Map("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
 Map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
 Map("n", "<leader>gg", "<cmd>LazyGit<CR>")
-
 -- telescope git commands (not on youtube nvim video)
 Map("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits (use <cr> to checkout) ["gc" for git commits]
 Map("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>") -- list git commits for current file/buffer (use <cr> to checkout) ["gfc" for git file commits]
