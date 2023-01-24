@@ -124,7 +124,6 @@ Map("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>", opts)
 Map("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
 Map("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
 Map("n", "<leader>ot", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
-Map("n", "<leader>f", format(bufnr), opts)
 Map("n", "<leader>gp", "<Cmd>Lspsaga peek_definition<CR>", opts)
 Map("n", "<leader>gf", "<Cmd>Lspsaga lsp_finder<CR>", opts)
 Map("n", "<leader>gi", vim.lsp.buf.implementation, opts)
