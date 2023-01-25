@@ -62,10 +62,10 @@ Map("n", "<S-Down>", "<C-w>-")
 -- Map("n", "j", "jzz")
 -- Map("n", "k", "kzz")
 
-Map("n", "q", ":m+1<CR>")
-Map("n", "<leader>q", 'V"-y"-p') -- duplicates a line
-Map("n", "Q", ":m-2<CR>")
+-- Map("n", "q", ":m+1<CR>")
+-- Map("n", "Q", ":m-2<CR>")
 
+Map("n", "<leader>m", 'V"-y"-p') -- duplicates a line
 Map("v", "m", ":m '>+1<CR>gv=gv")
 Map("v", "M", ":m '<-2<CR>gv=gv")
 
@@ -80,6 +80,9 @@ Map("n", "[d", vim.diagnostic.goto_prev)
 Map("n", "]d", vim.diagnostic.goto_next)
 
 -- Map("n", "ff", ":$put _<CR>")
+
+-- Quick action
+Map("n", "jk", "<ESC>") -- ESC on jk pressed togather
 
 -- Quick fix list navigation
 Map("n", "<C-[>", ":cn<CR>")
