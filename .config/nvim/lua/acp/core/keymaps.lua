@@ -82,7 +82,7 @@ Map("n", "]d", vim.diagnostic.goto_next)
 -- Map("n", "ff", ":$put _<CR>")
 
 -- Quick action
-Map("n", "jk", "<ESC>") -- ESC on jk pressed togather
+Map("i", "jk", "<ESC>") -- ESC on jk pressed togather
 
 -- Quick fix list navigation
 Map("n", "<C-[>", ":cn<CR>")
