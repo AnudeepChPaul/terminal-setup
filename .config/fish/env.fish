@@ -3,7 +3,7 @@ set -qx MANPATH; or set MANPATH '';
 set -qx INFOPATH; or set INFOPATH ''; 
 set -gx EDITOR "nvim"
 
-set architechture (arch)
+set -l architechture (arch)
 
 if [ "$architechture" = "i386" ]
   set -gx HOMEBREW_PREFIX "/usr/local";
