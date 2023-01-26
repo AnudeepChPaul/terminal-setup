@@ -3,13 +3,21 @@ set -qx MANPATH; or set MANPATH '';
 set -qx INFOPATH; or set INFOPATH ''; 
 set -gx EDITOR "nvim"
 
-set -gx HOMEBREW_PREFIX "/opt/homebrew";
+set architechture (arch)
 
-set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX";
-set -gx PATH "$PATH" "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin" "$HOME/bin" "$HOME/.config/custom_scripts";
+if [ "$architechture" = "i386" ]
+  set -gx HOMEBREW_PREFIX "/usr/local";
+  set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX/homebrew";
+else
+  set -gx HOMEBREW_PREFIX "/opt/homebrew";
+  set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX";
+end
+
 set -gx HOMEBREW_CELLAR "$HOMEBREW_PREFIX/Cellar";
 set -gx MANPATH "$HOMEBREW_PREFIX/share/man" $MANPATH;
 set -gx INFOPATH "$HOMEBREW_PREFIX/share/info" $INFOPATH;
+set -gx PATH "$PATH" "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin" "$HOME/bin" "$HOME/.config/custom_scripts";
+
 set -gx TERM xterm-256color
 set -gx theme_color_scheme terminal-dark
 set -gx fish_prompt_pwd_dir_length 1
