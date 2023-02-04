@@ -41,7 +41,7 @@ return packer.startup(function(use)
       "williamboman/mason-lspconfig.nvim",
 
       -- Useful status updates for LSP
-      -- "j-hui/fidget.nvim",
+      "j-hui/fidget.nvim",
 
       -- Additional lua configuration, makes nvim stuff amazing
       "folke/neodev.nvim",
@@ -65,6 +65,10 @@ return packer.startup(function(use)
       ts_update()
     end,
   }) -- treesitter configuration
+  -- use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
+
+  use("nvim-tree/nvim-tree.lua") -- file explorer
+  use("nvim-tree/nvim-web-devicons") -- vs-code like icons
 
   use({ -- Autocompletion
     "hrsh7th/nvim-cmp",
@@ -86,7 +90,7 @@ return packer.startup(function(use)
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- dependency for better sorting performance
       { "nvim-telescope/telescope-file-browser.nvim" },
       { "nvim-telescope/telescope-project.nvim" },
-      { "kdheepak/lazygit.nvim" },
+      -- { "kdheepak/lazygit.nvim" },
     },
   }) -- fuzzy finder
   -- autocompletion
@@ -97,17 +101,14 @@ return packer.startup(function(use)
 
   -- use("norcalli/nvim-colorizer.lua")
   use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
-  use("szw/vim-maximizer") -- maximizes and restores current window
+  -- use("szw/vim-maximizer") -- maximizes and restores current window
 
   -- essential plugins
-  use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
+  -- use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
   use("numToStr/Comment.nvim") -- commenting with gc
-  use("nvim-tree/nvim-tree.lua") -- file explorer
-  use("nvim-tree/nvim-web-devicons") -- vs-code like icons
 
   -- configuring lsp servers
   use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
-  use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
   use("nvim-lualine/lualine.nvim") -- statusline
   use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 

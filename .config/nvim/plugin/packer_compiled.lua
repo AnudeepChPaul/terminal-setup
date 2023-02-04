@@ -109,15 +109,15 @@ _G.packer_plugins = {
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["fidget.nvim"] = {
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/fidget.nvim",
+    url = "https://github.com/j-hui/fidget.nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
-  },
-  ["lazygit.nvim"] = {
-    loaded = true,
-    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/lazygit.nvim",
-    url = "https://github.com/kdheepak/lazygit.nvim"
   },
   ["lspkind.nvim"] = {
     loaded = true,
@@ -189,13 +189,6 @@ _G.packer_plugins = {
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
-  ["nvim-ts-autotag"] = {
-    load_after = {},
-    loaded = true,
-    needs_bufread = false,
-    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/opt/nvim-ts-autotag",
-    url = "https://github.com/windwp/nvim-ts-autotag"
-  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -251,16 +244,6 @@ _G.packer_plugins = {
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/vim-go",
     url = "https://github.com/fatih/vim-go"
   },
-  ["vim-maximizer"] = {
-    loaded = true,
-    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/vim-maximizer",
-    url = "https://github.com/szw/vim-maximizer"
-  },
-  ["vim-surround"] = {
-    loaded = true,
-    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/vim-surround",
-    url = "https://github.com/tpope/vim-surround"
-  },
   ["vim-tmux-navigator"] = {
     loaded = true,
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
@@ -269,11 +252,6 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Load plugins in order defined by `after`
-time([[Sequenced loading]], true)
-vim.cmd [[ packadd nvim-treesitter ]]
-vim.cmd [[ packadd nvim-ts-autotag ]]
-time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

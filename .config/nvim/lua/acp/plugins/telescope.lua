@@ -19,11 +19,11 @@ table.insert(vimgrep_arguments, "!**/package-lock.json")
 table.insert(vimgrep_arguments, "--glob*")
 table.insert(vimgrep_arguments, "!**/node_modules/*") ]]
 
-local lg_utils = require("lazygit.utils")
-
-vim.cmd([[
-  autocmd BufEnter * :lua require('lazygit.utils').project_root_dir()
-]])
+-- local lg_utils = require("lazygit.utils")
+--
+-- vim.cmd([[
+--   autocmd BufEnter * :lua require('lazygit.utils').project_root_dir()
+-- ]])
 
 -- configure telescope
 telescope.setup({
@@ -106,5 +106,5 @@ telescope.setup({
 
 telescope.load_extension("fzf")
 telescope.load_extension("live_grep_args")
-telescope.load_extension("lazygit")
+-- telescope.load_extension("lazygit")
 telescope.load_extension("project")

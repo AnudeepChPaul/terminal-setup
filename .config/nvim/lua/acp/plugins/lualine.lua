@@ -17,9 +17,9 @@ local lualine_nightfly = require("lualine.themes.nightfly")
 --   },
 -- }
 --
-
 local Mode = {}
 
+-- Color table for highlights
 Mode.map = {
   ["n"] = "NORMAL",
   ["no"] = "O-PENDING",
@@ -59,6 +59,7 @@ Mode.map = {
   ["t"] = "TERMINAL",
 }
 
+---@return string current mode name
 function Mode.get_mode()
   local mode_code = vim.api.nvim_get_mode().mode
   if Mode.map[mode_code] == nil then
@@ -67,7 +68,6 @@ function Mode.get_mode()
   return Mode.map[mode_code]
 end
 
--- Color table for highlights
 -- stylua: ignore
 local colors = {
   bg       = '#202328',
@@ -136,7 +136,6 @@ local mode_color = {
   n = colors.blue,
   i = colors.green,
   v = colors.red,
-  [""] = colors.blue,
   V = colors.blue,
   c = colors.magenta,
   no = colors.red,
@@ -167,26 +166,13 @@ end
 
 ins_left({
   function()
-    return "▊" .. Mode.get_mode()
+    return "▊ " .. Mode.get_mode() .. " ▊"
   end,
   color = function()
-    return { fg = mode_color[vim.fn.mode()], gui = "bold" }
+    return { fg = mode_color[vim.fn.mode()] }
   end, -- Sets highlighting of component
   padding = { left = 0, right = 1 }, -- We don't need space before this
 })
-
---[[ ins_left({
-  -- mode component
-  function()
-    return ""
-  end,
-  color = function()
-    -- auto change color according to neovims mode
-
-    return { fg = mode_color[vim.fn.mode()] }
-  end,
-  padding = { right = 1 },
-}) ]]
 
 ins_left({
   -- filesize component
@@ -194,22 +180,30 @@ ins_left({
   cond = conditions.buffer_not_empty,
 })
 
-ins_left({ "location" })
-
-ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
-
 ins_left({
-  "diagnostics",
-  sources = { "nvim_diagnostic" },
-  symbols = { error = " ", warn = " ", info = " " },
-  diagnostics_color = {
-    color_error = { fg = colors.red },
-    color_warn = { fg = colors.yellow },
-    color_info = { fg = colors.cyan },
-  },
+  function()
+    return vim.fn.expand("%p")
+  end,
+  cond = conditions.buffer_not_empty,
+  color = { fg = colors.magenta, gui = "bold" },
 })
 
 ins_left({
+  color = { fg = colors.red, gui = "bold" },
+  function()
+    return (vim.bo.modified and "(M)" or "")
+  end,
+})
+
+ins_left({
+  function()
+    return "%="
+  end,
+})
+
+-- Insert mid section. You can make any number of sections in neovim :)
+-- for lualine it's any number greater then 2
+ins_right({
   -- Lsp server name .
   function()
     local msg = "No Active Lsp"
@@ -229,35 +223,19 @@ ins_left({
   icon = " LSP:",
   color = { fg = "#ffffff" },
 })
--- Insert mid section. You can make any number of sections in neovim :)
--- for lualine it's any number greater then 2
-ins_left({
-  function()
-    return "%="
-  end,
-})
+ins_right({ "location" })
+
+ins_right({ "progress", color = { fg = colors.fg } })
 
 ins_right({
-  function()
-    return vim.fn.expand("%p")
-  end,
-  cond = conditions.buffer_not_empty,
-  color = { fg = colors.blue, gui = "bold" },
-})
-
--- Add components to right sections
-ins_right({
-  "o:encoding", -- option component same as &encoding in viml
-  fmt = string.upper, -- I'm not sure why it's upper case either ;)
-  cond = conditions.hide_in_width,
-  color = { fg = colors.red, gui = "bold" },
-})
-
-ins_right({
-  "fileformat",
-  fmt = string.upper,
-  icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-  color = { fg = colors.red, gui = "bold" },
+  "diagnostics",
+  sources = { "nvim_diagnostic" },
+  symbols = { error = " ", warn = " ", info = " " },
+  diagnostics_color = {
+    color_error = { fg = colors.red },
+    color_warn = { fg = colors.yellow },
+    color_info = { fg = colors.cyan },
+  },
 })
 
 ins_right({
@@ -276,6 +254,20 @@ ins_right({
     removed = { fg = colors.red },
   },
   cond = conditions.hide_in_width,
+})
+-- Add components to right sections
+ins_right({
+  "o:encoding", -- option component same as &encoding in viml
+  fmt = string.upper, -- I'm not sure why it's upper case either ;)
+  cond = conditions.hide_in_width,
+  color = { fg = colors.green },
+})
+
+ins_right({
+  "fileformat",
+  fmt = string.upper,
+  icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+  color = { fg = colors.green },
 })
 
 ins_right({
