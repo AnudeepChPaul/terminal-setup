@@ -4,7 +4,7 @@ local lspconfig_status, lspconfig = pcall(require, "lspconfig")
 local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
 local protocol = require("vim.lsp.protocol")
 
-local enable_format_on_save = function(_, bufnr)
+--[[ local enable_format_on_save = function(_, bufnr)
   vim.api.nvim_clear_autocmds({ group = augroup_format, buffer = bufnr })
   vim.api.nvim_create_autocmd("BufWritePre", {
     group = augroup_format,
@@ -13,7 +13,7 @@ local enable_format_on_save = function(_, bufnr)
       vim.lsp.buf.format({ bufnr = bufnr })
     end,
   })
-end
+end ]]
 
 -- import cmp-nvim-lsp plugin safely
 local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")

@@ -1,6 +1,7 @@
 require("acp.plugins-setup")
 require("acp.core.options")
 require("acp.core.keymaps")
+require("acp.core.autocmd")
 require("acp.core.colorscheme")
 require("acp.plugins.comment")
 require("acp.plugins.nvim-tree")

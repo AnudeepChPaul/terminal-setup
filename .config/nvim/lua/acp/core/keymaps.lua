@@ -115,29 +115,29 @@ Map("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current working directory, respects .gitignore
 
 -- LSP Saga
-Map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
-Map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-Map("n", "K", "<Cmd>Lspsaga hover_doc ++quiet ++keep<CR>", opts)
-Map("i", "<leader>k", "<Cmd>Lspsaga signature_help<CR>", opts)
-Map("n", "<leader>rn", "<Cmd>Lspsaga rename<CR>", opts)
-Map("n", "<leader>rnn", "<cmd>Lspsaga rename ++project<CR>", opts)
-Map({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
-Map("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>", opts)
-Map("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>", opts)
-Map("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
-Map("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
-Map("n", "<leader>ot", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
-Map("n", "<leader>gp", "<Cmd>Lspsaga peek_definition<CR>", opts)
-Map("n", "<leader>gf", "<Cmd>Lspsaga lsp_finder<CR>", opts)
-Map("n", "<leader>gi", vim.lsp.buf.implementation, opts)
-Map("n", "<leader>gr", vim.lsp.buf.references, opts)
-Map("n", "<leader>gD", vim.lsp.buf.declaration, opts)
-Map("n", "<leader>gd", vim.lsp.buf.definition, opts)
+Map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+Map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+Map("n", "K", "<Cmd>Lspsaga hover_doc ++quiet ++keep<CR>")
+Map("n", "<leader>k", "<Cmd>Lspsaga signature_help<CR>")
+Map("n", "<leader>rn", "<Cmd>Lspsaga rename<CR>")
+Map("n", "<leader>rnn", "<cmd>Lspsaga rename ++project<CR>")
+Map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>")
+Map("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
+Map("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+Map("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>") -- show  diagnostics for line
+Map("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>") -- show diagnostics for cursor
+Map("n", "<leader>ot", "<cmd>LSoutlineToggle<CR>") -- see outline on right hand side
+Map("n", "<leader>gp", "<Cmd>Lspsaga peek_definition<CR>")
+Map("n", "<leader>gf", "<Cmd>Lspsaga lsp_finder<CR>")
+Map("n", "<leader>gi", vim.lsp.buf.implementation)
+Map("n", "<leader>gr", vim.lsp.buf.references)
+Map("n", "<leader>gD", vim.lsp.buf.declaration)
+Map("n", "<leader>gd", vim.lsp.buf.definition)
 
 -- typescript specific keymaps (e.g. rename file and update imports)
-Map("n", "rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
-Map("n", "oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
-Map("n", "ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables (not in youtube nvim video)
+Map("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
+Map("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
+Map("n", "<leader>ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables (not in youtube nvim video)
 
 -- telescope
 Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore

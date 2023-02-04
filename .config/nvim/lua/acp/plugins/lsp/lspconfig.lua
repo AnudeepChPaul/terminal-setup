@@ -7,22 +7,15 @@ local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 -- import typescript plugin safely
 local typescript_setup, typescript = pcall(require, "typescript")
 
-local format = function(buf)
-  return function()
-    vim.lsp.buf.format({ buffer = buf })
-    vim.api.nvim_command(":retab")
-  end
-end
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
   -- keybind options
-  local opts = { noremap = true, silent = true, buffer = bufnr }
+  local opts = { noremap = true, buffer = bufnr }
 
   -- set keybinds
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   vim.keymap.set("n", "<leader>p", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
   vim.keymap.set("n", "<leader>n", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
-  vim.keymap.set("n", "<leader>f", format(bufnr), opts)
 end
 
 -- used to enable autocompletion (assign to every lsp server config)
@@ -30,7 +23,8 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- Change the Diagnostic symbols in the sign column (gutter)
 -- (not in youtube nvim video)
-local signs = { Error = " ", Warn = " ", Hint = "ﴞ ", Info = " " }
+local signs = { Error = "E", Warn = "W", Hint = "H", Info = "I" }
+-- local signs = { Error = " ", Warn = " ", Hint = "H", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -88,4 +82,9 @@ lspconfig["sumneko_lua"].setup({
       },
     },
   },
+})
+
+lspconfig.gopls.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
 })

@@ -18,6 +18,55 @@ local lualine_nightfly = require("lualine.themes.nightfly")
 -- }
 --
 
+local Mode = {}
+
+Mode.map = {
+  ["n"] = "NORMAL",
+  ["no"] = "O-PENDING",
+  ["nov"] = "O-PENDING",
+  ["noV"] = "O-PENDING",
+  ["no\22"] = "O-PENDING",
+  ["niI"] = "NORMAL",
+  ["niR"] = "NORMAL",
+  ["niV"] = "NORMAL",
+  ["nt"] = "NORMAL",
+  ["ntT"] = "NORMAL",
+  ["v"] = "VISUAL",
+  ["vs"] = "VISUAL",
+  ["V"] = "V-LINE",
+  ["Vs"] = "V-LINE",
+  ["\22"] = "V-BLOCK",
+  ["\22s"] = "V-BLOCK",
+  ["s"] = "SELECT",
+  ["S"] = "S-LINE",
+  ["\19"] = "S-BLOCK",
+  ["i"] = "INSERT",
+  ["ic"] = "INSERT",
+  ["ix"] = "INSERT",
+  ["R"] = "REPLACE",
+  ["Rc"] = "REPLACE",
+  ["Rx"] = "REPLACE",
+  ["Rv"] = "V-REPLACE",
+  ["Rvc"] = "V-REPLACE",
+  ["Rvx"] = "V-REPLACE",
+  ["c"] = "COMMAND",
+  ["cv"] = "EX",
+  ["ce"] = "EX",
+  ["r"] = "REPLACE",
+  ["rm"] = "MORE",
+  ["r?"] = "CONFIRM",
+  ["!"] = "SHELL",
+  ["t"] = "TERMINAL",
+}
+
+function Mode.get_mode()
+  local mode_code = vim.api.nvim_get_mode().mode
+  if Mode.map[mode_code] == nil then
+    return mode_code
+  end
+  return Mode.map[mode_code]
+end
+
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
@@ -118,15 +167,15 @@ end
 
 ins_left({
   function()
-    return "▊" .. vim.fn.mode()
+    return "▊" .. Mode.get_mode()
   end,
   color = function()
-    return { fg = mode_color[vim.fn.mode()] }
+    return { fg = mode_color[vim.fn.mode()], gui = "bold" }
   end, -- Sets highlighting of component
   padding = { left = 0, right = 1 }, -- We don't need space before this
 })
 
-ins_left({
+--[[ ins_left({
   -- mode component
   function()
     return ""
@@ -137,18 +186,12 @@ ins_left({
     return { fg = mode_color[vim.fn.mode()] }
   end,
   padding = { right = 1 },
-})
+}) ]]
 
 ins_left({
   -- filesize component
   "filesize",
   cond = conditions.buffer_not_empty,
-})
-
-ins_left({
-  "filename",
-  cond = conditions.buffer_not_empty,
-  color = { fg = colors.magenta, gui = "bold" },
 })
 
 ins_left({ "location" })
@@ -164,14 +207,6 @@ ins_left({
     color_warn = { fg = colors.yellow },
     color_info = { fg = colors.cyan },
   },
-})
-
--- Insert mid section. You can make any number of sections in neovim :)
--- for lualine it's any number greater then 2
-ins_left({
-  function()
-    return "%="
-  end,
 })
 
 ins_left({
@@ -192,7 +227,22 @@ ins_left({
     return msg
   end,
   icon = " LSP:",
-  color = { fg = "#ffffff", gui = "bold" },
+  color = { fg = "#ffffff" },
+})
+-- Insert mid section. You can make any number of sections in neovim :)
+-- for lualine it's any number greater then 2
+ins_left({
+  function()
+    return "%="
+  end,
+})
+
+ins_right({
+  function()
+    return vim.fn.expand("%p")
+  end,
+  cond = conditions.buffer_not_empty,
+  color = { fg = colors.blue, gui = "bold" },
 })
 
 -- Add components to right sections
@@ -200,14 +250,14 @@ ins_right({
   "o:encoding", -- option component same as &encoding in viml
   fmt = string.upper, -- I'm not sure why it's upper case either ;)
   cond = conditions.hide_in_width,
-  color = { fg = colors.green, gui = "bold" },
+  color = { fg = colors.red, gui = "bold" },
 })
 
 ins_right({
   "fileformat",
   fmt = string.upper,
   icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-  color = { fg = colors.green, gui = "bold" },
+  color = { fg = colors.red, gui = "bold" },
 })
 
 ins_right({

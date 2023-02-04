@@ -29,7 +29,8 @@ vim.opt.autoindent = true
 --[[ vim.opt.smarttab = true ]]
 vim.opt.breakindent = true
 vim.opt.smartindent = true
-vim.opt.listchars = "tab:<>,space:·"
+-- vim.opt.listchars = { tab = "<>", space = "·", eol = "↵" }
+vim.opt.listchars = { tab = "<>", space = " ", eol = "↵" }
 
 -- Backspace
 vim.opt.backspace = "indent,eol,start"

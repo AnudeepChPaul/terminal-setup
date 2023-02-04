@@ -47,6 +47,7 @@ return packer.startup(function(use)
       "folke/neodev.nvim",
     },
   })
+  use("fatih/vim-go")
 
   use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
   use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
@@ -69,6 +70,7 @@ return packer.startup(function(use)
     "hrsh7th/nvim-cmp",
     requires = {
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-path", -- source for file system paths
@@ -101,7 +103,7 @@ return packer.startup(function(use)
   use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
   use("numToStr/Comment.nvim") -- commenting with gc
   use("nvim-tree/nvim-tree.lua") -- file explorer
-  -- use("nvim-tree/nvim-web-devicons") -- vs-code like icons
+  use("nvim-tree/nvim-web-devicons") -- vs-code like icons
 
   -- configuring lsp servers
   use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
