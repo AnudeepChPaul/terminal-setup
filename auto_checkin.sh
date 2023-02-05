@@ -21,7 +21,7 @@ cp -aR ~/.config/custom_scripts/**                       $project_dir/.config/cu
 cp -aR ~/.config/fish/config.fish                     $project_dir/.config/fish/
 
 # Let's not populate environment vars
-# cp -aR ~/.config/fish/env.fish                        $project_dir/.config/fish/
+cp -aR ~/.config/fish/env.fish                        $project_dir/.config/fish/
 cp -aR ~/.config/fish/functions/nvm.fish              $project_dir/.config/fish/functions/
 cp -aR ~/.config/fish/functions/load_nvm.fish         $project_dir/.config/fish/functions/
 cp -aR ~/.config/fish/functions/nvm_find_nvmrc.fish   $project_dir/.config/fish/functions/
