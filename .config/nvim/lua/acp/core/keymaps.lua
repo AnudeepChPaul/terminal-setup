@@ -14,7 +14,6 @@ Map("n", "<Up>", "<nop>")
 Map("n", "<Down>", "<nop>")
 Map("n", "<Left>", "<nop>")
 Map("n", "<Right>", "<nop>")
-Map("n", "<Right>", "<nop>")
 Map("n", "Q", "<nop>")
 
 -- use Ctrl+\ to exit insert mode
@@ -26,8 +25,6 @@ Map("n", "<leader>nh", ":nohl<CR>")
 
 -- delete single character without copying into register
 Map("n", "x", '"_x')
-
-Map("n", "Y", "yg$") -- split window vertically
 
 -- Delete a word backwards
 Map("n", "dw", 'vb"_d')
@@ -42,25 +39,25 @@ Map("n", "-", "<C-x>") -- decrement
 -- window management
 Map("n", "sv", "<C-w>v") -- split window vertically
 Map("n", "ss", "<C-w>s") -- split window horizontally
-Map("n", "se", "<C-w>=") -- make split windows equal width & height
+-- Map("n", "se", "<C-w>=") -- make split windows equal width & height
+Map("n", "sx", ":close<CR>") -- close current split window
+-- Map("", "sh", "<C-w>h") -- Switch to panel left
+-- Map("", "sk", "<C-w>k") -- Switch to panel up
+-- Map("", "sj", "<C-w>j") -- Switch to panel down
+-- Map("", "sl", "<C-w>l") -- Switch to panel right
 
-Map("n", "<leader>sx", ":close<CR>") -- close current split window
-Map("n", "<leader>wx", ":bd<CR>") -- close current buffer
+Map("n", "<leader>bx", ":bd<CR>") -- close current buffer
 
-Map("n", "<leader>tt", ":new<CR>") -- open new tab
-
-Map("", "sh", "<C-w>h") -- Switch to panel left
-Map("", "sk", "<C-w>k") -- Switch to panel up
-Map("", "sj", "<C-w>j") -- Switch to panel down
-Map("", "sl", "<C-w>l") -- Switch to panel right
+Map("n", "<leader>tt", ":tabnew<CR>") -- open nw tab
+Map("n", "<leader>tx", ":tabnew<CR>") -- open new tab
 
 Map("n", "<S-Left>", "<C-w><")
 Map("n", "<S-Right>", "<C-w>>")
 Map("n", "<S-Up>", "<C-w>+")
 Map("n", "<S-Down>", "<C-w>-")
 
--- Map("n", "j", "jzz")
--- Map("n", "k", "kzz")
+Map("n", "j", "jzz")
+Map("n", "k", "kzz")
 
 -- Map("n", "q", ":m+1<CR>")
 -- Map("n", "Q", ":m-2<CR>")
@@ -100,7 +97,8 @@ Map("n", "n", "nzzzv")
 Map("n", "N", "Nzzzv")
 
 Map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-Map("n", "<leader>r", ":substitute/")
+Map("n", "<leader>r", ":%s")
+Map("v", "<leader>r", ":s/")
 
 ----------------------
 -- Plugin Keybinds
@@ -111,7 +109,8 @@ Map("", "<leader>u", "<cmd>UndotreeToggle<CR>")
 Map("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximization
 
 -- nvim-tree
-Map("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
+Map("n", "<leader>e", ":NvimTreeOpen<CR>") -- toggle file explorer
+Map("n", "<leader>w", ":NvimTreeClose<CR>") -- toggle file explorer
 Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current working directory, respects .gitignore
 
 -- LSP Saga

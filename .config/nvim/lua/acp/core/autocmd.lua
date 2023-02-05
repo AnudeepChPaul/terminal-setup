@@ -8,17 +8,17 @@ end
 local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
 local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 
-autocmd("BufEnter", {
-  group = augroup("nvim_buffer_enter_command", { clear = true }),
-  callback = function()
-    local ft = vim.bo.filetype
-
-    if ft == "lua" then
-    elseif ft == "go" then
-    else
-    end
-  end,
-})
+-- autocmd("BufEnter", {
+--   group = augroup("nvim_buffer_enter_command", { clear = true }),
+--   callback = function()
+--     local ft = vim.bo.filetype
+--
+--     if ft == "lua" then
+--     elseif ft == "go" then
+--     else
+--     end
+--   end,
+-- })
 
 autocmd("BufWritePre", {
   group = augroup("nvim_pre_custom_command", { clear = true }),
@@ -28,38 +28,54 @@ autocmd("BufWritePre", {
   end,
 })
 
-local attach_to_buffer = function(output_buffer, pattern, command)
+local function open_temporary_output_buffer(command)
+  local temp_buffer = vim.api.nvim_create_buf(true, true)
+  if command ~= nil then
+    vim.fn.jobstart(command, {
+      stdout_buffered = true,
+      on_stdout = function(_, data)
+        if data then
+          vim.api.nvim_buf_set_lines(temp_buffer, -1, -1, false, data)
+        end
+      end,
+      on_stderr = function(_, data)
+        if data then
+          vim.api.nvim_buf_set_lines(temp_buffer, -1, -1, false, data)
+        end
+      end,
+    })
+  end
+  vim.api.nvim_open_win(temp_buffer, true, {
+    relative = "win",
+    width = 40,
+    height = 30,
+    row = 1,
+    col = 80,
+    border = "rounded",
+    noautocmd = true,
+  })
+end
+
+local attach_to_buffer = function(pattern, cmd)
   autocmd("BufWritePost", {
     group = augroup("nvim_go_post_custom_command", { clear = true }),
     pattern = pattern,
     callback = function()
-      print("We saved a .go file")
-      vim.fn.jobstart(command, {
-        stdout_buffered = true,
-        on_stdout = function(_, data)
-          if data then
-            vim.api.nvim_buf_set_lines(output_buffer, -1, -1, false, data)
-          end
-        end,
-        on_stderr = function(_, data)
-          if data then
-            vim.api.nvim_buf_set_lines(output_buffer, -1, -1, false, data)
-          end
-        end,
-      })
+      open_temporary_output_buffer(cmd)
     end,
   })
 end
 
-attach_to_buffer(0, "main.go", { "go", "run", "main.go" })
-
 -- vim.api.crea
 vim.api.nvim_create_user_command("AutoRunGo", function()
-  local bufnr = vim.fn.input("Buffer number: ")
   local pattern = vim.fn.input("Pattern: ")
   local command = vim.split(vim.fn.input("Command: "), " ")
 
-  attach_to_buffer(bufnr, pattern, command)
+  if pattern == "" then
+    pattern = "*.go"
+  end
+
+  attach_to_buffer(pattern, command)
 end, {})
 
 vim.api.nvim_create_user_command("AutoStop", function()
