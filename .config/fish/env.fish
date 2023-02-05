@@ -4,19 +4,29 @@ set -qx INFOPATH; or set INFOPATH '';
 set -gx EDITOR "nvim"
 set -gx GO_LANG_HOME "/usr/local/go";
 
-set -gx HOMEBREW_PREFIX "/opt/homebrew";
+set -l architechture (arch)
+if [ "$architechture" = "i386" ]
+set -gx HOMEBREW_PREFIX "/usr/local";
+  set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX/homebrew";
+else
+  set -gx HOMEBREW_PREFIX "/opt/homebrew";
+  set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX";
+end
 
 set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX";
-set -gx PATH "$PATH" "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin" "$HOME/bin" "$HOME/.config/custom_scripts" "$GO_LANG_HOME/bin";
 set -gx HOMEBREW_CELLAR "$HOMEBREW_PREFIX/Cellar";
+
+set -gx PATH "$PATH" "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin" "$HOME/bin" "$HOME/.config/custom_scripts" "$GO_LANG_HOME/bin";
 set -gx MANPATH "$HOMEBREW_PREFIX/share/man" $MANPATH;
 set -gx INFOPATH "$HOMEBREW_PREFIX/share/info" $INFOPATH;
+
 set -gx TERM xterm-256color
 set -gx theme_color_scheme terminal-dark
 set -gx fish_prompt_pwd_dir_length 1
 set -gx theme_display_user yes
 set -gx theme_hide_hostname no
 set -gx theme_hostname always
+
 set -gx FZF_DEFAULT_OPTS "--tac --layout=reverse --info=inline --border --margin=2 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)' --cycle"
 set -gx FZF_DEFAULT_COMMAND 'ls -a'
 set -gx FZF__PREVIEW__COMMAND 'bat --style=numbers --color=always --line-range :500 {}'
