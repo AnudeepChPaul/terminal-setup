@@ -56,8 +56,8 @@ Map("n", "<S-Right>", "<C-w>>")
 Map("n", "<S-Up>", "<C-w>+")
 Map("n", "<S-Down>", "<C-w>-")
 
-Map("n", "j", "jzz")
-Map("n", "k", "kzz")
+Map({ "n", "v" }, "j", "jzz")
+Map({ "n", "v" }, "k", "kzz")
 
 -- Map("n", "q", ":m+1<CR>")
 -- Map("n", "Q", ":m-2<CR>")
