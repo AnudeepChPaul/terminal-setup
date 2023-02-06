@@ -42,6 +42,7 @@ nvimtree.setup({
         { key = "@", action = "toggle_hidden", action_cb = toggle_hidden },
       },
     },
+    width = 45,
   },
   -- change folder arrow icons
   renderer = {
