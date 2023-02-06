@@ -112,6 +112,7 @@ Map("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximizati
 Map("n", "<leader>e", ":NvimTreeOpen<CR>") -- toggle file explorer
 Map("n", "<leader>w", ":NvimTreeClose<CR>") -- toggle file explorer
 Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current working directory, respects .gitignore
+Map("n", "<leader>fl", ":NvimTreeFindFile<CR>") -- locates the file (in nvim-tree) opened in current buffer
 
 -- LSP Saga
 Map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
