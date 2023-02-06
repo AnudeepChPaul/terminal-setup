@@ -182,7 +182,7 @@ ins_left({
 
 ins_left({
   function()
-    return vim.fn.expand("%:h")
+    return vim.fn.expand("%:h") .. "/" .. vim.fn.expand("%:t")
   end,
   cond = conditions.buffer_not_empty,
   color = { fg = colors.magenta, gui = "bold" },
