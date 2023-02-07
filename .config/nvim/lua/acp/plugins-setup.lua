@@ -67,6 +67,22 @@ return packer.startup(function(use)
   }) -- treesitter configuration
   -- use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
 
+  -- Plant uml support
+  use({
+    "weirongxu/plantuml-previewer.vim",
+    requires = {
+      -- "aklt/plantuml-syntax",
+      "tyru/open-browser.vim",
+    },
+  })
+  -- Markdown support
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  })
+    
   use("nvim-tree/nvim-tree.lua") -- file explorer
   use("nvim-tree/nvim-web-devicons") -- vs-code like icons
 
