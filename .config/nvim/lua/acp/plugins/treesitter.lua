@@ -8,7 +8,7 @@ treesitter.setup({
     enable = true,
     disable = function()
       local current_buffer_name = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-      return vim.fn.getfsize(current_buffer_name) > 8500 && 
+      return vim.fn.getfsize(current_buffer_name) > 8500
     end,
   },
   -- enable indentation
