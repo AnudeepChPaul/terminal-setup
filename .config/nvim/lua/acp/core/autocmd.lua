@@ -78,6 +78,29 @@ vim.api.nvim_create_user_command("AutoRunGo", function()
   attach_to_buffer(pattern, command)
 end, {})
 
+vim.api.nvim_create_user_command("AutoRunJS", function()
+  local pattern = vim.fn.input("Pattern: ")
+  local command = vim.split(vim.fn.input("Command: "), " ")
+
+  if pattern == "" then
+    pattern = "*.js"
+  end
+
+  attach_to_buffer(pattern, command)
+end, {})
+
+
+vim.api.nvim_create_user_command("AutoRunTS", function()
+  local pattern = vim.fn.input("Pattern: ")
+  local command = vim.split(vim.fn.input("Command: "), " ")
+
+  if pattern == "" then
+    pattern = "*.ts"
+  end
+
+  attach_to_buffer(pattern, command)
+end, {})
+
 vim.api.nvim_create_user_command("AutoStop", function()
   augroup("nvim_go_post_custom_command", { clear = true })
 end, {})
