@@ -5,8 +5,9 @@ local status, treesitter = pcall(require, "nvim-treesitter.configs")
 treesitter.setup({
   -- enable syntax highlighting
   highlight = {
-    enable = function()
-      return vim.fn.getfsize(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())) < 4000
+    enable = true,
+    disable = function()
+      return vim.fn.getfsize(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())) > 3000
     end,
   },
   -- enable indentation
