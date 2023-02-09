@@ -8,18 +8,6 @@ end
 local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
 local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 
--- autocmd("BufEnter", {
---   group = augroup("nvim_buffer_enter_command", { clear = true }),
---   callback = function()
---     local ft = vim.bo.filetype
---
---     if ft == "lua" then
---     elseif ft == "go" then
---     else
---     end
---   end,
--- })
-
 local pre_custom_command = function()
   autocmd("BufWritePre", {
     group = augroup("nvim_pre_custom_command", { clear = true }),
