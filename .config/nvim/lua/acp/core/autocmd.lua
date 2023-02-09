@@ -20,13 +20,15 @@ local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 --   end,
 -- })
 
-autocmd("BufWritePre", {
-  group = augroup("nvim_pre_custom_command", { clear = true }),
-  callback = function()
-    vim.lsp.buf.format({ buffer = vim.api.nvim_get_current_buf() })
-    vim.api.nvim_command(":retab")
-  end,
-})
+local pre_custom_command = function()
+  autocmd("BufWritePre", {
+    group = augroup("nvim_pre_custom_command", { clear = true }),
+    callback = function()
+      vim.lsp.buf.format({ buffer = vim.api.nvim_get_current_buf() })
+      vim.api.nvim_command(":retab")
+    end,
+  })
+end
 
 local function open_temporary_output_buffer(command)
   local temp_buffer = vim.api.nvim_create_buf(true, true)
@@ -104,3 +106,13 @@ end, {})
 vim.api.nvim_create_user_command("AutoStop", function()
   augroup("nvim_go_post_custom_command", { clear = true })
 end, {})
+
+vim.api.nvim_create_user_command("FormatOnSaveClear", function()
+  augroup("nvim_pre_custom_command", { clear = true })
+end, {})
+
+vim.api.nvim_create_user_command("FormatOnSave", function()
+  pre_custom_command()
+end, {})
+
+pre_custom_command()
