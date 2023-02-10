@@ -118,7 +118,7 @@ function tmux_manager
     return;
   end
   
-  find $PROJECTS_DIR -mindepth 1 -maxdepth 1 -type d | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read selected_
+  ghq list -p | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read selected_
 
   basename "$selected_" 2> /dev/null | tr . _ | read selected_dir
   
