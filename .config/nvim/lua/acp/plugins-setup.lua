@@ -60,6 +60,9 @@ return packer.startup(function(use)
 
   use({
     "nvim-treesitter/nvim-treesitter",
+    requires = {
+      "nvim-treesitter/playground"
+    },
     run = function()
       local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
       ts_update()
