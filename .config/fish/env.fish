@@ -4,17 +4,17 @@ set -qx INFOPATH; or set INFOPATH '';
 set -gx EDITOR "nvim"
 set -gx GO_LANG_HOME "/usr/local/go";
 
-set -l architechture (arch)
-if [ "$architechture" = "i386" ]
-set -gx HOMEBREW_PREFIX "/usr/local";
-  set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX/homebrew";
-else
-  set -gx HOMEBREW_PREFIX "/opt/homebrew";
-  set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX";
-end
-
+set -gx HOMEBREW_PREFIX "/opt/homebrew";
 set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX";
-set -gx HOMEBREW_CELLAR "$HOMEBREW_PREFIX/Cellar";
+set -l architechture (arch)
+
+if [ "$architechture" = "i386" ]
+  echo "i386 arch"
+  set -gx HOMEBREW_PREFIX "/usr/local";
+  set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX/Homebrew";
+end
+# ln -sf "$HOMEBREW_REPOSITORY"/bin/brew /usr/local/bin/brew
+set -gx HOMEBREW_CELLAR "$HOMEBREW_PREFIX"/Cellar;
 
 set -gx PATH "$PATH" "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin" "$HOME/bin" "$HOME/.config/custom_scripts" "$GO_LANG_HOME/bin";
 set -gx MANPATH "$HOMEBREW_PREFIX/share/man" $MANPATH;

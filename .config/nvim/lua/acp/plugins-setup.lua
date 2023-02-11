@@ -61,7 +61,7 @@ return packer.startup(function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     requires = {
-      "nvim-treesitter/playground"
+      "nvim-treesitter/playground",
     },
     run = function()
       local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
@@ -85,7 +85,7 @@ return packer.startup(function(use)
       vim.fn["mkdp#util#install"]()
     end,
   })
-    
+
   use("nvim-tree/nvim-tree.lua") -- file explorer
   use("nvim-tree/nvim-web-devicons") -- vs-code like icons
 
@@ -130,6 +130,13 @@ return packer.startup(function(use)
   use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
   use("nvim-lualine/lualine.nvim") -- statusline
   use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
+
+  use({
+    "NvChad/nvterm",
+    config = function()
+      require("nvterm").setup()
+    end,
+  })
 
   if packer_bootstrap then
     require("packer").sync()

@@ -157,6 +157,7 @@ Map("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes 
 -- restart lsp server (not on youtube nvim video)
 Map("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 
+Map("n", "<leader>ss", '<cmd>lua require("nvterm.terminal").toggle "float" <cr>') -- mapping to restart lsp if necessary
 --[[ Comment shortcuts
 NORMAL mode
 `gcc` - Toggles the current line using linewise comment

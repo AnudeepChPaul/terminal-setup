@@ -134,6 +134,11 @@ _G.packer_plugins = {
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["markdown-preview.nvim"] = {
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    url = "https://github.com/iamcco/markdown-preview.nvim"
+  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -194,10 +199,31 @@ _G.packer_plugins = {
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/nvim-tree/nvim-web-devicons"
   },
+  nvterm = {
+    config = { "\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vnvterm\frequire\0" },
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nvterm",
+    url = "https://github.com/NvChad/nvterm"
+  },
+  ["open-browser.vim"] = {
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/open-browser.vim",
+    url = "https://github.com/tyru/open-browser.vim"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  ["plantuml-previewer.vim"] = {
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/plantuml-previewer.vim",
+    url = "https://github.com/weirongxu/plantuml-previewer.vim"
+  },
+  playground = {
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/playground",
+    url = "https://github.com/nvim-treesitter/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -252,6 +278,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: nvterm
+time([[Config for nvterm]], true)
+try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vnvterm\frequire\0", "config", "nvterm")
+time([[Config for nvterm]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
