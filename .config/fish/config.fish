@@ -1,9 +1,12 @@
 source ~/.config/fish/env.fish
 
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+  # Commands to run in interactive sessions can go here
+  bind --erase --preset \cd
   bind \cf find_directories
   bind \cg tmux_manager
+  bind \cs cheat.sh
+  bind \ch _h
 end
 
 
@@ -46,6 +49,10 @@ function ll -d "Uses exa to return dirs & files"
   exa --all --long --header $argv
 end
 
+function _h -d "History with fuzzy finder"
+  commandline (history | fzf-tmux -p -h 40% -w 60%)
+end
+
 function v -d "Neovim"
   nvim $argv
 end
@@ -55,7 +62,7 @@ function vi -d "Neovim"
 end
 
 function find_directories -d "Find directories interactive mode"
-  find . -type d -maxdepth 1 -mindepth 1 | fzf --preview $FZF__SMART__PREVIEW__COMMAND \
+  find . -type d -maxdepth 1 -mindepth 1 | fzf-tmux -p --preview $FZF__SMART__PREVIEW__COMMAND \
     --prompt "Find Directory> " --ansi \
     --bind 'ctrl-d:reload(find . -type d -maxdepth 1 -mindepth 1)+change-prompt(Find Directory> )' \
     --bind 'ctrl-a:reload(find . -maxdepth 1 -mindepth 1)+change-prompt(Find All> )' \
@@ -118,7 +125,7 @@ function tmux_manager
     return;
   end
   
-  ghq list -p | fzf --preview "$FZF__DIR__PREVIEW__COMMAND" | read selected_
+  ghq list -p | fzf-tmux -p -h 50% -w 70% | read selected_
 
   basename "$selected_" 2> /dev/null | tr . _ | read selected_dir
   
