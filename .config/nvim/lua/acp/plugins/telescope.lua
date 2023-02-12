@@ -57,6 +57,8 @@ telescope.setup({
       "!**/package-lock.json",
       "--glob",
       "!**/node_modules/*",
+      "--glob",
+      "!**/dist/*",
     },
     mappings = {
       i = {
@@ -69,6 +71,8 @@ telescope.setup({
   pickers = {
     find_files = {
       -- theme = "dropdown",
+      --  theme = "cursor",
+      -- theme = "ivy",
       find_command = {
         "rg",
         "--files",
@@ -86,6 +90,9 @@ telescope.setup({
       prompt_prefix = " 🔍  ",
     },
     live_grep = {
+      -- theme = "dropdown",
+      -- theme = "cursor",
+      -- theme = "ivy",
       prompt_prefix = " 🔍  ",
       -- find_command = {
       --   "rg",
