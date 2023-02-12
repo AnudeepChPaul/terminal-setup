@@ -6,7 +6,7 @@ if status is-interactive
   bind \cf find_directories
   bind \cg tmux_manager
   bind \cs cheat.sh
-  bind \ch _h
+  bind \cw h__
 end
 
 
@@ -49,7 +49,7 @@ function ll -d "Uses exa to return dirs & files"
   exa --all --long --header $argv
 end
 
-function _h -d "History with fuzzy finder"
+function h__ -d "History with fuzzy finder"
   commandline (history | fzf-tmux -p -h 40% -w 60%)
 end
 
