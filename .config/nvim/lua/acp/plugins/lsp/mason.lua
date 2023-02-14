@@ -16,7 +16,6 @@ mason_lspconfig.setup({
     "tsserver",
     "html",
     "cssls",
-    "vuels",
     "volar",
     "lua_ls",
     "emmet_ls",
