@@ -50,12 +50,11 @@ lspconfig["cssls"].setup({
   on_attach = on_attach,
 })
 
--- configure tailwindcss server
+--[[ -- configure tailwindcss server
 lspconfig["tailwindcss"].setup({
   capabilities = capabilities,
   on_attach = on_attach,
-})
-
+}) ]]
 -- configure emmet language server
 lspconfig["emmet_ls"].setup({
   capabilities = capabilities,
@@ -87,4 +86,17 @@ lspconfig["lua_ls"].setup({
 lspconfig.gopls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
+})
+
+-- configure emmet language server
+-- lspconfig.vuels.setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   filetypes = { "vue" },
+-- })
+
+lspconfig.volar.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = { "vue" },
 })

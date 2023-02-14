@@ -13,7 +13,7 @@ local packer_bootstrap = ensure_packer() -- true if packer was just installed
 
 -- autocommand that reloads neovim and installs/updates/removes plugins
 -- when file is saved
-vim.cmd([[ 
+vim.cmd([[
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
@@ -33,7 +33,8 @@ return packer.startup(function(use)
   use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
   -- managing & installing lsp servers, linters & formatters
-  use({ -- LSP Configuration & Plugins
+  use({
+    -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
     requires = {
       -- Automatically install LSPs to stdpath for neovim
@@ -58,6 +59,11 @@ return packer.startup(function(use)
   use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
   use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 
+  -- use("Pocco81/DAPInstall.nvim")
+  -- use("Pocco81/dap-buddy.nvim")
+  -- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+  -- use("nvim-telescope/telescope-dap.nvim ")
+  -- use("theHamsta/nvim-dap-virtual-text")
   use({
     "nvim-treesitter/nvim-treesitter",
     requires = {
@@ -89,7 +95,8 @@ return packer.startup(function(use)
   use("nvim-tree/nvim-tree.lua") -- file explorer
   use("nvim-tree/nvim-web-devicons") -- vs-code like icons
 
-  use({ -- Autocompletion
+  use({
+    -- Autocompletion
     "hrsh7th/nvim-cmp",
     requires = {
       "hrsh7th/cmp-nvim-lsp",
