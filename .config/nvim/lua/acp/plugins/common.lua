@@ -2,7 +2,7 @@
 require("neodev").setup()
 
 -- Turn on lsp status information
--- require("fidget").setup()
+require("fidget").setup()
 
 require("nvterm").setup({
   terminals = {

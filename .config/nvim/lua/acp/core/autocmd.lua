@@ -79,7 +79,6 @@ vim.api.nvim_create_user_command("AutoRunJS", function()
   attach_to_buffer(pattern, command)
 end, {})
 
-
 vim.api.nvim_create_user_command("AutoRunTS", function()
   local pattern = vim.fn.input("Pattern: ")
   local command = vim.split(vim.fn.input("Command: "), " ")
@@ -103,4 +102,4 @@ vim.api.nvim_create_user_command("FormatOnSave", function()
   pre_custom_command()
 end, {})
 
-pre_custom_command()
+-- pre_custom_command()

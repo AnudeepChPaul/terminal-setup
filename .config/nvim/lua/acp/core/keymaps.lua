@@ -76,6 +76,7 @@ Map("n", "<leader>e", vim.diagnostic.open_float)
 Map("n", "[d", vim.diagnostic.goto_prev)
 Map("n", "]d", vim.diagnostic.goto_next)
 
+Map("n", "<leader>fr", ":lua vim.lsp.buf.format()<CR>") -- toggle file explorer
 -- Map("n", "ff", ":$put _<CR>")
 
 -- Quick action

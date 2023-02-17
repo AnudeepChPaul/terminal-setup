@@ -184,6 +184,11 @@ _G.packer_plugins = {
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
+  ["nvim-dev-container"] = {
+    loaded = true,
+    path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nvim-dev-container",
+    url = "https://codeberg.org/esensar/nvim-dev-container"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/anudeepchandrapaul/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
