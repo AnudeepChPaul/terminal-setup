@@ -91,8 +91,11 @@ function _port -d "Find port with lsof & netstat" -a port_id
 end
 
 function _ide
-  tmux split-window -v -p 30 'sleep 0.5; clear'
-  tmux split-window -h -p 50 'sleep 0.5; clear'
+  tmux split-window -v -p 30;
+  tmux split-window -h -p 50;
+  sleep 0.5;
+  tmux send-keys -t 1 'clear' Enter
+  tmux send-keys -t 2 'clear' Enter
 end
 
 function _tn -d "Create or attach into a tmux session" -a session_name session_dir
