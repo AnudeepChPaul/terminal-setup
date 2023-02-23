@@ -138,11 +138,18 @@ return packer.startup(function(use)
   use("nvim-lualine/lualine.nvim") -- statusline
   use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 
-  use({
-    "NvChad/nvterm",
-    config = function()
-      require("nvterm").setup()
-    end,
+--   use({
+--     "NvChad/nvterm",
+--     config = function()
+--       require("nvterm").setup()
+--     end,
+--   })
+    -- using packer.nvim
+
+  -- using packer.nvim
+  use ({
+    'nmac427/guess-indent.nvim',
+    config = function() require('guess-indent').setup {} end,
   })
 
   if packer_bootstrap then
