@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -15,9 +16,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -61,7 +62,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
+<<<<<<< HEAD
 DISABLE_UNTRACKED_FILES_DIRTY="true"
+=======
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+>>>>>>> 7aafa27 ([Initial Commit] - Adding first configuration set)
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -79,7 +84,17 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+<<<<<<< HEAD
 plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+=======
+plugins=(
+  zsh-npm-scripts-autocomplete
+  zsh-autocomplete
+  z
+  dotbare
+  forgit
+)
+>>>>>>> 7aafa27 ([Initial Commit] - Adding first configuration set)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,11 +106,19 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
+<<<<<<< HEAD
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nano'
 else
   export EDITOR='mvim'
 fi
+=======
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+>>>>>>> 7aafa27 ([Initial Commit] - Adding first configuration set)
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -111,6 +134,7 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+<<<<<<< HEAD
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -122,3 +146,5 @@ source ~/.zprofile
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 bindkey -s ^f "tmux-sessionizer\n"
+=======
+>>>>>>> 7aafa27 ([Initial Commit] - Adding first configuration set)

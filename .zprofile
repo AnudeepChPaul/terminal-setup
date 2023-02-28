@@ -18,6 +18,12 @@ export HOMEBREW_REPOSITORY="/opt/homebrew";
 export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
 export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
+# e.g. I have all my dotfiles stored in folder $HOME/.myworld and symlinks all of them to appropriate location.
+# export DOTBARE_DIR="$HOME/.myworld/.git"
+# export DOTBARE_TREE="$HOME/.myworld"
+export DOTBARE_DIR=$HOME/.cfg
+export DOTBARE_TREE=$HOME
+
 # Setting up aliases
 alias c="clear"
 alias ..="cd .."
