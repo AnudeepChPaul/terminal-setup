@@ -35,4 +35,4 @@ curl -o $HOME/bin/jdk.default.tar.gz https://download.java.net/java/GA/jdk18.0.2
 tar -xvf jdk.default.tar.gz
 
 
-
+brew install scc rm-improved ddgr ripgrep tldr

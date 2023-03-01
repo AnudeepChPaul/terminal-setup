@@ -18,6 +18,7 @@ export HOMEBREW_REPOSITORY="/opt/homebrew";
 export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
 export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
+export NVM_DIR="$HOME/.nvm"
 # e.g. I have all my dotfiles stored in folder $HOME/.myworld and symlinks all of them to appropriate location.
 # export DOTBARE_DIR="$HOME/.myworld/.git"
 # export DOTBARE_TREE="$HOME/.myworld"
@@ -52,6 +53,7 @@ alias o="ack --sort-files --color"
 alias l="ls -alp"
 alias vg='lazygit'
 alias ll='exa --all --long --icons --header'
+alias db="dotbare"
 
 # Setting up nvm
 export NVM_DIR="$HOME/.nvm"
@@ -64,6 +66,8 @@ export FZF__DIR__PREVIEW__COMMAND='tree -aC -I "${TREE__GLOBAL_IGNORE}" {} | hea
 export TREE__GLOBAL_IGNORE=".git|node_modules|.history|webpack|.next|.idea|.gradle|.vscode"
 export FZF__SMART__PREVIEW__COMMAND="[ -d {} ] && $FZF__DIR__PREVIEW__COMMAND || $FZF__PREVIEW__COMMAND"
 export HISTCONTROL=ignorespace:erasedups
+
+export EDITOR="nvim"
 
 _uninstall_homebrew() {
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)"
