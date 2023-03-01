@@ -190,6 +190,22 @@ _ide () {
   tmux split-window -h -p 40
 }
 
+tmux_manager() {
+  if test -z "$PROJECTS_DIR"; then
+    return;
+  fi
+  
+  ghq list -p | fzf-tmux -p -h 50% -w 70% | read selected_
+
+  basename "$selected_" 2> /dev/null | tr . _ | read selected_dir
+  
+  if test -z "$selected_dir"
+    return;
+  fi
+
+  _tn $selected_dir $selected_
+}
+
 ##
 # Your previous /Users/anudeepchandrapaul/.zprofile file was backed up as /Users/anudeepchandrapaul/.zprofile.macports-saved_2023-01-01_at_18:51:31
 ##
