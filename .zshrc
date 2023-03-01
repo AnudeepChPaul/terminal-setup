@@ -131,4 +131,4 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 bindkey -s ^f find_directories
 bindkey -s ^g tmux_manager
 bindkey -s ^s cheat.sh
-bindkey -s ^w h__
+bindkey -s ^w h
