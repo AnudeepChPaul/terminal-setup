@@ -165,7 +165,24 @@ _run_nginx() {
 }
 
 _tn() {
-  tmux new -s $1 || tmux attach -t $1
+  if test -z $session_name; then
+    builtin echo "Session name don't exists"
+    return;
+  fi
+  
+  applied_session_name=$session_name
+  tmux_running=$(pgrep tmux)
+  
+  if [[ test -z "$TMUX" and test -z "$tmux_running" ]]; then
+    tmux new-session -s $applied_session_name -c $session_dir
+    return;
+  fi
+  
+  if not tmux has-session -t $applied_session_name 2> /dev/null; then
+    tmux new-session -s $applied_session_name -c $session_dir -d
+  fi
+
+  tmux attach -t $applied_session_name || tmux switchc -t $applied_session_name;
 }
 
 _ide () {
