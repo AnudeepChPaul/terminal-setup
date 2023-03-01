@@ -94,7 +94,20 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-_dotbare_completion_cmd
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle :compinstall filename '/Users/anudeepchandrapaul/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=16000
+setopt autocd extendedglob
+# End of lines configured by zsh-newuser-install
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -132,3 +145,5 @@ bindkey -s ^f find_directories
 bindkey -s ^g tmux_manager
 bindkey -s ^s cheat.sh
 bindkey -s ^w h
+bindkey -s ^t "tmux-sessionizer\n"
+
