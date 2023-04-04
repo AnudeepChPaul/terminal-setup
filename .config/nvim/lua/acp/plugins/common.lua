@@ -1,10 +1,15 @@
 -- Setup neovim lua configuration
-require("neodev").setup()
+-- require("neodev").setup()
 
 -- Turn on lsp status information
-require("fidget").setup()
 
-require("nvterm").setup({
+local nv_status, nvt = pcall(require, "nvterm")
+
+if not nv_status then
+  return
+end
+
+nvt.setup({
   terminals = {
     shell = vim.o.shell,
     list = {},
@@ -31,7 +36,13 @@ require("nvterm").setup({
   },
 })
 
-require("devcontainer").setup({
+local d_status, dc = pcall(require, "devcontainer")
+
+if not d_status then
+  return
+end
+
+dc.setup({
   -- config_search_start = function()
   --   -- By default this function uses vim.loop.cwd()
   --   -- This is used to find a starting point for .devcontainer.json file search

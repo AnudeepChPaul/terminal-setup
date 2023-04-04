@@ -32,27 +32,47 @@ return packer.startup(function(use)
   use("wbthomason/packer.nvim")
   use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-  -- managing & installing lsp servers, linters & formatters
+  use("tpope/vim-fugitive") -- nvim git controls
+
+  -- managing & installing lsp servers, linters & formatters-- Lua
   use({
-    -- LSP Configuration & Plugins
-    "neovim/nvim-lspconfig",
+    "VonHeikemen/lsp-zero.nvim",
+    branch = "v1.x",
     requires = {
-      -- Automatically install LSPs to stdpath for neovim
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      -- LSP Support
+      { "neovim/nvim-lspconfig" },
+      { "williamboman/mason.nvim" },
+      { "williamboman/mason-lspconfig.nvim" },
 
-      -- Useful status updates for LSP
-      "j-hui/fidget.nvim",
+      -- Autocompletion
+      { "hrsh7th/nvim-cmp" },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-path" },
+      { "saadparwaiz1/cmp_luasnip" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-nvim-lua" },
+      { "glepnir/lspsaga.nvim", branch = "main" },
+      { "onsails/lspkind.nvim" }, -- vs-code like icons for autocompletion
 
-      -- Additional lua configuration, makes nvim stuff amazing
-      "folke/neodev.nvim",
+      -- Snippets
+      { "L3MON4D3/LuaSnip" },
+      { "rafamadriz/friendly-snippets" },
     },
   })
-  use("fatih/vim-go")
-  use({ "https://codeberg.org/esensar/nvim-dev-container" })
-  use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
+  -- use({
+  --   "folke/trouble.nvim",
+  --   requires = "nvim-tree/nvim-web-devicons",
+  --   config = function()
+  --     require("trouble").setup({
+  --       -- your configuration comes here
+  --       -- or leave it empty to use the default settings
+  --       -- refer to the configuration section below
+  --     })
+  --   end,
+  -- })
+  -- use("fatih/vim-go")
+  -- use({ "https://codeberg.org/esensar/nvim-dev-container" })
   use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
-  use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
   -- use('neoclide/coc.nvim', {branch = 'release'})
 
   -- formatting & linting
@@ -68,6 +88,7 @@ return packer.startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     requires = {
       "nvim-treesitter/playground",
+      "nvim-treesitter/nvim-treesitter-context",
     },
     run = function()
       local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
@@ -121,8 +142,9 @@ return packer.startup(function(use)
   }) -- fuzzy finder
   -- autocompletion
 
+  use({ "nyoom-engineering/oxocarbon.nvim" })
   -- use("EdenEast/nightfox.nvim") -- nightfox color scheme
-  use("rose-pine/neovim", { as = "rose-pine" }) -- rose pine color theme
+  -- use("rose-pine/neovim", { as = "rose-pine" }) -- rose pine color theme
   -- use("akinsho/nvim-bufferline.lua") -- bufferline for tab
 
   use("norcalli/nvim-colorizer.lua")

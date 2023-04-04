@@ -64,3 +64,6 @@ vim.opt.iskeyword:append("-")
 
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ "r" })
+
+vim.o.updatetime = 250
+vim.diagnostic.config({ virtual_text = false })

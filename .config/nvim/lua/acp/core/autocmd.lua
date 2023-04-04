@@ -1,10 +1,3 @@
-function sleep(n)
-  local t = os.clock()
-  while os.clock() - t <= n do
-    -- nothing
-  end
-end
-
 local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
 local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 
