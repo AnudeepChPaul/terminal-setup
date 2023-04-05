@@ -44,6 +44,11 @@ typescript.setup({
   },
 })
 
+lspconfig.tsserver.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
 -- configure css server
 lspconfig["cssls"].setup({
   capabilities = capabilities,
