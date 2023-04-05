@@ -1,6 +1,9 @@
 -- Setup neovim lua configuration
 -- require("neodev").setup()
 
+-- Harpoon setup
+require("harpoon").setup({})
+
 -- Turn on lsp status information
 --
 vim.g.codelens_auto = 1
