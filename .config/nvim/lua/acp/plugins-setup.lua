@@ -32,7 +32,13 @@ return packer.startup(function(use)
   use("wbthomason/packer.nvim")
   use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-  use("tpope/vim-fugitive") -- nvim git controls
+  -- nvim git controls
+  use({
+    "tpope/vim-fugitive",
+    requires = {
+      "lewis6991/gitsigns.nvim", -- show line modifications on left hand side
+    },
+  })
 
   -- managing & installing lsp servers, linters & formatters-- Lua
   use({
@@ -48,7 +54,7 @@ return packer.startup(function(use)
       { "hrsh7th/nvim-cmp" },
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-path" },
-      { "saadparwaiz1/cmp_luasnip" },
+      -- { "saadparwaiz1/cmp_luasnip" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-nvim-lua" },
       { "glepnir/lspsaga.nvim", branch = "main" },
@@ -105,16 +111,21 @@ return packer.startup(function(use)
       "tyru/open-browser.vim",
     },
   })
-  -- Markdown support
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-  })
+  -- -- Markdown support
+  -- use({
+  --   "iamcco/markdown-preview.nvim",
+  --   run = function()
+  --     vim.fn["mkdp#util#install"]()
+  --   end,
+  -- })
 
-  use("nvim-tree/nvim-tree.lua") -- file explorer
-  use("nvim-tree/nvim-web-devicons") -- vs-code like icons
+  -- file explorer
+  use({
+    "nvim-tree/nvim-tree.lua",
+    requires = {
+      "nvim-tree/nvim-web-devicons", -- vs-code like icons for nvim tree
+    },
+  })
 
   use({
     -- Autocompletion
@@ -158,14 +169,13 @@ return packer.startup(function(use)
   -- configuring lsp servers
   use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
   use("nvim-lualine/lualine.nvim") -- statusline
-  use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 
-  use({
-    "NvChad/nvterm",
-    config = function()
-      require("nvterm").setup()
-    end,
-  })
+  -- use({
+  --   "NvChad/nvterm",
+  --   config = function()
+  --     require("nvterm").setup()
+  --   end,
+  -- })
 
   if packer_bootstrap then
     require("packer").sync()

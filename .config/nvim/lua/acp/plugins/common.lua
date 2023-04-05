@@ -2,6 +2,8 @@
 -- require("neodev").setup()
 
 -- Turn on lsp status information
+--
+vim.g.codelens_auto = 1
 
 local nv_status, nvt = pcall(require, "nvterm")
 

@@ -30,6 +30,7 @@ vim.opt.autoindent = true
 vim.opt.breakindent = true
 vim.opt.smartindent = true
 -- vim.opt.listchars = { tab = "<>", space = "·", eol = "↵" }
+vim.opt.list = true
 vim.opt.listchars = { tab = "<>", space = " ", eol = "↵" }
 
 -- Backspace
@@ -46,10 +47,10 @@ vim.opt.cursorline = true
 
 -- Appearance
 vim.opt.termguicolors = true
-vim.opt.background = ""
+vim.opt.background = "dark"
 vim.opt.signcolumn = "yes"
 vim.opt.showcmd = true
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 2
 
 -- Clipboard
 vim.opt.clipboard:append("unnamedplus")
