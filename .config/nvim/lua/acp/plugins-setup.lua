@@ -126,20 +126,7 @@ return packer.startup(function(use)
       "nvim-tree/nvim-web-devicons", -- vs-code like icons for nvim tree
     },
   })
-
-  use({
-    -- Autocompletion
-    "hrsh7th/nvim-cmp",
-    requires = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-path", -- source for file system paths
-      "mbbill/undotree", -- Undotree visualizes the undo history
-      "hrsh7th/cmp-buffer", -- source for text in buffer
-    },
-  })
+  use("ThePrimeagen/harpoon")
 
   use({
     "nvim-telescope/telescope.nvim",
