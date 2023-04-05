@@ -115,7 +115,7 @@ Map("n", "<leader>w", ":NvimTreeClose<CR>") -- toggle file explorer
 Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current working directory, respects .gitignore
 Map("n", "<leader>fl", ":NvimTreeFindFile<CR>") -- locates the file (in nvim-tree) opened in current buffer
 
--- LSP Saga
+-- LSP
 Map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 Map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 Map("n", "K", "<Cmd>Lspsaga hover_doc ++quiet ++keep<CR>")
@@ -128,12 +128,13 @@ Map("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 Map("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>") -- show  diagnostics for line
 Map("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>") -- show diagnostics for cursor
 Map("n", "<leader>ot", "<cmd>LSoutlineToggle<CR>") -- see outline on right hand side
-Map("n", "<leader>gp", "<Cmd>Lspsaga peek_definition<CR>")
 Map("n", "<leader>gf", "<Cmd>Lspsaga lsp_finder<CR>")
-Map("n", "<leader>gi", vim.lsp.buf.implementation)
-Map("n", "<leader>gr", vim.lsp.buf.references)
-Map("n", "<leader>gD", vim.lsp.buf.declaration)
-Map("n", "<leader>gd", vim.lsp.buf.definition)
+Map("n", "gp", "<Cmd>Lspsaga peek_definition<CR>")
+Map("n", "gi", vim.lsp.buf.implementation)
+Map("n", "gr", vim.lsp.buf.references)
+Map("n", "gD", vim.lsp.buf.declaration)
+Map("n", "gd", vim.lsp.buf.definition)
+Map("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 
 -- typescript specific keymaps (e.g. rename file and update imports)
 Map("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
@@ -155,8 +156,12 @@ Map("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>") -- list git commits f
 Map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git branches (use <cr> to checkout) ["gb" for git branch]
 Map("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
 
--- restart lsp server (not on youtube nvim video)
-Map("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+
+-- harpoon
+Map("n", "<TAB>", ":lua require('harpoon.ui').nav_next()<CR>")
+Map("n", "<S-TAB>", ":lua require('harpoon.ui').nav_prev()<CR>")
+Map("n", "<leader>hh", ":lua require('harpoon.mark').add_file()<cr>")
+Map("n", "<leader>fj", ":lua require('harpoon.ui').toggle_quick_menu()<cr>")
 
 Map("n", "<leader>ss", '<cmd>lua require("nvterm.terminal").toggle "float" <cr>') -- mapping to restart lsp if necessary
 --[[ Comment shortcuts
