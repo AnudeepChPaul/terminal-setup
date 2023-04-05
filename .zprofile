@@ -54,6 +54,8 @@ alias l="ls -alp"
 alias vg='lazygit'
 alias ll='exa --all --long --icons --header'
 alias db="dotbare"
+alias vi="nvim"
+alias vim="nvim"
 
 # Setting up nvm
 export NVM_DIR="$HOME/.nvm"
@@ -165,24 +167,12 @@ _run_nginx() {
 }
 
 _tn() {
-  if test -z $session_name; then
-    builtin echo "Session name don't exists"
-    return;
-  fi
-  
-  applied_session_name=$session_name
-  tmux_running=$(pgrep tmux)
-  
-  if [[ test -z "$TMUX" and test -z "$tmux_running" ]]; then
-    tmux new-session -s $applied_session_name -c $session_dir
-    return;
-  fi
-  
-  if not tmux has-session -t $applied_session_name 2> /dev/null; then
-    tmux new-session -s $applied_session_name -c $session_dir -d
-  fi
-
-  tmux attach -t $applied_session_name || tmux switchc -t $applied_session_name;
+    session_name=$1
+    session_dir=$2
+    
+    tmux new-session -s $session_name -c $session_dir -d 2> /dev/null; tmux attach -t $session_name 2> /dev/null || tmu
+    switchc -t $session_name 2> /dev/null
+ }
 }
 
 _ide () {
@@ -190,20 +180,39 @@ _ide () {
   tmux split-window -h -p 40
 }
 
-tmux_manager() {
-  if test -z "$PROJECTS_DIR"; then
-    return;
-  fi
-  
-  ghq list -p | fzf-tmux -p -h 50% -w 70% | read selected_
+function _z () {
+  dir_full_path=`z -e $1`
 
-  basename "$selected_" 2> /dev/null | tr . _ | read selected_dir
-  
-  if test -z "$selected_dir"
-    return;
+  if [[ -z "$dir_full_path" ]]; then
+   return;
   fi
 
-  _tn $selected_dir $selected_
+
+  basename "$dir_full_path" 2> /dev/null | tr . _ | read dir_name
+
+  if [[ -z "$dir_name" ]]; then
+    return;
+  fi
+
+  tmux new-session -s $dir_name -c $dir_full_path -d 2> /dev/null;
+  sleep 1;
+  tmux attach -t $dir_name 2> /dev/null || tmux switchc -t $dir_name 2> /dev/null;
+}
+
+
+function _tmux_manager() {
+  if [[ -z "$PROJECTS_DIR" ]]; then
+   return;
+  fi
+  ghq list -p | fzf-tmux -p -h 50% -w 70% | read dir_full_path
+
+  basename "$dir_full_path" 2> /dev/null | tr . _ | read dir_name
+
+  if [[ -z "$dir_name" ]]; then
+    return;
+  fi
+
+  _tn $dir_name $dir_full_path
 }
 
 ##
@@ -218,3 +227,5 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # MacPorts Installer addition on 2023-01-01_at_18:51:31: adding an appropriate MANPATH variable for use with MacPorts.
 export MANPATH="/opt/local/share/man:$MANPATH"
 # Finished adapting your MANPATH environment variable for use with MacPorts.
+
+eval "$(pyenv init --path)
