@@ -40,6 +40,8 @@ return packer.startup(function(use)
     },
   })
 
+  use({ "mbbill/undotree" })
+
   -- managing & installing lsp servers, linters & formatters-- Lua
   use({
     "VonHeikemen/lsp-zero.nvim",

@@ -91,6 +91,7 @@ plugins=(
   dotbare
   z
   zsh-lazyload
+  zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
