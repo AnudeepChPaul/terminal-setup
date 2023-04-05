@@ -176,7 +176,6 @@ _tn() {
     session_dir=$2;
     
     tmux new-session -s $session_name -c $session_dir -d 2> /dev/null; tmux attach -t $session_name 2> /dev/null || tmux switchc -t $session_name 2> /dev/null;
- }
 }
 
 _ide () {
@@ -232,4 +231,4 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export MANPATH="/opt/local/share/man:$MANPATH"
 # Finished adapting your MANPATH environment variable for use with MacPorts.
 
-eval "$(pyenv init --path)
+eval "$(pyenv init --path)"
