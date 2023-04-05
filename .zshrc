@@ -141,9 +141,10 @@ lazyload dotbare -- '_dotbare_completion_cmd'
 lazyload nvm -- 'source "$NVM_DIR/nvm.sh"; $NVM_DIR/bash_completion'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-bindkey -s ^f find_directories
-bindkey -s ^g tmux_manager
-bindkey -s ^s cheat.sh
-bindkey -s ^w h
-bindkey -s ^t "tmux-sessionizer\n"
+
+zle -N _tmux_manager
+bindkey "^g" _tmux_manager
+
+zle -N h
+bindkey "^w" h
 
