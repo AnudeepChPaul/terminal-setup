@@ -40,16 +40,16 @@ Map("n", "-", "<C-x>") -- decrement
 Map("n", "sv", "<C-w>v") -- split window vertically
 Map("n", "ss", "<C-w>s") -- split window horizontally
 -- Map("n", "se", "<C-w>=") -- make split windows equal width & height
-Map("n", "sx", ":close<CR>") -- close current split window
+Map("n", "sx", vim.cmd.close) -- close current split window
 -- Map("", "sh", "<C-w>h") -- Switch to panel left
 -- Map("", "sk", "<C-w>k") -- Switch to panel up
 -- Map("", "sj", "<C-w>j") -- Switch to panel down
 -- Map("", "sl", "<C-w>l") -- Switch to panel right
 
-Map("n", "<leader>bx", ":bd<CR>") -- close current buffer
+Map("n", "<leader>bx", vim.cmd.bd) -- close current buffer
 
-Map("n", "<leader>tt", ":tabnew<CR>") -- open nw tab
-Map("n", "<leader>tx", ":tabnew<CR>") -- open new tab
+Map("n", "<leader>tt", vim.cmd.tabnew) -- open nw tab
+Map("n", "<leader>tx", vim.cmd.tabclose) -- open new tab
 
 Map("n", "<S-Left>", "<C-w><")
 Map("n", "<S-Right>", "<C-w>>")
@@ -63,9 +63,13 @@ Map("n", "<S-Down>", "<C-w>-")
 -- Map("n", "Q", ":m-2<CR>")
 
 Map("n", "<leader>m", 'V"-y"-p') -- duplicates a line
-Map("v", "m", ":m '>+1<CR>gv=gv")
-Map("v", "M", ":m '<-2<CR>gv=gv")
+Map("x", "<leader>p", '"_dP')
 
+Map("v", "J", ":m '>+1<CR>gv=gv")
+Map("v", "K", ":m '<-2<CR>gv=gv")
+Map("n", "J", "mzJ`z") -- Bring the bottom line to end of upper line without changing cursor position
+Map("n", "<C-d>", "<C-d>zz") -- Scrolls down keeping cursor in the middle of the screen
+Map("n", "<C-u>", "<C-u>zz") --Scrolls down keeping cursor in the middle of the screen
 Map("v", "<", "<gv")
 Map("v", ">", ">gv")
 
@@ -76,23 +80,15 @@ Map("n", "<leader>e", vim.diagnostic.open_float)
 Map("n", "[d", vim.diagnostic.goto_prev)
 Map("n", "]d", vim.diagnostic.goto_next)
 
-Map("n", "<leader>fr", ":lua vim.lsp.buf.format()<CR>") -- toggle file explorer
+Map("n", "<leader>fr", vim.lsp.buf.format) -- toggle file explorer
 -- Map("n", "ff", ":$put _<CR>")
-
--- Quick action
-Map("i", "jk", "<ESC>") -- ESC on jk pressed togather
 
 -- Quick fix list navigation
 Map("n", "<C-[>", ":cn<CR>")
 Map("n", "<C-]>", ":cp<CR>")
 
-Map("n", "<TAB>", ":bnext<CR>")
-Map("n", "<S-TAB>", ":bprevious<CR>")
-
-Map("x", "<leader>p", '"_dP')
-Map("n", "J", "mzJ`z") -- Bring the bottom line to end of upper line without changing cursor position
-Map("n", "<C-d>", "<C-d>zz") -- Scrolls down keeping cursor in the middle of the screen
-Map("n", "<C-u>", "<C-u>zz") --Scrolls down keeping cursor in the middle of the screen
+Map("n", "<TAB>", vim.cmd.bnext)
+Map("n", "<S-TAB>", vim.cmd.bprevious)
 
 Map("n", "n", "nzzzv")
 Map("n", "N", "Nzzzv")
@@ -104,10 +100,9 @@ Map("v", "<leader>r", ":s/")
 ----------------------
 -- Plugin Keybinds
 ----------------------
-Map("", "<leader>u", "<cmd>UndotreeToggle<CR>")
-
+Map("", "<leader>u", vim.cmd.UndotreeToggle)
 -- vim-maximizer
-Map("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximization
+Map("n", "<leader>sm", vim.cmd.MaximizerToggle) -- toggle split window maximization
 
 -- nvim-tree
 Map("n", "<leader>e", ":NvimTreeOpen<CR>") -- toggle file explorer
@@ -116,54 +111,95 @@ Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current work
 Map("n", "<leader>fl", ":NvimTreeFindFile<CR>") -- locates the file (in nvim-tree) opened in current buffer
 
 -- LSP
+Map("n", "<leader>st", ":Lspsaga term_toggle<CR>")
 Map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 Map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
-Map("n", "K", "<Cmd>Lspsaga hover_doc ++quiet ++keep<CR>")
-Map("n", "<leader>k", "<Cmd>Lspsaga signature_help<CR>")
-Map("n", "<leader>rn", "<Cmd>Lspsaga rename<CR>")
-Map("n", "<leader>rnn", "<cmd>Lspsaga rename ++project<CR>")
-Map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>")
-Map("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
-Map("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
-Map("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>") -- show  diagnostics for line
-Map("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>") -- show diagnostics for cursor
-Map("n", "<leader>ot", "<cmd>LSoutlineToggle<CR>") -- see outline on right hand side
-Map("n", "<leader>gf", "<Cmd>Lspsaga lsp_finder<CR>")
-Map("n", "gp", "<Cmd>Lspsaga peek_definition<CR>")
+Map("n", "K", function()
+  vim.cmd.Lspsaga("hover_doc", "++quiet")
+end)
+Map("n", "<leader>k", vim.lsp.buf.signature_help)
+Map("n", "<leader>rn", function()
+  vim.cmd.Lspsaga("rename", "++project")
+end)
+Map("n", "<leader>ca", function()
+  vim.cmd.Lspsaga("code_action")
+end)
+Map("n", "<leader>ci", function()
+  vim.cmd.Lspsaga("incoming_calls")
+end)
+Map("n", "<leader>co", function()
+  vim.cmd.Lspsaga("outgoing_calls")
+end)
+Map("n", "<leader>D", function()
+  vim.cmd.Lspsaga("show_line_diagnostics")
+end) -- show  diagnostics for line
+Map("n", "<leader>d", function()
+  vim.cmd.Lspsaga("show_cursor_diagnostics")
+end) -- show diagnostics for cursor
+Map("n", "<leader>bf", function()
+  vim.cmd.Lspsaga("show_buf_diagnostics")
+end) -- show diagnostics for cursor
+Map("n", "<leader>ot", function()
+  -- see outline on right hand side
+  vim.cmd.Lspsaga("outline")
+end)
+Map("n", "<leader>gf", function()
+  vim.cmd.Lspsaga("lsp_finder")
+end)
+Map("n", "gp", function()
+  vim.cmd.Lspsaga("peek_definition")
+end)
+Map("n", "gt", function()
+  vim.cmd.Lspsaga("peek_type_definition")
+end)
 Map("n", "gi", vim.lsp.buf.implementation)
 Map("n", "gr", vim.lsp.buf.references)
 Map("n", "gD", vim.lsp.buf.declaration)
 Map("n", "gd", vim.lsp.buf.definition)
-Map("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+Map("n", "<leader>rs", vim.cmd.LspRestart) -- mapping to restart lsp if necessary
 
 -- typescript specific keymaps (e.g. rename file and update imports)
-Map("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
-Map("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
-Map("n", "<leader>ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables (not in youtube nvim video)
+Map("n", "<leader>rf", vim.cmd.TypescriptRenameFile) -- rename file and update imports
+Map("n", "<leader>oi", vim.cmd.TypescriptOrganizeImports) -- organize imports (not in youtube nvim video)
+Map("n", "<leader>ru", vim.cmd.TypescriptRemoveUnused) -- remove unused variables (not in youtube nvim video)
 
 -- telescope
 Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
 Map("n", "<leader>fq", "<cmd>Telescope quickfix<cr>") -- find files within current working directory, respects .gitignore
 Map("n", "<leader>fg", "<cmd>Telescope git_files<cr>") -- find string in current working directory as you type
-Map("n", "<leader>fs", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+Map("n", "<leader>fs", require("telescope").extensions.live_grep_args.live_grep_args)
 Map("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 Map("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
 Map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
 Map("n", "<leader>gg", "<cmd>LazyGit<CR>")
+
 -- telescope git commands (not on youtube nvim video)
 Map("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits (use <cr> to checkout) ["gc" for git commits]
 Map("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>") -- list git commits for current file/buffer (use <cr> to checkout) ["gfc" for git file commits]
 Map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git branches (use <cr> to checkout) ["gb" for git branch]
 Map("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
 
+-- Fugitive
+Map("n", "<leader>fgt", vim.cmd.Git)
 
 -- harpoon
-Map("n", "<TAB>", ":lua require('harpoon.ui').nav_next()<CR>")
-Map("n", "<S-TAB>", ":lua require('harpoon.ui').nav_prev()<CR>")
-Map("n", "<leader>hh", ":lua require('harpoon.mark').add_file()<cr>")
-Map("n", "<leader>fj", ":lua require('harpoon.ui').toggle_quick_menu()<cr>")
+Map("n", "<TAB>", require("harpoon.ui").nav_next)
+Map("n", "<S-TAB>", require("harpoon.ui").nav_prev)
+Map("n", "<leader>hh", require("harpoon.mark").add_file)
+Map("n", "<leader>fj", require("harpoon.ui").toggle_quick_menu)
+Map("n", "<leader>1", function()
+  require("harpoon.ui").nav_file(1)
+end)
+Map("n", "<leader>2", function()
+  require("harpoon.ui").nav_file(2)
+end)
+Map("n", "<leader>3", function()
+  require("harpoon.ui").nav_file(3)
+end)
+Map("n", "<leader>4", function()
+  require("harpoon.ui").nav_file(4)
+end)
 
-Map("n", "<leader>ss", '<cmd>lua require("nvterm.terminal").toggle "float" <cr>') -- mapping to restart lsp if necessary
 --[[ Comment shortcuts
 NORMAL mode
 `gcc` - Toggles the current line using linewise comment

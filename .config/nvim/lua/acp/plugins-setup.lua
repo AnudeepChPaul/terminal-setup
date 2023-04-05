@@ -51,6 +51,8 @@ return packer.startup(function(use)
       { "neovim/nvim-lspconfig" },
       { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
+      -- additional functionality for typescript server (e.g. rename file & update imports),
+      { "jose-elias-alvarez/typescript.nvim" },
 
       -- Autocompletion
       { "hrsh7th/nvim-cmp" },
@@ -80,7 +82,6 @@ return packer.startup(function(use)
   -- })
   -- use("fatih/vim-go")
   -- use({ "https://codeberg.org/esensar/nvim-dev-container" })
-  use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
   -- use('neoclide/coc.nvim', {branch = 'release'})
 
   -- formatting & linting
