@@ -1,4 +1,3 @@
-source ~/.zprofile
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -137,8 +136,10 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-dotbare -- '_dotbare_completion_cmd'
-nvm -- 'source "$NVM_DIR/nvm.sh"; $NVM_DIR/bash_completion'
+source ~/.zprofile
+
+_dotbare_completion_cmd
+source "$NVM_DIR/nvm.sh"; $NVM_DIR/bash_completion
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -148,3 +149,25 @@ bindkey "^g" _tmux_manager
 zle -N h
 bindkey "^w" h
 
+eval export PATH="/Users/achandrapaul/.jenv/shims:${PATH}"
+export JENV_SHELL=zsh
+export JENV_LOADED=1
+unset JAVA_HOME
+unset JDK_HOME
+source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh'
+jenv rehash 2>/dev/null
+jenv refresh-plugins
+jenv() {
+  type typeset &> /dev/null && typeset command
+  command="$1"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  enable-plugin|rehash|shell|shell-options)
+    eval `jenv "sh-$command" "$@"`;;
+  *)
+    command jenv "$command" "$@";;
+  esac
+}

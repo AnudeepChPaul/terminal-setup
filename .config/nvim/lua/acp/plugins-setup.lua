@@ -44,11 +44,9 @@ return packer.startup(function(use)
 
   -- managing & installing lsp servers, linters & formatters-- Lua
   use({
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v1.x",
+    "neovim/nvim-lspconfig",
     requires = {
       -- LSP Support
-      { "neovim/nvim-lspconfig" },
       { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
       -- additional functionality for typescript server (e.g. rename file & update imports),
@@ -67,6 +65,8 @@ return packer.startup(function(use)
       -- Snippets
       { "L3MON4D3/LuaSnip" },
       { "rafamadriz/friendly-snippets" },
+      { "jose-elias-alvarez/null-ls.nvim" }, -- configure formatters & linters
+      { "jayp0521/mason-null-ls.nvim" }, -- bridges gap b/w mason & null-ls
     },
   })
   -- use({
@@ -80,19 +80,7 @@ return packer.startup(function(use)
   --     })
   --   end,
   -- })
-  -- use("fatih/vim-go")
-  -- use({ "https://codeberg.org/esensar/nvim-dev-container" })
-  -- use('neoclide/coc.nvim', {branch = 'release'})
 
-  -- formatting & linting
-  use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
-  use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
-
-  -- use("Pocco81/DAPInstall.nvim")
-  -- use("Pocco81/dap-buddy.nvim")
-  -- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-  -- use("nvim-telescope/telescope-dap.nvim ")
-  -- use("theHamsta/nvim-dap-virtual-text")
   use({
     "nvim-treesitter/nvim-treesitter",
     requires = {
@@ -104,7 +92,6 @@ return packer.startup(function(use)
       ts_update()
     end,
   }) -- treesitter configuration
-  -- use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
 
   -- Plant uml support
   use({
@@ -114,13 +101,6 @@ return packer.startup(function(use)
       "tyru/open-browser.vim",
     },
   })
-  -- -- Markdown support
-  -- use({
-  --   "iamcco/markdown-preview.nvim",
-  --   run = function()
-  --     vim.fn["mkdp#util#install"]()
-  --   end,
-  -- })
 
   -- file explorer
   use({
@@ -159,13 +139,6 @@ return packer.startup(function(use)
   -- configuring lsp servers
   use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
   use("nvim-lualine/lualine.nvim") -- statusline
-
-  -- use({
-  --   "NvChad/nvterm",
-  --   config = function()
-  --     require("nvterm").setup()
-  --   end,
-  -- })
 
   if packer_bootstrap then
     require("packer").sync()

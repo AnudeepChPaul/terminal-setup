@@ -56,13 +56,13 @@ lspconfig["cssls"].setup({
 --   on_attach = on_attach,
 -- })
 
--- configure emmet language server
-lspconfig["emmet_ls"].setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-})
-
+-- -- configure emmet language server
+-- lspconfig["emmet_ls"].setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+-- })
+--
 -- configure lua server (with special settings)
 lspconfig["lua_ls"].setup({
   capabilities = capabilities,
@@ -84,10 +84,10 @@ lspconfig["lua_ls"].setup({
   },
 })
 
-lspconfig.gopls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
+-- lspconfig.gopls.setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+-- })
 
 -- configure emmet language server
 -- lspconfig.vuels.setup({
@@ -95,9 +95,9 @@ lspconfig.gopls.setup({
 --   on_attach = on_attach,
 --   filetypes = { "vue" },
 -- })
-
-lspconfig.volar.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  filetypes = { "vue" },
-})
+--
+-- lspconfig.volar.setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   filetypes = { "vue" },
+-- })
