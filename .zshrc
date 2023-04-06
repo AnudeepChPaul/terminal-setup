@@ -90,7 +90,6 @@ plugins=(
   forgit
   dotbare
   z
-  zsh-lazyload
   zsh-vi-mode
 )
 
@@ -138,8 +137,8 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-lazyload dotbare -- '_dotbare_completion_cmd'
-lazyload nvm -- 'source "$NVM_DIR/nvm.sh"; $NVM_DIR/bash_completion'
+dotbare -- '_dotbare_completion_cmd'
+nvm -- 'source "$NVM_DIR/nvm.sh"; $NVM_DIR/bash_completion'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
