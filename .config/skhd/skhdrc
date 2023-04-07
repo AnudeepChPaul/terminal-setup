@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# resetting existing mod keys
+shift + cmd - j : :
+shift + cmd - k : :
+shift + ctrl + cmd - s : brew services restart skhd
+shift + cmd - b : open -a "Google Chrome"
+shift + cmd - i : open -a "Amethyst"
+shift + cmd - w : open -a "iTerm"
+shift + cmd - p : open -a "Settings"
