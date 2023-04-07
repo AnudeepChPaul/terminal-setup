@@ -60,6 +60,14 @@ focus-ccw:
   mod: mod4
   key: h
 
+focus-screen-cw:
+  mod: mod1
+  key: l
+
+focus-screen-ccw:
+  mod: mod1
+  key: h
+
 expand-main:
   mod: mod3
   key: L
@@ -81,6 +89,10 @@ focus-main:
   key: m
 
 swap-cw:
-  mod: mod3
+  mod: mod1
   key: r
+
+swap-ccw:
+  mod: mod2
+  key: R
 
