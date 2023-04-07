@@ -123,7 +123,12 @@ return packer.startup(function(use)
   }) -- fuzzy finder
   -- autocompletion
 
-  use({ "nyoom-engineering/oxocarbon.nvim" })
+  use({
+    "tjdevries/colorbuddy.nvim",
+    requires = {
+      "nyoom-engineering/oxocarbon.nvim",
+    },
+  })
   -- use("EdenEast/nightfox.nvim") -- nightfox color scheme
   -- use("rose-pine/neovim", { as = "rose-pine" }) -- rose pine color theme
   -- use("akinsho/nvim-bufferline.lua") -- bufferline for tab
