@@ -104,6 +104,16 @@ Map("", "<leader>u", vim.cmd.UndotreeToggle)
 -- vim-maximizer
 Map("n", "<leader>sm", vim.cmd.MaximizerToggle) -- toggle split window maximization
 
+-- GitSigns
+Map("n", "gl", function()
+  vim.cmd.Gitsigns("toggle_current_line_blame")
+end)
+Map("n", "gL", function()
+  vim.cmd.Gitsigns("diffthis")
+end)
+-- Fugitive
+Map("n", "<leader>fgt", vim.cmd.Git)
+
 -- nvim-tree
 Map("n", "<leader>e", ":NvimTreeOpen<CR>") -- toggle file explorer
 Map("n", "<leader>w", ":NvimTreeClose<CR>") -- toggle file explorer
@@ -143,7 +153,7 @@ Map("n", "<leader>ot", function()
   -- see outline on right hand side
   vim.cmd.Lspsaga("outline")
 end)
-Map("n", "<leader>gf", function()
+Map("n", "<leader>fg", function()
   vim.cmd.Lspsaga("lsp_finder")
 end)
 Map("n", "gp", function()
@@ -166,7 +176,7 @@ Map("n", "<leader>ru", vim.cmd.TypescriptRemoveUnused) -- remove unused variable
 -- telescope
 Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
 Map("n", "<leader>fq", "<cmd>Telescope quickfix<cr>") -- find files within current working directory, respects .gitignore
-Map("n", "<leader>fg", "<cmd>Telescope git_files<cr>") -- find string in current working directory as you type
+Map("n", "<leader>gf", "<cmd>Telescope git_files<cr>") -- find string in current working directory as you type
 Map("n", "<leader>fs", require("telescope").extensions.live_grep_args.live_grep_args)
 Map("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 Map("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
@@ -178,9 +188,6 @@ Map("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits
 Map("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>") -- list git commits for current file/buffer (use <cr> to checkout) ["gfc" for git file commits]
 Map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git branches (use <cr> to checkout) ["gb" for git branch]
 Map("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
-
--- Fugitive
-Map("n", "<leader>fgt", vim.cmd.Git)
 
 -- harpoon
 Map("n", "<TAB>", require("harpoon.ui").nav_next)

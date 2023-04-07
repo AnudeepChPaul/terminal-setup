@@ -111,6 +111,17 @@ local config = {
     -- section_separators = { left = "", right = "" },
     -- component_separators = { left = "", right = "" },
     theme = "onedark",
+    disabled_filetypes = {
+      "packer",
+      "NvimTree",
+      statusline = {},
+      winbar = {},
+    },
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    },
   },
   sections = {
     lualine_a = {
@@ -158,6 +169,11 @@ table.insert(config.sections.lualine_c, {
 })
 
 table.insert(config.sections.lualine_x, {
+  "searchcount",
+  "selectioncount",
+})
+
+table.insert(config.sections.lualine_x, {
   -- Lsp server name .
   function()
     local msg = "No Active Lsp"
@@ -174,7 +190,7 @@ table.insert(config.sections.lualine_x, {
     end
     return msg
   end,
-  icon = "  LSP:",
+  icon = " LSP:",
 })
 
 table.insert(config.sections.lualine_x, {

@@ -5,25 +5,25 @@ local telescope_setup, telescope = pcall(require, "telescope")
 local actions_setup, actions = pcall(require, "telescope.actions")
 
 local lga_actions = require("telescope-live-grep-args.actions")
---[[
-local telescopeConfig = require("telescope.config")
-local vimgrep_arguments = telescopeConfig.values.vimgrep_arguments
 
-table.insert(vimgrep_arguments, "--hidden")
-table.insert(vimgrep_arguments, "--glob")
-table.insert(vimgrep_arguments, "!**/.git/*")
-table.insert(vimgrep_arguments, "--glob*")
-table.insert(vimgrep_arguments, "!**/*.lock")
-table.insert(vimgrep_arguments, "--glob*")
-table.insert(vimgrep_arguments, "!**/package-lock.json")
-table.insert(vimgrep_arguments, "--glob*")
-table.insert(vimgrep_arguments, "!**/node_modules/*") ]]
+local previewers = require("telescope.previewers")
+local Job = require("plenary.job")
 
--- local lg_utils = require("lazygit.utils")
---
--- vim.cmd([[
---   autocmd BufEnter * :lua require('lazygit.utils').project_root_dir()
--- ]])
+local no_binary_preview = function(filepath, bufnr, opts)
+  opts = opts or {}
+
+  filepath = vim.fn.expand(filepath)
+  vim.loop.fs_stat(filepath, function(_, stat)
+    if not stat then
+      return
+    end
+    if stat.size > 100000 then
+      return
+    else
+      previewers.buffer_previewer_maker(filepath, bufnr, opts)
+    end
+  end)
+end
 
 -- configure telescope
 telescope.setup({
@@ -41,6 +41,7 @@ telescope.setup({
 
   -- configure custom mappings
   defaults = {
+    buffer_previewer_maker = no_binary_preview,
     vimgrep_arguments = {
       "rg",
       "--with-filename",
@@ -94,25 +95,11 @@ telescope.setup({
       -- theme = "cursor",
       -- theme = "ivy",
       prompt_prefix = " 🔍  ",
-      -- find_command = {
-      --   "rg",
-      --   "--hidden",
-      --   "--no-ignore",
-      --   "--glob",
-      --   "!**/.git/*",
-      --   "--glob",
-      --   "!**/*.lock",
-      --   "--glob",
-      --   "!**/package-lock.json",
-      --   "--glob",
-      --   "!**/node_modules/*",
-      -- },
     },
   },
 })
 
 telescope.load_extension("fzf")
 telescope.load_extension("live_grep_args")
--- telescope.load_extension("lazygit")
 telescope.load_extension("project")
 -- telescope.load_extension("file_browser")

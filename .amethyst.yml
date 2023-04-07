@@ -23,7 +23,7 @@ focus-follows-mouse: true
 
 # Add 10px margin between windows
 window-margins: true
-window-margin-size: 15
+window-margin-size: 10
 
 # Add "command" to the default mods
 mod1:

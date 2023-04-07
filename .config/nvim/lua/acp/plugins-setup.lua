@@ -52,12 +52,13 @@ return packer.startup(function(use)
       { "jose-elias-alvarez/typescript.nvim" },
 
       -- Autocompletion
+      { "hrsh7th/nvim-cmp" },
       { "hrsh7th/cmp-nvim-lua" },
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-path" },
+      { "hrsh7th/cmp-nvim-lua" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "glepnir/lspsaga.nvim", branch = "main" },
-      { "hrsh7th/nvim-cmp" },
 
       -- Snippets
       { "L3MON4D3/LuaSnip" },
@@ -83,7 +84,6 @@ return packer.startup(function(use)
   use({
     "weirongxu/plantuml-previewer.vim",
     requires = {
-      -- "aklt/plantuml-syntax",
       "tyru/open-browser.vim",
     },
   })
