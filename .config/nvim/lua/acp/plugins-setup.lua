@@ -32,15 +32,14 @@ return packer.startup(function(use)
   use("wbthomason/packer.nvim")
   use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
+  use("nvim-lualine/lualine.nvim") -- statusline
   -- nvim git controls
   use({
     "tpope/vim-fugitive",
-    requires = {
-      "lewis6991/gitsigns.nvim", -- show line modifications on left hand side
-    },
+    "lewis6991/gitsigns.nvim", -- show line modifications on left hand side
+    "ThePrimeagen/harpoon",
+    "mbbill/undotree",
   })
-
-  use({ "mbbill/undotree" })
 
   -- managing & installing lsp servers, linters & formatters-- Lua
   use({
@@ -53,14 +52,12 @@ return packer.startup(function(use)
       { "jose-elias-alvarez/typescript.nvim" },
 
       -- Autocompletion
-      { "hrsh7th/nvim-cmp" },
+      { "hrsh7th/cmp-nvim-lua" },
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-path" },
-      -- { "saadparwaiz1/cmp_luasnip" },
       { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-nvim-lua" },
       { "glepnir/lspsaga.nvim", branch = "main" },
-      { "onsails/lspkind.nvim" }, -- vs-code like icons for autocompletion
+      { "hrsh7th/nvim-cmp" },
 
       -- Snippets
       { "L3MON4D3/LuaSnip" },
@@ -69,17 +66,6 @@ return packer.startup(function(use)
       { "jayp0521/mason-null-ls.nvim" }, -- bridges gap b/w mason & null-ls
     },
   })
-  -- use({
-  --   "folke/trouble.nvim",
-  --   requires = "nvim-tree/nvim-web-devicons",
-  --   config = function()
-  --     require("trouble").setup({
-  --       -- your configuration comes here
-  --       -- or leave it empty to use the default settings
-  --       -- refer to the configuration section below
-  --     })
-  --   end,
-  -- })
 
   use({
     "nvim-treesitter/nvim-treesitter",
@@ -109,7 +95,6 @@ return packer.startup(function(use)
       "nvim-tree/nvim-web-devicons", -- vs-code like icons for nvim tree
     },
   })
-  use("ThePrimeagen/harpoon")
 
   use({
     "nvim-telescope/telescope.nvim",
@@ -143,7 +128,6 @@ return packer.startup(function(use)
 
   -- configuring lsp servers
   use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
-  use("nvim-lualine/lualine.nvim") -- statusline
 
   if packer_bootstrap then
     require("packer").sync()

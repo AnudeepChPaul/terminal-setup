@@ -50,7 +50,7 @@ vim.opt.termguicolors = true
 vim.opt.background = "dark"
 vim.opt.signcolumn = "yes"
 vim.opt.showcmd = true
-vim.opt.cmdheight = 2
+vim.opt.cmdheight = 1
 
 -- Clipboard
 vim.opt.clipboard:append("unnamedplus")
