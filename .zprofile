@@ -183,8 +183,8 @@ _ide () {
   tmux split-window -h -p 40;
 }
 
-function _z () {
-  dir_full_path=`z -e $1`;
+function zz () {
+  dir_full_path=`z -l $1`;
 
   if [[ -z "$dir_full_path" ]]; then
    return;
