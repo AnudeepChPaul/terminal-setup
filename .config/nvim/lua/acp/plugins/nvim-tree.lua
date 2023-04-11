@@ -31,6 +31,14 @@ local function toggle_hidden()
   api.tree.toggle_hidden_filter()
 end
 
+local function vertical_open()
+  api.node.open.vertical()
+end
+
+local function horizontal_open()
+  api.node.open.horizontal()
+end
+
 -- configure nvim-tree
 nvimtree.setup({
   view = {
@@ -40,6 +48,9 @@ nvimtree.setup({
         { key = "<", action = "scope_to_parent", action_cb = scope_to_parent },
         { key = "!", action = "toggle_ignore", action_cb = toggle_ignore },
         { key = "@", action = "toggle_hidden", action_cb = toggle_hidden },
+        { key = "e", action = "toggle_hidden", action_cb = horizontal_open },
+        { key = "s", action = "toggle_hidden", action_cb = vertical_open },
+        { key = "o", action = "toggle_hidden", action_cb = api.node.run.system },
       },
     },
     width = 45,
