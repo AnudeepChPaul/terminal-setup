@@ -107,6 +107,12 @@ umount -a
 reboot
 ```
 
+## Setting up Qtile
+ ```
+ sudo pacman -S qtile lxappearance nitrogen thunar picom archlinux-wallpaper lightdm lightdm-gtk-greeter 
+ ```
+
+
 ## Setting up router
 > intern0: the network card connected to the LAN. On an actual computer it will probably have the name enp2s0, enp1s1, etc.
 > extern0: the network card connected to the external network (or WAN). It will probably have the name enp2s0, enp1s1, etc.
