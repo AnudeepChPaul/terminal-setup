@@ -109,7 +109,16 @@ reboot
 
 ## Setting up Qtile
  ```
- sudo pacman -S qtile lxappearance nitrogen thunar picom archlinux-wallpaper lightdm lightdm-gtk-greeter 
+ sudo pacman -S qtile lxappearance\
+   nitrogen thunar picom dmenu\
+   archlinux-wallpaper lightdm \
+   lightdm-gtk-greeter dmenu \
+   dialog wpa_supplicant dhcpcd netctl
+ 
+ sudo systemctl enable lightdm.service
+ 
+ sudo nano /etc/lightdm/lightdm.conf
+ uncomment display-setup-script=xrandr
  ```
 
 
