@@ -10,6 +10,8 @@ export ROVER_HOME_PATH="$HOME/.rover"
 export PATH=$PATH:$GO_PATH/bin:$HOME/bin:/usr/local/bin:$HOME/bin/redis-6.2.6/src:$PYTHON_PATH:$MAVEN_PATH/bin:$PLATFORM_TOOLS_PATH
 export PATH="$PATH:$ROVER_HOME_PATH/bin"
 
+export GHQ_ROOT="$HOME/Projects"
+
 # Homebrew setup
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
 export HOMEBREW_PREFIX="/opt/homebrew";
@@ -29,6 +31,20 @@ CUSTOM_FILE=".custom_env";
 if [[ -f "$CUSTOM_FILE" ]]; then
     source "$CUSTOM_FILE";
 fi
+
+# Setting up nvm
+export NVM_DIR="$HOME/.nvm";
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh";  # This loads nvm
+
+export FZF_DEFAULT_OPTS="--tac --layout=reverse --info=inline --border --margin=1 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'";
+export FZF_DEFAULT_COMMAND="ls -a";
+export FZF__PREVIEW__COMMAND='bat --style=numbers --color=always --line-range :500 {}';
+export FZF__DIR__PREVIEW__COMMAND='tree -aC -I "${TREE__GLOBAL_IGNORE}" {} | head -700';
+export TREE__GLOBAL_IGNORE=".git|node_modules|.history|webpack|.next|.idea|.gradle|.vscode";
+export FZF__SMART__PREVIEW__COMMAND="[ -d {} ] && $FZF__DIR__PREVIEW__COMMAND || $FZF__PREVIEW__COMMAND";
+export HISTCONTROL=ignorespace:erasedups;
+
+export EDITOR="nvim";
 
 # Setting up aliases
 alias c="clear";
@@ -61,20 +77,6 @@ alias ll='exa --all --long --icons --header';
 alias db="dotbare";
 alias vi="nvim";
 alias vim="nvim";
-
-# Setting up nvm
-export NVM_DIR="$HOME/.nvm";
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh";  # This loads nvm
-
-export FZF_DEFAULT_OPTS="--tac --layout=reverse --info=inline --border --margin=1 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'";
-export FZF_DEFAULT_COMMAND="ls -a";
-export FZF__PREVIEW__COMMAND='bat --style=numbers --color=always --line-range :500 {}';
-export FZF__DIR__PREVIEW__COMMAND='tree -aC -I "${TREE__GLOBAL_IGNORE}" {} | head -700';
-export TREE__GLOBAL_IGNORE=".git|node_modules|.history|webpack|.next|.idea|.gradle|.vscode";
-export FZF__SMART__PREVIEW__COMMAND="[ -d {} ] && $FZF__DIR__PREVIEW__COMMAND || $FZF__PREVIEW__COMMAND";
-export HISTCONTROL=ignorespace:erasedups;
-
-export EDITOR="nvim";
 
 _uninstall_homebrew() {
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)";
