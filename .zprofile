@@ -26,7 +26,7 @@ export NVM_DIR="$HOME/.nvm";
 export DOTBARE_DIR=$HOME/.cfg;
 export DOTBARE_TREE=$HOME;
 
-CUSTOM_FILE=".custom_env";
+CUSTOM_FILE="$HOME/.custom_env";
 
 if [[ -f "$CUSTOM_FILE" ]]; then
     source "$CUSTOM_FILE";
