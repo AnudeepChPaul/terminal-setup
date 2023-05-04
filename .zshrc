@@ -143,7 +143,7 @@ zle -N _tmux_manager
 bindkey "^g" _tmux_manager
 
 zle -N h
-bindkey "^w" h
+bindkey "^h" h
 
 eval export PATH="/Users/achandrapaul/.jenv/shims:${PATH}"
 export JENV_SHELL=zsh
