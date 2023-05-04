@@ -88,7 +88,6 @@ plugins=(
   zsh-autocomplete
   forgit
   dotbare
-  zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
