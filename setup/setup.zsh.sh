@@ -18,3 +18,5 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 
 nvim ~/.zshrc && source ~/.zshrc
+
+pip3 install frogmouth
