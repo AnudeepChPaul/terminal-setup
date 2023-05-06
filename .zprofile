@@ -20,6 +20,9 @@ export HOMEBREW_REPOSITORY="/opt/homebrew";
 export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
 export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+export MANPATH="/opt/local/share/man:$MANPATH"
+
 which brew &> /dev/null && eval "$(`which brew` shellenv)"
 
 export NVM_DIR="$HOME/.nvm";
@@ -220,23 +223,12 @@ function _tmux_manager() {
   _tn $dir_name $dir_full_path
 }
 
-##
-# Your previous /Users/anudeepchandrapaul/.zprofile file was backed up as /Users/anudeepchandrapaul/.zprofile.macports-saved_2023-01-01_at_18:51:31
-##
-
-# MacPorts Installer addition on 2023-01-01_at_18:51:31: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-
-# MacPorts Installer addition on 2023-01-01_at_18:51:31: adding an appropriate MANPATH variable for use with MacPorts.
-export MANPATH="/opt/local/share/man:$MANPATH"
-# Finished adapting your MANPATH environment variable for use with MacPorts.
-
-eval "$(pyenv init --path)"
-
 function aws-login() {  eval $( $OWL/bin/owl aws-login $@ ) ; };
 function change-realm() {  eval $( $OWL/bin/owl change-realm $@ ) ; };
 function aws-ec2() {
   LINES=${LINES} COLUMNS=${COLUMNS} ${OWL}/command/pellets/ec2/scripts/login-wrapper "${@}"
 }
+
+
+eval "$(pyenv init --path)"
+source ~/.dotbare/dotbare.plugin.bash
