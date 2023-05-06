@@ -2,6 +2,8 @@
 
 . common.utils.sh
 
+which nvm &> /dev/null || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
 zsh --version
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
