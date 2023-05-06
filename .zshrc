@@ -149,7 +149,8 @@ export JENV_SHELL=zsh
 export JENV_LOADED=1
 unset JAVA_HOME
 unset JDK_HOME
-source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh'
+
+source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh' &> /dev/null
 jenv rehash 2>/dev/null
 jenv refresh-plugins
 jenv() {
@@ -167,7 +168,7 @@ jenv() {
   esac
 }
 
-. /opt/homebrew/etc/profile.d/z.sh
+. /opt/homebrew/etc/profile.d/z.sh &> /dev/null
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
