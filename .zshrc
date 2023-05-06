@@ -152,7 +152,7 @@ unset JDK_HOME
 
 source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh' &> /dev/null
 jenv rehash 2>/dev/null
-jenv refresh-plugins
+jenv refresh-plugins 2>/dev/null
 jenv() {
   type typeset &> /dev/null && typeset command
   command="$1"
