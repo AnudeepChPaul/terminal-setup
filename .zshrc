@@ -84,7 +84,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(
   zsh-syntax-highlighting
   zsh-autosuggestions
-  zsh-npm-scripts-autocomplete
+  zsh-better-npm-completion
   zsh-autocomplete
   forgit
   dotbare
