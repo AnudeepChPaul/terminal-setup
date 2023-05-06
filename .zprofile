@@ -20,7 +20,7 @@ export HOMEBREW_REPOSITORY="/opt/homebrew";
 export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
 export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
-eval "$(`which brew` shellenv)"
+which brew &> /dev/null && eval "$(`which brew` shellenv)"
 
 export NVM_DIR="$HOME/.nvm";
 export DOTBARE_DIR=$HOME/.cfg;
@@ -34,7 +34,7 @@ fi
 
 # Setting up nvm
 export NVM_DIR="$HOME/.nvm";
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh";  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; # This loads nvm
 
 export FZF_DEFAULT_OPTS="--tac --layout=reverse --info=inline --border --margin=1 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'";
 export FZF_DEFAULT_COMMAND="ls -a";
