@@ -13,6 +13,8 @@ sudo zypper install --no-confirm \
   nginx docker tailscale \
   telegraf python-certbot \
   python-certbot-nginx
+  
+# apt install python3-certbot python3-certbot-nginx
 
 wget https://github.com/joohoi/acme-dns-certbot-joohoi/raw/master/acme-dns-auth.py
 chmod +x acme-dns-auth.py
