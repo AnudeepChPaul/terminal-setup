@@ -22,6 +22,3 @@ sudo mv acme-dns-auth.py /etc/letsencrypt/
 sudo certbot certonly --manual --manual-auth-hook /etc/letsencrypt/acme-dns-auth.py --preferred-challenges dns --debug-challenges -d 
 
 sudo certbot --nginx
-
-
-https://dev-sd7ywkn0dv457tf1.jp.auth0.com/authorize?client_id=hdnSeZgmSreZqhf0WxbnrpxdInPyOoES&redirect_uri=http%3A%2F%2Fgrafana.anudeep.pro%3A3000%2Flogin%2Fgeneric_oauth&response_type=code&scope=openid+profile+email+offline_access&state=7_C-KSgmHahpFB0kgvy07KC4d1xJfTBthGNZsBpOsYY%3D
