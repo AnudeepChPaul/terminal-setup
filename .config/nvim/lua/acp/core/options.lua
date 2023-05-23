@@ -68,3 +68,7 @@ vim.opt.formatoptions:append({ "r" })
 
 vim.o.updatetime = 250
 vim.diagnostic.config({ virtual_text = false })
+
+-- NeoVim Folding Options
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 20
