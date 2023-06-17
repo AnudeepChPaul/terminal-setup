@@ -50,6 +50,7 @@ return packer.startup(function(use)
       { "williamboman/mason-lspconfig.nvim" },
       -- additional functionality for typescript server (e.g. rename file & update imports),
       { "jose-elias-alvarez/typescript.nvim" },
+      { "Exafunction/codeium.vim" },
 
       -- Autocompletion
       { "hrsh7th/nvim-cmp" },

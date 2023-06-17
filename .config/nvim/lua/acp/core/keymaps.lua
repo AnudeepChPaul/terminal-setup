@@ -215,6 +215,18 @@ Map("n", "<leader>4", function()
   require("harpoon.ui").nav_file(4)
 end)
 
+Map("i", "<c-;>", function()
+  return vim.fn["codeium#CycleCompletions"](1)
+end)
+
+Map("i", "<c-,>", function()
+  return vim.fn["codeium#CycleCompletions"](-1)
+end)
+
+Map("i", "<c-\\>", function()
+  return vim.fn["codeium#Clear"]()
+end)
+
 --[[ Comment shortcuts
 NORMAL mode
 `gcc` - Toggles the current line using linewise comment

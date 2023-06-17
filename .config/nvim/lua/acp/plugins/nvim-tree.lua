@@ -55,7 +55,11 @@ nvimtree.setup({
     },
     width = 45,
   },
-  -- change folder arrow icons
+  update_focused_file = {
+    enable = true,
+    update_cwd = false,
+    ignore_list = {},
+  }, -- change folder arrow icons
   renderer = {
     icons = {
       glyphs = {

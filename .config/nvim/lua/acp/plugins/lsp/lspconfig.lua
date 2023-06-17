@@ -22,7 +22,6 @@ end
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- Change the Diagnostic symbols in the sign column (gutter)
--- (not in youtube nvim video)
 local signs = { Error = "E", Warn = "W", Hint = "H", Info = "I" }
 -- local signs = { Error = " ", Warn = " ", Hint = "H", Info = " " }
 for type, icon in pairs(signs) do
@@ -30,7 +29,11 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
-lspconfig.pyright.setup({})
+-- configure python server
+lspconfig.pyright.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
 
 -- configure html server
 lspconfig.html.setup({
@@ -38,7 +41,10 @@ lspconfig.html.setup({
   on_attach = on_attach,
 })
 
-lspconfig.tsserver.setup({})
+lspconfig.tsserver.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
 
 -- configure typescript server with plugin
 typescript.setup({
