@@ -7,6 +7,7 @@ local pre_custom_command = function()
     callback = function()
       vim.lsp.buf.format({ buffer = vim.api.nvim_get_current_buf() })
       vim.api.nvim_command(":retab")
+      vim.api.nvim_command(":CocCommand eslint.executeAutofix")
     end,
   })
 end

@@ -1,6 +1,10 @@
 -- import null-ls plugin safely
 local setup, null_ls = pcall(require, "null-ls")
 
+local function Map(key, left, right)
+  vim.keymap.set(key, left, right, { noremap = true })
+end
+
 -- for conciseness
 local formatting = null_ls.builtins.formatting -- to setup formatters
 local diagnostics = null_ls.builtins.diagnostics -- to setup linters
@@ -27,6 +31,11 @@ null_ls.setup({
   },
   -- configure format on save
   on_attach = function(current_client, bufnr)
+    -- typescript specific keymaps (e.g. rename file and update imports)
+    Map("n", "<leader>rf", vim.cmd.TypescriptRenameFile) -- rename file and update imports
+    Map("n", "<leader>oi", vim.cmd.TypescriptOrganizeImports) -- organize imports (not in youtube nvim video)
+    Map("n", "<leader>ru", vim.cmd.TypescriptRemoveUnused) -- remove unused variables (not in youtube nvim video)
+
     if current_client.supports_method("textDocument/formatting") then
       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
       vim.api.nvim_create_autocmd("BufWritePre", {

@@ -5,6 +5,16 @@ local function Map(key, left, right)
   vim.keymap.set(key, left, right, { noremap = true })
 end
 
+local function toggle_outline()
+  return vim.cmd([[
+    let winid = coc#window#find('cocViewId', 'OUTLINE')
+    if winid == -1
+    call CocActionAsync('showOutline', 1)
+    else
+    call coc#window#close(winid)
+    endif
+    ]])
+end
 ---------------------
 -- General Keymaps
 ---------------------
@@ -120,66 +130,63 @@ Map("n", "<leader>w", ":NvimTreeClose<CR>") -- toggle file explorer
 Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current working directory, respects .gitignore
 Map("n", "<leader>fl", ":NvimTreeFindFile<CR>") -- locates the file (in nvim-tree) opened in current buffer
 
--- LSP
-Map("n", "<leader>st", ":Lspsaga term_toggle<CR>")
-Map("n", "mE", function()
-  vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
-end)
-Map("n", "me", function()
-  vim.diagnostic.goto_next()
-end)
-Map("n", "K", function()
-  vim.cmd.Lspsaga("hover_doc", "++quiet")
-end)
-Map("n", "<leader>k", vim.lsp.buf.signature_help)
-Map("n", "<leader>rn", function()
-  vim.cmd.Lspsaga("rename", "++project")
-end)
-Map("n", "ma", function()
-  -- vim.cmd.Lspsaga("code_action")
-  vim.lsp.buf.code_action()
-end)
-Map("n", "<leader>ci", function()
-  vim.cmd.Lspsaga("incoming_calls")
-end)
-Map("n", "<leader>co", function()
-  vim.cmd.Lspsaga("outgoing_calls")
-end)
-Map("n", "ml", function()
-  vim.cmd.Lspsaga("show_line_diagnostics")
-end) -- show  diagnostics for line
-Map("n", "mc", function()
-  vim.cmd.Lspsaga("show_cursor_diagnostics")
-end) -- show diagnostics for cursor
-Map("n", "mf", function()
-  vim.cmd.Lspsaga("show_buf_diagnostics")
-end) -- show diagnostics for cursor
-Map("n", "mw", function()
-  vim.cmd.Lspsaga("show_workspace_diagnostics")
-end) -- show diagnostics for cursor
-Map("n", "mo", function()
-  -- see outline on right hand side
-  vim.cmd.Lspsaga("outline")
-end)
-Map("n", "gr", function()
-  vim.cmd.Lspsaga("lsp_finder")
-end)
-Map("n", "gp", function()
-  vim.cmd.Lspsaga("peek_definition")
-end)
-Map("n", "gt", function()
-  vim.cmd.Lspsaga("peek_type_definition")
-end)
-Map("n", "gi", vim.lsp.buf.implementation)
-Map("n", "<leader>gr", vim.lsp.buf.references)
-Map("n", "gD", vim.lsp.buf.declaration)
-Map("n", "gd", vim.lsp.buf.definition)
-Map("n", "<leader>rs", vim.cmd.LspRestart) -- mapping to restart lsp if necessary
-
--- typescript specific keymaps (e.g. rename file and update imports)
-Map("n", "<leader>rf", vim.cmd.TypescriptRenameFile) -- rename file and update imports
-Map("n", "<leader>oi", vim.cmd.TypescriptOrganizeImports) -- organize imports (not in youtube nvim video)
-Map("n", "<leader>ru", vim.cmd.TypescriptRemoveUnused) -- remove unused variables (not in youtube nvim video)
+-- -- LSP
+-- Map("n", "<leader>st", ":Lspsaga term_toggle<CR>")
+-- Map("n", "mE", function()
+--   vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+-- end)
+-- Map("n", "me", function()
+--   vim.diagnostic.goto_next()
+-- end)
+-- Map("n", "K", function()
+--   vim.cmd.Lspsaga("hover_doc", "++quiet")
+-- end)
+-- Map("n", "<leader>k", vim.lsp.buf.signature_help)
+-- Map("n", "<leader>rn", function()
+--   vim.cmd.Lspsaga("rename", "++project")
+-- end)
+-- Map("n", "ma", function()
+--   -- vim.cmd.Lspsaga("code_action")
+--   vim.lsp.buf.code_action()
+-- end)
+-- Map("n", "<leader>ci", function()
+--   vim.cmd.Lspsaga("incoming_calls")
+-- end)
+-- Map("n", "<leader>co", function()
+--   vim.cmd.Lspsaga("outgoing_calls")
+-- end)
+-- Map("n", "ml", function()
+--   vim.cmd.Lspsaga("show_line_diagnostics")
+-- end) -- show  diagnostics for line
+-- Map("n", "mc", function()
+--   vim.cmd.Lspsaga("show_cursor_diagnostics")
+-- end) -- show diagnostics for cursor
+-- Map("n", "mf", function()
+--   vim.cmd.Lspsaga("show_buf_diagnostics")
+-- end) -- show diagnostics for cursor
+-- Map("n", "mw", function()
+--   vim.cmd.Lspsaga("show_workspace_diagnostics")
+-- end) -- show diagnostics for cursor
+-- Map("n", "mo", function()
+--   -- see outline on right hand side
+--   vim.cmd.Lspsaga("outline")
+-- end)
+-- Map("n", "gr", function()
+--   vim.cmd.Lspsaga("lsp_finder")
+-- end)
+-- Map("n", "gp", function()
+--   vim.cmd.Lspsaga("peek_definition")
+-- end)
+-- Map("n", "gt", function()
+--   vim.cmd.Lspsaga("peek_type_definition")
+-- end)
+-- Map("n", "gi", vim.lsp.buf.implementation)
+-- Map("n", "<leader>gr", vim.lsp.buf.references)
+-- Map("n", "gD", vim.lsp.buf.declaration)
+-- Map("n", "gd", vim.lsp.buf.definition)
+-- Map("n", "<leader>rs", vim.cmd.LspRestart) -- mapping to restart lsp if necessary
+-- Map("n", "<leader>ll", vim.cmd.LspStart) -- mapping to restart lsp if necessary
+-- Map("n", "<leader>rs", vim.cmd.LspStop) -- mapping to restart lsp if necessary
 
 -- telescope
 Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
@@ -253,3 +260,35 @@ cs followed by char to replace followed by char to change it to
 'Hello world!' --> cs'<div> --> <div>Hello World!</div>
 To remove the delimiters entirely, press ds". "Hello World" --> ds" --> Hello World
 ]]
+
+keymap = vim.keymap.set
+
+-- COC Config
+keymap("n", "K", ":call CocActionAsync('definitionHover')<CR>", { silent = true })
+keymap("n", "<leader>cc", ":CocEnable <CR>", { silent = true })
+keymap("n", "<leader>cs", ":CocDisable <CR>", { silent = true })
+keymap("n", "<leader>oi", ":call CocActionAsync('organizeImport')<CR>", { silent = true })
+keymap("n", "<leader>mo", ":call CocActionAsync('showOutgoingCalls')<CR>", { silent = true })
+keymap("n", "<leader>mi", ":call CocActionAsync('showIncomingCalls')<CR>", { silent = true })
+keymap("n", "<leader>fr", "<Plug>(coc-format)", { silent = true })
+
+keymap("n", "gt", ":call CocActionAsync('jumpTypeDefinition')<CR>", { silent = true })
+keymap("n", "gi", ":call CocActionAsync('jumpImplementation')<CR>", { silent = true })
+keymap("n", "gd", ":CocCommand tsserver.goToSourceDefinition <CR>", { silent = true })
+keymap("n", "gr", "<Plug>(coc-references)", { silent = true })
+
+keymap("n", "ma", "<Plug>(coc-codeaction-cursor)", { silent = true })
+keymap("n", "mf", "<Plug>(coc-fix-current)", { silent = true })
+keymap("n", "ms", "<Plug>(coc-codeaction-source)", { silent = true })
+keymap("n", "mr", "<Plug>(coc-codeaction-refactor)", { silent = true })
+keymap("n", "ml", "<Plug>(coc-codeaction-line)", { silent = true })
+keymap("n", "md", "<Plug>(coc-codeaction)", { silent = true })
+keymap("n", "me", ":call CocActionAsync('diagnosticNext')<CR>", { silent = true })
+keymap("n", "mo", toggle_outline, { silent = true, expr = false })
+keymap("n", "mrn", ":call CocActionAsync('rename')<CR>", { silent = true })
+keymap("n", "mrf", ":call CocActionAsync('refactor')<CR>", { silent = true })
+
+keymap("i", "<CR>", "coc#pum#visible() ? coc#pum#confirm() : '<CR>'", { expr = true })
+keymap("i", "<C-j>", "coc#pum#visible() ? coc#pum#next(1) : '<C-j>'", { expr = true })
+keymap("i", "<C-space>", "coc#refresh()", { expr = true })
+keymap("i", "<C-k>", "coc#pum#visible() ? coc#pum#prev(1) : '<C-k>'", { expr = true })

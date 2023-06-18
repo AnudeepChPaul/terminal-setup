@@ -40,34 +40,43 @@ return packer.startup(function(use)
     "ThePrimeagen/harpoon",
     "mbbill/undotree",
   })
+  use({ "Exafunction/codeium.vim" })
 
-  -- managing & installing lsp servers, linters & formatters-- Lua
+  use({ "neoclide/coc.nvim", branch = "release" })
+
   use({
-    "neovim/nvim-lspconfig",
+    "hrsh7th/nvim-cmp",
     requires = {
-      -- LSP Support
-      { "williamboman/mason.nvim" },
-      { "williamboman/mason-lspconfig.nvim" },
-      -- additional functionality for typescript server (e.g. rename file & update imports),
-      { "jose-elias-alvarez/typescript.nvim" },
-      { "Exafunction/codeium.vim" },
-
-      -- Autocompletion
-      { "hrsh7th/nvim-cmp" },
-      { "hrsh7th/cmp-nvim-lua" },
-      { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-path" },
-      { "hrsh7th/cmp-nvim-lua" },
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "glepnir/lspsaga.nvim", branch = "main" },
-
-      -- Snippets
       { "L3MON4D3/LuaSnip" },
-      { "rafamadriz/friendly-snippets" },
-      { "jose-elias-alvarez/null-ls.nvim" }, -- configure formatters & linters
-      { "jayp0521/mason-null-ls.nvim" }, -- bridges gap b/w mason & null-ls
+      -- Autocompletion
+      { "hrsh7th/cmp-path" },
+      -- { "hrsh7th/cmp-buffer" },
+      -- { "hrsh7th/cmp-nvim-lua" },
+      -- { "hrsh7th/cmp-nvim-lua" },
+      -- { "hrsh7th/cmp-nvim-lsp" },
     },
   })
+  -- managing & installing lsp servers, linters & formatters-- Lua
+  -- use({
+  --   "neovim/nvim-lspconfig",
+  --   requires = {
+  --
+  --     -- LSP Support
+  --     { "williamboman/mason.nvim" },
+  --     { "williamboman/mason-lspconfig.nvim" },
+  --     -- additional functionality for typescript server (e.g. rename file & update imports),
+  --     { "jose-elias-alvarez/typescript.nvim" },
+  --
+  --     -- Autocompletion
+  --     { "glepnir/lspsaga.nvim", branch = "main" },
+  --
+  --     -- Snippets
+  --     { "L3MON4D3/LuaSnip" },
+  --     { "rafamadriz/friendly-snippets" },
+  --     { "jose-elias-alvarez/null-ls.nvim" }, -- configure formatters & linters
+  --     { "jayp0521/mason-null-ls.nvim" }, -- bridges gap b/w mason & null-ls
+  --   },
+  -- })
 
   use({
     "nvim-treesitter/nvim-treesitter",

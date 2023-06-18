@@ -1,3 +1,7 @@
+local function Map(key, left, right)
+  vim.keymap.set(key, left, right, { noremap = true })
+end
+
 -- import lspconfig plugin safely
 local lspconfig_status, lspconfig = pcall(require, "lspconfig")
 
@@ -14,8 +18,14 @@ local on_attach = function(client, bufnr)
 
   -- set keybinds
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-  --[[ vim.keymap.set("n", "<leader>p", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
-  vim.keymap.set("n", "<leader>n", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer ]]
+
+  if client.name == "pyright" then
+    Map("n", "<leader>oi", vim.cmd.PyrightOrganizeImports)
+  elseif client.name == "tsserver" then
+    Map("n", "<leader>rf", vim.cmd.TypescriptRenameFile)
+    Map("n", "<leader>oi", vim.cmd.TypescriptOrganizeImports)
+    Map("n", "<leader>ru", vim.cmd.TypescriptRemoveUnused)
+  end
 end
 
 -- used to enable autocompletion (assign to every lsp server config)
@@ -34,6 +44,8 @@ lspconfig.pyright.setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
+
+-- lspconfig.pylsp.setup({})
 
 -- configure html server
 lspconfig.html.setup({
