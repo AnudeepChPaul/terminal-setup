@@ -57,8 +57,8 @@ return packer.startup(function(use)
     },
   })
   -- managing & installing lsp servers, linters & formatters-- Lua
-  -- use({
-  --   "neovim/nvim-lspconfig",
+  use({
+    "neovim/nvim-lspconfig",
   --   requires = {
   --
   --     -- LSP Support
@@ -76,7 +76,7 @@ return packer.startup(function(use)
   --     { "jose-elias-alvarez/null-ls.nvim" }, -- configure formatters & linters
   --     { "jayp0521/mason-null-ls.nvim" }, -- bridges gap b/w mason & null-ls
   --   },
-  -- })
+  })
 
   use({
     "nvim-treesitter/nvim-treesitter",

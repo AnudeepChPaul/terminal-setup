@@ -13,6 +13,7 @@ autopairs.setup({
     javascript = { "template_string" }, -- don't add pairs in javscript template_string treesitter nodes
     java = false, -- don't check treesitter on java
   },
+  map_cr = false
 })
 
 -- import nvim-autopairs completion functionality safely
