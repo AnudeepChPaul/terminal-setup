@@ -134,18 +134,16 @@ local config = {
         file_status = true,
         path = 1,
         color = { gui = "bold" },
+        symbols = {
+          modified = '[+]',      -- Text to show when the file is modified.
+          readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
+          unnamed = '[Untitled]', -- Text to show for unnamed buffers.
+          newfile = '[New]',     -- Text to show for newly created file before first write
+        },
       },
       "progress",
     },
-    lualine_c = {
-      {
-        "filesize",
-        cond = conditions.buffer_not_empty,
-        color = function()
-          return { fg = mode_color[vim.fn.mode()] }
-        end, -- Sets highlighting of component
-      },
-    },
+    lualine_c = {},
     lualine_x = {},
     lualine_y = { "location" },
     lualine_z = { { "encoding", fmt = string.upper }, "filetype" },
@@ -175,12 +173,18 @@ table.insert(config.sections.lualine_c, {
 })
 
 table.insert(config.sections.lualine_x, {
+  "filesize",
+  cond = conditions.buffer_not_empty,
+  color = function()
+    return { fg = mode_color[vim.fn.mode()] }
+  end,
+})
+
+table.insert(config.sections.lualine_x, {
   "searchcount",
   "selectioncount",
 })
 
-
-table.insert(config.sections.lualine_x, "%{get(b:,'coc_current_function', '')}")
 
 -- table.insert(config.sections.lualine_x, {
 --   -- Lsp server name .
@@ -225,13 +229,13 @@ table.insert(config.sections.lualine_x, {
   cond = conditions.hide_in_width,
 })
 
-table.insert(config.sections.lualine_x, {
-  "fileformat",
-  fmt = string.upper,
-  icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-  color = function()
-    return { fg = mode_color[vim.fn.mode()] }
-  end, -- Sets highlighting of component
-})
+-- table.insert(config.sections.lualine_x, {
+--   "fileformat",
+--   fmt = string.upper,
+--   icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+--   color = function()
+--     return { fg = mode_color[vim.fn.mode()] }
+--   end, -- Sets highlighting of component
+-- })
 
 lualine.setup(config)
