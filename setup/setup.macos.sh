@@ -12,7 +12,7 @@ brew install gh
 gh auth login
 
 echo "==============Setting up shell utils=============="
-brew install fzf tree bat
+brew install fzf tree bat zoxide
 brew install tmux neovim ripgrep
 brew install lazygit lua-language-server fd exa
 
