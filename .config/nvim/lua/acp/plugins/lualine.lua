@@ -156,6 +156,12 @@ local config = {
         "filename",
         file_status = true,
         path = 0,
+        symbols = {
+          modified = '[+]',      -- Text to show when the file is modified.
+          readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
+          unnamed = '[Untitled]', -- Text to show for unnamed buffers.
+          newfile = '[New]',     -- Text to show for newly created file before first write
+        }
       },
     },
   },
@@ -173,30 +179,33 @@ table.insert(config.sections.lualine_x, {
   "selectioncount",
 })
 
-table.insert(config.sections.lualine_x, {
-  -- Lsp server name .
-  function()
-    local msg = "No Active Lsp"
-    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then
-      return msg
-    end
-    for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return client.name
-      end
-    end
-    return msg
-  end,
-  icon = " LSP:",
-})
+
+table.insert(config.sections.lualine_x, "%{get(b:,'coc_current_function', '')}")
+
+-- table.insert(config.sections.lualine_x, {
+--   -- Lsp server name .
+--   function()
+--     local msg = "No Active Lsp"
+--     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+--     local clients = vim.lsp.get_active_clients()
+--     if next(clients) == nil then
+--       return msg
+--     end
+--     for _, client in ipairs(clients) do
+--       local filetypes = client.config.filetypes
+--       if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+--         return client.name
+--       end
+--     end
+--     return msg
+--   end,
+--   icon = " LSP:",
+-- })
 
 table.insert(config.sections.lualine_x, {
   "diagnostics",
-  sources = { "nvim_diagnostic" },
-  symbols = { error = " ", warn = " ", info = " " },
+  sources = { "coc" },
+  symbols = { error = "E ", warn = "W ", info = "I ", hint = "H " },
   diagnostics_color = {
     color_error = { fg = colors.red },
     color_warn = { fg = colors.yellow },

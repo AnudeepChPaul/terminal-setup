@@ -32,70 +32,38 @@ return packer.startup(function(use)
   use("wbthomason/packer.nvim")
   use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-  use("nvim-lualine/lualine.nvim") -- statusline
-  -- nvim git controls
-  use({
-    "tpope/vim-fugitive",
-    "lewis6991/gitsigns.nvim", -- show line modifications on left hand side
-    "ThePrimeagen/harpoon",
-    "mbbill/undotree",
-  })
+  -- Code intellisense with LSP servers
   use({ "Exafunction/codeium.vim" })
-
   use({ "neoclide/coc.nvim", branch = "release" })
+  use({
+    "neovim/nvim-lspconfig",
+    requires = {
+      { "windwp/nvim-autopairs" }
+    },
+  })
 
   use({
     "hrsh7th/nvim-cmp",
     requires = {
       { "L3MON4D3/LuaSnip" },
-      -- Autocompletion
       { "hrsh7th/cmp-path" },
-      -- { "hrsh7th/cmp-buffer" },
-      -- { "hrsh7th/cmp-nvim-lua" },
-      -- { "hrsh7th/cmp-nvim-lua" },
-      -- { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-buffer" },
     },
   })
-  -- managing & installing lsp servers, linters & formatters-- Lua
-  use({
-    "neovim/nvim-lspconfig",
-  --   requires = {
-  --
-  --     -- LSP Support
-  --     { "williamboman/mason.nvim" },
-  --     { "williamboman/mason-lspconfig.nvim" },
-  --     -- additional functionality for typescript server (e.g. rename file & update imports),
-  --     { "jose-elias-alvarez/typescript.nvim" },
-  --
-  --     -- Autocompletion
-  --     { "glepnir/lspsaga.nvim", branch = "main" },
-  --
-  --     -- Snippets
-  --     { "L3MON4D3/LuaSnip" },
-  --     { "rafamadriz/friendly-snippets" },
-  --     { "jose-elias-alvarez/null-ls.nvim" }, -- configure formatters & linters
-  --     { "jayp0521/mason-null-ls.nvim" }, -- bridges gap b/w mason & null-ls
-  --   },
-  })
 
+  -- Syntax highlighting with treesitter
   use({
     "nvim-treesitter/nvim-treesitter",
     requires = {
       "nvim-treesitter/playground",
       "nvim-treesitter/nvim-treesitter-context",
+      "weirongxu/plantuml-previewer.vim",
+      "tyru/open-browser.vim",
     },
     run = function()
       local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
       ts_update()
     end,
-  }) -- treesitter configuration
-
-  -- Plant uml support
-  use({
-    "weirongxu/plantuml-previewer.vim",
-    requires = {
-      "tyru/open-browser.vim",
-    },
   })
 
   -- file explorer
@@ -106,17 +74,22 @@ return packer.startup(function(use)
     },
   })
 
+  -- nvim essential utilities
   use({
+    "nvim-lualine/lualine.nvim",
+    "tpope/vim-fugitive",
+    "lewis6991/gitsigns.nvim",
+    "ThePrimeagen/harpoon",
+    "mbbill/undotree",
+    "numToStr/Comment.nvim",
+    "christoomey/vim-tmux-navigator",
+    "norcalli/nvim-colorizer.lua",
+    "tpope/vim-surround",
     "nvim-telescope/telescope.nvim",
-    requires = {
-      { "nvim-telescope/telescope-live-grep-args.nvim" },
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- dependency for better sorting performance
-      -- { "nvim-telescope/telescope-file-browser.nvim" },
-      { "nvim-telescope/telescope-project.nvim" },
-      -- { "kdheepak/lazygit.nvim" },
-    },
-  }) -- fuzzy finder
-  -- autocompletion
+    "nvim-telescope/telescope-live-grep-args.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    "nvim-telescope/telescope-project.nvim",
+  })
 
   use({
     "tjdevries/colorbuddy.nvim",
@@ -124,20 +97,6 @@ return packer.startup(function(use)
       "nyoom-engineering/oxocarbon.nvim",
     },
   })
-  -- use("EdenEast/nightfox.nvim") -- nightfox color scheme
-  -- use("rose-pine/neovim", { as = "rose-pine" }) -- rose pine color theme
-  -- use("akinsho/nvim-bufferline.lua") -- bufferline for tab
-
-  use("norcalli/nvim-colorizer.lua")
-  use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
-  -- use("szw/vim-maximizer") -- maximizes and restores current window
-
-  -- essential plugins
-  -- use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
-  use("numToStr/Comment.nvim") -- commenting with gc
-
-  -- configuring lsp servers
-  use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
 
   if packer_bootstrap then
     require("packer").sync()

@@ -15,81 +15,6 @@ vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
 -- Accessing neo-vim for custom commands
 local api = require("nvim-tree.api")
 
--- configure nvim-tree
-nvimtree.setup({
-  view = {
-    mappings = {
-      list = {
-        { key = ">", action = "scope_to_node", action_cb = scope_to_node },
-        { key = "<", action = "scope_to_parent", action_cb = scope_to_parent },
-        { key = "!", action = "toggle_ignore", action_cb = toggle_ignore },
-        { key = "@", action = "toggle_hidden", action_cb = toggle_hidden },
-        { key = "e", action = "toggle_hidden", action_cb = horizontal_open },
-        { key = "s", action = "toggle_hidden", action_cb = vertical_open },
-        { key = "o", action = "toggle_hidden", action_cb = api.node.run.system },
-      },
-    },
-    width = 45,
-  },
-  update_focused_file = {
-    enable = true,
-    update_cwd = false,
-    ignore_list = {},
-  }, -- change folder arrow icons
-  renderer = {
-    icons = {
-      glyphs = {
-        folder = {
-          arrow_closed = "", -- arrow when folder is closed
-          arrow_open = "", -- arrow when folder is open
-        },
-      },
-    },
-  },
-  -- disable window_picker for
-  -- explorer to work well with
-  -- window splits
-  actions = {
-    open_file = {
-      window_picker = {
-        enable = false,
-      },
-    },
-    change_dir = {
-      enable = true,
-      global = true,
-    },
-  },
-  git = {
-    enable = true,
-    ignore = false,
-    show_on_dirs = true,
-    show_on_open_dirs = true,
-    timeout = 400,
-  },
-  modified = {
-    enable = false,
-    show_on_dirs = true,
-    show_on_open_dirs = true,
-  },
-})
---
--- This function has been generated from your
---   view.mappings.list
---   view.mappings.custom_only
---   remove_keymaps
---
--- You should add this function to your configuration and set on_attach = on_attach in the nvim-tree setup call.
---
--- Although care was taken to ensure correctness and completeness, your review is required.
---
--- Please check for the following issues in auto generated content:
---   "Mappings removed" is as you expect
---   "Mappings migrated" are correct
---
--- Please see https://github.com/nvim-tree/nvim-tree.lua/wiki/Migrating-To-on_attach for assistance in migrating.
---
-
 local function on_attach(bufnr)
   local api = require("nvim-tree.api")
 
@@ -165,3 +90,68 @@ local function on_attach(bufnr)
   vim.keymap.set("n", "s", api.node.open.vertical, opts("vertical_open"))
   vim.keymap.set("n", "o", api.node.run.system, opts("system_open"))
 end
+
+-- configure nvim-tree
+nvimtree.setup({
+  on_attach = on_attach,
+  view = {
+    width = 45,
+  },
+  update_focused_file = {
+    enable = true,
+    update_cwd = false,
+    ignore_list = {},
+  }, -- change folder arrow icons
+  renderer = {
+    icons = {
+      glyphs = {
+        folder = {
+          arrow_closed = "", -- arrow when folder is closed
+          arrow_open = "", -- arrow when folder is open
+        },
+      },
+    },
+  },
+  -- disable window_picker for
+  -- explorer to work well with
+  -- window splits
+  actions = {
+    open_file = {
+      window_picker = {
+        enable = false,
+      },
+    },
+    change_dir = {
+      enable = true,
+      global = true,
+    },
+  },
+  git = {
+    enable = true,
+    ignore = false,
+    show_on_dirs = true,
+    show_on_open_dirs = true,
+    timeout = 400,
+  },
+  modified = {
+    enable = false,
+    show_on_dirs = true,
+    show_on_open_dirs = true,
+  },
+})
+--
+-- This function has been generated from your
+--   view.mappings.list
+--   view.mappings.custom_only
+--   remove_keymaps
+--
+-- You should add this function to your configuration and set on_attach = on_attach in the nvim-tree setup call.
+--
+-- Although care was taken to ensure correctness and completeness, your review is required.
+--
+-- Please check for the following issues in auto generated content:
+--   "Mappings removed" is as you expect
+--   "Mappings migrated" are correct
+--
+-- Please see https://github.com/nvim-tree/nvim-tree.lua/wiki/Migrating-To-on_attach for assistance in migrating.
+--
