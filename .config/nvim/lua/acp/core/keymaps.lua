@@ -80,14 +80,6 @@ Map("n", "<leader>e", vim.diagnostic.open_float)
 Map("n", "[d", vim.diagnostic.goto_prev)
 Map("n", "]d", vim.diagnostic.goto_next)
 
--- Map("n", "ff", ":$put _<CR>")
-
--- Quick fix list navigation
-Map("n", "<C-[>", ":cn<CR>")
-Map("n", "<C-]>", ":cp<CR>")
-
-Map("n", "<TAB>", vim.cmd.bnext)
-Map("n", "<S-TAB>", vim.cmd.bprevious)
 
 Map("n", "n", "nzzzv")
 Map("n", "N", "Nzzzv")
@@ -194,10 +186,14 @@ Map("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>") -- list git commits f
 Map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git branches (use <cr> to checkout) ["gb" for git branch]
 Map("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
 
+-- Quick fix list navigation
+Map("n", "<C-[>", ":cn<CR>")
+Map("n", "<C-]>", ":cp<CR>")
+Map("n", "<S-TAB>", vim.cmd.bnext)
+
 -- harpoon
 Map("n", "<TAB>", require("harpoon.ui").nav_next)
-Map("n", "<S-TAB>", require("harpoon.ui").nav_prev)
-Map("n", "<leader>hh", require("harpoon.mark").add_file)
+Map("n", "<leader>ha", require("harpoon.mark").add_file)
 Map("n", "<leader>fj", require("harpoon.ui").toggle_quick_menu)
 Map("n", "<leader>1", function()
   require("harpoon.ui").nav_file(1)
