@@ -22,6 +22,7 @@ export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export MANPATH="/opt/local/share/man:$MANPATH"
+export PATH="/Users/achandrapaul/.jenv/shims:${PATH}"
 
 which brew &> /dev/null && eval "$(`which brew` shellenv)"
 
@@ -43,23 +44,57 @@ export FZF_DEFAULT_OPTS="--tac --layout=reverse --info=inline --border --margin=
 export FZF_DEFAULT_COMMAND="ls -a";
 export FZF__PREVIEW__COMMAND='bat --style=numbers --color=always --line-range :500 {}';
 export FZF__DIR__PREVIEW__COMMAND='tree -aC -I "${TREE__GLOBAL_IGNORE}" {} | head -700';
-export TREE__GLOBAL_IGNORE=".git|node_modules|.history|webpack|.next|.idea|.gradle|.vscode";
+export TREE__GLOBAL_IGNORE="node_modules|.history|webpack|.next|.idea|.gradle|.vscode";
 export FZF__SMART__PREVIEW__COMMAND="[ -d {} ] && $FZF__DIR__PREVIEW__COMMAND || $FZF__PREVIEW__COMMAND";
 export HISTCONTROL=ignorespace:erasedups;
 
 export EDITOR="nvim";
 
 # Setting up aliases
-alias c="clear";
+alias al='alias | less' # List all aliases
+alias as='alias | grep' # Search aliases
+
+alias l='exa -alF --icons'
+alias la='exa -alF --icons'
+alias ll='exa -laFh --icons --git'
+alias lm='exa -lahr --color-scale --icons -s=modified'
+alias lb='exa -lahr --color-scale --icons -s=size'
+alias tree='f() { exa -aF --tree -L=${1:-2} --icons };f'
+
+# alias la='ls -A'
+# alias ll='ls -lAFh'
+# alias lb='ls -lhSA'
+# alias lm='ls -tA -1'
+
+alias c='clear && hr_color="\033[0;37m" && hr'
+
 alias ..="cd ..";
+alias ...="cd ../../";
+alias ....="cd ../../../";
+alias .....="cd ../../../../";
+alias ......="cd ../../../../../";
+
+alias d3="cd $HOME/Projects";
+
 alias sc="code";
 alias _s="sudo";
 alias _sn="sudo nano";
 alias _sv="sudo nvim";
 alias v="nvim";
+alias vi="nvim";
+alias vim="nvim";
+
 alias gc="git clone";
-alias d3="cd $HOME/Projects";
 alias conf="sv -O ~/.zprofile ~/.zshrc";
+alias o="ack --sort-files --color";
+alias vg='lazygit';
+alias db="dotbare";
+
+alias plz="fc -l -1 | cut -d' ' -f2- | xargs sudo"
+alias cpwd='pwd | pbcopy'
+alias pa='pbpaste'
+
+# docker shorthands
 alias de="docker exec -u root -it";
 alias dils="docker image ls";
 alias dvls="docker volume ls";
@@ -73,13 +108,16 @@ alias dira='docker image rm $(docker image ls -q)';
 alias dvra='docker volume rm $(docker volume ls -q)';
 alias dcra='docker container rm $(docker container ls -q)';
 alias dnra='docker network rm $(docker network ls -q)';
-alias o="ack --sort-files --color";
-alias l="ls -alp";
-alias vg='lazygit';
-alias ll='exa --all --long --icons --header';
-alias db="dotbare";
-alias vi="nvim";
-alias vim="nvim";
+
+# Don't google
+alias myip="curl ifconfig.me"
+alias whatismyip="curl ifconfig.me"
+alias ws="curl wttr.in"
+alias wss="curl 'wttr.in?format=3'"
+alias dadjoke='curl -H "Accept: text/plain" https://icanhazdadjoke.com/; echo'
+alias news='curl hkkr.in'
+alias ask='$HOME/bin/cht.sh'
+
 
 _uninstall_homebrew() {
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)";
@@ -232,3 +270,26 @@ function aws-ec2() {
 
 eval "$(pyenv init --path)"
 source ~/.dotbare/dotbare.plugin.bash
+
+export JENV_SHELL=zsh
+export JENV_LOADED=1
+unset JAVA_HOME
+unset JDK_HOME
+
+source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh' &> /dev/null
+jenv rehash 2>/dev/null
+jenv refresh-plugins 2>/dev/null
+jenv() {
+  type typeset &> /dev/null && typeset command
+  command="$1"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  enable-plugin|rehash|shell|shell-options)
+    eval `jenv "sh-$command" "$@"`;;
+  *)
+    command jenv "$command" "$@";;
+  esac
+}

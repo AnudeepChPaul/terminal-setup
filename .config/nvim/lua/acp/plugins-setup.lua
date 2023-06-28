@@ -37,9 +37,6 @@ return packer.startup(function(use)
   use({ "neoclide/coc.nvim", branch = "release" })
   use({
     "neovim/nvim-lspconfig",
-    requires = {
-      { "windwp/nvim-autopairs" }
-    },
   })
 
   use({
@@ -47,7 +44,6 @@ return packer.startup(function(use)
     requires = {
       { "L3MON4D3/LuaSnip" },
       { "hrsh7th/cmp-path" },
-      { "hrsh7th/cmp-buffer" },
     },
   })
 
@@ -76,6 +72,7 @@ return packer.startup(function(use)
 
   -- nvim essential utilities
   use({
+    "windwp/nvim-autopairs",
     "nvim-lualine/lualine.nvim",
     "tpope/vim-fugitive",
     "lewis6991/gitsigns.nvim",

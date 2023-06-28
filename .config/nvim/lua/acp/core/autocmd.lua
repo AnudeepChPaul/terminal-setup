@@ -96,4 +96,10 @@ vim.api.nvim_create_user_command("FormatOnSave", function()
   pre_custom_command()
 end, {})
 
+vim.api.nvim_create_augroup("CocGroup", {})
 -- pre_custom_command()
+vim.api.nvim_create_autocmd("CursorHold", {
+    group = "CocGroup",
+    command = "silent call CocActionAsync('highlight')",
+    desc = "Highlight symbol under cursor on CursorHold"
+})

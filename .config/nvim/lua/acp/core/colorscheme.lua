@@ -21,11 +21,13 @@ vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "#000000" })
 vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
 vim.api.nvim_set_hl(0, "ColorColumn", { bg = "none" })
+
 vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
 vim.api.nvim_set_hl(0, "VertSplit", { bg = "none" })
 vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { bg = "none" })
 vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { bg = "#fafafa", fg = "#000000" })
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+
 vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
 vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { bg = "none" })

@@ -5,16 +5,6 @@ local function Map(key, left, right)
   vim.keymap.set(key, left, right, { noremap = true })
 end
 
-local function toggle_outline()
-  return vim.cmd([[
-    let winid = coc#window#find('cocViewId', 'OUTLINE')
-    if winid == -1
-    call CocActionAsync('showOutline', 1)
-    else
-    call coc#window#close(winid)
-    endif
-    ]])
-end
 ---------------------
 -- General Keymaps
 ---------------------
@@ -90,7 +80,6 @@ Map("n", "<leader>e", vim.diagnostic.open_float)
 Map("n", "[d", vim.diagnostic.goto_prev)
 Map("n", "]d", vim.diagnostic.goto_next)
 
-Map("n", "<leader>fr", vim.lsp.buf.format) -- toggle file explorer
 -- Map("n", "ff", ":$put _<CR>")
 
 -- Quick fix list navigation
@@ -231,65 +220,72 @@ Map("i", "<c-,>", function()
   return vim.fn["codeium#CycleCompletions"](-1)
 end)
 
-Map("i", "<c-\\>", function()
+Map("i", "<c-backspace>", function()
   return vim.fn["codeium#Clear"]()
 end)
 
---[[ Comment shortcuts
-NORMAL mode
-`gcc` - Toggles the current line using linewise comment
-`gbc` - Toggles the current line using blockwise comment
-`[count]gcc` - Toggles the number of line given as a prefix-count using linewise
-`[count]gbc` - Toggles the number of line given as a prefix-count using blockwise
-`gc[count]{motion}` - (Op-pending) Toggles the region using linewise comment
-`gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment
 
-VISUAL mode
-`gc` - Toggles the region using linewise comment
-`gb` - Toggles the region using blockwise comment
-]]
+---------------------
+-- COC Keymaps
+---------------------
 
---[[ Surround Shortcuts
-VISUAL Mode
-Press a capital V (for linewise visual mode) followed by S<p class="important">
-  <p class="important">
-    <em>Hello</em> world!
-  </p>
+function _G.toggle_outline()
+  return vim.cmd([[
+    let winid = coc#window#find('cocViewId', 'OUTLINE')
+    if winid == -1
+    call CocActionAsync('showOutline', 1)
+    else
+    call coc#window#close(winid)
+    endif
+    ]])
+end
 
-NORMAL mode
-cs followed by char to replace followed by char to change it to
-'Hello world!' --> cs'<div> --> <div>Hello World!</div>
-To remove the delimiters entirely, press ds". "Hello World" --> ds" --> Hello World
-]]
+function _G.show_docs()
+    local cw = vim.fn.expand('<cword>')
+    if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
+        vim.api.nvim_command('h ' .. cw)
+    elseif vim.api.nvim_eval('coc#rpc#ready()') then
+        vim.fn.CocActionAsync('definitionHover')
+    else
+        vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
+    end
+end
+
+function _G.format_buffer()
+    vim.api.nvim_command(":retab")
+    vim.api.nvim_command(":call CocAction('format')")
+    vim.api.nvim_command(":CocCommand eslint.executeAutofix")
+end
 
 keymap = vim.keymap.set
 
 -- COC Config
-keymap("n", "K", ":call CocActionAsync('definitionHover')<CR>", { silent = true })
+keymap("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 keymap("n", "<leader>cc", ":CocEnable <CR>", { silent = true })
 keymap("n", "<leader>cs", ":CocDisable <CR>", { silent = true })
 keymap("n", "<leader>oi", ":call CocActionAsync('organizeImport')<CR>", { silent = true })
 keymap("n", "<leader>mo", ":call CocActionAsync('showOutgoingCalls')<CR>", { silent = true })
 keymap("n", "<leader>mi", ":call CocActionAsync('showIncomingCalls')<CR>", { silent = true })
-keymap("n", "<leader>fr", "<Plug>(coc-format)", { silent = true })
 
 keymap("n", "gt", ":call CocActionAsync('jumpTypeDefinition')<CR>", { silent = true })
 keymap("n", "gi", ":call CocActionAsync('jumpImplementation')<CR>", { silent = true })
 keymap("n", "gd", ":CocCommand tsserver.goToSourceDefinition <CR>", { silent = true })
 keymap("n", "gr", "<Plug>(coc-references)", { silent = true })
 
-keymap("n", "ma", "<Plug>(coc-codeaction-cursor)", { silent = true })
-keymap("n", "mf", "<Plug>(coc-fix-current)", { silent = true })
-keymap("n", "ms", "<Plug>(coc-codeaction-source)", { silent = true })
-keymap("n", "mr", "<Plug>(coc-codeaction-refactor)", { silent = true })
-keymap("n", "ml", "<Plug>(coc-codeaction-line)", { silent = true })
-keymap("n", "md", "<Plug>(coc-codeaction)", { silent = true })
+keymap("n", "ma", "<Plug>(coc-codeaction)", { silent = true })
+keymap("n", "mc", "<Plug>(coc-codeaction-cursor)", { silent = true })
 keymap("n", "me", ":call CocActionAsync('diagnosticNext')<CR>", { silent = true })
-keymap("n", "mo", toggle_outline, { silent = true, expr = false })
+keymap("n", "mf", "<Plug>(coc-fix-current)", { silent = true })
+keymap("n", "ml", "<Plug>(coc-codeaction-line)", { silent = true })
+keymap("n", "mo", _G.toggle_outline, { silent = true, expr = false })
+keymap("n", "mr", ":call CocActionAsync('refactor')<CR>", { silent = true })
 keymap("n", "mrn", ":call CocActionAsync('rename')<CR>", { silent = true })
-keymap("n", "mrf", ":call CocActionAsync('refactor')<CR>", { silent = true })
+keymap("n", "ms", "<Plug>(coc-codeaction-source)", { silent = true })
 
 keymap("i", "<CR>", "coc#pum#visible() ? coc#pum#confirm() : '<CR>'", { expr = true })
 keymap("i", "<C-j>", "coc#pum#visible() ? coc#pum#next(1) : '<C-j>'", { expr = true })
 keymap("i", "<C-space>", "coc#refresh()", { expr = true })
 keymap("i", "<C-k>", "coc#pum#visible() ? coc#pum#prev(1) : '<C-k>'", { expr = true })
+
+keymap("n", "<leader>is", ":CocList -I symbols<CR>", {silent = true})
+keymap("n", "<c-k><c-d>", _G.format_buffer, {silent = true})

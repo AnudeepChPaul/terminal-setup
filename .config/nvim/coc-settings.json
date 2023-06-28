@@ -7,20 +7,27 @@
   "diagnostic.infoSign": "I",
   "diagnostic.warningSign": "W",
   "diagnostic.refreshOnInsertMode": true,
+
   "dialog.confirmKey": "<cr>",
+
   "suggest.defaultSortMethod": "none",
   "suggest.languageSourcePriority": 99,
   "suggest.localityBonus": false,
+  "suggest.noselect": true,
   "suggest.selection": "first",
   "suggest.triggerAfterInsertEnter": true,
+
   "javascript.suggest.autoImports": true,
   "typescript.suggest.autoImports": true,
+
   "coc.preferences.enableLinkedEditing": true,
   "coc.preferences.maxFileSize": "600000",
   "codeLens.enable": true,
+
   "colors.enable": true,
   "cursors.nextKey": "<C-j>",
   "cursors.prevKey": "<C-k>",
+
   "outline.codeActionKinds": [
     "quickfix",
     "refactor",
@@ -31,8 +38,10 @@
     "source.fixAll",
     "source.organizeImports"
   ],
+
   "yaml.enable": true,
   "yaml.format.enable": true,
+
   "eslint.enable": true,
   "eslint.alwaysShowStatus": true,
   "eslint.format.enable": true,

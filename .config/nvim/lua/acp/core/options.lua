@@ -67,7 +67,7 @@ vim.opt.iskeyword:append("-")
 vim.opt.formatoptions:append({ "r" })
 
 vim.o.updatetime = 250
-vim.diagnostic.config({ virtual_text = false })
+vim.diagnostic.config({ virtual_text = true })
 
 -- NeoVim Folding Options
 vim.opt.foldmethod = "indent"
