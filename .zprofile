@@ -8,7 +8,7 @@ export PLATFORM_TOOLS_PATH="$HOME/bin/platform-tools"
 export ROVER_HOME_PATH="$HOME/.rover"
 
 export PATH=$PATH:$GO_PATH/bin:$HOME/bin:/usr/local/bin:$HOME/bin/redis-6.2.6/src:$PYTHON_PATH:$MAVEN_PATH/bin:$PLATFORM_TOOLS_PATH
-export PATH="$PATH:$ROVER_HOME_PATH/bin:$HOME/__bin__/apache-maven-3.9.1/apache-maven/src/bin"
+export PATH="$PATH:$ROVER_HOME_PATH/bin:$HOME/__bin__/apache-maven-3.9.3/apache-maven/src/bin"
 
 export GHQ_ROOT="$HOME/Projects"
 
