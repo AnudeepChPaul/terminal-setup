@@ -189,6 +189,7 @@ Map("n", "<leader>fl", ":NvimTreeFindFile<CR>") -- locates the file (in nvim-tre
 -- Map("n", "<leader>rs", vim.cmd.LspStop) -- mapping to restart lsp if necessary
 
 -- telescope
+Map("n", "<leader>fr", "<cmd>Telescope resume<cr>") -- Lists the results incl. multi-selections of the previous picker
 Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
 Map("n", "<leader>fq", "<cmd>Telescope quickfix<cr>") -- find files within current working directory, respects .gitignore
 Map("n", "<leader>gf", "<cmd>Telescope git_files<cr>") -- find string in current working directory as you type
