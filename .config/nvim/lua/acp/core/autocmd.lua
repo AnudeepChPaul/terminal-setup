@@ -84,6 +84,17 @@ vim.api.nvim_create_user_command("AutoRunTS", function()
   attach_to_buffer(pattern, command)
 end, {})
 
+vim.api.nvim_create_user_command("AutoRunPy", function()
+  local pattern = vim.fn.input("Pattern: ")
+  local command = vim.split(vim.fn.input("Command: "), " ")
+
+  if pattern == "" then
+    pattern = "*.py"
+  end
+
+  attach_to_buffer(pattern, command)
+end, {})
+
 vim.api.nvim_create_user_command("AutoStop", function()
   augroup("nvim_go_post_custom_command", { clear = true })
 end, {})
