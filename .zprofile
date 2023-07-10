@@ -2,7 +2,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # setting up PATH variables
 export GO_PATH=$HOME/go
-export MAVEN_PATH=$HOME/bin/apache-maven-3.8.6/
+export MAVEN_PATH=$HOME/bin/apache-maven-3.8.8/
 export PYTHON_PATH=/usr/local/bin/python
 export PLATFORM_TOOLS_PATH="$HOME/bin/platform-tools"
 export ROVER_HOME_PATH="$HOME/.rover"
@@ -54,6 +54,8 @@ export EDITOR="nvim";
 alias al='alias | less' # List all aliases
 alias as='alias | grep' # Search aliases
 
+alias _pv='python3 -m venv ./venv'
+
 alias l='exa -alF --icons'
 alias la='exa -alF --icons'
 alias ll='exa -laFh --icons --git'
@@ -81,8 +83,8 @@ alias _s="sudo";
 alias _sn="sudo nano";
 alias _sv="sudo nvim";
 alias v="nvim";
-alias vi="nvim";
-alias vim="nvim";
+# alias vi="nvim";
+# alias vim="nvim";
 
 alias gc="git clone";
 alias conf="sv -O ~/.zprofile ~/.zshrc";
