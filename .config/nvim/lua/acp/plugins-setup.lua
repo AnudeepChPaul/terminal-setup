@@ -33,20 +33,32 @@ return packer.startup(function(use)
   use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
   -- Code intellisense with LSP servers
-  use({ "Exafunction/codeium.vim" })
-  use({ "neoclide/coc.nvim", branch = "release" })
-  use({
-    "neovim/nvim-lspconfig",
-  })
+  -- use({ "Exafunction/codeium.vim" })
+  -- use({ "neoclide/coc.nvim", branch = "release" })
+  use("github/copilot.vim")
+  use {
+	  'VonHeikemen/lsp-zero.nvim',
+	  branch = 'v1.x',
+	  requires = {
+		  -- LSP Support
+		  {'neovim/nvim-lspconfig'},
+		  {'williamboman/mason.nvim'},
+		  {'williamboman/mason-lspconfig.nvim'},
+      {'nvimdev/lspsaga.nvim'},
 
-  use({
-    "hrsh7th/nvim-cmp",
-    requires = {
-      { "L3MON4D3/LuaSnip" },
-      { "hrsh7th/cmp-path" },
-    },
-  })
+		  -- Autocompletion
+		  {'hrsh7th/nvim-cmp'},
+		  {'hrsh7th/cmp-buffer'},
+		  {'hrsh7th/cmp-path'},
+		  {'saadparwaiz1/cmp_luasnip'},
+		  {'hrsh7th/cmp-nvim-lsp'},
+		  {'hrsh7th/cmp-nvim-lua'},
 
+		  -- Snippets
+		  {'L3MON4D3/LuaSnip'},
+		  {'rafamadriz/friendly-snippets'},
+	  }
+  }
   -- Syntax highlighting with treesitter
   use({
     "nvim-treesitter/nvim-treesitter",

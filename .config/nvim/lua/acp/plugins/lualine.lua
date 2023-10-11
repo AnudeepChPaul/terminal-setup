@@ -186,36 +186,36 @@ table.insert(config.sections.lualine_x, {
 })
 
 
--- table.insert(config.sections.lualine_x, {
---   -- Lsp server name .
---   function()
---     local msg = "No Active Lsp"
---     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
---     local clients = vim.lsp.get_active_clients()
---     if next(clients) == nil then
---       return msg
---     end
---     for _, client in ipairs(clients) do
---       local filetypes = client.config.filetypes
---       if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
---         return client.name
---       end
---     end
---     return msg
---   end,
---   icon = " LSP:",
--- })
-
 table.insert(config.sections.lualine_x, {
-  "diagnostics",
-  sources = { "coc" },
-  symbols = { error = "E ", warn = "W ", info = "I ", hint = "H " },
-  diagnostics_color = {
-    color_error = { fg = colors.red },
-    color_warn = { fg = colors.yellow },
-    color_info = { fg = colors.cyan },
-  },
+  -- Lsp server name .
+  function()
+    local msg = "No Active Lsp"
+    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+    local clients = vim.lsp.get_active_clients()
+    if next(clients) == nil then
+      return msg
+    end
+    for _, client in ipairs(clients) do
+      local filetypes = client.config.filetypes
+      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+        return client.name
+      end
+    end
+    return msg
+  end,
+  icon = " LSP:",
 })
+
+-- table.insert(config.sections.lualine_x, {
+--   "diagnostics",
+--   sources = { "coc" },
+--   symbols = { error = "E ", warn = "W ", info = "I ", hint = "H " },
+--   diagnostics_color = {
+--     color_error = { fg = colors.red },
+--     color_warn = { fg = colors.yellow },
+--     color_info = { fg = colors.cyan },
+--   },
+-- })
 
 table.insert(config.sections.lualine_x, {
   "diff",
