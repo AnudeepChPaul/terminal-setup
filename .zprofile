@@ -228,26 +228,6 @@ _ide () {
   tmux split-window -h -p 40;
 }
 
-function zz () {
-  dir_full_path=`z -l $1`;
-
-  if [[ -z "$dir_full_path" ]]; then
-   return;
-  fi
-
-
-  basename "$dir_full_path" 2> /dev/null | tr . _ | read dir_name;
-
-  if [[ -z "$dir_name" ]]; then
-    return;
-  fi
-
-  tmux new-session -s $dir_name -c $dir_full_path -d 2> /dev/null;
-  sleep 1;
-  tmux attach -t $dir_name 2> /dev/null || tmux switchc -t $dir_name 2> /dev/null;
-}
-
-
 function _tmux_manager() {
   if [[ -z "$PROJECTS_DIR" ]]; then
    return;
