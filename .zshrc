@@ -141,6 +141,9 @@ bindkey "^g" _tmux_manager
 zle -N h
 bindkey "^h" h
 
+zle -N _tmux_smart_attach_
+bindkey "^b" _tmux_smart_attach_
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

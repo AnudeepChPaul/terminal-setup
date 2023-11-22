@@ -251,6 +251,12 @@ function aws-ec2() {
 
 _tmux_smart_attach_ () {
   session=`tmux list-sessions | fzf +s --tac | cut -d ':' -f1`
+
+  if [[ -z "$session" ]]; then 
+    echo "aborting";
+    return 
+  fi
+
   tmux attach -t $session || tmux switch-client -t $session
 }
 
