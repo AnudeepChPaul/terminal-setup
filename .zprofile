@@ -249,6 +249,11 @@ function aws-ec2() {
   LINES=${LINES} COLUMNS=${COLUMNS} ${OWL}/command/pellets/ec2/scripts/login-wrapper "${@}"
 }
 
+_tmux_smart_attach_ () {
+  session=`tmux list-sessions | fzf +s --tac | cut -d ':' -f1`
+  tmux attach -t $session || tmux switch-client -t $session
+}
+
 
 eval "$(pyenv init --path)"
 source ~/.dotbare/dotbare.plugin.bash
