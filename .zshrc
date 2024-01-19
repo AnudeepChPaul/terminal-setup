@@ -150,3 +150,11 @@ bindkey "^b" _tmux_smart_attach_
 
 eval "$(zoxide init zsh)"
 fpath=(~/.zsh.d/ $fpath)
+
+# pnpm
+export PNPM_HOME="/Users/anudeepchandrapaul/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
