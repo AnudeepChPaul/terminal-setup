@@ -100,6 +100,11 @@ alias plz="fc -l -1 | cut -d' ' -f2- | xargs sudo"
 alias cpwd='pwd | pbcopy'
 alias pa='pbpaste'
 
+# tmux shortcuts
+alias trw='function ttrw() { tmux rename-window "${1:-zsh|exec}"}; ttrw';
+alias tka='tmux kill-server';
+alias tks='tmux kill-session -t';
+
 # docker shorthands
 alias de="docker exec -u root -it";
 alias dils="docker image ls";

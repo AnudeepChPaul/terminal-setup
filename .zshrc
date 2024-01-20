@@ -136,13 +136,13 @@ source "$NVM_DIR/nvm.sh"
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 zle -N _tmux_manager
-bindkey "^g" _tmux_manager
+bindkey -s "^y" '_tmux_manager^M'
 
 zle -N h
-bindkey "^h" h
+bindkey -s "^h" 'h^M'
 
 zle -N _tmux_smart_attach_
-bindkey "^b" _tmux_smart_attach_
+bindkey -s "^t" '_tmux_smart_attach_^M'
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
