@@ -101,6 +101,11 @@ return packer.startup(function(use)
   })
 
   use({
+      "iamcco/markdown-preview.nvim",
+      run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
+  use({
     "tjdevries/colorbuddy.nvim",
     requires = {
       "nyoom-engineering/oxocarbon.nvim",
