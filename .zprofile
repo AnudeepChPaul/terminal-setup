@@ -50,6 +50,9 @@ export HISTCONTROL=ignorespace:erasedups;
 
 export EDITOR="nvim";
 
+export TWILIO_API_DEFINITIONS_ROOT="${GHQ_ROOT}"/code.hq.twilio.com/twilio/api-definitions
+
+
 # Setting up aliases
 alias al='alias | less' # List all aliases
 alias as='alias | grep' # Search aliases
@@ -119,6 +122,8 @@ alias wss="curl 'wttr.in?format=3'"
 alias dadjoke='curl -H "Accept: text/plain" https://icanhazdadjoke.com/; echo'
 alias news='curl hkkr.in'
 alias ask='$HOME/bin/cht.sh'
+alias otr='owl tubes --backend envoy render'
+alias ots='owl tubes --backend envoy stop'
 
 
 _uninstall_homebrew() {
@@ -286,3 +291,8 @@ jenv() {
     command jenv "$command" "$@";;
   esac
 }
+
+
+# Added by Toolbox App
+export PATH="$PATH:/Users/achandrapaul/Library/Application Support/JetBrains/Toolbox/scripts"
+
