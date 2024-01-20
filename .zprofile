@@ -226,7 +226,7 @@ _tn() {
     session_name=$1;
     session_dir=$2;
     
-    tmux new-session -s $session_name -c $session_dir -d 2> /dev/null; tmux attach -t $session_name 2> /dev/null || tmux switchc -t $session_name 2> /dev/null;
+    tmux new-session -s $session_name -n "main:${session_name}" -c $session_dir -d 2> /dev/null; tmux attach -t $session_name 2> /dev/null || tmux switchc -t $session_name 2> /dev/null;
 }
 
 _ide () {
@@ -235,7 +235,7 @@ _ide () {
 }
 
 function _tmux_manager() {
-  if [[ -z "$PROJECTS_DIR" ]]; then
+  if [[ -z "$GHQ_ROOT" ]]; then
    return;
   fi
   ghq list -p | fzf-tmux -p -h 50% -w 70% | read dir_full_path
