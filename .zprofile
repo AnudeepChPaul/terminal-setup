@@ -23,6 +23,7 @@ export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export MANPATH="/opt/local/share/man:$MANPATH"
 export PATH="/Users/achandrapaul/.jenv/shims:${PATH}"
+export PATH="${HOME}/.dotbare:${PATH}"
 
 which brew &> /dev/null && eval "$(`which brew` shellenv)"
 
@@ -267,7 +268,7 @@ _tmux_smart_attach_ () {
 
 
 eval "$(pyenv init --path)"
-source ~/.dotbare/dotbare.plugin.bash
+source ~/.dotbare/dotbare.plugin.zsh
 
 export JENV_SHELL=zsh
 export JENV_LOADED=1
