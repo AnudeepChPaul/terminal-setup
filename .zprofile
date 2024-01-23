@@ -1,5 +1,8 @@
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
+# Prezto Dir
+# export ZDOTDIR=$HOME/.config/zsh;
+
 # setting up PATH variables
 export GO_PATH=$HOME/go
 export MAVEN_PATH=$HOME/bin/apache-maven-3.8.8/
@@ -28,7 +31,6 @@ export PATH="${HOME}/.dotbare:${PATH}"
 export PATH="$PNPM_HOME:${PATH}"
 export PATH="$PATH:/Users/achandrapaul/Library/Application Support/JetBrains/Toolbox/scripts"
 
-which brew &> /dev/null && eval "$(`which brew` shellenv)"
 
 export NVM_DIR="$HOME/.nvm";
 export DOTBARE_DIR=$HOME/.cfg;
@@ -284,27 +286,4 @@ _tmux_smart_attach_ () {
 eval "$(pyenv init --path)"
 # source ~/.dotbare/dotbare.plugin.zsh
 
-export JENV_SHELL=zsh
-export JENV_LOADED=1
-unset JAVA_HOME
-unset JDK_HOME
-
 # source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh' &> /dev/null
-jenv rehash 2>/dev/null
-jenv refresh-plugins 2>/dev/null
-jenv() {
-  type typeset &> /dev/null && typeset command
-  command="$1"
-  if [ "$#" -gt 0 ]; then
-    shift
-  fi
-
-  case "$command" in
-  enable-plugin|rehash|shell|shell-options)
-    eval `jenv "sh-$command" "$@"`;;
-  *)
-    command jenv "$command" "$@";;
-  esac
-}
-
-
