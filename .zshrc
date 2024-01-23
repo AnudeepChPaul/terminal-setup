@@ -24,6 +24,7 @@ plugins=(
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 export NVM_AUTO_USE=true
+export NVM_NO_USE=false
 
 source $ZSH/oh-my-zsh.sh
 
@@ -54,7 +55,7 @@ fi
 eval "$(zoxide init zsh)"
 source ~/.zprofile
 
-_dotbare_completion_cmd
+# _dotbare_completion_cmd
 
 zle -N _tmux_manager
 zle -N h
