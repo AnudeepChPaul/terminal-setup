@@ -1,0 +1,12 @@
+font_family      HackNerdFontMonoRegular
+bold_font        HackNerdFontMonoBold
+italic_font      HackNerdFontMonoItalic
+bold_italic_font HackNerdFontMonoBoldItalic
+
+font_size        15
+
+
+# BEGIN_KITTY_THEME
+# GitHub Dark
+include current-theme.conf
+# END_KITTY_THEME
