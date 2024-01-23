@@ -54,7 +54,7 @@ fi
 eval "$(zoxide init zsh)"
 source ~/.zprofile
 
-# _dotbare_completion_cmd
+_dotbare_completion_cmd
 
 zle -N _tmux_manager
 zle -N h
