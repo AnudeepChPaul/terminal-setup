@@ -11,19 +11,22 @@ export PATH=$PATH:$GO_PATH/bin:$HOME/bin:/usr/local/bin:$HOME/bin/redis-6.2.6/sr
 export PATH="$PATH:$ROVER_HOME_PATH/bin:$HOME/__bin__/apache-maven-3.9.3/apache-maven/src/bin"
 
 export GHQ_ROOT="$HOME/Projects"
+export PNPM_HOME="/Users/anudeepchandrapaul/Library/pnpm"
 
 # Homebrew setup
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
 export HOMEBREW_PREFIX="/opt/homebrew";
 export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
 export HOMEBREW_REPOSITORY="/opt/homebrew";
 export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+export MANPATH="/opt/local/share/man:$MANPATH"
 export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-export MANPATH="/opt/local/share/man:$MANPATH"
 export PATH="/Users/achandrapaul/.jenv/shims:${PATH}"
 export PATH="${HOME}/.dotbare:${PATH}"
+export PATH="$PNPM_HOME:${PATH}"
+export PATH="$PATH:/Users/achandrapaul/Library/Application Support/JetBrains/Toolbox/scripts"
 
 which brew &> /dev/null && eval "$(`which brew` shellenv)"
 
@@ -41,15 +44,13 @@ fi
 export NVM_DIR="$HOME/.nvm";
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; # This loads nvm
 
-export FZF_DEFAULT_OPTS="--tac --layout=reverse --info=inline --border --margin=1 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'";
+export FZF_DEFAULT_OPTS="--height=81% --tac --layout=reverse --info=inline --border --margin=0 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'";
 export FZF_DEFAULT_COMMAND="ls -a";
 export FZF__PREVIEW__COMMAND='bat --style=numbers --color=always --line-range :500 {}';
 export FZF__DIR__PREVIEW__COMMAND='tree -aC -I "${TREE__GLOBAL_IGNORE}" {} | head -700';
 export TREE__GLOBAL_IGNORE="node_modules|.history|webpack|.next|.idea|.gradle|.vscode";
 export FZF__SMART__PREVIEW__COMMAND="[ -d {} ] && $FZF__DIR__PREVIEW__COMMAND || $FZF__PREVIEW__COMMAND";
 export HISTCONTROL=ignorespace:erasedups;
-
-export EDITOR="nvim";
 
 export TWILIO_API_DEFINITIONS_ROOT="${GHQ_ROOT}"/code.hq.twilio.com/twilio/api-definitions
 
@@ -72,7 +73,7 @@ alias tree='f() { exa -aF --tree -L=${1:-2} --icons };f'
 # alias lb='ls -lhSA'
 # alias lm='ls -tA -1'
 
-alias c='clear && hr_color="\033[0;37m" && hr'
+alias c='clear'
 
 alias ..="cd ..";
 alias ...="cd ../../";
@@ -95,10 +96,12 @@ alias conf="sv -O ~/.zprofile ~/.zshrc";
 alias o="ack --sort-files --color";
 alias vg='lazygit';
 alias db="dotbare";
-
+alias p="pnpm";
 alias plz="fc -l -1 | cut -d' ' -f2- | xargs sudo"
 alias cpwd='pwd | pbcopy'
 alias pa='pbpaste'
+alias rn='ranger'
+
 
 # tmux shortcuts
 alias trw='function ttrw() { tmux rename-window "${1:-zsh|exec}"}; ttrw';
@@ -120,6 +123,11 @@ alias dvra='docker volume rm $(docker volume ls -q)';
 alias dcra='docker container rm $(docker container ls -q)';
 alias dnra='docker network rm $(docker network ls -q)';
 
+# kitty specific
+alias k="kitty";
+alias kk="kitty +kitten"
+alias icat="kitty +kitten icat"
+
 # Don't google
 alias myip="curl ifconfig.me"
 alias whatismyip="curl ifconfig.me"
@@ -138,7 +146,8 @@ _uninstall_homebrew() {
 
 # Setting up shorthands for big boys
 _r() {
-    source ~/.zshrc;
+    exec zsh
+    # source ~/.zshrc;
     tmux source ~/.config/tmux/tmux.conf;
     echo "Reloaded!";
 }
@@ -150,7 +159,7 @@ _f() {
          depth=1;
     fi
 
-    dir=$(find . -type f -maxdepth $depth | egrep -v "${TREE__GLOBAL_IGNORE}" | fzf --preview "${FZF__PREVIEW__COMMAND}");
+    dir=$(find . -type f -maxdepth $depth | egrep -v "${TREE__GLOBAL_IGNORE}" | fzf-tmux -p --preview "${FZF__PREVIEW__COMMAND}");
 
     if [[ -f "$dir" ]]; then
         eval "v $dir";
@@ -165,7 +174,7 @@ _d() {
         depth=1;
     fi
 
-    dir=$(find . -type d -maxdepth $depth -name "*$input*" | egrep -v "${TREE__GLOBAL_IGNORE}" | fzf --preview "$FZF__DIR__PREVIEW__COMMAND");
+    dir=$(find . -type d -maxdepth $depth -name "*$input*" | egrep -v "${TREE__GLOBAL_IGNORE}" | fzf-tmux -p --preview "$FZF__DIR__PREVIEW__COMMAND");
     cd "$dir";
 }
 
@@ -177,7 +186,7 @@ _a() {
         depth=2;
     fi
 
-    dir=$(find . -maxdepth $depth -name "*$input*" | egrep -v "${TREE__GLOBAL_IGNORE}" | fzf --preview "$FZF__SMART__PREVIEW__COMMAND");
+    dir=$(find . -maxdepth $depth -name "*$input*" | egrep -v "${TREE__GLOBAL_IGNORE}" | fzf-tmux -p --preview "$FZF__SMART__PREVIEW__COMMAND");
 
     echo "$dir";
 
@@ -261,7 +270,7 @@ function aws-ec2() {
 }
 
 _tmux_smart_attach_ () {
-  session=`tmux list-sessions | fzf +s --tac | cut -d ':' -f1`
+  session=`tmux list-sessions | fzf-tmux -p +s --tac | cut -d ':' -f1`
 
   if [[ -z "$session" ]]; then 
     echo "aborting";
@@ -273,14 +282,14 @@ _tmux_smart_attach_ () {
 
 
 eval "$(pyenv init --path)"
-source ~/.dotbare/dotbare.plugin.zsh
+# source ~/.dotbare/dotbare.plugin.zsh
 
 export JENV_SHELL=zsh
 export JENV_LOADED=1
 unset JAVA_HOME
 unset JDK_HOME
 
-source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh' &> /dev/null
+# source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh' &> /dev/null
 jenv rehash 2>/dev/null
 jenv refresh-plugins 2>/dev/null
 jenv() {
@@ -298,7 +307,4 @@ jenv() {
   esac
 }
 
-
-# Added by Toolbox App
-export PATH="$PATH:/Users/achandrapaul/Library/Application Support/JetBrains/Toolbox/scripts"
 
