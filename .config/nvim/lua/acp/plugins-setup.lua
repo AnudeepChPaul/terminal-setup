@@ -67,6 +67,7 @@ return packer.startup(function(use)
       "nvim-treesitter/nvim-treesitter-context",
       "weirongxu/plantuml-previewer.vim",
       "tyru/open-browser.vim",
+      -- "HiPhish/nvim-ts-rainbow2"
     },
     run = function()
       local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
@@ -98,6 +99,7 @@ return packer.startup(function(use)
     "nvim-telescope/telescope-live-grep-args.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
     "nvim-telescope/telescope-project.nvim",
+    { "lukas-reineke/indent-blankline.nvim", main= "ibl" },
   })
 
   use({

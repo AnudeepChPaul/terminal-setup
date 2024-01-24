@@ -93,7 +93,10 @@ alias v="nvim";
 # alias vi="nvim";
 # alias vim="nvim";
 
+# git shortcuts
 alias gc="git clone";
+alias gfp="git fetch; git pull"
+
 alias conf="sv -O ~/.zprofile ~/.zshrc";
 alias o="ack --sort-files --color";
 alias vg='lazygit';
