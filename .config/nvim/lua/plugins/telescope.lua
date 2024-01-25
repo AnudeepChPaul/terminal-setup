@@ -3,14 +3,20 @@ local Util = require("lazyvim.util")
 return {
   "nvim-telescope/telescope.nvim",
   keys = {
+    { "<leader>fS", false },
     {
       "<leader>fs",
       Util.telescope("live_grep", { prompt_title = "Live Grep (Root dir)" }),
       desc = "Grep (root dir)",
     },
     {
-      "<leader>fS",
-      Util.telescope("live_grep", { prompt_title = "Live Grep (Current dir)", cwd = false }),
+      "<leader>/",
+      function()
+        return require("telescope.builtin").live_grep({
+          prompt_title = "Live Grep (" .. vim.fn.expand("%:h") .. ")",
+          cwd = vim.fn.expand("%:h"),
+        })
+      end,
       desc = "Grep (cwd)",
     },
   },
