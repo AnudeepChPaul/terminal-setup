@@ -151,22 +151,22 @@ Map("n", "<S-TAB>", vim.cmd.bnext)
 Map("n", "<C-TAB>", function()
   require("harpoon.ui").nav_next()
 end)
-Map("n", "<leader>ha", function()
+Map("n", ";a", function()
   require("harpoon.mark").add_file()
 end)
-Map("n", "<leader>fj", function()
+Map("n", ";s", function()
   require("harpoon.ui").toggle_quick_menu()
 end)
-Map("n", "<leader>1", function()
+Map("n", ";1", function()
   require("harpoon.ui").nav_file(1)
 end)
-Map("n", "<leader>2", function()
+Map("n", ";2", function()
   require("harpoon.ui").nav_file(2)
 end)
-Map("n", "<leader>3", function()
+Map("n", ";3", function()
   require("harpoon.ui").nav_file(3)
 end)
-Map("n", "<leader>4", function()
+Map("n", ";4", function()
   require("harpoon.ui").nav_file(4)
 end)
 
@@ -184,16 +184,16 @@ function _G.toggle_outline()
     ]])
 end
 
-function _G.show_docs()
-  local cw = vim.fn.expand("<cword>")
-  if vim.fn.index({ "vim", "help" }, vim.bo.filetype) >= 0 then
-    vim.api.nvim_command("h " .. cw)
-  elseif vim.api.nvim_eval("coc#rpc#ready()") then
-    vim.fn.CocActionAsync("definitionHover")
-  else
-    vim.api.nvim_command("!" .. vim.o.keywordprg .. " " .. cw)
-  end
-end
+-- function _G.show_docs()
+--   local cw = vim.fn.expand("<cword>")
+--   if vim.fn.index({ "vim", "help" }, vim.bo.filetype) >= 0 then
+--     vim.api.nvim_command("h " .. cw)
+--   elseif vim.api.nvim_eval("coc#rpc#ready()") then
+--     vim.fn.CocActionAsync("definitionHover")
+--   else
+--     vim.api.nvim_command("!" .. vim.o.keywordprg .. " " .. cw)
+--   end
+-- end
 
 function _G.format_buffer()
   vim.api.nvim_command(":retab")
