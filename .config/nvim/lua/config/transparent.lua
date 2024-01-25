@@ -33,5 +33,9 @@ return {
     vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = "none" })
     vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { bg = "none" })
     vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = "none" })
+
+    vim.api.nvim_set_hl(0, "NeoTree", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "none" })
   end,
 }

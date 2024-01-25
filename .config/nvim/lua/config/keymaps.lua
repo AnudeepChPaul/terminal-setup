@@ -20,7 +20,6 @@ Map("n", "<Down>", "<nop>")
 Map("n", "<Left>", "<nop>")
 Map("n", "<Right>", "<nop>")
 Map("n", "Q", "<nop>")
-Map("n", "<leader>mx", "<cmd>!chmod +x %<CR>")
 
 -- use Ctrl+\ to exit insert mode
 Map("i", "<C-\\>", "<ESC>")
@@ -45,7 +44,7 @@ Map("n", "-", "<C-x>") -- decrement
 -- window management
 Map("n", "sv", "<C-w>v") -- split window vertically
 Map("n", "ss", "<C-w>s") -- split window horizontally
--- Map("n", "se", "<C-w>=") -- make split windows equal width & height
+Map("n", "se", "<C-w>=") -- make split windows equal width & height
 Map("n", "sx", vim.cmd.close) -- close current split window
 -- Map("", "sh", "<C-w>h") -- Switch to panel left
 -- Map("", "sk", "<C-w>k") -- Switch to panel up
@@ -102,11 +101,14 @@ Map("v", "<leader>r", ":s/")
 ----------------------
 Map("", "<leader>u", vim.cmd.UndotreeToggle)
 -- vim-maximizer
-Map("n", "<leader>sm", vim.cmd.MaximizerToggle) -- toggle split window maximization
+-- Map("n", "<leader>sm", vim.cmd.'MaximizerToggle') -- toggle split window maximization
+
+Map("n", "{", "ysiw{")
 
 function _K.toggle_current_line_blame()
   vim.cmd.Gitsigns("toggle_current_line_blame")
 end
+
 function _K.git_diff_this()
   vim.cmd.Gitsigns("diffthis")
 end
@@ -195,11 +197,12 @@ end
 
 function _G.format_buffer()
   vim.api.nvim_command(":retab")
+  vim.lsp.buf.format()
   -- vim.api.nvim_command(":call CocAction('format')")
   -- vim.api.nvim_command(":CocCommand eslint.executeAutofix")
 end
 
-keymap = vim.keymap.set
+local keymap = vim.keymap.set
 
 -- COC Config
 -- keymap("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
@@ -238,47 +241,61 @@ keymap("n", "<c-k><c-d>", _G.format_buffer, { silent = true })
 function _K.hover_doc()
   vim.cmd.Lspsaga("hover_doc", "++quiet")
 end
+
 function _K.code_action()
-  vim.cmd.Lspsaga("code_action", "++project")
+  vim.lsp.buf.code_action()
+  -- vim.cmd.Lspsaga("code_action", "++project")
 end
+
 function _K.goto_next_diagnostic()
   vim.diagnostic.goto_next()
 end
+
 function _K.goto_next_error()
   vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
 end
+
 function _K.outline()
   vim.cmd.Lspsaga("outline")
 end
+
 function _K.rename()
   vim.cmd.Lspsaga("rename", "++project")
 end
+
 function _K.show_line_diagnostics()
   vim.cmd.Lspsaga("show_line_diagnostics")
 end
+
 function _K.show_cursor_diagnostics()
   vim.cmd.Lspsaga("show_cursor_diagnostics")
 end
+
 function _K.show_buf_diagnostics()
   vim.cmd.Lspsaga("show_buf_diagnostics")
 end
+
 function _K.show_workspace_diagnostics()
   vim.cmd.Lspsaga("show_workspace_diagnostics")
 end
+
 function _K.find_references()
   vim.cmd.Lspsaga("find_references")
 end
+
 function _K.peek_definition()
   vim.cmd.Lspsaga("peek_definition")
 end
+
 function _K.peek_type_definition()
   vim.cmd.Lspsaga("peek_type_definition")
 end
+
 function _K.signature_help()
   vim.cmd.Lspsaga("signature_help")
 end
 
-Map("n", "K", _K.hover_doc)
+Map("n", "K", vim.lsp.buf.hover)
 Map("n", "me", _K.goto_next_diagnostic)
 Map("n", "mE", _K.goto_next_error)
 Map("n", "ma", _K.code_action)
@@ -288,7 +305,10 @@ Map("n", "ml", _K.show_line_diagnostics)
 Map("n", "mc", _K.show_cursor_diagnostics)
 Map("n", "mf", _K.show_buf_diagnostics)
 Map("n", "mw", _K.show_workspace_diagnostics)
-Map("n", "mrn", _K.rename)
+Map("n", "mi", function()
+  vim.opt.shiftwidth = vim.lsp.util.get_effective_tabstop()
+end)
+Map("n", "mrn", vim.lsp.buf.rename)
 
 Map("n", "gr", vim.lsp.buf.references)
 Map("n", "gR", _K.find_references)

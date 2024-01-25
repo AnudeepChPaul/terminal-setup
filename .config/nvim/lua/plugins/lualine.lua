@@ -1,5 +1,5 @@
 local Util = require("lazyvim.util")
-local icons = require("lazyvim.config").icons
+-- local icons = require("lazyvim.config").icons
 
 return {
   "nvim-lualine/lualine.nvim",
@@ -11,18 +11,17 @@ return {
           {
             "diagnostics",
             symbols = {
-              error = icons.diagnostics.Error,
-              warn = icons.diagnostics.Warn,
-              info = icons.diagnostics.Info,
-              hint = icons.diagnostics.Hint,
+              error = "E",
+              warn = "W",
+              info = "i",
+              hint = "H",
             },
           },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          { Util.lualine.pretty_path() },
           {
             "filename",
             file_status = true,
-            path = 0,
+            path = 1,
             symbols = { modified = "[+]", readonly = "[-]", unnamed = "[Untitled]", newfile = "[New]" },
           },
         },
