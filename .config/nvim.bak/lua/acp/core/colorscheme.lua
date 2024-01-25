@@ -1,11 +1,4 @@
--- vim.opt.background = "dark" -- set this to dark or light
-
--- set colorscheme to nightfly with protected call
--- in case it isn't installed
--- vim.cmd("colorscheme terafox")
--- local status, _ = pcall(vim.cmd, "colorscheme rose-pine")
-
-vim.cmd("colorscheme oxocarbon")
+vim.cmd("colorscheme craftzdog/solarized-osaka")
 
 vim.api.nvim_set_hl(0, "Error", { fg = "red", bg = "#fafafa" })
 vim.api.nvim_set_hl(0, "Visual", { fg = "#000000", bg = "#fafafa" })
@@ -40,3 +33,4 @@ vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { bg = "none" })
 vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = "none" })
 vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { bg = "none" })
 vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = "none" })
+
