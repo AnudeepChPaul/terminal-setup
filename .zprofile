@@ -15,6 +15,7 @@ export PATH="$PATH:$ROVER_HOME_PATH/bin:$HOME/__bin__/apache-maven-3.9.3/apache-
 
 export GHQ_ROOT="$HOME/Projects"
 export PNPM_HOME="/Users/anudeepchandrapaul/Library/pnpm"
+export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 
 # Homebrew setup
 export HOMEBREW_PREFIX="/opt/homebrew";
