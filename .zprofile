@@ -43,10 +43,6 @@ if [[ -f "$CUSTOM_FILE" ]]; then
     source "$CUSTOM_FILE";
 fi
 
-# Setting up nvm
-export NVM_DIR="$HOME/.nvm";
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; # This loads nvm
-
 export FZF_DEFAULT_OPTS="--height=81% --tac --layout=reverse --info=inline --border --margin=0 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'";
 export FZF_DEFAULT_COMMAND="ls -a";
 export FZF__PREVIEW__COMMAND='bat --style=numbers --color=always --line-range :500 {}';
@@ -69,7 +65,6 @@ alias la='exa -alF --icons'
 alias ll='exa -laFh --icons --git'
 alias lm='exa -lahr --color-scale --icons -s=modified'
 alias lb='exa -lahr --color-scale --icons -s=size'
-alias tree='f() { exa -aF --tree -L=${1:-2} --icons };f'
 
 # alias la='ls -A'
 # alias ll='ls -lAFh'
@@ -110,7 +105,7 @@ alias rn='ranger'
 
 
 # tmux shortcuts
-alias trw='function ttrw() { tmux rename-window "${1:-zsh|exec}"}; ttrw';
+
 alias tka='tmux kill-server';
 alias tks='tmux kill-session -t';
 
@@ -145,6 +140,13 @@ alias ask='$HOME/bin/cht.sh'
 alias otr='owl tubes --backend envoy render'
 alias ots='owl tubes --backend envoy stop'
 
+function trw { 
+  tmux rename-window "${1:-zsh|exec}";
+}
+
+function tree { 
+  exa -aF --tree -L="${1:-2}" --icons;
+}
 
 _uninstall_homebrew() {
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)";
@@ -291,3 +293,4 @@ eval "$(pyenv init --path)"
 # source ~/.dotbare/dotbare.plugin.zsh
 
 # source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh' &> /dev/null
+#
