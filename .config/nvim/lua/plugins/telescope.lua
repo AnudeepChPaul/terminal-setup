@@ -3,7 +3,25 @@ local Util = require("lazyvim.util")
 return {
   "nvim-telescope/telescope.nvim",
   keys = {
-    { "<leader>fS", false },
+    { "<leader>ss", false },
+    {
+      "<leader>fS",
+      function()
+        require("telescope.builtin").lsp_document_symbols({
+          symbols = require("lazyvim.config").get_kind_filter(),
+        })
+      end,
+      desc = "Goto Symbol",
+      {
+        "<leader>sS",
+        function()
+          require("telescope.builtin").lsp_dynamic_workspace_symbols({
+            symbols = require("lazyvim.config").get_kind_filter(),
+          })
+        end,
+        desc = "Goto Symbol (Workspace)",
+      },
+    },
     {
       "<leader>fs",
       Util.telescope("live_grep", { prompt_title = "Live Grep (Root dir)" }),

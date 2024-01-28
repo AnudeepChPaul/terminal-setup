@@ -1,5 +1,6 @@
 # Use tall and fullscreen layouts
 layouts:
+    - bsp
     - tall
     - fullscreen
     - tall-right
@@ -15,7 +16,6 @@ layouts:
     - floating
     - widescreen-tall
     - widescreen-tall-right
-    - bsp
 
   # Enable focus-follows-mouse
 mouse-follows-focus: false

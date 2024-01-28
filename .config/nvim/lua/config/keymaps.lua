@@ -5,8 +5,8 @@
 -- set leader key to space
 vim.g.mapleader = " "
 
-local function Map(key, left, right)
-  vim.keymap.set(key, left, right, { noremap = true, silent = true })
+local function Map(key, left, right, desc)
+  vim.keymap.set(key, left, right, { noremap = true, silent = true, desc = desc })
 end
 
 ---------------------
@@ -42,10 +42,10 @@ Map("n", "+", "<C-a>") -- increment
 Map("n", "-", "<C-x>") -- decrement
 
 -- window management
-Map("n", "sv", "<C-w>v") -- split window vertically
-Map("n", "ss", "<C-w>s") -- split window horizontally
-Map("n", "se", "<C-w>=") -- make split windows equal width & height
-Map("n", "sx", vim.cmd.close) -- close current split window
+Map("n", "<leader>sv", "<C-w>v") -- split window vertically
+Map("n", "<leader>ss", "<C-w>s") -- split window horizontally
+Map("n", "<leader>se", "<C-w>=") -- make split windows equal width & height
+Map("n", "<leader>sx", vim.cmd.close) -- close current split window
 -- Map("", "sh", "<C-w>h") -- Switch to panel left
 -- Map("", "sk", "<C-w>k") -- Switch to panel up
 -- Map("", "sj", "<C-w>j") -- Switch to panel down
@@ -67,39 +67,31 @@ Map("n", "<S-Down>", "<C-w>-")
 -- Map("n", "q", ":m+1<CR>")
 -- Map("n", "Q", ":m-2<CR>")
 
-Map("n", "<leader>m", 'V"-y"-p') -- duplicates a line
-Map("x", "p", '"_dP')
+Map("n", "<leader>m", 'V"-y"-p', "Duplicates a line without copying to clipboard")
+Map("x", "p", '"_dP', "Paste's a line without copying the replacement")
 
-Map("v", "J", ":m '>+1<CR>gv=gv")
-Map("v", "K", ":m '<-2<CR>gv=gv")
-Map("n", "J", "mzJ`z") -- Bring the bottom line to end of upper line without changing cursor position
-Map("n", "<C-d>", "<C-d>zz") -- Scrolls down keeping cursor in the middle of the screen
-Map("n", "<C-u>", "<C-u>zz") --Scrolls down keeping cursor in the middle of the screen
-Map("v", "<", "<gv")
-Map("v", ">", ">gv")
+Map("v", "J", ":m '>+1<CR>gv=gv", "Moves line one down")
+Map("v", "K", ":m '<-2<CR>gv=gv", "Moves line one up")
+Map("n", "J", "mzJ`z", "Bring botton line at the current line end")
+Map("n", "<C-d>", "<C-d>zz", "Scrolls down with cursor at centre")
+Map("n", "<C-u>", "<C-u>zz", "Scrolls up with cursor at centre")
+Map("v", "<", "<gv", "Indents left")
+Map("v", ">", ">gv", "Indents right")
 Map("n", "<C-h", ":TmuxNavigateLeft<CR>")
 Map("n", "<C-j>", ":TmuxNavigateDown<CR>")
 Map("n", "<C-k>", ":TmuxNavigateUp<CR>")
 Map("n", "<C-l>", ":TmuxNavigateRight<CR>")
 
-Map("n", "<leader>lw", ":set list!<CR>")
-Map("n", "<leader>lr", ":set rnu!<CR>")
+Map("n", "<leader>lw", ":set list!<CR>", "Toggles list characters like Tab, space, newline")
+Map("n", "<leader>lr", ":set rnu!<CR>", "Toggles relative numbering")
 
-Map("n", "n", "nzzzv")
-Map("n", "N", "Nzzzv")
+Map("n", "n", "nzzzv", "Goto next seach occurrence with cursor at center")
+Map("n", "N", "Nzzzv", "Goto previous seach occurrence with cursor at center")
 
 Map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-Map("n", "<leader>r", ":%s")
-Map("v", "<leader>r", ":s/")
+Map("v", "<leader>r", ":s/", "Replaces search term within selection")
 
-----------------------
--- Plugin Keybinds
-----------------------
 Map("", "<leader>u", vim.cmd.UndotreeToggle)
--- vim-maximizer
--- Map("n", "<leader>sm", vim.cmd.'MaximizerToggle') -- toggle split window maximization
-
-Map("n", "{", "ysiw{")
 
 function _K.toggle_current_line_blame()
   vim.cmd.Gitsigns("toggle_current_line_blame")
@@ -110,10 +102,10 @@ function _K.git_diff_this()
 end
 
 -- GitSigns
-Map("n", "gl", _K.toggle_current_line_blame)
-Map("n", "gL", _K.git_diff_this)
+Map("n", "gl", _K.toggle_current_line_blame, "Toggles current line git blame")
+Map("n", "gL", _K.git_diff_this, "Shows current file difference")
 -- Fugitive
-Map("n", "<leader>fgt", vim.cmd.Git)
+Map("n", "<leader>fgt", vim.cmd.Git, "Shows git fugitive window")
 
 -- Quick fix list navigation
 Map("n", "<C-[>", ":cn<CR>")
@@ -123,25 +115,25 @@ Map("n", "<S-TAB>", vim.cmd.bnext)
 -- harpoon
 Map("n", "<C-TAB>", function()
   require("harpoon.ui").nav_next()
-end)
+end, "Goto next harpoon file")
 Map("n", ";a", function()
   require("harpoon.mark").add_file()
-end)
+end, "Add file to harpoon quick list")
 Map("n", ";s", function()
   require("harpoon.ui").toggle_quick_menu()
-end)
+end, "Toggle harpoon quick menu")
 Map("n", ";1", function()
   require("harpoon.ui").nav_file(1)
-end)
+end, "Goto 1st harpoon file")
 Map("n", ";2", function()
   require("harpoon.ui").nav_file(2)
-end)
+end, "Goto 2nd harpoon file")
 Map("n", ";3", function()
   require("harpoon.ui").nav_file(3)
-end)
+end, "Goto 3rd harpoon file")
 Map("n", ";4", function()
   require("harpoon.ui").nav_file(4)
-end)
+end, "Goto 4th harpoon file")
 
 function _G.format_buffer()
   vim.api.nvim_command(":retab")
