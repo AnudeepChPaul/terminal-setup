@@ -1,0 +1,200 @@
+
+# Get editor completions based on the config schema
+'$schema' = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+format = '''
+[](bold green)$directory
+[╰$character](bold green) '''
+
+right_format = '''$all'''
+
+
+[character] # available characters: ❯ ▶ ▶▶ 
+success_symbol = '[▶](bold green)'
+
+[line_break]
+disabled = false
+
+
+#### Utility Modules ####
+[package]
+disabled = false
+
+[directory]
+fish_style_pwd_dir_length=1
+
+[git_branch]
+truncation_length = 4
+always_show_remote=true
+truncation_symbol = ''
+
+[git_commit]
+commit_hash_length = 6
+only_detached = false
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = '[ PICKING](bold red)'
+
+[memory_usage]
+format = '$symbol [${ram}( \\| ${swap})]($style) '
+disabled = false
+threshold = -1
+symbol = ' '
+style = 'bold dimmed green'
+
+[cmd_duration]
+min_time=50
+
+[bun]
+format = '[$symbol($version )]($style)'
+
+[c]
+format = '[$symbol($version(-$name) )]($style)'
+
+[cmake]
+format = '[$symbol($version )]($style)'
+
+[cobol]
+format = '[$symbol($version )]($style)'
+
+[conda]
+format = '[$symbol$environment]($style)'
+
+[crystal]
+format = '[$symbol($version )]($style)'
+
+[daml]
+format = '[$symbol($version )]($style)'
+
+[dart]
+format = '[$symbol($version )]($style)'
+
+[deno]
+format = '[$symbol($version )]($style)'
+
+[docker_context]
+format = '[$symbol$context]($style)'
+
+[dotnet]
+format = '[$symbol($version )(🎯 $tfm )]($style)'
+
+[elixir]
+format = '[$symbol($version \(OTP $otp_version\) )]($style)'
+
+[elm]
+format = '[$symbol($version )]($style)'
+
+[erlang]
+format = '[$symbol($version )]($style)'
+
+[fennel]
+format = '[$symbol($version )]($style)'
+
+[golang]
+format = '[$symbol($version )]($style)'
+symbol = ''
+
+[guix_shell]
+format = '[$symbol]($style) '
+
+[gradle]
+format = '[$symbol($version )]($style)'
+
+[haskell]
+format = '[$symbol($version )]($style)'
+
+[haxe]
+format = '[$symbol($version )]($style)'
+
+[helm]
+format = '[$symbol($version )]($style)'
+
+[java]
+format = '[$symbol($version )]($style)'
+
+[julia]
+format = '[$symbol($version )]($style)'
+
+[kotlin]
+format = '[$symbol($version )]($style)'
+symbol = ''
+
+[lua]
+symbol = ''
+format = '[$symbol($version )]($style)'
+
+[meson]
+format = '[$symbol$project]($style)'
+
+[nim]
+format = '[$symbol($version )]($style)'
+
+[nodejs]
+format = '[$symbol($version )]($style)'
+
+[ocaml]
+format = '[$symbol($version )(\($switch_indicator$switch_name\) )]($style)'
+
+[opa]
+format = '[$symbol($version )]($style)'
+
+[perl]
+format = '[$symbol($version )]($style)'
+
+[php]
+format = '[$symbol($version )]($style)'
+
+[pulumi]
+format = '[$symbol($username@)$stack]($style)'
+
+[purescript]
+format = '[$symbol($version )]($style)'
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = ''
+
+[rlang]
+format = '[$symbol($version )]($style)'
+
+[raku]
+format = '[$symbol($version-$vm_version )]($style)'
+
+[red]
+format = '[$symbol($version )]($style)'
+
+[ruby]
+format = '[$symbol($version )]($style)'
+
+[rust]
+format = '[$symbol($version )]($style)'
+
+[scala]
+format = '[${symbol}(${version} )]($style)'
+
+[solidity]
+format = '[$symbol($version )]($style)'
+
+[spack]
+format = '[$symbol$environment]($style)'
+
+[swift]
+format = '[$symbol($version )]($style)'
+
+[terraform]
+format = '[$symbol$workspace]($style)'
+
+[typst]
+format = '[$symbol($version )]($style)'
+
+[vagrant]
+format = '[$symbol($version )]($style)'
+
+[vlang]
+format = '[$symbol($version )]($style)'
+
+[zig]
+format = '[$symbol($version )]($style)'
