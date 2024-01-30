@@ -236,6 +236,9 @@ Map("i", "<c-;>", "<Plug>(copilot-next)")
 Map("i", "<c-,>", "<Plug>(copilot-previours)")
 Map("i", "<c-leader>", "<Plug>(copilot-suggest)")
 
+Map("n", "<leader>q", ":Neotree position=float reveal=true reveal_force_cwd <cr>")
+Map("n", "<leader>e", ":Neotree reveal left reveal_force_cwd <cr>")
+
 -- nvim-tree
 -- Map("n", "<leader>e", ":NvimTreeOpen<CR>") -- toggle file explorer
 -- Map("n", "<leader>w", ":NvimTreeClose<CR>") -- toggle file explorer
