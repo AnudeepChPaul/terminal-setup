@@ -14,145 +14,162 @@ end
 ---------------------
 -- General Keymaps
 ---------------------
-local _K = {}
 
--- No use up/down/left/right arrow
-Map("n", "<Up>", "<nop>")
-Map("n", "<Down>", "<nop>")
-Map("n", "<Left>", "<nop>")
-Map("n", "<Right>", "<nop>")
-Map("n", "Q", "<nop>")
+local wk = require("which-key")
+local n_opts = {
+  noremap = true,
+  silent = true,
+  mode = "n",
+}
+local v_opts = {
+  noremap = true,
+  silent = true,
+  mode = "v",
+}
+local i_opts = {
+  noremap = true,
+  silent = true,
+  mode = "i",
+}
+local x_opts = {
+  mode = "x",
+  noremap = true,
+  silent = true,
+}
 
--- use Ctrl+\ to exit insert mode
-Map("i", "<C-\\>", "<ESC>")
-Map("i", "<C-c>", "<ESC>")
+-- Noop bindings
+local no_op_bindings = {
+  ["<Up>"] = { "<nop>", "No operation" },
+  ["<Down>"] = { "<nop>", "No operation" },
+  ["<Left>"] = { "<nop>", "No operation" },
+  ["<Right>"] = { "<nop>", "No operation" },
+  ["Q"] = { "<nop>", "No operation" },
+}
 
--- clear search highlights
-Map("n", "<leader>nh", ":nohl<CR>")
+-- Insert mode binding for faster escapes
+local i_mode_bindings = {
+  ["<c-;>"] = { "<Plug>(copilot-next)" },
+  ["<c-,>"] = { "<Plug>(copilot-previours)" },
+  ["<c-space>"] = { "<Plug>(copilot-suggest)" },
+  ["<C-\\"] = { "<ESC>", "Escape" },
+  ["<C-c"] = { "<ESC>", "Escape" },
+}
 
--- delete single character without copying into register
-Map("n", "x", '"_x')
+local n_utility_bindings = {
+  ["<leader>"] = {
+    ["nh"] = { ":nohl<CR>", "Clear search highlights" },
+    ["sv"] = { "<C-w>v", "Split window vertically" },
+    ["ss"] = { "<C-w>s", "Split window horizontally" },
+    ["se"] = { "<C-w>=", "Split windows equal hight & width" },
+    ["sx"] = { vim.cmd.close, "Close current split window" },
+    ["bx"] = { vim.cmd.bd, "Close current buffer" },
+    ["tt"] = { vim.cmd.tabnew, "Opens new tab" },
+    ["tx"] = { vim.cmd.tabclose, "Close newly opened tab" },
+    ["m"] = { 'V"-y"-p', "Duplicates a line without copying to clipboard" },
+    ["lw"] = { ":set list!<CR>", "Toggles list characters like Tab, space, newline" },
+    ["lr"] = { ":set rnu!<CR>", "Toggles relative numbering" },
+  },
+  ["x"] = { '"_x', "Delete single character without copying into register" },
+  ["dw"] = { 'vb"_d', "Delete word backwards" },
+  ["<C-a>"] = { "gg<S-v>G", "Select all words" },
+  ["+"] = { "<C-a>", "Increment number" },
+  ["-"] = { "<C-x>", "Decrement number" },
+  ["J"] = { "mzJ`z", "Bring botton line at the current line end" },
+  ["<C-d>"] = { "<C-d>zz", "Scrolls down with cursor at centre" },
+  ["<C-u>"] = { "<C-u>zz", "Scrolls up with cursor at centre" },
+  ["<C-h"] = { ":TmuxNavigateLeft<CR>" },
+  ["<C-j>"] = { ":TmuxNavigateDown<CR>" },
+  ["<C-k>"] = { ":TmuxNavigateUp<CR>" },
+  ["<C-l>"] = { ":TmuxNavigateRight<CR>" },
+  ["<C-f>"] = { "<cmd>silent !tmux neww tmux-sessionizer<CR>" },
+  ["n"] = { "nzzzv", "Goto next seach occurrence with cursor at center" },
+  ["N"] = { "Nnzzzv", "Goto previous seach occurrence with cursor at center" },
+  ["<S-Left>"] = { "<C-w><" },
+  ["<S-Right>"] = { "<C-w>>" },
+  ["<S-Up>"] = { "<C-w>+" },
+  ["<S-Down>"] = { "<C-w>-" },
+  ["<S-TAB>"] = { vim.cmd.bnext, "Move to load next buffer" },
+}
 
--- Delete a word backwards
-Map("n", "dw", 'vb"_d')
+local x_mode_bindings = {
+  ["p"] = { '"_dP"', "Paste's a line without copying the replacement" },
+}
 
--- Select all
-Map("n", "<C-a>", "gg<S-v>G")
+local v_indentation_keys = {
+  ["J"] = { ":m '>+1<CR>gv=gv", "Moves line one down" },
+  ["K"] = { ":m '<-2<CR>gv=gv", "Moves line one up" },
+  ["<"] = { "<gv", "Indents left" },
+  [">"] = { ">gv", "Indents right" },
+  ["<leader>r"] = { ":s/", "Replaces search term within selection" },
+}
 
--- increment/decrement numbers
-Map("n", "+", "<C-a>") -- increment
-Map("n", "-", "<C-x>") -- decrement
-
--- window management
-Map("n", "<leader>sv", "<C-w>v") -- split window vertically
-Map("n", "<leader>ss", "<C-w>s") -- split window horizontally
-Map("n", "<leader>se", "<C-w>=") -- make split windows equal width & height
-Map("n", "<leader>sx", vim.cmd.close) -- close current split window
--- Map("", "sh", "<C-w>h") -- Switch to panel left
--- Map("", "sk", "<C-w>k") -- Switch to panel up
--- Map("", "sj", "<C-w>j") -- Switch to panel down
--- Map("", "sl", "<C-w>l") -- Switch to panel right
-
-Map("n", "<leader>bx", vim.cmd.bd) -- close current buffer
-
-Map("n", "<leader>tt", vim.cmd.tabnew) -- open nw tab
-Map("n", "<leader>tx", vim.cmd.tabclose) -- open new tab
-
-Map("n", "<S-Left>", "<C-w><")
-Map("n", "<S-Right>", "<C-w>>")
-Map("n", "<S-Up>", "<C-w>+")
-Map("n", "<S-Down>", "<C-w>-")
-
--- Map({ "n", "v" }, "j", "jzz")
--- Map({ "n", "v" }, "k", "kzz")
-
--- Map("n", "q", ":m+1<CR>")
--- Map("n", "Q", ":m-2<CR>")
-
-Map("n", "<leader>m", 'V"-y"-p', "Duplicates a line without copying to clipboard")
-Map("x", "p", '"_dP', "Paste's a line without copying the replacement")
-
-Map("v", "J", ":m '>+1<CR>gv=gv", "Moves line one down")
-Map("v", "K", ":m '<-2<CR>gv=gv", "Moves line one up")
-Map("n", "J", "mzJ`z", "Bring botton line at the current line end")
-Map("n", "<C-d>", "<C-d>zz", "Scrolls down with cursor at centre")
-Map("n", "<C-u>", "<C-u>zz", "Scrolls up with cursor at centre")
-Map("v", "<", "<gv", "Indents left")
-Map("v", ">", ">gv", "Indents right")
-Map("n", "<C-h", ":TmuxNavigateLeft<CR>")
-Map("n", "<C-j>", ":TmuxNavigateDown<CR>")
-Map("n", "<C-k>", ":TmuxNavigateUp<CR>")
-Map("n", "<C-l>", ":TmuxNavigateRight<CR>")
-
-Map("n", "<leader>lw", ":set list!<CR>", "Toggles list characters like Tab, space, newline")
-Map("n", "<leader>lr", ":set rnu!<CR>", "Toggles relative numbering")
-
-Map("n", "n", "nzzzv", "Goto next seach occurrence with cursor at center")
-Map("n", "N", "Nzzzv", "Goto previous seach occurrence with cursor at center")
-
-Map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-Map("v", "<leader>r", ":s/", "Replaces search term within selection")
-
-Map("", "<leader>u", vim.cmd.UndotreeToggle)
-
-function _K.toggle_current_line_blame()
+-- GitSigns
+local _G = {}
+function _G.toggle_current_line_blame()
   vim.cmd.Gitsigns("toggle_current_line_blame")
 end
 
-function _K.git_diff_this()
+function _G.git_diff_this()
   vim.cmd.Gitsigns("diffthis")
 end
 
--- GitSigns
-Map("n", "gl", _K.toggle_current_line_blame, "Toggles current line git blame")
-Map("n", "gL", _K.git_diff_this, "Shows current file difference")
--- Fugitive
-Map("n", "<leader>fgt", vim.cmd.Git, "Shows git fugitive window")
-
--- Quick fix list navigation
-Map("n", "<C-[>", ":cn<CR>")
-Map("n", "<C-]>", ":cp<CR>")
-Map("n", "<S-TAB>", vim.cmd.bnext)
+local n_git_bindgins = {
+  ["gl"] = { _G.toggle_current_line_blame, "Toggles current line git blame" },
+  ["gL"] = { _G.git_diff_this, "Shows current file difference" },
+  ["<leader>fgt"] = { vim.cmd.Git, "Shows git fugitive window" },
+}
 
 -- harpoon
-Map("n", "<C-TAB>", function()
-  require("harpoon.ui").nav_next()
-end, "Goto next harpoon file")
-Map("n", ";a", function()
-  require("harpoon.mark").add_file()
-end, "Add file to harpoon quick list")
-Map("n", ";s", function()
-  require("harpoon.ui").toggle_quick_menu()
-end, "Toggle harpoon quick menu")
-Map("n", ";1", function()
-  require("harpoon.ui").nav_file(1)
-end, "Goto 1st harpoon file")
-Map("n", ";2", function()
-  require("harpoon.ui").nav_file(2)
-end, "Goto 2nd harpoon file")
-Map("n", ";3", function()
-  require("harpoon.ui").nav_file(3)
-end, "Goto 3rd harpoon file")
-Map("n", ";4", function()
-  require("harpoon.ui").nav_file(4)
-end, "Goto 4th harpoon file")
+local _H = {}
 
-function _G.format_buffer()
-  vim.api.nvim_command(":retab")
-  vim.lsp.buf.format()
-  -- vim.api.nvim_command(":call CocAction('format')")
-  -- vim.api.nvim_command(":CocCommand eslint.executeAutofix")
+function _H.nav_next()
+  require("harpoon.ui").nav_next()
 end
 
--- Copilot
-Map("i", "<c-;>", "<Plug>(copilot-next)")
-Map("i", "<c-,>", "<Plug>(copilot-previours)")
-Map("i", "<c-leader>", "<Plug>(copilot-suggest)")
+function _H.add_file()
+  require("harpoon.mark").add_file()
+end
+
+function _H.quick_menu()
+  require("harpoon.ui").toggle_quick_menu()
+end
+
+function _H.goto_one()
+  require("harpoon.ui").nav_file(1)
+end
+
+function _H.goto_two()
+  require("harpoon.ui").nav_file(2)
+end
+
+function _H.goto_three()
+  require("harpoon.ui").nav_file(3)
+end
+
+function _H.goto_four()
+  require("harpoon.ui").nav_file(4)
+end
+
+local n_harpoon_maps = {
+  ["<C-TAB>"] = { _H.nav_next, "Goto next harpoon file" },
+  [";a"] = { _H.add_file, "Add file to harpoon quick list" },
+  [";s"] = { _H.quick_menu, "Toggle harpoon quick menu" },
+  [";1"] = { _H.goto_one, "Goto 1st harpoon file" },
+  [";2"] = { _H.goto_two, "Goto 2nd harpoon file" },
+  [";3"] = { _H.goto_three, "Goto 3rd harpoon file" },
+  [";4"] = { _H.goto_four, "Goto 4th harpoon file" },
+}
 
 ---------------------
 -------- LSP --------
 ---------------------
 
+local _K = {}
+function _K.format_buffer()
+  vim.api.nvim_command(":retab")
+  _K.smart_shift()
+  vim.lsp.buf.format()
+end
 function _K.hover_doc()
   vim.cmd.Lspsaga("hover_doc", "++quiet")
 end
@@ -210,47 +227,57 @@ function _K.signature_help()
   vim.cmd.Lspsaga("signature_help")
 end
 
-Map("n", "<c-k><c-d>", _G.format_buffer)
-Map("n", "K", vim.lsp.buf.hover)
-Map("n", "me", _K.goto_next_diagnostic)
-Map("n", "mE", _K.goto_next_error)
-Map("n", "ma", _K.code_action)
-Map("n", "ms", _K.signature_help)
-Map("n", "mo", _K.outline)
-Map("n", "ml", _K.show_line_diagnostics)
-Map("n", "mc", _K.show_cursor_diagnostics)
-Map("n", "mf", _K.show_buf_diagnostics)
-Map("n", "mw", _K.show_workspace_diagnostics)
-Map("n", "mi", function()
+function _K.smart_shift()
   vim.opt.shiftwidth = vim.lsp.util.get_effective_tabstop()
-end)
-Map("n", "mrl", vim.lsp.buf.rename)
-Map("n", "mrn", ":IncRename ")
+end
 
-Map("n", "gr", vim.lsp.buf.references)
-Map("n", "gR", _K.find_references)
-Map("n", "gp", _K.peek_definition)
-Map("n", "gt", _K.peek_type_definition)
-Map("n", "gi", vim.lsp.buf.implementation)
-Map("n", "gD", vim.lsp.buf.declaration)
-Map("n", "gd", vim.lsp.buf.definition)
+local n_lsp_keybinds = {
+  ["<c-k><c-d>"] = { _K.format_buffer, "Formats the buffer with smart indent" },
+  ["K"] = { vim.lsp.buf.hover, "Impersonates hover effect" },
+  ["me"] = { _K.goto_next_diagnostic, "Goto next diagnostic (including error, info, warning etc)" },
+  ["mE"] = { _K.goto_next_error, "Goto next error" },
+  ["ma"] = { _K.code_action, "Shows code action for cursor" },
+  ["ms"] = { _K.signature_help, "LspSaga shows signature help" },
+  ["mo"] = { _K.outline, "LspSaga show sugnature outline" },
+  ["ml"] = { _K.show_line_diagnostics, "LspSaga show line diagnostics" },
+  ["mc"] = { _K.show_cursor_diagnostics, "LspSaga show cursor diagnostics" },
+  ["mf"] = { _K.show_buf_diagnostics, "LspSaga show buffer diagnostics" },
+  ["mw"] = { _K.show_workspace_diagnostics, "LspSaga show workspace diagnostics" },
+  -- ["mi"] = { _K.smart_shift },
+  ["mrl"] = { vim.lsp.buf.rename, "Lsp renaming without highlighting" },
+  ["mrn"] = { ":IncRename ", "Lsp renaming with highlighting" },
+  ["gr"] = { vim.lsp.buf.references, "Find symbol references" },
+  ["gR"] = { _K.find_references, "Find LspSaga symbol references" },
+  ["gp"] = { _K.peek_definition, "Peek at symbol defintion" },
+  ["gt"] = { _K.peek_type_definition, "Peek at symbol type definition" },
+  ["gi"] = { vim.lsp.buf.implementation, "Goto buffer implementation" },
+  ["gD"] = { vim.lsp.buf.declaration, "Goto buffer declaration.." },
+  ["gd"] = { vim.lsp.buf.definition, "Goto buffer definition.." },
+  ["<leader>"] = {
+    ["rr"] = { vim.cmd.LspRestart, " mapping to restart lsp if necessary" },
+    ["ll"] = { vim.cmd.LspStart, " mapping to restart lsp if necessary" },
+    ["rs"] = { vim.cmd.LspStop, " mapping to restart lsp if necessary" },
+    ["d"] = {
+      ":Neotree position=float reveal=true reveal_force_cwd <cr>",
+      "Opens Neotree into floating mode revealing selected file if any",
+    },
+    ["e"] = {
+      ":Neotree reveal left reveal_force_cwd <cr>",
+      "Opens Neotree into left side revealing selected file if any",
+    },
+  },
+}
 
-Map("n", "<leader>rs", vim.cmd.LspRestart) -- mapping to restart lsp if necessary
-Map("n", "<leader>ll", vim.cmd.LspStart) -- mapping to restart lsp if necessary
-Map("n", "<leader>rs", vim.cmd.LspStop) -- mapping to restart lsp if necessary
+wk.register(n_lsp_keybinds, n_opts)
+wk.register(n_git_bindgins, n_opts)
+wk.register(n_harpoon_maps, n_opts)
 
-Map(
-  "n",
-  "<leader>d",
-  ":Neotree position=float reveal=true reveal_force_cwd <cr>",
-  "Opens Neotree into floating mode revealing selected file if any"
-)
-Map(
-  "n",
-  "<leader>e",
-  ":Neotree reveal left reveal_force_cwd <cr>",
-  "Opens Neotree into left side revealing selected file if any"
-)
+wk.register(no_op_bindings, n_opts)
+wk.register(no_op_bindings, v_opts)
+wk.register(i_mode_bindings, i_opts)
+wk.register(x_mode_bindings, x_opts)
+wk.register(v_indentation_keys, v_opts)
+wk.register(n_utility_bindings, n_opts)
 
 -- nvim-tree
 -- Map("n", "<leader>e", ":NvimTreeOpen<CR>") -- toggle file explorer
