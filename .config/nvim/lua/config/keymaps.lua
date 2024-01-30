@@ -5,6 +5,8 @@
 -- set leader key to space
 vim.g.mapleader = " "
 
+print("Keymaps loaded....")
+
 local function Map(key, left, right, desc)
   vim.keymap.set(key, left, right, { noremap = true, silent = true, desc = desc })
 end
@@ -142,6 +144,11 @@ function _G.format_buffer()
   -- vim.api.nvim_command(":CocCommand eslint.executeAutofix")
 end
 
+-- Copilot
+Map("i", "<c-;>", "<Plug>(copilot-next)")
+Map("i", "<c-,>", "<Plug>(copilot-previours)")
+Map("i", "<c-leader>", "<Plug>(copilot-suggest)")
+
 ---------------------
 -------- LSP --------
 ---------------------
@@ -218,7 +225,7 @@ Map("n", "mi", function()
   vim.opt.shiftwidth = vim.lsp.util.get_effective_tabstop()
 end)
 Map("n", "mrl", vim.lsp.buf.rename)
-Map("n", "mrn", ":IncRename  ")
+Map("n", "mrn", ":IncRename ")
 
 Map("n", "gr", vim.lsp.buf.references)
 Map("n", "gR", _K.find_references)
@@ -232,12 +239,18 @@ Map("n", "<leader>rs", vim.cmd.LspRestart) -- mapping to restart lsp if necessar
 Map("n", "<leader>ll", vim.cmd.LspStart) -- mapping to restart lsp if necessary
 Map("n", "<leader>rs", vim.cmd.LspStop) -- mapping to restart lsp if necessary
 
-Map("i", "<c-;>", "<Plug>(copilot-next)")
-Map("i", "<c-,>", "<Plug>(copilot-previours)")
-Map("i", "<c-leader>", "<Plug>(copilot-suggest)")
-
-Map("n", "<leader>q", ":Neotree position=float reveal=true reveal_force_cwd <cr>")
-Map("n", "<leader>e", ":Neotree reveal left reveal_force_cwd <cr>")
+Map(
+  "n",
+  "<leader>d",
+  ":Neotree position=float reveal=true reveal_force_cwd <cr>",
+  "Opens Neotree into floating mode revealing selected file if any"
+)
+Map(
+  "n",
+  "<leader>e",
+  ":Neotree reveal left reveal_force_cwd <cr>",
+  "Opens Neotree into left side revealing selected file if any"
+)
 
 -- nvim-tree
 -- Map("n", "<leader>e", ":NvimTreeOpen<CR>") -- toggle file explorer
