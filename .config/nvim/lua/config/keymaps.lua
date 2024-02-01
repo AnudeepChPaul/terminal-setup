@@ -48,9 +48,9 @@ local no_op_bindings = {
 
 -- Insert mode binding for faster escapes
 local i_mode_bindings = {
-  ["<c-;>"] = { "<Plug>(copilot-next)" },
-  ["<c-,>"] = { "<Plug>(copilot-previours)" },
-  ["<c-space>"] = { "<Plug>(copilot-suggest)" },
+  ["<c-;>"] = { "<Plug>(copilot-next)", "Copilot next suggestion" },
+  ["<c-,>"] = { "<Plug>(copilot-previours)", "Copilot previous suggestion" },
+  ["<c-space>"] = { "<Plug>(copilot-suggest)", "Copilot suggest" },
   ["<C-\\"] = { "<ESC>", "Escape" },
   ["<C-c"] = { "<ESC>", "Escape" },
 }
@@ -75,19 +75,19 @@ local n_utility_bindings = {
   ["+"] = { "<C-a>", "Increment number" },
   ["-"] = { "<C-x>", "Decrement number" },
   ["J"] = { "mzJ`z", "Bring botton line at the current line end" },
-  ["<C-d>"] = { "<C-d>zz", "Scrolls down with cursor at centre" },
-  ["<C-u>"] = { "<C-u>zz", "Scrolls up with cursor at centre" },
-  ["<C-h"] = { ":TmuxNavigateLeft<CR>" },
-  ["<C-j>"] = { ":TmuxNavigateDown<CR>" },
-  ["<C-k>"] = { ":TmuxNavigateUp<CR>" },
-  ["<C-l>"] = { ":TmuxNavigateRight<CR>" },
-  ["<C-f>"] = { "<cmd>silent !tmux neww tmux-sessionizer<CR>" },
+  ["<c-d>"] = { "<C-d>zz", "Scrolls down with cursor at centre" },
+  ["<c-u>"] = { "<C-u>zz", "Scrolls up with cursor at centre" },
+  ["<c-h"] = { ":TmuxNavigateLeft<CR>", "Tmux navigate left" },
+  ["<c-j>"] = { ":TmuxNavigateDown<CR>", "Tmux navigate down" },
+  ["<c-k>"] = { ":TmuxNavigateUp<CR>", "Tmux navigate up" },
+  ["<c-l>"] = { ":TmuxNavigateRight<CR>", "Tmux navigate right" },
+  ["<c-f>"] = { "<cmd>silent !tmux neww tmux-sessionizer<CR>" },
   ["n"] = { "nzzzv", "Goto next seach occurrence with cursor at center" },
   ["N"] = { "Nnzzzv", "Goto previous seach occurrence with cursor at center" },
-  ["<S-Left>"] = { "<C-w><" },
-  ["<S-Right>"] = { "<C-w>>" },
-  ["<S-Up>"] = { "<C-w>+" },
-  ["<S-Down>"] = { "<C-w>-" },
+  ["<S-Left>"] = { "<C-w><", "Expand Split window left" },
+  ["<S-Right>"] = { "<C-w>>", "Expand Split window right" },
+  ["<S-Up>"] = { "<C-w>+", "Expand Split window up" },
+  ["<S-Down>"] = { "<C-w>-", "Expand Split window down" },
   ["<S-TAB>"] = { vim.cmd.bnext, "Move to load next buffer" },
 }
 
