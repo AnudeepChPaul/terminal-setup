@@ -12,23 +12,36 @@ right_format = '''$all'''
 
 
 [character] # available characters: ❯ ▶ ▶▶ 
-success_symbol = '[▶](bold green)'
+success_symbol = '[▶](bold #50fa7b)'
+error_symbol = "[λ](bold #ff5555)"
 
 [line_break]
 disabled = false
 
 
 #### Utility Modules ####
+[hostname]
+style = "bold #bd93f9"
+
+[username]
+format = "[$user]($style) on "
+style_user = "bold #8be9fd"
+
 [package]
 disabled = false
 
 [directory]
 fish_style_pwd_dir_length=1
+style = "bold #50fa7b"
+
+# [cmd_duration]
+# style = "bold #f1fa8c"
 
 [git_branch]
 truncation_length = 4
 always_show_remote=true
 truncation_symbol = ''
+style = "bold #ff79c6"
 
 [git_commit]
 commit_hash_length = 6
@@ -37,6 +50,9 @@ only_detached = false
 [git_state]
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
 cherry_pick = '[ PICKING](bold red)'
+
+[git_status]
+style = "bold #ff5555"
 
 [memory_usage]
 format = '$symbol [${ram}( \\| ${swap})]($style) '

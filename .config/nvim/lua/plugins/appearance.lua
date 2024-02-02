@@ -1,15 +1,19 @@
 local Util = require("lazyvim.util")
 
 return {
+  -- {
+  --   "craftzdog/solarized-osaka.nvim",
+  --   lazy = true,
+  --   priority = 100,
+  --   opts = function()
+  --     return {
+  --       transparent = true,
+  --     }
+  --   end,
+  -- },
   {
-    "craftzdog/solarized-osaka.nvim",
+    "AnudeepChPaul/dracula.nvim",
     lazy = true,
-    priority = 100,
-    opts = function()
-      return {
-        transparent = true,
-      }
-    end,
   },
   {
     "folke/noice.nvim",

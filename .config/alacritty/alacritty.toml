@@ -1,0 +1,30 @@
+import = ["~/.config/alacritty/dracula.toml"]
+shell = "/bin/zsh"
+working_directory = "$HOME/Projects"
+
+[window]
+decorations = "Buttonless"
+opacity = 0.81
+blur = true
+startup_mode = "Maximized"
+padding = { x = 10, y = 7 }
+
+[font]
+normal = { family = "SauceCodePro Nerd Font", style = "Regular" }
+bold = { family = "SauceCodePro Nerd Font", style = "Bold" }
+italic = { family = "SauceCodePro Nerd Font", style = "Italic" }
+bold_italic = { family = "SauceCodePro Nerd Font", style = "Bold" }
+builtin_box_drawing = false
+size = 15
+
+[cursor]
+style = { shape = "Beam", blinking = "On" }
+vi_mode_style = { shape = "Beam", blinking = "Off" }
+thickness = 0.05
+blink_interval = 750
+
+[terminal]
+osc52 = "CopyPaste"
+
+[mouse]
+hide_when_typing = true

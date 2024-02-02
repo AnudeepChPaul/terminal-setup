@@ -6,12 +6,12 @@ export ZSH="$HOME/.oh-my-zsh"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
-  zsh-nvm
   zsh-syntax-highlighting
   zsh-autosuggestions
   zsh-completions
   # fast-syntax-highlighting
   dotbare
+  zsh-nvm
 )
 
 export NVM_LAZY_LOAD=true
