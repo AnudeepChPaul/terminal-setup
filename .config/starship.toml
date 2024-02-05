@@ -38,7 +38,7 @@ style = "bold #50fa7b"
 # style = "bold #f1fa8c"
 
 [git_branch]
-truncation_length = 4
+truncation_length = 8
 always_show_remote=true
 truncation_symbol = ''
 style = "bold #ff79c6"

@@ -3,6 +3,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="dracula-pro"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
@@ -45,8 +46,8 @@ else
   export EDITOR='nvim'
 fi
 
-eval "$(zoxide init zsh)"
 source ~/.zprofile
+eval "$(zoxide init zsh)"
 
 _dotbare_completion_cmd
 
