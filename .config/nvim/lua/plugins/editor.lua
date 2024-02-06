@@ -49,4 +49,5 @@ return {
       { "<leader>sm", "<cmd>MaximizerToggle<CR>", desc = "Maximize/minimize a split" },
     },
   },
+  { "weirongxu/plantuml-previewer.vim" },
 }

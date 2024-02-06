@@ -35,7 +35,7 @@
       "int" : 0
     },
     "appSpecs" : {
-      "string" : "[{\"loc\":0,\"isGroup\":true,\"shortcut\":{\"modifierFlags\":1310720,\"keyCode\":37},\"children\":[{\"bundleId\":\"~global\",\"loc\":9,\"y\":\"10\",\"h\":\"855\",\"w\":\"690\",\"display\":-3,\"id\":4,\"x\":\"50\"},{\"bundleId\":\"~global\",\"x\":\"744\",\"h\":\"424\",\"display\":-3,\"loc\":9,\"id\":5,\"y\":\"8\",\"w\":\"687\"},{\"x\":\"744\",\"display\":-3,\"h\":\"424\",\"y\":\"442\",\"id\":6,\"w\":\"687\",\"loc\":9,\"bundleId\":\"~global\"}],\"name\":\"Group 1\",\"id\":7},{\"loc\":0,\"id\":10,\"name\":\"Layout 1\",\"isGroup\":true}]"
+      "string" : "[{\"name\":\" Utility\",\"displayRestored\":true,\"isGroup\":true,\"id\":18,\"loc\":0,\"children\":[{\"display\":-3,\"w\":\"1665\",\"y\":\"935\",\"id\":13,\"loc\":9,\"x\":\"1685\",\"h\":\"930\",\"bundleId\":\"notion.id\"},{\"display\":-3,\"bundleId\":\"com.tinyspeck.slackmacgap\",\"id\":14,\"y\":\"9\",\"w\":\"1666\",\"x\":\"9\",\"h\":\"1847\",\"loc\":9},{\"w\":\"1665\",\"id\":17,\"bundleId\":\"com.cron.electron\",\"loc\":9,\"y\":\"10\",\"display\":-3,\"x\":\"1685\",\"h\":\"930\"}],\"wake\":true}]"
     },
     "attemptMatchOnNextPrevDisplay" : {
       "int" : 0
@@ -254,7 +254,7 @@
       "int" : 2
     },
     "reticleColor" : {
-      "string" : "{\"red\":0.8,\"blue\":0.2,\"alpha\":0.5,\"green\":0.3}"
+      "string" : "{\"blue\":0.2,\"green\":0.3,\"red\":0.8,\"alpha\":0.5}"
     },
     "reticleDisplayMinDist" : {
       "float" : 0
@@ -515,6 +515,10 @@
       "keyCode" : 16,
       "modifierFlags" : 1310720
     },
+    "tidy" : {
+      "keyCode" : 17,
+      "modifierFlags" : 1835008
+    },
     "topHalf" : {
       "keyCode" : 13,
       "modifierFlags" : 786432
@@ -528,6 +532,6 @@
       "modifierFlags" : 786432
     }
   },
-  "timestamp" : 728921272.188264,
+  "timestamp" : 728922090.657796,
   "version" : "157"
 }

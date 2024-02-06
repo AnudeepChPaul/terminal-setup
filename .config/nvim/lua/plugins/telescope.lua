@@ -37,6 +37,16 @@ return {
       end,
       desc = "Grep (cwd)",
     },
+    {
+      "<leader>bf",
+      function()
+        return require("telescope.actions").send_to_qflist({
+          prompt_title = "Live Grep (" .. vim.fn.expand("%:h") .. ")",
+          cwd = vim.fn.expand("%:h"),
+        })
+      end,
+      desc = "Grep (cwd)",
+    },
   },
   opts = {
     defaults = {
@@ -65,7 +75,7 @@ return {
         i = {
           ["<C-k>"] = require("telescope.actions").move_selection_previous, -- move to prev result
           ["<C-j>"] = require("telescope.actions").move_selection_next, -- move to next result
-          ["<C-q>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
+          ["<C-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
         },
       },
     },
