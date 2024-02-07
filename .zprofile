@@ -85,13 +85,7 @@ alias ll='exa -laFh --icons --git'
 alias lm='exa -lahr --color-scale --icons -s=modified'
 alias lb='exa -lahr --color-scale --icons -s=size'
 
-# alias la='ls -A'
-# alias ll='ls -lAFh'
-# alias lb='ls -lhSA'
-# alias lm='ls -tA -1'
-
 alias c='clear'
-
 alias ..="cd ..";
 alias ...="cd ../../";
 alias ....="cd ../../../";
@@ -111,6 +105,9 @@ alias v="nvim";
 # git shortcuts
 alias gc="git clone";
 alias gfp="git fetch; git pull"
+alias glsm="git ls-files --modified --others --exclude-standard"
+alias gdf="git diff --staged --name-status"
+alias gdf="git diff --staged"
 
 alias conf="sv -O ~/.zprofile ~/.zshrc";
 alias o="ack --sort-files --color";
@@ -124,7 +121,6 @@ alias rn='ranger'
 
 
 # tmux shortcuts
-
 alias tka='tmux kill-server';
 alias tks='tmux kill-session -t';
 
