@@ -7,10 +7,10 @@ export ZSH="$HOME/.oh-my-zsh"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
-  zsh-syntax-highlighting
+  # zsh-syntax-highlighting
   zsh-autosuggestions
   zsh-completions
-  # fast-syntax-highlighting
+  fast-syntax-highlighting
   dotbare
   zsh-nvm
 )
@@ -62,9 +62,5 @@ bindkey '^[OM' accept-line
 # bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
 # bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 # bindkey -M menuselect '\r' .accept-line
-
-
-# # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(starship init zsh)"
