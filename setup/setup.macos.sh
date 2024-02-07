@@ -6,15 +6,15 @@ echo "==============Installing curl=============="
 brew install curl
 
 echo "==============Installing git=============="
-brew install git
-brew install gh
+brew install git gh lazygit
 
 gh auth login
 
 echo "==============Setting up shell utils=============="
 brew install fzf tree bat zoxide
 brew install tmux neovim ripgrep
-brew install lazygit lua-language-server fd exa
+brew install lua-language-server fd exa
+brew install alacritty starship ranger mdcat
 
 . common.utils.sh
 
@@ -33,6 +33,5 @@ mkdir $HOME/bin
 echo "==============Downloading JDK=============="
 curl -o $HOME/bin/jdk.default.tar.gz https://download.java.net/java/GA/jdk18.0.2/f6ad4b4450fd4d298113270ec84f30ee/9/GPL/openjdk-18.0.2_macos-aarch64_bin.tar.gz
 tar -xvf jdk.default.tar.gz
-
 
 brew install scc rm-improved ddgr ripgrep tldr
