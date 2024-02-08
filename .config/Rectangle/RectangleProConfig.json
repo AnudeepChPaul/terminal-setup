@@ -254,7 +254,7 @@
       "int" : 2
     },
     "reticleColor" : {
-      "string" : "{\"green\":0.3,\"blue\":0.2,\"alpha\":0.5,\"red\":0.8}"
+      "string" : "{\"blue\":0.2,\"alpha\":0.5,\"red\":0.8,\"green\":0.3}"
     },
     "reticleDisplayMinDist" : {
       "float" : 0
@@ -467,14 +467,6 @@
       "keyCode" : 7,
       "modifierFlags" : 786432
     },
-    "fillLeft" : {
-      "keyCode" : 123,
-      "modifierFlags" : 1835008
-    },
-    "fillRight" : {
-      "keyCode" : 124,
-      "modifierFlags" : 1835008
-    },
     "larger" : {
       "keyCode" : 17,
       "modifierFlags" : 1310720
@@ -528,6 +520,6 @@
       "modifierFlags" : 786432
     }
   },
-  "timestamp" : 728971406.944499,
+  "timestamp" : 728974884.190345,
   "version" : "157"
 }

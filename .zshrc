@@ -64,3 +64,5 @@ bindkey '^[OM' accept-line
 # bindkey -M menuselect '\r' .accept-line
 
 eval "$(starship init zsh)"
+
+nvm use default

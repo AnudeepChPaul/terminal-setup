@@ -50,4 +50,5 @@ return {
     },
   },
   { "weirongxu/plantuml-previewer.vim" },
+  { "github/copilot.vim" },
 }

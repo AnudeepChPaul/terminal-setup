@@ -74,3 +74,5 @@ vim.diagnostic.config({ virtual_text = true })
 -- NeoVim Folding Options
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 20
+
+vim.g.copilot_node_command = "/Users/achandrapaul/.nvm/versions/node/v18.17.1/bin/node"
