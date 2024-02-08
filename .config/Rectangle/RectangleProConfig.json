@@ -254,7 +254,7 @@
       "int" : 2
     },
     "reticleColor" : {
-      "string" : "{\"blue\":0.2,\"alpha\":0.5,\"red\":0.8,\"green\":0.3}"
+      "string" : "{\"alpha\":0.5,\"red\":0.8,\"green\":0.3,\"blue\":0.2}"
     },
     "reticleDisplayMinDist" : {
       "float" : 0
@@ -520,6 +520,6 @@
       "modifierFlags" : 786432
     }
   },
-  "timestamp" : 728974884.190345,
+  "timestamp" : 729079433.097643,
   "version" : "157"
 }
