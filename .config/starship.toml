@@ -8,8 +8,7 @@ format = '''
 [](bold green)$directory
 [╰$character](bold green) '''
 
-right_format = '''$all'''
-
+right_format = ''' $all '''
 
 [character] # available characters: ❯ ▶ ▶▶ 
 success_symbol = '[▶](bold #50fa7b)'
@@ -38,7 +37,7 @@ style = "bold #50fa7b"
 # style = "bold #f1fa8c"
 
 [git_branch]
-truncation_length = 8
+truncation_length = 15
 always_show_remote=true
 truncation_symbol = ''
 style = "bold #ff79c6"
