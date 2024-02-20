@@ -261,9 +261,9 @@ _run_nginx() {
 
 _tn() {
     session_name=$1;
-    session_dir=$2;
+    session_dir=`zoxide query ${session_name}`
     
-    tmux new-session -s $session_name -n "main:${session_name}" -c $session_dir -d 2> /dev/null; tmux attach -t $session_name 2> /dev/null || tmux switchc -t $session_name 2> /dev/null;
+    tmux new-session -s $session_name -n "main:${session_name}" -c "${session_dir}" -d 2> /dev/null; tmux attach -t $session_name 2> /dev/null || tmux switchc -t $session_name 2> /dev/null;
 }
 
 _ide () {
