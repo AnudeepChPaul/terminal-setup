@@ -51,6 +51,23 @@ return {
       { "<leader>sm", "<cmd>MaximizerToggle<CR>", desc = "Maximize/minimize a split" },
     },
   },
+  {
+    "folke/flash.nvim",
+    opts = {
+      modes = {
+        char = {
+          labels = "1234567890abcdefghijklmnopqrstuvwxyz",
+          jump_labels = true,
+        },
+        treesitter = {
+          labels = "1234567890abcdefghijklmnopqrstuvwxyz",
+        },
+        search = {
+          labels = "1234567890abcdefghijklmnopqrstuvwxyz",
+        },
+      },
+    },
+  },
   { "weirongxu/plantuml-previewer.vim" },
   { "github/copilot.vim" },
 }
