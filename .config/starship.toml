@@ -55,7 +55,7 @@ style = "bold #ff5555"
 
 [memory_usage]
 format = '$symbol [${ram}( \\| ${swap})]($style) '
-disabled = false
+disabled = true
 threshold = -1
 symbol = ' '
 style = 'bold dimmed green'
