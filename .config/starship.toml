@@ -5,10 +5,9 @@
 add_newline = true
 
 format = '''
-[](bold green)$directory
-[╰$character](bold green) '''
+[](bold green)$directory $fill $all
+[╰$character](bold green)'''
 
-right_format = ''' $all '''
 
 [character] # available characters: ❯ ▶ ▶▶ 
 success_symbol = '[▶](bold #50fa7b)'
@@ -35,6 +34,9 @@ style = "bold #50fa7b"
 
 # [cmd_duration]
 # style = "bold #f1fa8c"
+
+[fill]
+symbol = ' '
 
 [git_branch]
 truncation_length = 15
@@ -169,7 +171,7 @@ format = '[$symbol($username@)$stack]($style)'
 format = '[$symbol($version )]($style)'
 
 [python]
-format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+format = '[${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 symbol = ''
 
 [rlang]
@@ -194,13 +196,13 @@ format = '[${symbol}(${version} )]($style)'
 format = '[$symbol($version )]($style)'
 
 [spack]
-format = '[$symbol$environment]($style)'
+format = '[$symbol $environment ]($style)'
 
 [swift]
 format = '[$symbol($version )]($style)'
 
 [terraform]
-format = '[$symbol$workspace]($style)'
+format = '[$symbol $workspace]($style)'
 
 [typst]
 format = '[$symbol($version )]($style)'
