@@ -254,7 +254,7 @@
       "int" : 2
     },
     "reticleColor" : {
-      "string" : "{\"alpha\":0.5,\"red\":0.8,\"green\":0.3,\"blue\":0.2}"
+      "string" : "{\"red\":0.8,\"blue\":0.2,\"alpha\":0.5,\"green\":0.3}"
     },
     "reticleDisplayMinDist" : {
       "float" : 0
@@ -467,9 +467,29 @@
       "keyCode" : 7,
       "modifierFlags" : 786432
     },
+    "centerTwoThirds" : {
+      "keyCode" : 7,
+      "modifierFlags" : 917504
+    },
+    "fillLeft" : {
+      "keyCode" : 123,
+      "modifierFlags" : 1835008
+    },
+    "fillRight" : {
+      "keyCode" : 124,
+      "modifierFlags" : 1835008
+    },
+    "firstTwoThirds" : {
+      "keyCode" : 0,
+      "modifierFlags" : 917504
+    },
     "larger" : {
       "keyCode" : 17,
       "modifierFlags" : 1310720
+    },
+    "lastTwoThirds" : {
+      "keyCode" : 2,
+      "modifierFlags" : 917504
     },
     "leftHalf" : {
       "keyCode" : 0,
@@ -520,6 +540,6 @@
       "modifierFlags" : 786432
     }
   },
-  "timestamp" : 729079433.097643,
+  "timestamp" : 730179180.284152,
   "version" : "157"
 }
