@@ -2,19 +2,23 @@
 # Get editor completions based on the config schema
 '$schema' = 'https://starship.rs/config-schema.json'
 
+
+# Prompt appearance
 add_newline = true
 
-format = '''
+format = ''' 
 [](bold green)$directory $fill $all
 [╰$character](bold green)'''
-
 
 [character] # available characters: ❯ ▶ ▶▶ 
 success_symbol = '[▶](bold #50fa7b)'
 # error_symbol = "[λ](bold #ff5555)"
 
 [line_break]
-disabled = false
+disabled = true
+
+[fill]
+symbol = ' '
 
 
 #### Utility Modules ####
@@ -31,12 +35,6 @@ disabled = false
 [directory]
 fish_style_pwd_dir_length=1
 style = "bold #50fa7b"
-
-# [cmd_duration]
-# style = "bold #f1fa8c"
-
-[fill]
-symbol = ' '
 
 [git_branch]
 truncation_length = 15
