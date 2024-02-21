@@ -1,0 +1,47 @@
+
+return {
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      { 
+        "folke/neoconf.nvim",
+        cmd = "Neoconf", 
+        config = false, 
+        dependencies = { "nvim-lspconfig" } 
+      },
+      { "folke/neodev.nvim", opts = {} },
+      "mason.nvim",
+      {
+        "williamboman/mason.nvim",
+        cmd = "Mason",
+        keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+        build = ":MasonUpdate",
+        opts = {
+          ensure_installed = {
+            "stylua",
+            "eslint_d",
+            "prettier"
+          },
+        },
+      }
+    },
+    opts = {
+      diagnostics = {
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "E",
+            [vim.diagnostic.severity.WARN] = "W",
+            [vim.diagnostic.severity.HINT] = "H",
+            [vim.diagnostic.severity.INFO] = "i",
+          },
+        },
+      },
+      inlay_hints = {
+        enabled = false,
+      },
+      servers = {
+      },
+    },
+  },
+}

@@ -51,8 +51,8 @@ local i_mode_bindings = {
   ["<c-;>"] = { "<Plug>(copilot-next)", "Copilot next suggestion" },
   ["<c-,>"] = { "<Plug>(copilot-previours)", "Copilot previous suggestion" },
   ["<c-space>"] = { "<Plug>(copilot-suggest)", "Copilot suggest" },
-  ["<C-\\"] = { "<ESC>", "Escape" },
-  ["<C-c"] = { "<ESC>", "Escape" },
+  ["<C-\\>"] = { "<ESC>", "Escape" },
+  ["<C-c>"] = { "<ESC>", "Escape" },
 }
 
 local n_utility_bindings = {
@@ -77,7 +77,7 @@ local n_utility_bindings = {
   ["J"] = { "mzJ`z", "Bring botton line at the current line end" },
   ["<c-d>"] = { "<C-d>zz", "Scrolls down with cursor at centre" },
   ["<c-u>"] = { "<C-u>zz", "Scrolls up with cursor at centre" },
-  ["<c-h"] = { ":TmuxNavigateLeft<CR>", "Tmux navigate left" },
+  ["<c-h>"] = { ":TmuxNavigateLeft<CR>", "Tmux navigate left" },
   ["<c-j>"] = { ":TmuxNavigateDown<CR>", "Tmux navigate down" },
   ["<c-k>"] = { ":TmuxNavigateUp<CR>", "Tmux navigate up" },
   ["<c-l>"] = { ":TmuxNavigateRight<CR>", "Tmux navigate right" },
@@ -150,6 +150,10 @@ function _H.goto_four()
   require("harpoon.ui").nav_file(4)
 end
 
+function _H.goto_five()
+  require("harpoon.ui").nav_file(5)
+end
+
 local n_harpoon_maps = {
   ["<C-TAB>"] = { _H.nav_next, "Goto next harpoon file" },
   [";a"] = { _H.add_file, "Add file to harpoon quick list" },
@@ -158,6 +162,7 @@ local n_harpoon_maps = {
   [";2"] = { _H.goto_two, "Goto 2nd harpoon file" },
   [";3"] = { _H.goto_three, "Goto 3rd harpoon file" },
   [";4"] = { _H.goto_four, "Goto 4th harpoon file" },
+  [";5"] = { _H.goto_five, "Goto 5th harpoon file" },
 }
 
 ---------------------

@@ -1,4 +1,12 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
+vim.g.mapleader = " "
+require("acp.options")
 
-require("config.transparent").transparent()
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("acp.lazy_init")
+
+-- loading keystrokes and options
+--require("acp.keymap")
+
+
+
+-- require("config.transparent").transparent()
