@@ -80,8 +80,10 @@ return {
         width = dim.width,
         cursorline = true,
         relativenumber = true,
+        signcolumn = "yes",
         float = {
           enable = true,
+          quit_on_focus_loss = true,
           open_win_config = {
             relative = "editor",
             border = "rounded",
@@ -100,6 +102,11 @@ return {
         indent_markers = {
           enable = true,
           inline_arrows = true,
+        },
+        icons = {
+          git_placement = "signcolumn",
+          diagnostics_placement = "after",
+          modified_placement = "signcolumn",
         },
       },
       update_focused_file = {
