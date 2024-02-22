@@ -1,13 +1,3 @@
--- return {
---   "nvim-neo-tree/neo-tree.nvim",
---   event = "VimEnter",
---   keys = {
---     { "<leader>e", false },
---   },
---   dependencies = { "nvim-lua/plenary.nvim", { "MunifTanjim/nui.nvim", lazy = true } },
---   opts = {},
--- }
-
 local function on_attach(bufnr)
   local api = require("nvim-tree.api")
 

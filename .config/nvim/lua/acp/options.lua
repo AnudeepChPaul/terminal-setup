@@ -34,6 +34,9 @@ vim.opt.breakindent = true
 vim.opt.smartindent = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "<>", space = " ", eol = "↵" }
+vim.opt.foldenable = true
+vim.opt.foldlevel = 5
+vim.opt.foldmethod = "indent"
 
 -- Backspace
 vim.opt.backspace = "indent,eol,start"

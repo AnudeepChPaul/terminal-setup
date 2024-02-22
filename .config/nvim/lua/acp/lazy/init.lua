@@ -23,7 +23,7 @@ return {
   },
   {
     "echasnovski/mini.comment",
-    event = { "InsertEnter" },
+    event = { "BufRead", "BufNewFile" },
     dependencies = {
       {
         "JoosepAlviste/nvim-ts-context-commentstring",
