@@ -432,7 +432,7 @@ local function register()
       ["sh"] = { _T.help_tags, "Help Pages" },
       ["sb"] = { _T.search_symbol, "Search LSP Workspace Symbols" },
       ["sH"] = { _T.highlight_groups, "Search Highlight Groups" },
-      ["sR"] = { _T.resume, "Resume" },
+      ["sr"] = { _T.resume, "Resume" },
       ["ss"] = { _T.find_files_in_cwd, "Find files in cwd" },
       ["qf"] = { _T.find_in_quickfix, "Find in Quick Fix" },
     }
