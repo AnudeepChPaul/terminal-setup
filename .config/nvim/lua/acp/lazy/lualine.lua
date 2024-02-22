@@ -1,7 +1,7 @@
 return {
     "nvim-lualine/lualine.nvim",
     lazy = true,
-    event ={ "BufRead", "BufNewFile"  },
+    event ={ "BufRead", "BufNewFile" },
     opts = function()
       return {
         sections = {

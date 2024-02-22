@@ -14,7 +14,7 @@ require("lazy").setup({
   defaults = {
     lazy = true,
   },
-  checker = { enabled = true },
+  checker = { enabled = false },
   spec = {
     {
       "nvim-lua/plenary.nvim",

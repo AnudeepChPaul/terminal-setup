@@ -65,6 +65,7 @@ local function register()
       ["m"] = { 'V"-y"-p', "Duplicates a line without copying to clipboard" },
       ["lw"] = { ":set list!<CR>", "Toggles list characters like Tab, space, newline" },
       ["lr"] = { ":set rnu!<CR>", "Toggles relative numbering" },
+      ["sR"] = { function() require("spectre").open() end, "Replace in files (Spectre)" },
     },
     ["x"] = { '"_x', "Delete single character without copying into register" },
     ["dw"] = { 'vb"_d', "Delete word backwards" },

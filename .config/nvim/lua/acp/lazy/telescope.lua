@@ -1,14 +1,31 @@
-local Util = require("lazy.util")
+-- local no_binary_preview = function(filepath, bufnr, opts)
+--   local previewers = require("telescope.previewers")
+--   opts = opts or {}
+--
+--   filepath = vim.fn.expand(filepath)
+--
+--   vim.loop.fs_stat(filepath, function(_, stat)
+--     if not stat then
+--       return
+--     end
+--     if stat.size > 500000 then
+--       return
+--     else
+--       previewers.buffer_previewer_maker(filepath, bufnr, opts)
+--     end
+--   end)
+-- end
 
 return {
   {
     "nvim-telescope/telescope.nvim",
     tag = '0.1.5',
     cmd = "Telescope",
+    event = "VimEnter",
     version = false,
     dependencies = {
       {"nvim-telescope/telescope-live-grep-args.nvim", version = '1.0.0' },
-      { 
+      {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
         enabled = vim.fn.executable("make") == 1,
@@ -17,18 +34,24 @@ return {
     opts = function()
       local lga_actions = require("telescope-live-grep-args.actions")
       local actions = require("telescope.actions")
-      local telescope = require("telescope") 
+      local telescope = require("telescope")
 
       telescope.setup({
-        extensions = {
-          live_grep_args = {
-            auto_quoting = false,
-          },
-        },
+        -- extensions = {
+        --   live_grep_args = {
+        --     auto_quoting = false,
+        --   },
+        -- },
 
         -- configure custom mappings
         defaults = {
-          buffer_previewer_maker = no_binary_preview,
+          dynamic_preview_title = true,
+          -- buffer_previewer_maker = no_binary_preview,
+          -- preview = {
+          --   filesize_limit = 2,
+          --   check_mime_type = 'file',
+          --   hide_on_startup = true
+          -- },
           vimgrep_arguments = {
             "rg",
             "--with-filename",
@@ -57,9 +80,12 @@ return {
               ["<C-s>"] = actions.select_horizontal, -- select horizontal
               ["<C-v>"] = actions.select_vertical, -- select vertical
               ["<C-t>"] = actions.select_tab, -- select tab
+
               ["<C-u>"] = actions.preview_scrolling_up,
               ["<C-d>"] = actions.preview_scrolling_down,
-              -- send selected to quickfixlist
+              ["<C-n>"] = actions.results_scrolling_up,
+              ["<C-p>"] = actions.results_scrolling_down,
+
               ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
               ["<esc>"] = actions.close,
               ["<c-c>"] = actions.close,
@@ -79,6 +105,7 @@ return {
               ["<C-n>"] = actions.results_scrolling_up,
               ["<C-p>"] = actions.results_scrolling_down,
 
+              ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
               ["<esc>"] = actions.close,
               ["<c-c>"] = actions.close,
               ["<c-\\>"] = actions.close,
@@ -115,48 +142,3 @@ return {
   }
 }
 
--- keys = {
---   { "<leader>ss", false },
---   {
---     "<leader>fS",
---     function()
---       require("telescope.builtin").lsp_document_symbols({
---         symbols = require("lazyvim.config").get_kind_filter(),
---       })
---     end,
---     desc = "Goto Symbol",
---     {
---       "<leader>sS",
---       function()
---         require("telescope.builtin").lsp_dynamic_workspace_symbols({
---           symbols = require("lazyvim.config").get_kind_filter(),
---         })
---       end,
---       desc = "Goto Symbol (Workspace)",
---     },
---   },
---   {
---     "<leader>fs",
---     Util.telescope("live_grep", { prompt_title = "Live Grep (Root dir)" }),
---     desc = "Grep (root dir)",
---   },
---   {
---     "<leader>/",
---     function()
---       return require("telescope.builtin").live_grep({
---         prompt_title = "Live Grep (" .. vim.fn.expand("%:h") .. ")",
---         cwd = vim.fn.expand("%:h"),
---       })
---     end,
---     desc = "Grep (cwd)",
---   },
---   {
---     "<leader>bf",
---     function()
---       return require("telescope.actions").send_to_qflist({
---         prompt_title = "Live Grep (" .. vim.fn.expand("%:h") .. ")",
---         cwd = vim.fn.expand("%:h"),
---       })
---     end,
---     desc = "Grep (cwd)",
---   },
