@@ -48,14 +48,18 @@ local function on_attach(bufnr)
   vim.keymap.set("n", "o", api.node.run.system, opts("system_open"))
 end
 
-local function get_centered_coords()
+local function get_centered_coords(size)
+  if size == nil then
+    size = 2
+  end
+
   local width = vim.api.nvim_get_option("columns")
   local height = vim.api.nvim_get_option("lines")
-  local maxW = math.floor(width / 3)
-  local maxH = math.floor(height / 3)
+  local maxW = math.floor(width / size)
+  local maxH = math.floor(height / size)
 
-  local row = height * 0.33
-  local col = (width * 0.33) - (vim.fn.wincol() / 2)
+  local row = height * (1 / size) / 2
+  local col = (width * (1 / size) / 2) - (vim.fn.wincol() / 2)
 
   return { row = row, col = col, width = maxW, height = maxH }
 end
@@ -75,6 +79,7 @@ return {
       view = {
         width = dim.width,
         cursorline = true,
+        relativenumber = true,
         float = {
           enable = true,
           open_win_config = {
@@ -88,6 +93,10 @@ return {
         },
       },
       renderer = {
+        highlight_git = "all",
+        highlight_diagnostics = "all",
+        highlight_opened_files = "all",
+        highlight_modified = "all",
         indent_markers = {
           enable = true,
           inline_arrows = true,

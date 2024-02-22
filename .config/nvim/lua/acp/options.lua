@@ -23,6 +23,7 @@ vim.opt.undodir = os.getenv("HOME") .. "/.config/undodir"
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.wo.number = true
+vim.opt.fillchars = { eob = " " }
 
 -- Tabs & Indentation
 vim.opt.tabstop = 2
