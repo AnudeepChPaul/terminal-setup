@@ -2,7 +2,7 @@ return {
   {
     "kylechui/nvim-surround",
     version = "*",
-    event = { "BufRead", "BufNewFile"},
+    event = { "BufRead", "BufNewFile" },
     config = function()
       require("nvim-surround").setup()
     end,
@@ -17,7 +17,7 @@ return {
         opts = {
           enable_autocmd = false,
         },
-      }
+      },
     },
     opts = {
       options = {
@@ -25,11 +25,11 @@ return {
           return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
         end,
       },
-    }
+    },
   },
   {
     "smjonas/inc-rename.nvim",
-    event = {'BufRead', 'BufNewFile'},
+    event = { "BufRead", "BufNewFile" },
     config = function()
       require("inc_rename").setup()
     end,
@@ -37,7 +37,7 @@ return {
   {
     "szw/vim-maximizer",
     lazy = true,
-    event = {'BufRead', 'BufNewFile'},
+    event = { "BufRead", "BufNewFile" },
     keys = {
       { "<leader>sm", "<cmd>MaximizerToggle<CR>", desc = "Maximize/minimize a split" },
     },

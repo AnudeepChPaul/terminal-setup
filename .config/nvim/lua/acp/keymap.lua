@@ -1,4 +1,3 @@
-
 -- Keymaps are automatically loaded on the VeryLazy event
 -- set leader key to space
 vim.g.mapleader = " "
@@ -7,12 +6,10 @@ vim.g.mapleader = " "
 --   vim.keymap.set(key, left, right, { noremap = true, silent = true, desc = desc })
 -- end
 
-local function register()
+local function register(wk, _opts)
   ---------------------
   -- General Keymaps
   ---------------------
-
-  local wk = require("which-key")
   local n_opts = {
     noremap = true,
     silent = true,
@@ -65,7 +62,12 @@ local function register()
       ["m"] = { 'V"-y"-p', "Duplicates a line without copying to clipboard" },
       ["lw"] = { ":set list!<CR>", "Toggles list characters like Tab, space, newline" },
       ["lr"] = { ":set rnu!<CR>", "Toggles relative numbering" },
-      ["sR"] = { function() require("spectre").open() end, "Replace in files (Spectre)" },
+      ["sR"] = {
+        function()
+          require("spectre").open()
+        end,
+        "Replace in files (Spectre)",
+      },
     },
     ["x"] = { '"_x', "Delete single character without copying into register" },
     ["dw"] = { 'vb"_d', "Delete word backwards" },
@@ -217,6 +219,25 @@ local function register()
     -- vim.cmd.Lspsaga("show_workspace_diagnostics")
   end
 
+  function _K.goto_definition()
+    require("telescope.builtin").lsp_definitions({
+      prompt_title = "Find Definitions",
+    })
+    -- vim.cmd.Lspsaga("find_references")
+  end
+
+  function _K.goto_declaration()
+    require("telescope.builtin").lsp_declarations({
+      prompt_title = "Find Declarations",
+    })
+  end
+
+  function _K.goto_implementations()
+    require("telescope.builtin").lsp_implementations({
+      prompt_title = "Find Implementations",
+    })
+  end
+
   function _K.find_references()
     require("telescope.builtin").lsp_references({
       prompt_title = "Find References",
@@ -263,8 +284,8 @@ local function register()
   end
 
   function _K.goto_prev_trouble()
-    if require('trouble').is_open() then
-      require('trouble').previous({ skip_groups = true, jump = true })
+    if require("trouble").is_open() then
+      require("trouble").previous({ skip_groups = true, jump = true })
     else
       local ok, err = pcall(vim.cmd.cprevious)
       if not ok then
@@ -295,9 +316,9 @@ local function register()
     ["gr"] = { _K.find_references, "Find LspSaga symbol references" },
     ["gp"] = { _K.peek_definition, "Peek at symbol defintion" },
     ["gt"] = { _K.peek_type_definition, "Peek at symbol type definition" },
-    ["gi"] = { vim.lsp.buf.implementation, "Goto buffer implementation" },
-    ["gD"] = { vim.lsp.buf.declaration, "Goto buffer declaration.." },
-    ["gd"] = { vim.lsp.buf.definition, "Goto buffer definition.." },
+    ["gi"] = { _K.goto_implementations, "Goto buffer implementation" },
+    ["gD"] = { _K.goto_declaration, "Goto buffer declaration.." },
+    ["gd"] = { _K.goto_definition, "Goto buffer definition.." },
     ["<leader>"] = {
       ["rr"] = { vim.cmd.LspRestart, " mapping to restart lsp if necessary" },
       ["ll"] = { vim.cmd.LspStart, " mapping to restart lsp if necessary" },
@@ -326,7 +347,7 @@ local function register()
 
   _T.grep_word_under_cursor = function()
     require("telescope-live-grep-args.shortcuts").grep_word_under_cursor({
-      prompt_title = "Searching for " .. vim.fn.expand("<cword"),
+      prompt_title = "Searching for " .. vim.fn.expand("<cword>"),
     })
   end
 
@@ -339,7 +360,7 @@ local function register()
   _T.find_files_in_cwd = function()
     require("telescope.builtin").find_files({
       cwd = vim.fn.expand("%:p:h"),
-      prompt_title = "Finding in" .. vim.fn.expand("%:p:h"),
+      prompt_title = "Finding files in " .. vim.fn.expand("%:h"),
     })
   end
 
@@ -358,7 +379,7 @@ local function register()
 
   _T.git_files = function()
     require("telescope.builtin").git_files({
-      prompt_title = "Find Files (git-files)"
+      prompt_title = "Find Files (git-files)",
     })
   end
 
@@ -382,7 +403,7 @@ local function register()
 
   _T.man_pages = function()
     require("telescope.builtin").man_pages({
-      prompt_title = "Man Pages"
+      prompt_title = "Man Pages",
     })
   end
 
@@ -417,8 +438,8 @@ local function register()
   local n_telescope_bindings = {
     ["<leader>"] = {
       ["<space>"] = { _T.find_files, "Find Files (root dir)" },
-      [":"] = { "<cmd>Telescope command_history<cr>", "Command History" },
-      ["ff" ] = { _T.find_files_in_cwd, "Find Files in current working dir" },
+      [":"] = { _T.command_history, "Command History" },
+      ["ff"] = { _T.find_files_in_cwd, "Find Files in current working dir" },
       ["fs"] = { _T.telescope_live_grep, "Grep (root dir)" },
       ["fb"] = { _T.switch_buffer, "Switch Buffer" },
       ["fc"] = { _T.command_history, "Command History" },
@@ -435,19 +456,18 @@ local function register()
       ["sr"] = { _T.resume, "Resume" },
       ["ss"] = { _T.find_files_in_cwd, "Find files in cwd" },
       ["qf"] = { _T.find_in_quickfix, "Find in Quick Fix" },
-    }
-  };
+    },
+  }
 
   local n_lazy_bindings = {
     ["<leader>"] = {
-      ["z"] = "<cmd>:Lazy"
-    }
+      ["z"] = "<cmd>:Lazy",
+    },
   }
 
   wk.register(n_lsp_keybinds, n_opts)
   wk.register(n_git_bindgins, n_opts)
   wk.register(n_harpoon_maps, n_opts)
-
   wk.register(no_op_bindings, n_opts)
   wk.register(no_op_bindings, v_opts)
   wk.register(i_mode_bindings, i_opts)
@@ -459,7 +479,7 @@ local function register()
 end
 
 return {
-  register = register
+  register = register,
 }
 -- nvim-tree
 -- Map("n", "<leader>e", ":NvimTreeOpen<CR>") -- toggle file explorer

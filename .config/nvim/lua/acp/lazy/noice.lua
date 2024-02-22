@@ -1,7 +1,7 @@
 return {
   {
     "folke/noice.nvim",
-    event = {"CmdlineEnter"},
+    event = { "CmdlineEnter" },
     opts = {
       presets = {
         bottom_search = false, -- use a classic bottom cmdline for search

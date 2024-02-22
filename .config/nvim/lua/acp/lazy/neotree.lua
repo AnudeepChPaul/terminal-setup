@@ -5,8 +5,8 @@ return {
     { "<leader>e", false },
   },
   dependencies = { "nvim-lua/plenary.nvim", { "MunifTanjim/nui.nvim", lazy = true } },
-  opts = { },
-  config = function(_, opts) 
+  opts = {},
+  config = function(_, opts)
     require("neo-tree").setup(opts)
     vim.api.nvim_create_autocmd("TermClose", {
       pattern = "*lazygit",
@@ -16,6 +16,6 @@ return {
         end
       end,
     })
-    require("acp.transparent").transparent();
-  end
+    require("acp.transparent").apply()
+  end,
 }

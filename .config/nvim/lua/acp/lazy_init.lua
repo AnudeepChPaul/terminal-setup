@@ -7,7 +7,7 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 -- Setup vim options
-require('acp.options')
+require("acp.options")
 
 -- Setup Lazy Vim Plugins
 require("lazy").setup({
@@ -19,7 +19,7 @@ require("lazy").setup({
     {
       "nvim-lua/plenary.nvim",
       name = "plenary",
-      lazy = false
+      lazy = false,
     },
     { import = "acp.lazy" },
     { import = "acp.colorscheme" },

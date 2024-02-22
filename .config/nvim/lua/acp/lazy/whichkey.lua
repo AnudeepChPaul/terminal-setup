@@ -1,7 +1,8 @@
 return {
-  "folke/which-key.nvim", 
+  "folke/which-key.nvim",
   event = "VeryLazy",
   init = function(_, opts)
-    require("acp.keymap").register()
-  end
+    local wk = require("which-key")
+    require("acp.keymap").register(wk, opts)
+  end,
 }

@@ -1,8 +1,10 @@
 return {
   "neovim/nvim-lspconfig",
-  event ={ "BufRead", "BufNewFile" },
+  event = { "BufRead", "BufNewFile" },
   dependencies = {
-    "williamboman/mason.nvim",
+    {
+      "williamboman/mason.nvim",
+    },
     "williamboman/mason-lspconfig.nvim",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
@@ -12,16 +14,46 @@ return {
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
     "j-hui/fidget.nvim",
+    {
+      "stevearc/conform.nvim",
+      opts = {
+        formatters_by_ft = {
+          ["javascript"] = { "prettier" },
+          ["javascriptreact"] = { "prettier" },
+          ["typescript"] = { "prettier" },
+          ["typescriptreact"] = { "prettier" },
+          ["vue"] = { "prettier" },
+          ["css"] = { "prettier" },
+          ["scss"] = { "prettier" },
+          ["less"] = { "prettier" },
+          ["html"] = { "prettier" },
+          ["json"] = { "prettier" },
+          ["jsonc"] = { "prettier" },
+          ["yaml"] = { "prettier" },
+          ["markdown"] = { "prettier" },
+          ["markdown.mdx"] = { "prettier" },
+          ["graphql"] = { "prettier" },
+          ["handlebars"] = { "prettier" },
+          lua = { "stylua" },
+          python = { "isort", "black" },
+          ["*"] = { "codespell" },
+          -- Use the "_" filetype to run formatters on filetypes that don't
+          -- have other formatters configured.
+          ["_"] = { "trim_whitespace" },
+        },
+        format_on_save = {
+          lsp_fallback = true,
+          timeout_ms = 500,
+        },
+      },
+    },
   },
 
   config = function()
-    local cmp = require('cmp')
+    local cmp = require("cmp")
     local cmp_lsp = require("cmp_nvim_lsp")
-    local capabilities = vim.tbl_deep_extend(
-      "force",
-      {},
-      vim.lsp.protocol.make_client_capabilities(),
-      cmp_lsp.default_capabilities())
+    local capabilities =
+      vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
     require("fidget").setup({})
     require("mason").setup()
@@ -33,26 +65,25 @@ return {
       },
       handlers = {
         function(server_name) -- default handler (optional)
-
-          require("lspconfig")[server_name].setup {
-            capabilities = capabilities
-          }
+          require("lspconfig")[server_name].setup({
+            capabilities = capabilities,
+          })
         end,
 
         ["lua_ls"] = function()
           local lspconfig = require("lspconfig")
-          lspconfig.lua_ls.setup {
+          lspconfig.lua_ls.setup({
             capabilities = capabilities,
             settings = {
               Lua = {
                 diagnostics = {
                   globals = { "vim", "it", "describe", "before_each", "after_each" },
-                }
-              }
-            }
-          }
+                },
+              },
+            },
+          })
         end,
-      }
+      },
     })
 
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -60,14 +91,14 @@ return {
     cmp.setup({
       snippet = {
         expand = function(args)
-          require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+          require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
         end,
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-Space>"] = cmp.mapping.complete(),
-        ['<C-j>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-k>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        ["<C-j>"] = cmp.mapping.select_prev_item(cmp_select),
+        ["<C-k>"] = cmp.mapping.select_next_item(cmp_select),
+        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ["<S-CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
@@ -82,11 +113,11 @@ return {
         end,
       }),
       sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' }, -- For luasnip users.
+        { name = "nvim_lsp" },
+        { name = "luasnip" }, -- For luasnip users.
       }, {
-          { name = 'buffer' },
-        })
+        { name = "buffer" },
+      }),
     })
 
     vim.diagnostic.config({
@@ -100,5 +131,5 @@ return {
         prefix = "",
       },
     })
-  end
+  end,
 }

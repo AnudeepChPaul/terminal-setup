@@ -19,17 +19,17 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    tag = '0.1.5',
+    tag = "0.1.5",
     cmd = "Telescope",
     event = "VimEnter",
     version = false,
     dependencies = {
-      {"nvim-telescope/telescope-live-grep-args.nvim", version = '1.0.0' },
+      { "nvim-telescope/telescope-live-grep-args.nvim", version = "1.0.0" },
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
         enabled = vim.fn.executable("make") == 1,
-      }
+      },
     },
     opts = function()
       local lga_actions = require("telescope-live-grep-args.actions")
@@ -109,7 +109,7 @@ return {
               ["<esc>"] = actions.close,
               ["<c-c>"] = actions.close,
               ["<c-\\>"] = actions.close,
-            }
+            },
           },
         },
         pickers = {
@@ -133,12 +133,11 @@ return {
           live_grep = {
             prompt_prefix = " 🔍  ",
           },
-        }
+        },
       })
 
       -- telescope.load_extension("fzf")
       telescope.load_extension("live_grep_args")
-    end
-  }
+    end,
+  },
 }
-

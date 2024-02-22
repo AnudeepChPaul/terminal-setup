@@ -1,6 +1,6 @@
 return {
   "folke/flash.nvim",
-  event = {"BufRead", "BufNewFile"},
+  event = { "BufRead", "BufNewFile" },
   opts = {
     search = {
       wrap = true,
