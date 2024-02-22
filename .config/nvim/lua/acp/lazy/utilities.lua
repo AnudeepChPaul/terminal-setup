@@ -8,11 +8,24 @@ return {
     end,
   },
   {
-    'numToStr/Comment.nvim',
-    lazy = false,
-    config = function()
-      require('Comment').setup()
-    end,
+    "echasnovski/mini.comment",
+    event = { "BufRead", "BufNewFile" },
+    dependencies = {
+      {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        lazy = true,
+        opts = {
+          enable_autocmd = false,
+        },
+      }
+    },
+    opts = {
+      options = {
+        custom_commentstring = function()
+          return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
+        end,
+      },
+    }  
   },
   {
     "smjonas/inc-rename.nvim",

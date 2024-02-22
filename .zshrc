@@ -64,6 +64,6 @@ bindkey '^[OM' accept-line
 # bindkey -M menuselect '\r' .accept-line
 
 eval "$(starship init zsh)"
-# nvm use default
+nvm use default
 
 alias node="$HOME/.nvm/versions/node/v18.17.1/bin/node"
