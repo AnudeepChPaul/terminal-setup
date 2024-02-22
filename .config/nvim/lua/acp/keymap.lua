@@ -319,14 +319,6 @@ local function register(wk, _opts)
       ["rr"] = { vim.cmd.LspRestart, " mapping to restart lsp if necessary" },
       ["ll"] = { vim.cmd.LspStart, " mapping to restart lsp if necessary" },
       ["rs"] = { vim.cmd.LspStop, " mapping to restart lsp if necessary" },
-      ["d"] = {
-        ":Neotree position=float reveal=true reveal_force_cwd <cr>",
-        "Opens Neotree into floating mode revealing selected file if any",
-      },
-      ["e"] = {
-        ":Neotree reveal left reveal_force_cwd <cr>",
-        "Opens Neotree into left side revealing selected file if any",
-      },
       ["tr"] = { _K.toggle_trouble, "Toggles trouble window" },
       ["tj"] = { _K.goto_next_trouble, "Goto next trouble" },
       ["tk"] = { _K.goto_prev_trouble, "Goto previous trouble" },
@@ -449,6 +441,7 @@ local function register(wk, _opts)
       ["fc"] = { _T.command_history, "Command History" },
       ["fg"] = { _T.git_files, "Find Files (git-files)" },
       ["fr"] = { _T.recents, "Recent" },
+      ["fq"] = { _T.find_in_quickfix, "Find in Quick Fix" },
       ["sw"] = { _T.grep_word_under_cursor, "Search word under cursor" },
       ["sk"] = { _T.telescope_keymaps, "Find Key Maps" },
       ["sm"] = { _T.marks, "Jump to Mark" },
@@ -458,12 +451,28 @@ local function register(wk, _opts)
       ["sH"] = { _T.highlight_groups, "Search Highlight Groups" },
       ["sr"] = { _T.resume, "Resume" },
       ["qf"] = { _T.find_in_quickfix, "Find in Quick Fix" },
+      ["ss"] = { _T.find_files_in_cwd, "Find files in cwd" },
     },
   }
 
-  local n_lazy_bindings = {
+  local api = require("nvim-tree.api")
+  -- BEGIN_DEFAULT_ON_ATTACH
+  -- nvim-tree
+  local n_tree_bindings = {
+    -- ["<leader>"] = {
+    --   ["e"] = { ":NvimTreeOpen<CR>", "Toggle file explorer" },
+    --   ["w"] = { ":NvimTreeClose<CR>", "Toggle file explorer" },
+    --   ["rr"] = { ":NvimTreeRefresh<CR>", "Refresh file explorer" },
+    --   ["fl"] = { ":NvimTreeFindFile<CR>", "Find file in file explorer" },
+    -- },
     ["<leader>"] = {
-      ["z"] = "<cmd>:Lazy",
+      ["d"] = { api.tree.toggle, "Toggle file explorer" },
+      ["fl"] = {
+        function()
+          api.tree.open({ find_file = true })
+        end,
+        "Toggle file explorer",
+      },
     },
   }
 
@@ -477,18 +486,12 @@ local function register(wk, _opts)
   wk.register(v_indentation_keys, v_opts)
   wk.register(n_utility_bindings, n_opts)
   wk.register(n_telescope_bindings, n_opts)
-  wk.register(n_lazy_bindings, n_opts)
+  wk.register(n_tree_bindings, n_opts)
 end
 
 return {
   register = register,
 }
--- nvim-tree
--- Map("n", "<leader>e", ":NvimTreeOpen<CR>") -- toggle file explorer
--- Map("n", "<leader>w", ":NvimTreeClose<CR>") -- toggle file explorer
--- Map("n", "<leader>rr", ":NvimTreeRefresh<CR>") -- find files within current working directory, respects .gitignore
--- Map("n", "<leader>fl", ":NvimTreeFindFile<CR>") -- locates the file (in nvim-tree) opened in current buffer
-
 -- telescope
 -- Map("n", "<leader>fr", "<cmd>Telescope resume<cr>") -- Lists the results incl. multi-selections of the previous picker
 -- Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore

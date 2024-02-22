@@ -33,6 +33,7 @@ export PATH="$PNPM_HOME:${PATH}"
 export PATH="$PATH:/Users/achandrapaul/Library/Application Support/JetBrains/Toolbox/scripts"
 
 
+export PYENV_ROOT="$HOME/.pyenv";
 export NVM_DIR="$HOME/.nvm";
 export DOTBARE_DIR=$HOME/.cfg;
 export DOTBARE_TREE=$HOME;
@@ -155,11 +156,11 @@ alias ask='$HOME/bin/cht.sh'
 alias otr='owl tubes --backend envoy render'
 alias ots='owl tubes --backend envoy stop'
 
-function trw { 
+function trw {
   tmux rename-window "${1:-zsh|exec}";
 }
 
-function tree { 
+function tree {
   exa -aF --tree -L="${1:-2}" --icons;
 }
 
@@ -262,7 +263,7 @@ _run_nginx() {
 _tn() {
     session_name=$1;
     session_dir=`zoxide query ${session_name}`
-    
+
     tmux new-session -s $session_name -n "main:${session_name}" -c "${session_dir}" -d 2> /dev/null; tmux attach -t $session_name 2> /dev/null || tmux switchc -t $session_name 2> /dev/null;
 }
 
@@ -295,9 +296,9 @@ function aws-ec2() {
 _tmux_smart_attach_ () {
   session=`tmux list-sessions | fzf-tmux -p +s --tac | cut -d ':' -f1`
 
-  if [[ -z "$session" ]]; then 
+  if [[ -z "$session" ]]; then
     echo "aborting";
-    return 
+    return
   fi
 
   tmux attach -t $session || tmux switch-client -t $session

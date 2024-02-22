@@ -24,6 +24,7 @@ return {
     event = "VimEnter",
     version = false,
     dependencies = {
+      { "nvim-lua/plenary.nvim", version = "0.5.1" },
       { "nvim-telescope/telescope-live-grep-args.nvim", version = "1.0.0" },
       {
         "nvim-telescope/telescope-fzf-native.nvim",

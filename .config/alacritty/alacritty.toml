@@ -19,7 +19,7 @@ builtin_box_drawing = false
 size = 15
 
 [cursor]
-style = { shape = "Beam", blinking = "Always" }
+style = { shape = "Beam", blinking = "on" }
 vi_mode_style = { shape = "Beam", blinking = "Off" }
 thickness = 0.05
 blink_interval = 500

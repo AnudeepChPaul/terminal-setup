@@ -4,7 +4,6 @@ return {
     name = "plenary",
     lazy = false,
   },
-  { "MunifTanjim/nui.nvim", lazy = true, event = "VimEnter" },
   { "nvim-tree/nvim-web-devicons", lazy = true },
   {
     "ThePrimeagen/harpoon",
@@ -17,14 +16,14 @@ return {
   {
     "kylechui/nvim-surround",
     version = "*",
-    event = { "BufRead", "BufNewFile" },
+    event = { "InsertEnter" },
     config = function()
       require("nvim-surround").setup()
     end,
   },
   {
     "echasnovski/mini.comment",
-    event = { "BufRead", "BufNewFile" },
+    event = { "InsertEnter" },
     dependencies = {
       {
         "JoosepAlviste/nvim-ts-context-commentstring",

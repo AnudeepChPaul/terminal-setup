@@ -1,7 +1,7 @@
 return {
   {
     "echasnovski/mini.pairs",
-    event = { "BufRead", "BufNewFile" },
+    event = { "InsertEnter" },
     opts = {},
     keys = {
       {

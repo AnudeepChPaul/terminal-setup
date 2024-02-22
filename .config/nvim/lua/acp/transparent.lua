@@ -10,15 +10,15 @@ return {
     vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "none" })
     vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none" })
     vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
-    vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
+    vim.api.nvim_set_hl(0, "LineNr", { bg = "none", fg = "#ababab" })
     vim.api.nvim_set_hl(0, "CursorLine", { bg = "#000000" })
-    vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
+    vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none", fg = "#ffffff", bold = true })
     vim.api.nvim_set_hl(0, "ColorColumn", { bg = "none" })
 
     vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
     vim.api.nvim_set_hl(0, "VertSplit", { bg = "none" })
     vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { bg = "none" })
-    vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { bg = "#fafafa", fg = "#000000" })
+    vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { bg = "#000000", bold = true })
     vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 
     vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
