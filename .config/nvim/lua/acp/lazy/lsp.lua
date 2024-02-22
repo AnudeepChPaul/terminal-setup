@@ -96,8 +96,8 @@ return {
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-j>"] = cmp.mapping.select_prev_item(cmp_select),
-        ["<C-k>"] = cmp.mapping.select_next_item(cmp_select),
+        ["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
+        ["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
         ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ["<S-CR>"] = cmp.mapping.confirm({
@@ -106,7 +106,7 @@ return {
         }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-e>"] = cmp.mapping.abort(),
+        ["<C-c>"] = cmp.mapping.abort(),
         ["<C-CR>"] = function(fallback)
           cmp.abort()
           fallback()
