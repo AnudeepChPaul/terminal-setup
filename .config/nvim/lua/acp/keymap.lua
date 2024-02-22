@@ -294,10 +294,6 @@ local function register(wk, _opts)
     end
   end
 
-  function _K.inc_rename()
-    require("inc_rename").rename()
-  end
-
   local n_lsp_keybinds = {
     ["<c-k><c-d>"] = { _K.format_buffer, "Formats the buffer with smart indent" },
     ["K"] = { vim.lsp.buf.hover, "Impersonates hover effect" },
@@ -311,7 +307,7 @@ local function register(wk, _opts)
     ["mf"] = { _K.show_buf_diagnostics, "LspSaga show buffer diagnostics" },
     ["mw"] = { _K.show_workspace_diagnostics, "LspSaga show workspace diagnostics" },
     ["mrl"] = { vim.lsp.buf.rename, "Lsp renaming without highlighting" },
-    ["mrn"] = { _K.inc_rename, "Lsp renaming with highlighting" },
+    ["mrn"] = { ":IncRename ", "Lsp renaming with highlighting" },
     ["gR"] = { vim.lsp.buf.references, "Find symbol references" },
     ["gr"] = { _K.find_references, "Find LspSaga symbol references" },
     ["gp"] = { _K.peek_definition, "Peek at symbol defintion" },
