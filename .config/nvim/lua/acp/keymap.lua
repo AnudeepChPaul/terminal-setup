@@ -3,11 +3,11 @@
 -- set leader key to space
 vim.g.mapleader = " "
 
-local function Map(key, left, right, desc)
-  vim.keymap.set(key, left, right, { noremap = true, silent = true, desc = desc })
-end
+-- local function Map(key, left, right, desc)
+--   vim.keymap.set(key, left, right, { noremap = true, silent = true, desc = desc })
+-- end
 
-local function register() 
+local function register()
   ---------------------
   -- General Keymaps
   ---------------------
@@ -202,23 +202,40 @@ local function register()
   end
 
   function _K.show_buf_diagnostics()
-    vim.cmd.Lspsaga("show_buf_diagnostics")
+    require("telescope.builtin").diagnostics({
+      prompt_title = "Buffer Diagnostics",
+      sort_by = "severity",
+    })
+    -- vim.cmd.Lspsaga("show_buf_diagnostics")
   end
 
   function _K.show_workspace_diagnostics()
-    vim.cmd.Lspsaga("show_workspace_diagnostics")
+    require("telescope.builtin").diagnostics({
+      prompt_title = "Buffer Diagnostics",
+      sort_by = "severity",
+    })
+    -- vim.cmd.Lspsaga("show_workspace_diagnostics")
   end
 
   function _K.find_references()
-    vim.cmd.Lspsaga("find_references")
+    require("telescope.builtin").lsp_references({
+      prompt_title = "Find References",
+    })
+    -- vim.cmd.Lspsaga("find_references")
   end
 
   function _K.peek_definition()
-    vim.cmd.Lspsaga("peek_definition")
+    require("telescope.builtin").lsp_definitions({
+      prompt_title = "Peek at symbol definition",
+    })
+    -- vim.cmd.Lspsaga("peek_definition")
   end
 
   function _K.peek_type_definition()
-    vim.cmd.Lspsaga("peek_type_definition")
+    require("telescope.builtin").lsp_type_definitions({
+      prompt_title = "Peek at symbol type definition",
+    })
+    -- vim.cmd.Lspsaga("peek_type_definition")
   end
 
   function _K.signature_help()
@@ -273,10 +290,9 @@ local function register()
     ["mf"] = { _K.show_buf_diagnostics, "LspSaga show buffer diagnostics" },
     ["mw"] = { _K.show_workspace_diagnostics, "LspSaga show workspace diagnostics" },
     ["mrl"] = { vim.lsp.buf.rename, "Lsp renaming without highlighting" },
-    -- ["mrn"] = { ":IncRename ", "Lsp renaming with highlighting" },
     ["mrn"] = { _K.inc_rename, "Lsp renaming with highlighting" },
-    ["gr"] = { vim.lsp.buf.references, "Find symbol references" },
-    ["gR"] = { _K.find_references, "Find LspSaga symbol references" },
+    ["gR"] = { vim.lsp.buf.references, "Find symbol references" },
+    ["gr"] = { _K.find_references, "Find LspSaga symbol references" },
     ["gp"] = { _K.peek_definition, "Peek at symbol defintion" },
     ["gt"] = { _K.peek_type_definition, "Peek at symbol type definition" },
     ["gi"] = { vim.lsp.buf.implementation, "Goto buffer implementation" },

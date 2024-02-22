@@ -25,7 +25,7 @@ return {
           return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
         end,
       },
-    }  
+    }
   },
   {
     "smjonas/inc-rename.nvim",
