@@ -49,7 +49,7 @@ return {
     },
   },
 
-  config = function()
+  config = function(_, opts)
     local cmp = require("cmp")
     local cmp_lsp = require("cmp_nvim_lsp")
     local capabilities =
@@ -83,6 +83,38 @@ return {
             },
           })
         end,
+
+        ["tsserver"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.tsserver.setup({
+            capabilities = capabilities,
+            on_attach = function(client, bufnr)
+              require("which-key").register({
+                ["<leader>co"] = {
+                  function()
+                    vim.lsp.buf.code_action({
+                      apply = true,
+                      context = { only = { "source.organizeImports.ts" }, diagnostics = {} },
+                    })
+                  end,
+                  "Organize Imports",
+                },
+                ["<leader>cR"] = {
+                  function()
+                    vim.lsp.buf.code_action({
+                      apply = true,
+                      context = { only = { "source.removeUnused.ts" }, diagnostics = {} },
+                    })
+                  end,
+                  "Remove Unused Imports",
+                },
+              }, {
+                mode = "n",
+                buffer = bufnr,
+              })
+            end,
+          })
+        end,
       },
     })
 
@@ -114,6 +146,7 @@ return {
       }),
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
+        { name = "" },
         { name = "luasnip" }, -- For luasnip users.
       }, {
         { name = "buffer" },

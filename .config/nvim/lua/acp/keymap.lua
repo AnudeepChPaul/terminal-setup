@@ -337,7 +337,14 @@ local function register(wk, _opts)
 
   _T.telescope_live_grep = function()
     require("telescope").extensions.live_grep_args.live_grep_args({
-      prompt_title = "Grep (root dir)",
+      prompt_title = "Live Grep (root dir)",
+    })
+  end
+
+  _T.telescope_live_grep_cwd = function()
+    require("telescope").extensions.live_grep_args.live_grep_args({
+      cwd = vim.fn.expand("%:p:h"),
+      prompt_title = "Live Grep " .. vim.fn.expand("%:h"),
     })
   end
 
@@ -434,14 +441,14 @@ local function register(wk, _opts)
   local n_telescope_bindings = {
     ["<leader>"] = {
       ["<space>"] = { _T.find_files, "Find Files (root dir)" },
-      [":"] = { _T.command_history, "Command History" },
       ["ff"] = { _T.find_files_in_cwd, "Find Files in current working dir" },
-      ["fs"] = { _T.telescope_live_grep, "Grep (root dir)" },
+      ["/"] = { _T.telescope_live_grep, "Grep (root dir)" },
+      ["fs"] = { _T.telescope_live_grep_cwd, "Grep (root dir)" },
+      [":"] = { _T.command_history, "Command History" },
       ["fb"] = { _T.switch_buffer, "Switch Buffer" },
       ["fc"] = { _T.command_history, "Command History" },
       ["fg"] = { _T.git_files, "Find Files (git-files)" },
       ["fr"] = { _T.recents, "Recent" },
-      ["/"] = { _T.telescope_live_grep, "Grep (root dir)" },
       ["sw"] = { _T.grep_word_under_cursor, "Search word under cursor" },
       ["sk"] = { _T.telescope_keymaps, "Find Key Maps" },
       ["sm"] = { _T.marks, "Jump to Mark" },
@@ -450,7 +457,6 @@ local function register(wk, _opts)
       ["sb"] = { _T.search_symbol, "Search LSP Workspace Symbols" },
       ["sH"] = { _T.highlight_groups, "Search Highlight Groups" },
       ["sr"] = { _T.resume, "Resume" },
-      ["ss"] = { _T.find_files_in_cwd, "Find files in cwd" },
       ["qf"] = { _T.find_in_quickfix, "Find in Quick Fix" },
     },
   }

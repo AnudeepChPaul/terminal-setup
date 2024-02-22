@@ -4,6 +4,7 @@ return {
     name = "plenary",
     lazy = false,
   },
+  { "MunifTanjim/nui.nvim", lazy = true, event = "VimEnter" },
   { "nvim-tree/nvim-web-devicons", lazy = true },
   {
     "ThePrimeagen/harpoon",

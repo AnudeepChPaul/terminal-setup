@@ -1,10 +1,11 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   event = "VimEnter",
+  enabled = false,
   keys = {
     { "<leader>e", false },
   },
-  dependencies = { "nvim-lua/plenary.nvim", { "MunifTanjim/nui.nvim", lazy = true } },
+  dependencies = { { "MunifTanjim/nui.nvim", lazy = true } },
   opts = {},
   config = function(_, opts)
     require("neo-tree").setup(opts)
