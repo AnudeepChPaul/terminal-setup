@@ -46,7 +46,7 @@ return {
           lsp_fallback = true,
           timeout_ms = 500,
         },
-      }
+      },
     },
   },
 
@@ -60,7 +60,15 @@ return {
     local capabilities =
       vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
-    require("mason").setup()
+    require("mason").setup({
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
+        },
+      },
+    })
     require("mason-lspconfig").setup({
       ensure_installed = {
         "lua_ls",

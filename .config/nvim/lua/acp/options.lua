@@ -13,6 +13,7 @@ vim.opt.virtualedit = "onemore"
 vim.opt.wrap = true
 vim.opt.guicursor = ""
 vim.opt.mouse = ""
+vim.opt.showmode = false
 
 vim.opt.backup = false
 vim.opt.swapfile = false
@@ -36,7 +37,7 @@ vim.opt.smartindent = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "<>", space = " ", eol = "↵" }
 vim.opt.foldenable = true
-vim.opt.foldlevel = 5
+vim.opt.foldlevel = 9
 vim.opt.foldmethod = "indent"
 
 -- Backspace

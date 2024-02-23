@@ -43,6 +43,8 @@ return {
     vim.api.nvim_set_hl(0, "NeoTree", { bg = "none" })
     vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NeoTreeTitleBar", { bg = "#F8F8F2", fg = "#415854" })
+    vim.api.nvim_set_hl(0, "NeoTreeFloatTitle", { bg = "#F8F8F2", fg = "#415854" })
     vim.api.nvim_set_hl(0, "NeoTreeIndentMarker", { fg = "#F8F8F2", bg = "none" })
     vim.api.nvim_set_hl(0, "NeoTreeDotfile", { fg = "#F8F8F2", bg = "none" })
     vim.api.nvim_set_hl(0, "NeoTreeGitIgnored", { fg = "#F8F8F2", bg = "none" })
