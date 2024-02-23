@@ -27,9 +27,10 @@ return {
       { "nvim-lua/plenary.nvim", version = "0.5.1" },
       { "nvim-telescope/telescope-live-grep-args.nvim", version = "1.0.0" },
       {
+
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
-        enabled = vim.fn.executable("make") == 1,
+        -- enabled = vim.fn.executable("make") == 1,
       },
     },
     opts = function()
@@ -43,6 +44,15 @@ return {
         --     auto_quoting = false,
         --   },
         -- },
+        extensions = {
+          fzf = {
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
+          },
+        },
 
         -- configure custom mappings
         defaults = {
@@ -137,7 +147,7 @@ return {
         },
       })
 
-      -- telescope.load_extension("fzf")
+      telescope.load_extension("fzf")
       telescope.load_extension("live_grep_args")
     end,
   },

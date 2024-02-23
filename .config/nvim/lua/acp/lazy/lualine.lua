@@ -25,8 +25,7 @@ return {
           {
             "filename",
             file_status = true,
-            path = 1,
-            color = { gui = "bold" },
+            path = 4,
             symbols = {
               added = "+", -- Text to show when the file is added.
               modified = "~", -- Text to show when the file is modified.
