@@ -434,9 +434,9 @@ local function register(wk, _opts)
     ["<leader>"] = {
       ["<space>"] = { _T.find_files, "Find Files (root dir)" },
       ["ff"] = { _T.find_files_in_cwd, "Find Files in current working dir" },
-      ["/"] = { _T.telescope_live_grep, "Grep (root dir)" },
-      ["fs"] = { _T.telescope_live_grep_cwd, "Grep (root dir)" },
-      [":"] = { _T.command_history, "Command History" },
+      ["fF"] = { _T.find_files_in_cwd, "Find files in cwd" },
+      ["fs"] = { _T.telescope_live_grep, "Grep (root dir)" },
+      ["fS"] = { _T.telescope_live_grep_cwd, "Grep (root dir)" },
       ["fb"] = { _T.switch_buffer, "Switch Buffer" },
       ["fc"] = { _T.command_history, "Command History" },
       ["fg"] = { _T.git_files, "Find Files (git-files)" },
@@ -451,30 +451,39 @@ local function register(wk, _opts)
       ["sH"] = { _T.highlight_groups, "Search Highlight Groups" },
       ["sr"] = { _T.resume, "Resume" },
       ["qf"] = { _T.find_in_quickfix, "Find in Quick Fix" },
-      ["ss"] = { _T.find_files_in_cwd, "Find files in cwd" },
     },
   }
 
-  local api = require("nvim-tree.api")
+  local tree_exists, api = pcall(require, "nvim-tree")
+  local n_tree_bindings = {}
   -- BEGIN_DEFAULT_ON_ATTACH
   -- nvim-tree
-  local n_tree_bindings = {
-    -- ["<leader>"] = {
-    --   ["e"] = { ":NvimTreeOpen<CR>", "Toggle file explorer" },
-    --   ["w"] = { ":NvimTreeClose<CR>", "Toggle file explorer" },
-    --   ["rr"] = { ":NvimTreeRefresh<CR>", "Refresh file explorer" },
-    --   ["fl"] = { ":NvimTreeFindFile<CR>", "Find file in file explorer" },
-    -- },
-    ["<leader>"] = {
-      ["d"] = { api.tree.toggle, "Toggle file explorer" },
-      ["fl"] = {
-        function()
-          api.tree.open({ find_file = true })
-        end,
-        "Toggle file explorer",
+  if tree_exists then
+    n_tree_bindings = {
+      -- ["<leader>"] = {
+      --   ["e"] = { ":NvimTreeOpen<CR>", "Toggle file explorer" },
+      --   ["w"] = { ":NvimTreeClose<CR>", "Toggle file explorer" },
+      --   ["rr"] = { ":NvimTreeRefresh<CR>", "Refresh file explorer" },
+      --   ["fl"] = { ":NvimTreeFindFile<CR>", "Find file in file explorer" },
+      -- },
+      ["<leader>"] = {
+        ["d"] = { api.tree.toggle, "Toggle file explorer" },
+        ["fl"] = {
+          function()
+            api.tree.open({ find_file = true })
+          end,
+          "Toggle file explorer",
+        },
       },
-    },
-  }
+    }
+  else
+    n_tree_bindings = {
+      ["<leader>"] = {
+        ["d"] = { ":Neotree position=float <cr>", "Toggle file explorer" },
+        ["fl"] = { ":Neotree position=float reveal=true reveal_force_cwd <cr>", "Find file in file explorer" },
+      },
+    }
+  end
 
   wk.register(n_lsp_keybinds, n_opts)
   wk.register(n_git_bindgins, n_opts)
