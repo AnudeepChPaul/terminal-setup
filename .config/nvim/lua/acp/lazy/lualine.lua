@@ -25,14 +25,14 @@ return {
           {
             "filename",
             file_status = true,
-            path = 4,
+            path = 3,
             symbols = {
-              added = "+", -- Text to show when the file is added.
-              modified = "~", -- Text to show when the file is modified.
-              removed = "-", -- Text to show when the file is modified.
-              readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-              unnamed = "[Untitled]", -- Text to show for unnamed buffers.
-              newfile = "[New]", -- Text to show for newly created file before first write
+              added = "+",
+              modified = "~",
+              removed = "-",
+              readonly = "[-]",
+              unnamed = "[Untitled]",
+              newfile = "[New]",
             },
           },
         },
@@ -45,16 +45,11 @@ return {
           {
             "diagnostics",
             sources = { "nvim_lsp" },
-            -- symbols = {
-            --   error = "E",
-            --   warn = "W",
-            --   info = "i",
-            --   hint = "H",
-            -- },
           },
         },
         lualine_y = {
           function()
+            local a = ""
             local msg = "No Active Lsp"
             local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
             local clients = vim.lsp.get_active_clients()
@@ -70,9 +65,25 @@ return {
             end
             return icon .. msg
           end,
+          "encoding",
+          "fileformat",
         },
         lualine_z = { "progress", "location", "filesize" },
       },
+      -- winbar = {
+      --   lualine_a = {
+      --     {
+      --       "filename",
+      --       file_status = false,
+      --       path = 3,
+      --     },
+      --   },
+      -- },
+      -- inactive_winbar = {
+      --   lualine_c = {
+      --     { "filename", file_status = false, path = 3 },
+      --   },
+      -- },
       extensions = { "fugitive" },
     }
   end,

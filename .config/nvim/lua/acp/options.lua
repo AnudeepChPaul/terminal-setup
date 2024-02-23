@@ -11,7 +11,7 @@ vim.opt.laststatus = 2
 vim.opt.scrolloff = 10
 vim.opt.virtualedit = "onemore"
 vim.opt.wrap = true
-vim.opt.guicursor = ""
+vim.opt.guicursor = "n-v-r-o:block,i:ver25"
 vim.opt.mouse = ""
 vim.opt.showmode = false
 
