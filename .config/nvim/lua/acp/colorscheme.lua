@@ -15,7 +15,7 @@ return {
     vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none" })
     vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
     vim.api.nvim_set_hl(0, "LineNr", { bg = "none", fg = "#ababab" })
-    vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none", fg = "#ffffff", bold = true })
+    vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none", fg = "#F8F8F2", bold = true })
 
     vim.api.nvim_set_hl(0, "CursorLine", { bg = "#415854" })
 
@@ -43,5 +43,10 @@ return {
     vim.api.nvim_set_hl(0, "NeoTree", { bg = "none" })
     vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NeoTreeIndentMarker", { fg = "#F8F8F2", bg = "none" })
+    vim.api.nvim_set_hl(0, "NeoTreeDotfile", { fg = "#F8F8F2", bg = "none" })
+    vim.api.nvim_set_hl(0, "NeoTreeGitIgnored", { fg = "#F8F8F2", bg = "none" })
+    vim.api.nvim_set_hl(0, "NeoTreeHiddenByName", { fg = "#F8F8F2", bg = "none" })
+    vim.api.nvim_set_hl(0, "NeoTreeWindowsHidden", { fg = "#F8F8F2", bg = "none" })
   end,
 }

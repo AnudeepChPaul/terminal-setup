@@ -7,6 +7,37 @@ return {
     { "nvim-tree/nvim-web-devicons", lazy = true },
     { "MunifTanjim/nui.nvim", lazy = true },
   },
+  opts = {
+    filesystem = {
+      filtered_items = {
+        visible = true, -- when true, they will just be displayed differently than normal items
+        hide_dotfiles = true,
+        hide_gitignored = false,
+        hide_hidden = true,
+        always_show = { -- remains visible even if other settings would normally hide it
+          ".gitignored",
+        },
+        never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+          ".DS_Store",
+          "thumbs.db",
+        },
+        hide_by_name = {
+          "node_modules",
+        },
+      },
+    },
+    window = {
+      mappings = {
+        ["<cr>"] = "open",
+        ["<esc>"] = "cancel",
+        ["<c-c>"] = "cancel",
+        ["S"] = "open_split",
+        ["s"] = "open_vsplit",
+        ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
+        ["w"] = "open_with_window_picker",
+      },
+    },
+  },
 }
 -- local function on_attach(bufnr)
 --   local api = require("nvim-tree.api")
