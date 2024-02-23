@@ -13,6 +13,7 @@ return {
     "hrsh7th/nvim-cmp",
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
+    "onsails/lspkind.nvim",
     "j-hui/fidget.nvim",
     {
       "stevearc/conform.nvim",
@@ -50,12 +51,15 @@ return {
   },
 
   config = function(_, opts)
+    require("fidget").setup({})
+
     local cmp = require("cmp")
+    local kind = require("lspkind")
     local cmp_lsp = require("cmp_nvim_lsp")
+
     local capabilities =
       vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
-    require("fidget").setup({})
     require("mason").setup()
     require("mason-lspconfig").setup({
       ensure_installed = {
@@ -146,10 +150,22 @@ return {
       }),
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "luasnip" }, -- For luasnip users.
+        { name = "luasnip" },
+        { name = "path" },
       }, {
         { name = "buffer" },
       }),
+      formatting = {
+        format = kind.cmp_format({
+          mode = "text_symbol",
+          maxwidth = 64,
+          ellipsis_char = "...",
+          show_labelDetails = true,
+          before = function(entry, vim_item)
+            return vim_item
+          end,
+        }),
+      },
     })
 
     vim.diagnostic.config({
