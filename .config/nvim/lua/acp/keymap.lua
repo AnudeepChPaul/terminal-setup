@@ -116,7 +116,7 @@ local function register(wk, _opts)
   local n_git_bindgins = {
     ["gl"] = { _G.toggle_current_line_blame, "Toggles current line git blame" },
     ["gL"] = { _G.git_diff_this, "Shows current file difference" },
-    ["<leader>fgt"] = { vim.cmd.Git, "Shows git fugitive window" },
+    ["<leader>go"] = { vim.cmd.Git, "Shows git fugitive window" },
   }
 
   -- harpoon
