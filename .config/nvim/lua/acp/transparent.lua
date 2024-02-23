@@ -18,7 +18,7 @@ return {
     vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
     vim.api.nvim_set_hl(0, "VertSplit", { bg = "none" })
     vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { bg = "none" })
-    vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { bg = "#000000", bold = true })
+    vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { bg = "none", bold = true, underline = true })
     vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 
     vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
