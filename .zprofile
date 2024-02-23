@@ -30,7 +30,7 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="/Users/achandrapaul/.jenv/shims:${PATH}"
 export PATH="${HOME}/.dotbare:${PATH}"
 export PATH="$PNPM_HOME:${PATH}"
-export PATH="$PATH:/Users/achandrapaul/Library/Application Support/JetBrains/Toolbox/scripts"
+export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$HOME/Projects/github.com/mawww/kakoune/src"
 
 
 export PYENV_ROOT="$HOME/.pyenv";

@@ -70,6 +70,10 @@ local function register(wk, _opts)
       },
     },
     ["x"] = { '"_x', "Delete single character without copying into register" },
+    ["w"] = { "<ESC>vw", "go to start of next word with selection" },
+    ["e"] = { "<ESC>ve", "go to end of current word with selection" },
+    ["b"] = { "<ESC>vb", "go backwards end of current word with selection" },
+    ["U"] = { "<C-r>", "Redo" },
     ["dw"] = { 'vb"_d', "Delete word backwards" },
     ["<C-a>"] = { "gg<S-v>G", "Select all words" },
     ["+"] = { "<C-a>", "Increment number" },
@@ -95,9 +99,12 @@ local function register(wk, _opts)
     ["p"] = { '"_dP"', "Paste's a line without copying the replacement" },
   }
 
-  local v_indentation_keys = {
+  local v_utility_bindings = {
     ["J"] = { ":m '>+1<CR>gv=gv", "Moves line one down" },
     ["K"] = { ":m '<-2<CR>gv=gv", "Moves line one up" },
+    ["w"] = { "<ESC>vw", "go to start of next word with selection" },
+    ["e"] = { "<ESC>ve", "go to end of current word with selection" },
+    ["b"] = { "<ESC>vb", "go backwards end of current word with selection" },
     ["<"] = { "<gv", "Indents left" },
     [">"] = { ">gv", "Indents right" },
     ["<leader>r"] = { ":s/", "Replaces search term within selection" },
@@ -492,7 +499,7 @@ local function register(wk, _opts)
   wk.register(no_op_bindings, v_opts)
   wk.register(i_mode_bindings, i_opts)
   wk.register(x_mode_bindings, x_opts)
-  wk.register(v_indentation_keys, v_opts)
+  wk.register(v_utility_bindings, v_opts)
   wk.register(n_utility_bindings, n_opts)
   wk.register(n_telescope_bindings, n_opts)
   wk.register(n_tree_bindings, n_opts)
