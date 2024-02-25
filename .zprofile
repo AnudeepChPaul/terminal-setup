@@ -145,6 +145,8 @@ alias k="kitty";
 alias kk="kitty +kitten"
 alias icat="kitty +kitten icat"
 
+alias pnpx="pnpm dlx"
+
 # Don't google
 alias myip="curl ifconfig.me"
 alias whatismyip="curl ifconfig.me"

@@ -49,6 +49,12 @@ local function register(wk, _opts)
     ["<C-c>"] = { "<ESC>", "Escape" },
   }
 
+  local function set_fold_level()
+    local l = vim.fn.input("Set fold level: ")
+
+    vim.opt.foldlevel = tonumber(l)
+  end
+
   local n_utility_bindings = {
     ["<leader>"] = {
       ["nh"] = { ":nohl<CR>", "Clear search highlights" },
@@ -62,6 +68,7 @@ local function register(wk, _opts)
       ["m"] = { 'V"-y"-p', "Duplicates a line without copying to clipboard" },
       ["lw"] = { ":set list!<CR>", "Toggles list characters like Tab, space, newline" },
       ["lr"] = { ":set rnu!<CR>", "Toggles relative numbering" },
+      ["lf"] = { set_fold_level, "Sets fold level from user input" },
       ["sR"] = {
         function()
           require("spectre").open()
@@ -70,9 +77,9 @@ local function register(wk, _opts)
       },
     },
     ["x"] = { '"_x', "Delete single character without copying into register" },
-    ["w"] = { "<ESC>vw", "go to start of next word with selection" },
-    ["e"] = { "<ESC>ve", "go to end of current word with selection" },
-    ["b"] = { "<ESC>vb", "go backwards end of current word with selection" },
+    -- ["w"] = { "<ESC>vw", "go to start of next word with selection" },
+    -- ["e"] = { "<ESC>ve", "go to end of current word with selection" },
+    -- ["b"] = { "<ESC>vb", "go backwards end of current word with selection" },
     ["U"] = { "<C-r>", "Redo" },
     ["dw"] = { 'vb"_d', "Delete word backwards" },
     ["<C-a>"] = { "gg<S-v>G", "Select all words" },
@@ -102,9 +109,9 @@ local function register(wk, _opts)
   local v_utility_bindings = {
     ["J"] = { ":m '>+1<CR>gv=gv", "Moves line one down" },
     ["K"] = { ":m '<-2<CR>gv=gv", "Moves line one up" },
-    ["w"] = { "<ESC>vw", "go to start of next word with selection" },
-    ["e"] = { "<ESC>ve", "go to end of current word with selection" },
-    ["b"] = { "<ESC>vb", "go backwards end of current word with selection" },
+    -- ["w"] = { "<ESC>vw", "go to start of next word with selection" },
+    -- ["e"] = { "<ESC>ve", "go to end of current word with selection" },
+    -- ["b"] = { "<ESC>vb", "go backwards end of current word with selection" },
     ["<"] = { "<gv", "Indents left" },
     [">"] = { ">gv", "Indents right" },
     ["<leader>r"] = { ":s/", "Replaces search term within selection" },
