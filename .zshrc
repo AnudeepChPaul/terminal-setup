@@ -11,7 +11,6 @@ plugins=(
   zsh-autosuggestions
   zsh-completions
   fast-syntax-highlighting
-  dotbare
   zsh-nvm
 )
 
@@ -139,7 +138,7 @@ fi
 source ~/.zprofile
 eval "$(zoxide init zsh)"
 
-_dotbare_completion_cmd
+# _dotbare_completion_cmd
 
 zle -N _tmux_manager
 zle -N h
