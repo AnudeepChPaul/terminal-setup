@@ -6,11 +6,11 @@
 # Prompt appearance
 add_newline = true
 
-format = ''' 
+format = '''
 [](bold green)$directory $fill $all
 [╰$character](bold green)'''
 
-[character] # available characters: ❯ ▶ ▶▶ 
+[character] # available characters: ❯ ▶ ▶▶
 success_symbol = '[▶](bold #50fa7b)'
 # error_symbol = "[λ](bold #ff5555)"
 
@@ -142,7 +142,7 @@ symbol = ''
 format = '[$symbol($version )]($style) '
 
 [meson]
-format = '[$symbol$project]($style) '
+format = '[$symbol$project ]($style) '
 
 [nim]
 format = '[$symbol($version )]($style) '
@@ -197,10 +197,10 @@ format = '[$symbol($version )]($style) '
 format = '[$symbol $environment ]($style) '
 
 [swift]
-format = '[$symbol($version )]($style) '
+format = '[$symbol($version) ]($style) '
 
 [terraform]
-format = '[$symbol $workspace]($style) '
+format = '[$symbol $workspace ]($style) '
 
 [typst]
 format = '[$symbol($version )]($style) '

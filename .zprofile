@@ -80,11 +80,9 @@ alias as='alias | grep' # Search aliases
 
 alias _pv='python3 -m venv ./venv'
 
-alias l='exa -alF --icons'
-alias la='exa -alF --icons'
-alias ll='exa -laFh --icons --git'
-alias lm='exa -lahr --color-scale --icons -s=modified'
-alias lb='exa -lahr --color-scale --icons -s=size'
+alias l='eza -1 --long --icons --classify --git-ignore --group-directories-first --git --git-repos-no-status --header'
+alias la='eza -1 --long --icons --classify --git-ignore --group-directories-first --git --git-repos-no-status --all -T --header'
+alias lg='eza -1 --long --icons --classify --git-ignore --group-directories-first --git --git-repos --all --header'
 
 alias c='clear'
 alias ..="cd ..";
