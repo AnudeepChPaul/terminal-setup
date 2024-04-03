@@ -109,7 +109,7 @@ return {
               "typescriptreact",
               "typescript.tsx",
             },
-            root_dir = nvim_lsp.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+            root_dir = nvim_lsp.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
             on_attach = function(client, bufnr)
               require("which-key").register({
                 ["<leader>co"] = {
