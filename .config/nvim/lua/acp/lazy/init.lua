@@ -14,6 +14,10 @@ return {
     event = { "VimEnter" },
   },
   {
+    "mbbill/undotree",
+    event = { "BufRead", "BufNewFile" },
+  },
+  {
     "kylechui/nvim-surround",
     version = "*",
     event = { "InsertEnter" },
