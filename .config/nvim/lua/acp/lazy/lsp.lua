@@ -79,6 +79,7 @@ return {
         function(server_name) -- default handler (optional)
           require("lspconfig")[server_name].setup({
             capabilities = capabilities,
+            autostart = true,
           })
         end,
 
@@ -100,6 +101,15 @@ return {
           local lspconfig = require("lspconfig")
           lspconfig.tsserver.setup({
             capabilities = capabilities,
+            filetypes = {
+              "javascript",
+              "javascriptreact",
+              "javascript.jsx",
+              "typescript",
+              "typescriptreact",
+              "typescript.tsx",
+            },
+            root_dir = nvim_lsp.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
             on_attach = function(client, bufnr)
               require("which-key").register({
                 ["<leader>co"] = {
