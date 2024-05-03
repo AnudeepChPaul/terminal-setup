@@ -156,6 +156,10 @@ alias ask='$HOME/bin/cht.sh'
 alias otr='owl tubes --backend envoy render'
 alias ots='owl tubes --backend envoy stop'
 
+alias flextest="npx nx run console:test --watchAll=false --coverage --coverageReporters=text '--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**' --testPathPattern=apps/console/src/app/shell --testPathPattern=apps/console/src/app/shared  --testPathPattern=apps/console/src/app/applications/Flex"
+
+alias flextest_html="npx nx run console:test --watchAll=false --coverage --coverageReporters=html '--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**' --testPathPattern=apps/console/src/app/shell --testPathPattern=apps/console/src/app/shared  --testPathPattern=apps/console/src/app/applications/Flex"
+
 function trw {
   tmux rename-window "${1:-zsh|exec}";
 }

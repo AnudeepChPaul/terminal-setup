@@ -164,6 +164,26 @@ local function register(wk, _opts)
     require("harpoon.ui").nav_file(4)
   end
 
+  function _H.goto_five()
+    require("harpoon.ui").nav_file(5)
+  end
+
+  function _H.goto_six()
+    require("harpoon.ui").nav_file(6)
+  end
+
+  function _H.goto_seven()
+    require("harpoon.ui").nav_file(7)
+  end
+
+  function _H.goto_eight()
+    require("harpoon.ui").nav_file(8)
+  end
+
+  function _H.goto_nine()
+    require("harpoon.ui").nav_file(9)
+  end
+
   local n_harpoon_maps = {
     ["<C-TAB>"] = { _H.nav_next, "Goto next harpoon file" },
     [";a"] = { _H.add_file, "Add file to harpoon quick list" },
@@ -172,6 +192,11 @@ local function register(wk, _opts)
     [";2"] = { _H.goto_two, "Goto 2nd harpoon file" },
     [";3"] = { _H.goto_three, "Goto 3rd harpoon file" },
     [";4"] = { _H.goto_four, "Goto 4th harpoon file" },
+    [";5"] = { _H.goto_five, "Goto 5th harpoon file" },
+    [";6"] = { _H.goto_six, "Goto 6th harpoon file" },
+    [";7"] = { _H.goto_seven, "Goto 7th harpoon file" },
+    [";8"] = { _H.goto_eight, "Goto 8th harpoon file" },
+    [";9"] = { _H.goto_nine, "Goto 9th harpoon file" },
   }
 
   ---------------------
@@ -247,9 +272,10 @@ local function register(wk, _opts)
   end
 
   function _K.goto_implementations()
-    require("telescope.builtin").lsp_implementations({
-      prompt_title = "Find Implementations",
-    })
+    vim.lsp.buf.implementation()
+    -- require("telescope.builtin").lsp_implementations({
+    --   prompt_title = "Find Implementations",
+    -- })
   end
 
   function _K.find_references()
