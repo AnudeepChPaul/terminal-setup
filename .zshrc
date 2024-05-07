@@ -27,8 +27,11 @@ echo '\e[5 q'
 zstyle ':completion:*' file-sort modification
 zstyle :compinstall filename '/Users/anudeepchandrapaul/.zshrc'
 zstyle '*:compinit' arguments -D -i -u -C -w
+
 autoload -Uz compinit
 compinit
+
+autoload -Uz zkbd
 
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -144,10 +147,13 @@ zle -N _tmux_manager
 zle -N h
 zle -N _tmux_smart_attach_
 
+bindkey -A viins main
 bindkey -s "^y" '_tmux_manager^M'
 bindkey -s "^h" 'h^M'
 bindkey -s "^t" '_tmux_smart_attach_^M'
 bindkey '^[OM' accept-line
+bindkey '^g' clear-screen
+
 # bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
 # bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 # bindkey -M menuselect '\r' .accept-line
