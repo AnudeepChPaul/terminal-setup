@@ -38,6 +38,39 @@ return {
       local actions = require("telescope.actions")
       local telescope = require("telescope")
 
+      local function filenameFirst(_, path)
+        local tail = vim.fs.basename(path)
+        local parent = vim.fs.dirname(path)
+        if parent == "." then
+          return tail
+        end
+        return string.format("%s\t\t%s", tail, parent)
+      end
+
+      local grep_args = {
+        "rg",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--smart-case",
+        "--hidden",
+        "--no-ignore",
+        "--glob",
+        "!**/.git/*",
+        "--glob",
+        "!**/*.lock",
+        "--glob",
+        "!**/package-lock.json",
+        "--glob",
+        "!**/node_modules/*",
+        "--glob",
+        "!**/dist/*",
+        "--glob",
+        "!**/.cache/*",
+        "--glob",
+        "!**/coverage/*",
+      }
+
       telescope.setup({
         -- extensions = {
         --   live_grep_args = {
@@ -56,6 +89,8 @@ return {
 
         -- configure custom mappings
         defaults = {
+          path_display = filenameFirst,
+          prompt_prefix = " 🔍  ",
           dynamic_preview_title = true,
           -- buffer_previewer_maker = no_binary_preview,
           -- preview = {
@@ -63,25 +98,7 @@ return {
           --   check_mime_type = 'file',
           --   hide_on_startup = true
           -- },
-          vimgrep_arguments = {
-            "rg",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case",
-            "--hidden",
-            "--no-ignore",
-            "--glob",
-            "!**/.git/*",
-            "--glob",
-            "!**/*.lock",
-            "--glob",
-            "!**/package-lock.json",
-            "--glob",
-            "!**/node_modules/*",
-            "--glob",
-            "!**/dist/*",
-          },
+          vimgrep_arguments = grep_args,
           mappings = {
             i = {
               ["<c-o>"] = lga_actions.quote_prompt(),
@@ -125,24 +142,7 @@ return {
         },
         pickers = {
           find_files = {
-            find_command = {
-              "rg",
-              "--files",
-              "--hidden",
-              "--no-ignore",
-              "--glob",
-              "!**/.git/*",
-              "--glob",
-              "!**/*.lock",
-              "--glob",
-              "!**/package-lock.json",
-              "--glob",
-              "!**/node_modules/*",
-            },
-            prompt_prefix = " 🔍  ",
-          },
-          live_grep = {
-            prompt_prefix = " 🔍  ",
+            find_command = grep_args,
           },
         },
       })
