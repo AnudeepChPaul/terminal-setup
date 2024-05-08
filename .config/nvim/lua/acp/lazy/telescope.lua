@@ -24,7 +24,7 @@ return {
     event = "VimEnter",
     version = false,
     dependencies = {
-      { "nvim-lua/plenary.nvim", version = "0.5.1" },
+      { "nvim-lua/plenary.nvim",                        version = "0.5.1" },
       { "nvim-telescope/telescope-live-grep-args.nvim", version = "1.0.0" },
       {
 
@@ -47,30 +47,6 @@ return {
         return string.format("%s\t\t%s", tail, parent)
       end
 
-      local grep_args = {
-        "rg",
-        "--with-filename",
-        "--line-number",
-        "--column",
-        "--smart-case",
-        "--hidden",
-        "--no-ignore",
-        "--glob",
-        "!**/.git/*",
-        "--glob",
-        "!**/*.lock",
-        "--glob",
-        "!**/package-lock.json",
-        "--glob",
-        "!**/node_modules/*",
-        "--glob",
-        "!**/dist/*",
-        "--glob",
-        "!**/.cache/*",
-        "--glob",
-        "!**/coverage/*",
-      }
-
       telescope.setup({
         -- extensions = {
         --   live_grep_args = {
@@ -79,10 +55,10 @@ return {
         -- },
         extensions = {
           fzf = {
-            fuzzy = true, -- false will only do exact matching
+            fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
             -- the default case_mode is "smart_case"
           },
         },
@@ -98,16 +74,40 @@ return {
           --   check_mime_type = 'file',
           --   hide_on_startup = true
           -- },
-          vimgrep_arguments = grep_args,
+          vimgrep_arguments = {
+            "rg",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--hidden",
+            "--no-ignore",
+            "--glob",
+            "!**/.gitignore",
+            "--glob",
+            "!**/.git/*",
+            "--glob",
+            "!**/*.lock",
+            "--glob",
+            "!**/package-lock.json",
+            "--glob",
+            "!**/node_modules/*",
+            "--glob",
+            "!**/dist/*",
+            "--glob",
+            "!**/.cache/*",
+            "--glob",
+            "!**/coverage/*",
+          },
           mappings = {
             i = {
               ["<c-o>"] = lga_actions.quote_prompt(),
               ["<c-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
               ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-              ["<C-j>"] = actions.move_selection_next, -- move to next result
-              ["<C-s>"] = actions.select_horizontal, -- select horizontal
-              ["<C-v>"] = actions.select_vertical, -- select vertical
-              ["<C-t>"] = actions.select_tab, -- select tab
+              ["<C-j>"] = actions.move_selection_next,     -- move to next result
+              ["<C-s>"] = actions.select_horizontal,       -- select horizontal
+              ["<C-v>"] = actions.select_vertical,         -- select vertical
+              ["<C-t>"] = actions.select_tab,              -- select tab
 
               ["<C-u>"] = actions.preview_scrolling_up,
               ["<C-d>"] = actions.preview_scrolling_down,
@@ -123,10 +123,10 @@ return {
               ["<C-x>"] = actions.delete_buffer + actions.move_to_top,
 
               ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-              ["<C-j>"] = actions.move_selection_next, -- move to next result
-              ["<C-s>"] = actions.select_horizontal, -- select horizontal
-              ["<C-v>"] = actions.select_vertical, -- select vertical
-              ["<C-t>"] = actions.select_tab, -- select tab
+              ["<C-j>"] = actions.move_selection_next,     -- move to next result
+              ["<C-s>"] = actions.select_horizontal,       -- select horizontal
+              ["<C-v>"] = actions.select_vertical,         -- select vertical
+              ["<C-t>"] = actions.select_tab,              -- select tab
 
               ["<C-u>"] = actions.preview_scrolling_up,
               ["<C-d>"] = actions.preview_scrolling_down,
@@ -142,7 +142,31 @@ return {
         },
         pickers = {
           find_files = {
-            find_command = grep_args,
+            find_command = {
+              "rg",
+              "--files",
+              "--line-number",
+              "--column",
+              "--smart-case",
+              "--hidden",
+              "--no-ignore",
+              "--glob",
+              "!**/.gitignore",
+              "--glob",
+              "!**/.git/*",
+              "--glob",
+              "!**/*.lock",
+              "--glob",
+              "!**/package-lock.json",
+              "--glob",
+              "!**/node_modules/*",
+              "--glob",
+              "!**/dist/*",
+              "--glob",
+              "!**/.cache/*",
+              "--glob",
+              "!**/coverage/*",
+            },
           },
         },
       })
