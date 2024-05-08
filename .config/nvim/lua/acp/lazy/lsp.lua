@@ -57,8 +57,11 @@ return {
     local kind = require("lspkind")
     local cmp_lsp = require("cmp_nvim_lsp")
 
-    local capabilities =
-      vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+    local capabilities = vim.tbl_deep_extend("force", {},
+      vim.lsp.protocol.make_client_capabilities(),
+      cmp_lsp.default_capabilities()
+    )
+
 
     require("mason").setup({
       ui = {
@@ -67,7 +70,7 @@ return {
           package_pending = "➜",
           package_uninstalled = "✗",
         },
-      },
+      }
     })
     require("mason-lspconfig").setup({
       ensure_installed = {
@@ -142,6 +145,9 @@ return {
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
     cmp.setup({
+      completion = {
+        completeopt = "menu,menuone,preview,noselect",
+      },
       snippet = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
@@ -169,7 +175,6 @@ return {
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "path" },
-      }, {
         { name = "buffer" },
       }),
       formatting = {

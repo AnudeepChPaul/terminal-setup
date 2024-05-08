@@ -66,6 +66,7 @@ local function register(wk, _opts)
       ["tt"] = { vim.cmd.tabnew, "Opens new tab" },
       ["tx"] = { vim.cmd.tabclose, "Close newly opened tab" },
       ["m"] = { 'V"-y"-p', "Duplicates a line without copying to clipboard" },
+      ["li"] = { ":IBLToggle<CR>", "Toggles indentation guides" },
       ["lw"] = { ":set list!<CR>", "Toggles list characters like Tab, space, newline" },
       ["lr"] = { ":set rnu!<CR>", "Toggles relative numbering" },
       ["lf"] = { set_fold_level, "Sets fold level from user input" },
@@ -209,6 +210,7 @@ local function register(wk, _opts)
     _K.smart_shift()
     vim.lsp.buf.format()
   end
+
   function _K.hover_doc()
     vim.cmd.Lspsaga("hover_doc", "++quiet")
   end
