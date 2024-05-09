@@ -10,6 +10,10 @@ return {
     lazy = true,
   },
   {
+    "mg979/vim-visual-multi",
+    lazy = false
+  },
+  {
     "christoomey/vim-tmux-navigator",
     event = { "VimEnter" },
   },

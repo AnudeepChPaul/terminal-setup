@@ -389,14 +389,16 @@ local function register(wk, _opts)
   end
 
   _T.find_files = function()
-    require("telescope.builtin").find_files({
+    require("telescope.builtin").find_files(require('telescope.themes').get_dropdown {
+      previewer = false,
       prompt_title = "Find Files (root dir)",
     })
   end
 
   _T.find_files_in_cwd = function()
-    require("telescope.builtin").find_files({
+    require("telescope.builtin").find_files(require('telescope.themes').get_dropdown {
       cwd = vim.fn.expand("%:p:h"),
+      previewer = false,
       prompt_title = "Finding files in " .. vim.fn.expand("%:h"),
     })
   end

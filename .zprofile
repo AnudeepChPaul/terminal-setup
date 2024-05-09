@@ -156,6 +156,15 @@ alias ask='$HOME/bin/cht.sh'
 alias otr='owl tubes --backend envoy render'
 alias ots='owl tubes --backend envoy stop'
 
+# pomodoro
+alias work="timer 60m && terminal-notifier -message 'Drink a lot of water! 🧉💧'\
+        -title 'Work Timer is up! Take a Break 😊'\
+        -sound Crystal"
+
+alias rest="timer 10m && terminal-notifier -message 'Just check your slack once!'\
+        -title 'Break is over! Get back to work 😬'\
+        -sound Crystal"
+
 alias flextest="npx nx run console:test --watchAll=false --coverage --coverageReporters=text '--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**' --testPathPattern=apps/console/src/app/shell --testPathPattern=apps/console/src/app/shared  --testPathPattern=apps/console/src/app/applications/Flex"
 
 alias flextest_html="npx nx run console:test --watchAll=false --coverage --coverageReporters=html '--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**' --testPathPattern=apps/console/src/app/shell --testPathPattern=apps/console/src/app/shared  --testPathPattern=apps/console/src/app/applications/Flex"
