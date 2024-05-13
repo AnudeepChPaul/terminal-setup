@@ -149,7 +149,7 @@ zle -N _tmux_smart_attach_
 
 bindkey -A viins main
 bindkey -s "^y" '_tmux_manager^M'
-bindkey -s "^i" 'h^M'
+bindkey -s "^p" 'h^M'
 bindkey -s "^t" '_tmux_smart_attach_^M'
 bindkey '^[OM' accept-line
 bindkey '^g' clear-screen
