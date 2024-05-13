@@ -1,3 +1,11 @@
+local disable_function = function(lang)
+  local buf_name = vim.fn.expand("%")
+  print(buf_name, lang)
+  if lang == "vimdoc" then
+    return true
+  end
+end
+
 return {
   "nvim-treesitter/nvim-treesitter",
   version = false, -- last release is way too old and doesn't work on Windows
@@ -20,6 +28,8 @@ return {
         -- vim text objects c & C instead of the treesitter ones.
         local move = require("nvim-treesitter.textobjects.move") ---@type table<string,fun(...)>
         local configs = require("nvim-treesitter.configs")
+
+
         for name, fn in pairs(move) do
           if name:find("goto") == 1 then
             move[name] = function(q, ...)
@@ -62,10 +72,10 @@ return {
   cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   keys = {
     { "<c-space>", desc = "Increment selection" },
-    { "<bs>", desc = "Decrement selection", mode = "x" },
+    { "<bs>",      desc = "Decrement selection", mode = "x" },
   },
   opts = {
-    highlight = { enable = true },
+    highlight = { enable = true, disable = disable_function },
     indent = { enable = true },
     ensure_installed = {
       "bash",
