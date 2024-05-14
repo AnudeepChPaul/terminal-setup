@@ -24,7 +24,7 @@ return {
     event = "VimEnter",
     version = false,
     dependencies = {
-      { "nvim-lua/plenary.nvim",                        version = "0.5.1" },
+      { "nvim-lua/plenary.nvim", version = "0.5.1" },
       { "nvim-telescope/telescope-live-grep-args.nvim", version = "1.0.0" },
       {
 
@@ -48,17 +48,12 @@ return {
       end
 
       telescope.setup({
-        -- extensions = {
-        --   live_grep_args = {
-        --     auto_quoting = false,
-        --   },
-        -- },
         extensions = {
           fzf = {
-            fuzzy = true,                   -- false will only do exact matching
+            fuzzy = true, -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true,    -- override the file sorter
-            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+            override_file_sorter = true, -- override the file sorter
+            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
             -- the default case_mode is "smart_case"
           },
         },
@@ -68,12 +63,6 @@ return {
           path_display = filenameFirst,
           prompt_prefix = " 🔍  ",
           dynamic_preview_title = true,
-          -- buffer_previewer_maker = no_binary_preview,
-          -- preview = {
-          --   filesize_limit = 2,
-          --   check_mime_type = 'file',
-          --   hide_on_startup = true
-          -- },
           vimgrep_arguments = {
             "rg",
             "--with-filename",
@@ -98,16 +87,21 @@ return {
             "!**/.cache/*",
             "--glob",
             "!**/coverage/*",
+            "--glob",
+            "!**/.idea/*",
           },
           mappings = {
             i = {
               ["<c-o>"] = lga_actions.quote_prompt(),
               ["<c-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+
               ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-              ["<C-j>"] = actions.move_selection_next,     -- move to next result
-              ["<C-s>"] = actions.select_horizontal,       -- select horizontal
-              ["<C-v>"] = actions.select_vertical,         -- select vertical
-              ["<C-t>"] = actions.select_tab,              -- select tab
+              ["<C-j>"] = actions.move_selection_next, -- move to next result
+
+              ["<C-s>"] = actions.select_horizontal, -- select horizontal
+              ["<C-v>"] = actions.select_vertical, -- select vertical
+              ["<C-t>"] = actions.select_tab, -- select_tab
+              ["<C-h>"] = actions.select_horizontal, -- select horizontal
 
               ["<C-u>"] = actions.preview_scrolling_up,
               ["<C-d>"] = actions.preview_scrolling_down,
@@ -115,18 +109,22 @@ return {
               ["<C-p>"] = actions.results_scrolling_down,
 
               ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+
               ["<esc>"] = actions.close,
               ["<c-c>"] = actions.close,
               ["<c-\\>"] = actions.close,
             },
+
             n = {
+              ["<c-o>"] = lga_actions.quote_prompt(),
+              ["<c-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
               ["<C-x>"] = actions.delete_buffer + actions.move_to_top,
 
               ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-              ["<C-j>"] = actions.move_selection_next,     -- move to next result
-              ["<C-s>"] = actions.select_horizontal,       -- select horizontal
-              ["<C-v>"] = actions.select_vertical,         -- select vertical
-              ["<C-t>"] = actions.select_tab,              -- select tab
+              ["<C-j>"] = actions.move_selection_next, -- move to next result
+              ["<C-s>"] = actions.select_horizontal, -- select horizontal
+              ["<C-v>"] = actions.select_vertical, -- select vertical
+              ["<C-t>"] = actions.select_tab, -- select tab
 
               ["<C-u>"] = actions.preview_scrolling_up,
               ["<C-d>"] = actions.preview_scrolling_down,
@@ -134,6 +132,7 @@ return {
               ["<C-p>"] = actions.results_scrolling_down,
 
               ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+
               ["<esc>"] = actions.close,
               ["<c-c>"] = actions.close,
               ["<c-\\>"] = actions.close,
@@ -166,6 +165,8 @@ return {
               "!**/.cache/*",
               "--glob",
               "!**/coverage/*",
+              "--glob",
+              "!**/.idea/*",
             },
           },
         },
