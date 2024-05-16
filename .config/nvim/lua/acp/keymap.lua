@@ -45,8 +45,8 @@ local function register(wk, _opts)
     ["<c-;>"] = { "<Plug>(copilot-next)", "Copilot next suggestion" },
     ["<c-,>"] = { "<Plug>(copilot-previours)", "Copilot previous suggestion" },
     ["<c-space>"] = { "<Plug>(copilot-suggest)", "Copilot suggest" },
-    ["<C-\\>"] = { "<ESC>", "Escape" },
-    ["<C-c>"] = { "<ESC>", "Escape" },
+    ["<C-\\>"] = { "<ESC><ESC>", "Escape" },
+    ["<C-c>"] = { "<ESC><ESC>", "Escape" },
   }
 
   local function set_fold_level()
