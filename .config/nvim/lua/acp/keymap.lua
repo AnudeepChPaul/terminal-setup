@@ -46,7 +46,7 @@ local function register(wk, _opts)
     ["<c-,>"] = { "<Plug>(copilot-previours)", "Copilot previous suggestion" },
     ["<c-space>"] = { "<Plug>(copilot-suggest)", "Copilot suggest" },
     ["<C-\\>"] = { "<ESC><ESC>", "Escape" },
-    ["<C-c>"] = { "<ESC><ESC>", "Escape" },
+    ["<C-c>"] = { "<ESC><ESC><ESC>", "Escape" },
   }
 
   local function set_fold_level()
@@ -101,10 +101,14 @@ local function register(wk, _opts)
     ["<S-Up>"] = { "<C-w>+", "Expand Split window up" },
     ["<S-Down>"] = { "<C-w>-", "Expand Split window down" },
     ["<S-TAB>"] = { vim.cmd.bnext, "Move to load next buffer" },
+    ["<C-\\>"] = { "<ESC><ESC>", "Escape" },
+    ["<C-c>"] = { "<ESC><ESC><ESC>", "Escape" },
   }
 
   local x_mode_bindings = {
     ["p"] = { '"_dP"', "Paste's a line without copying the replacement" },
+    ["<C-\\>"] = { "<ESC><ESC>", "Escape" },
+    ["<C-c>"] = { "<ESC><ESC><ESC>", "Escape" },
   }
 
   local v_utility_bindings = {
@@ -116,6 +120,8 @@ local function register(wk, _opts)
     ["<"] = { "<gv", "Indents left" },
     [">"] = { ">gv", "Indents right" },
     ["<leader>r"] = { ":s/", "Replaces search term within selection" },
+    ["<C-\\>"] = { "<ESC><ESC>", "Escape" },
+    ["<C-c>"] = { "<ESC><ESC><ESC>", "Escape" },
   }
 
   -- GitSigns
