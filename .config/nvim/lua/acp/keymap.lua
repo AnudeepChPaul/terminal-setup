@@ -395,18 +395,18 @@ local function register(wk, _opts)
   end
 
   _T.find_files = function()
-    require("telescope.builtin").find_files(require('telescope.themes').get_dropdown {
+    require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({
       previewer = false,
       prompt_title = "Find Files (root dir)",
-    })
+    }))
   end
 
   _T.find_files_in_cwd = function()
-    require("telescope.builtin").find_files(require('telescope.themes').get_dropdown {
+    require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({
       cwd = vim.fn.expand("%:p:h"),
       previewer = false,
       prompt_title = "Finding files in " .. vim.fn.expand("%:h"),
-    })
+    }))
   end
 
   _T.switch_buffer = function()
@@ -418,20 +418,23 @@ local function register(wk, _opts)
 
   _T.command_history = function()
     require("telescope.builtin").command_history({
+      previewer = false,
       prompt_title = "Command History",
     })
   end
 
   _T.git_files = function()
-    require("telescope.builtin").git_files({
-      prompt_title = "Find Files (git-files)",
-    })
+    require("telescope.builtin").git_files(require("telescope.themes").get_dropdown({
+      previewer = false,
+      prompt_title = "Find Git Files",
+    }))
   end
 
   _T.recents = function()
-    require("telescope.builtin").oldfiles({
+    require("telescope.builtin").oldfiles(require("telescope.themes").get_dropdown({
+      previewer = false,
       prompt_title = "Recent",
-    })
+    }))
   end
 
   _T.telescope_keymaps = function()
