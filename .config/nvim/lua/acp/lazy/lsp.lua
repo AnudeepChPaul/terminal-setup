@@ -165,7 +165,10 @@ return {
         }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-c>"] = cmp.mapping.abort(),
+        ["<C-c>"] = function(fallback)
+          cmp.mapping.abort()
+          fallback()
+        end,
         ["<C-CR>"] = function(fallback)
           cmp.abort()
           fallback()

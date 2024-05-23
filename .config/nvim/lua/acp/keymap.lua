@@ -95,7 +95,7 @@ local function register(wk, _opts)
     ["<c-l>"] = { ":TmuxNavigateRight<CR>", "Tmux navigate right" },
     ["<c-f>"] = { "<cmd>silent !tmux neww tmux-sessionizer<CR>" },
     ["n"] = { "nzzzv", "Goto next seach occurrence with cursor at center" },
-    ["N"] = { "Nnzzzv", "Goto previous seach occurrence with cursor at center" },
+    ["N"] = { "Nzzzv", "Goto previous seach occurrence with cursor at center" },
     ["<S-Left>"] = { "<C-w><", "Expand Split window left" },
     ["<S-Right>"] = { "<C-w>>", "Expand Split window right" },
     ["<S-Up>"] = { "<C-w>+", "Expand Split window up" },
