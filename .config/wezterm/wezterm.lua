@@ -8,14 +8,6 @@ config.automatically_reload_config = true
 
 -- config.default_prog = { 'top' }
 
--- This is where you actually apply your config choices
-
--- For example, changing the color scheme:
-config.color_scheme = 'Dracula+'
-config.color_scheme = 'Dracula (Gogh)'
-config.color_scheme = 'Dracula (Official)'
-config.color_scheme = 'Dracula'
-config.color_scheme = 'X::DotShare (terminal.sexy)'
 config.color_scheme = 'Dark Pastel'
 
 config.window_background_opacity = 0.9
@@ -31,9 +23,9 @@ config.window_decorations = 'RESIZE'
 config.animation_fps = 9
 
 config.window_padding = {
-  left = 0,
-  right = 0,
-  top = 25,
+  left = 2,
+  right = 2,
+  top = 0,
   bottom = 0,
 }
 

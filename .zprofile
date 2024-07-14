@@ -158,6 +158,10 @@ alias ask='$HOME/bin/cht.sh'
 alias otr='owl tubes --backend envoy render'
 alias ots='owl tubes --backend envoy stop'
 
+# sencha
+alias saw="sencha app watch"
+alias sag="sencha app generate"
+
 # pomodoro
 alias work="timer 60m && terminal-notifier -message 'Drink a lot of water! 🧉💧'\
         -title 'Work Timer is up! Take a Break 😊'\
