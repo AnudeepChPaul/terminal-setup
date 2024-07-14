@@ -103,6 +103,8 @@ alias v="nvim";
 
 # git shortcuts
 alias gc="git clone";
+alias gs="git status";
+alias gsw="git switch";
 alias gfp="git fetch; git pull"
 alias glsm="git ls-files --modified --others --exclude-standard"
 alias gdf="git diff --staged --name-status"
@@ -168,6 +170,10 @@ alias rest="timer 10m && terminal-notifier -message 'Just check your slack once!
 alias flextest="npx nx run console:test --watchAll=false --coverage --coverageReporters=text '--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**' --testPathPattern=apps/console/src/app/shell --testPathPattern=apps/console/src/app/shared  --testPathPattern=apps/console/src/app/applications/Flex"
 
 alias flextest_html="npx nx run console:test --watchAll=false --coverage --coverageReporters=html '--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**' --testPathPattern=apps/console/src/app/shell --testPathPattern=apps/console/src/app/shared  --testPathPattern=apps/console/src/app/applications/Flex"
+
+alias flextest_html_p='npx nx run console:test --watchAll=false --coverage --coverageReporters=html "--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**" --testPathPattern=apps/console/src/app/shell --testPathPattern=apps/console/src/app/shared  --testPathPattern="${TEST_RUN_PATH}"'
+
+alias flextest_html_n='npx nx run console:test --watchAll=false --coverage --coverageReporters=html "--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**" --testPathPattern="${TEST_RUN_PATH}"'
 
 function trw {
   tmux rename-window "${1:-zsh|exec}";

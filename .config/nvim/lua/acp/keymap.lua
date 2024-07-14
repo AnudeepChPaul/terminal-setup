@@ -83,6 +83,7 @@ local function register(wk, _opts)
     -- ["b"] = { "<ESC>vb", "go backwards end of current word with selection" },
     ["U"] = { "<C-r>", "Redo" },
     ["dw"] = { 'vb"_d', "Delete word backwards" },
+    ["cp"] = { ':let @*=expand("%:p")<CR>', "Delete word backwards" },
     ["<C-a>"] = { "gg<S-v>G", "Select all words" },
     ["+"] = { "<C-a>", "Increment number" },
     ["-"] = { "<C-x>", "Decrement number" },
