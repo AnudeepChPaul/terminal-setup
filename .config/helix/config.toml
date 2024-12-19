@@ -1,0 +1,116 @@
+theme = "sweet-ass-theme"
+
+
+[keys.insert]
+"C-c" = ["normal_mode"]
+up = "no_op"
+down = "no_op"
+left = "no_op"
+right = "no_op"
+pageup = "no_op"
+pagedown = "no_op"
+home = "no_op"
+end = "no_op"
+
+
+[keys.normal]
+g = { a = "code_action" }
+"~" = "switch_case"
+"`" = "switch_to_lowercase"
+"U" = "switch_to_uppercase"
+"C-c" = ["normal_mode"]
+"C-r" = "redo"
+"C-h" = "jump_view_left"
+"C-l" = "jump_view_right"
+"C-j" = "jump_view_down"
+"C-k" = "jump_view_up"
+"S-h" = "swap_view_left"
+"S-l" = "swap_view_right"
+"S-j" = "swap_view_down"
+"S-k" = "swap_view_up"
+"y" = "yank_to_clipboard"
+"Y" = ["extend_line_below", "yank_main_selection_to_clipboard"]
+"p" = "paste_clipboard_after"
+"P" = ["delete_selection", "paste_clipboard_after"]
+tab = "move_parent_node_end"
+S-tab = "move_parent_node_start"
+up = "no_op"
+down = "no_op"
+left = "no_op"
+right = "no_op"
+pageup = "no_op"
+pagedown = "no_op"
+home = "no_op"
+end = "no_op"
+K = "hover"
+
+
+[keys.normal.space]
+P = "symbol_picker"
+S = "workspace_symbol_picker"
+"A-c" = "no_op"
+s = { h="hsplit", v="vsplit" }
+
+
+[keys.select]
+"C-c" = "normal_mode"
+"Y" = "yank_main_selection_to_clipboard"
+"p" = ["delete_selection", "paste_clipboard_after"]
+"P" = ["delete_selection", "paste_clipboard_before"]
+"`" = "switch_to_lowercase"
+"U" = "switch_to_uppercase"
+tab = "extend_parent_node_end"
+S-tab = "extend_parent_node_start"
+
+
+[editor]
+line-number = "relative"
+cursorline = true
+mouse = true
+color-modes = true
+bufferline = "never" # Enable tab bar at the top
+
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 25 # increase value to reduce forced mid-word wrapping
+max-indent-retain = 0
+wrap-indicator = ""  # set wrap-indicator to "" to hide it
+
+
+[editor.indent-guides]
+render = true
+character = "|" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+
+[editor.statusline]
+left = ["mode", "spinner"]
+center = ["file-name"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+
+[editor.lsp]
+enable = true
+display-messages = true
+display-inlay-hints = true
+
+
+[editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+'<' = '>'
+

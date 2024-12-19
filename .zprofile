@@ -9,9 +9,10 @@ export MAVEN_PATH=$HOME/bin/apache-maven-3.8.8/
 export PYTHON_PATH=/usr/local/bin/python
 export PLATFORM_TOOLS_PATH="$HOME/bin/platform-tools"
 export ROVER_HOME_PATH="$HOME/.rover"
+export HELIX_HOME_PATH="$HOME/helix"
 
 export PATH=$PATH:$GO_PATH/bin:$HOME/bin:/usr/local/bin:$HOME/bin/redis-6.2.6/src:$PYTHON_PATH:$MAVEN_PATH/bin:$PLATFORM_TOOLS_PATH
-export PATH="$PATH:$ROVER_HOME_PATH/bin:$HOME/__bin__/apache-maven-3.9.3/apache-maven/src/bin"
+export PATH="$PATH:$ROVER_HOME_PATH/bin:$HOME/__bin__/apache-maven-3.9.3/apache-maven/src/bin:$HELIX_HOME_PATH"
 
 export GHQ_ROOT="$HOME/Projects"
 export PNPM_HOME="/Users/anudeepchandrapaul/Library/pnpm"
