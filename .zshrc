@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/achandrapaul/.zsh/completions:"* ]]; then export FPATH="/Users/achandrapaul/.zsh/completions:$FPATH"; fi
 #!/bin/zsh
 
 export ZSH="$HOME/.oh-my-zsh"
@@ -159,7 +161,8 @@ bindkey '^g' clear-screen
 # bindkey -M menuselect '\r' .accept-line
 
 eval "$(starship init zsh)"
-nvm use default
+# nvm use default
 
 
 export PATH="/Users/anudeep/bin/Sencha/Cmd:$PATH"
+. "/Users/achandrapaul/.deno/env"

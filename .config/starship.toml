@@ -10,6 +10,11 @@ format = '''
 [](bold green)$directory $fill $all
 [╰$character](bold green)'''
 
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 10
+
+command_timeout = 90
+
 [character] # available characters: ❯ ▶ ▶▶
 success_symbol = '[▶](bold #50fa7b)'
 # error_symbol = "[λ](bold #ff5555)"
@@ -51,6 +56,7 @@ format = '[\($state( $progress_current of $progress_total)\)]($style) '
 cherry_pick = '[ PICKING](bold red)'
 
 [git_status]
+disabled = true
 style = "bold #ff5555"
 
 [memory_usage]
@@ -64,24 +70,30 @@ style = 'bold dimmed green'
 min_time=50
 
 [bun]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [c]
+disabled = true
 format = '[$symbol($version(-$name) )]($style) '
 
 [cmake]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [cobol]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [conda]
 format = '[$symbol$environment]($style) '
 
 [crystal]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [daml]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [dart]
@@ -94,18 +106,23 @@ format = '[$symbol($version )]($style) '
 format = '[$symbol$context]($style) '
 
 [dotnet]
+disabled = true
 format = '[$symbol($version )(🎯 $tfm )]($style) '
 
 [elixir]
+disabled = true
 format = '[$symbol($version \(OTP $otp_version\) )]($style) '
 
 [elm]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [erlang]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [fennel]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [golang]
@@ -119,18 +136,22 @@ format = '[$symbol]($style) '
 format = '[$symbol($version )]($style) '
 
 [haskell]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [haxe]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [helm]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [java]
 format = '[$symbol($version )]($style) '
 
 [julia]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [kotlin]
@@ -142,30 +163,38 @@ symbol = ''
 format = '[$symbol($version )]($style) '
 
 [meson]
+disabled = true
 format = '[$symbol$project ]($style) '
 
 [nim]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [nodejs]
 format = '[$symbol($version )]($style) '
 
 [ocaml]
+disabled = true
 format = '[$symbol($version )(\($switch_indicator$switch_name\) )]($style) '
 
 [opa]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [perl]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [php]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [pulumi]
+disabled = true
 format = '[$symbol($username@)$stack]($style) '
 
 [purescript]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [python]
@@ -173,43 +202,55 @@ format = '[${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )]($style) '
 symbol = ''
 
 [rlang]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [raku]
+disabled = true
 format = '[$symbol($version-$vm_version )]($style) '
 
 [red]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [ruby]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [rust]
 format = '[$symbol($version )]($style) '
 
 [scala]
+disabled = true
 format = '[${symbol}(${version} )]($style) '
 
 [solidity]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [spack]
+disabled = true
 format = '[$symbol $environment ]($style) '
 
 [swift]
+disabled = true
 format = '[$symbol($version) ]($style) '
 
 [terraform]
 format = '[$symbol $workspace ]($style) '
 
 [typst]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [vagrant]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [vlang]
+disabled = true
 format = '[$symbol($version )]($style) '
 
 [zig]
+disabled = true
 format = '[$symbol($version )]($style) '
