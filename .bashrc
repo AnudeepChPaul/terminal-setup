@@ -69,3 +69,4 @@ function _init_tmux_session {
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 _init_tmux_session master
+. "/Users/achandrapaul/.deno/env"
