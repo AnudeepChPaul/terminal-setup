@@ -27,5 +27,8 @@ blink_interval = 500
 [terminal]
 osc52 = "CopyPaste"
 
+[colors.primary]
+background= '#051014'
+
 [mouse]
 hide_when_typing = true
