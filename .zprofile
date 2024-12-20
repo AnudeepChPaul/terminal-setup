@@ -120,6 +120,7 @@ alias plz="fc -l -1 | cut -d' ' -f2- | xargs sudo"
 alias cpwd='pwd | pbcopy'
 alias pa='pbpaste'
 alias rn='ranger'
+alias j='zellij'
 
 
 # tmux shortcuts
