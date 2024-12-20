@@ -3,10 +3,6 @@ theme = "sweet-ass-theme"
 
 [keys.insert]
 "C-c" = ["normal_mode"]
-# up = "no_op"
-# down = "no_op"
-# left = "no_op"
-# right = "no_op"
 pageup = "no_op"
 pagedown = "no_op"
 home = "no_op"
@@ -29,9 +25,9 @@ g = { a = "code_action" }
 "S-j" = "swap_view_down"
 "S-k" = "swap_view_up"
 "y" = "yank_to_clipboard"
-"Y" = ["extend_line_below", "yank_main_selection_to_clipboard"]
+"Y" = ["extend_line_below", "yank_main_selection_to_clipboard", "move_char_left", "move_char_right"]
 "p" = "paste_clipboard_after"
-"P" = ["delete_selection", "paste_clipboard_after"]
+"P" = ["delete_selection", "normal_mode", "move_char_left", "paste_clipboard_after"]
 tab = "move_parent_node_end"
 S-tab = "move_parent_node_start"
 "S-up" = ["extend_to_line_bounds", "yank", "paste_before"]
@@ -44,6 +40,8 @@ pageup = "no_op"
 pagedown = "no_op"
 home = "no_op"
 end = "no_op"
+J = ["select_line_below", "join_selections", "move_char_left", "move_char_right"]
+V = ["select_mode", "extend_to_line_bounds"]
 K = "hover"
 D = ["select_mode", "goto_line_end", "yank_to_clipboard", "delete_selection", "normal_mode"]
 
@@ -57,13 +55,14 @@ s = { h="hsplit", v="vsplit" }
 
 [keys.select]
 "C-c" = "normal_mode"
-"Y" = "yank_main_selection_to_clipboard"
-"p" = ["delete_selection", "paste_clipboard_after"]
-"P" = ["delete_selection", "paste_clipboard_before"]
 "`" = "switch_to_lowercase"
 "U" = "switch_to_uppercase"
 tab = "extend_parent_node_end"
 S-tab = "extend_parent_node_start"
+"p" = ["delete_selection", "normal_mode", "move_char_left", "paste_clipboard_after"]
+"P" = ["delete_selection", "normal_mode", "move_char_left", "paste_clipboard_before"]
+"y" = "yank_to_clipboard"
+"Y" = ["yank_main_selection_to_clipboard", "normal_mode"]
 
 
 [editor]
@@ -77,7 +76,7 @@ bufferline = "never"
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
-select = "underline"
+select = "block"
 
 
 [editor.soft-wrap]
@@ -89,7 +88,7 @@ wrap-indicator = ""  # set wrap-indicator to "" to hide it
 
 [editor.indent-guides]
 render = true
-character = "|" # Some characters that work well: "▏", "┆", "┊", "⸽"
+character = "|"
 skip-levels = 1
 
 
