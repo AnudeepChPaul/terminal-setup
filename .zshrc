@@ -137,7 +137,7 @@ ZSH_HIGHLIGHT_STYLES[cursor]='standout'
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nvim'
 else
-  export EDITOR='nvim'
+  export EDITOR='hx'
 fi
 
 source ~/.zprofile

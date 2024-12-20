@@ -706,7 +706,7 @@
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HideFromDockAndAppSwitcher</key>
-	<true/>
+	<false/>
 	<key>HideMenuBarInFullscreen</key>
 	<false/>
 	<key>HideScrollbar</key>
