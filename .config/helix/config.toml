@@ -3,10 +3,10 @@ theme = "sweet-ass-theme"
 
 [keys.insert]
 "C-c" = ["normal_mode"]
-up = "no_op"
-down = "no_op"
-left = "no_op"
-right = "no_op"
+# up = "no_op"
+# down = "no_op"
+# left = "no_op"
+# right = "no_op"
 pageup = "no_op"
 pagedown = "no_op"
 home = "no_op"
@@ -34,6 +34,8 @@ g = { a = "code_action" }
 "P" = ["delete_selection", "paste_clipboard_after"]
 tab = "move_parent_node_end"
 S-tab = "move_parent_node_start"
+"S-up" = ["extend_to_line_bounds", "yank", "paste_before"]
+"S-down" = ["extend_to_line_bounds", "yank", "paste_after"]
 up = "no_op"
 down = "no_op"
 left = "no_op"
@@ -43,6 +45,7 @@ pagedown = "no_op"
 home = "no_op"
 end = "no_op"
 K = "hover"
+D = ["select_mode", "goto_line_end", "yank_to_clipboard", "delete_selection", "normal_mode"]
 
 
 [keys.normal.space]
@@ -68,7 +71,7 @@ line-number = "relative"
 cursorline = true
 mouse = true
 color-modes = true
-bufferline = "never" # Enable tab bar at the top
+bufferline = "never"
 
 
 [editor.cursor-shape]
