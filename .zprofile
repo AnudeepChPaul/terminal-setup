@@ -29,10 +29,11 @@ export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="/Users/achandrapaul/.jenv/shims:${PATH}"
+export PATH="${HOME}/.config/bin:${PATH}"
 export PATH="${HOME}/.dotbare:${PATH}"
 export PATH="$PNPM_HOME:${PATH}"
 export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$HOME/Projects/github.com/mawww/kakoune/src"
-
+export PATH="${HOMEBREW_PREFIX}/opt/file-formula/bin:$PATH"
 
 export PYENV_ROOT="$HOME/.pyenv";
 export NVM_DIR="$HOME/.nvm";
@@ -122,6 +123,8 @@ alias pa='pbpaste'
 alias rn='ranger'
 alias j='zellij'
 
+# zellij
+alias zpipe='zellij pipe -p'
 
 # tmux shortcuts
 alias tka='tmux kill-server';
@@ -172,14 +175,6 @@ alias work="timer 60m && terminal-notifier -message 'Drink a lot of water! 🧉�
 alias rest="timer 10m && terminal-notifier -message 'Just check your slack once!'\
         -title 'Break is over! Get back to work 😬'\
         -sound Crystal"
-
-alias flextest="npx nx run console:test --watchAll=false --coverage --coverageReporters=text '--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**' --testPathPattern=apps/console/src/app/shell --testPathPattern=apps/console/src/app/shared  --testPathPattern=apps/console/src/app/applications/Flex"
-
-alias flextest_html="npx nx run console:test --watchAll=false --coverage --coverageReporters=html '--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**' --testPathPattern=apps/console/src/app/shell --testPathPattern=apps/console/src/app/shared  --testPathPattern=apps/console/src/app/applications/Flex"
-
-alias flextest_html_p='npx nx run console:test --watchAll=false --coverage --coverageReporters=html "--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**" --testPathPattern=apps/console/src/app/shell --testPathPattern=apps/console/src/app/shared  --testPathPattern="${TEST_RUN_PATH}"'
-
-alias flextest_html_n='npx nx run console:test --watchAll=false --coverage --coverageReporters=html "--collectCoverageFrom=./{src/app/icons,src/app/shell,src/app/shared,src/app/applications/Flex}/**" --testPathPattern="${TEST_RUN_PATH}"'
 
 function trw {
   tmux rename-window "${1:-zsh|exec}";
@@ -329,9 +324,14 @@ _tmux_smart_attach_ () {
   tmux attach -t $session || tmux switch-client -t $session
 }
 
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 
 eval "$(pyenv init --path)"
-# source ~/.dotbare/dotbare.plugin.zsh
-
-# source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh' &> /dev/null
-#

@@ -163,6 +163,4 @@ bindkey '^g' clear-screen
 eval "$(starship init zsh)"
 # nvm use default
 
-
 export PATH="/Users/anudeep/bin/Sencha/Cmd:$PATH"
-. "/Users/achandrapaul/.deno/env"

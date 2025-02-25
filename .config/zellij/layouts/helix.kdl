@@ -1,0 +1,14 @@
+layout {
+    pane size=2 borderless=true {
+        plugin location="zellij:tab-bar"
+    }
+    pane split_direction="vertical" {
+        pane name="sidebar" borderless=true size=45 command="yazi" {
+            focus true
+        }
+        pane name="editor" size="70%"
+    }
+    pane size=2 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+}

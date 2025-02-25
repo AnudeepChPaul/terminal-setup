@@ -170,7 +170,7 @@ keybinds clear-defaults=true {
         bind "Ctrl [" { PreviousSwapLayout; }
         bind "Ctrl ]" { NextSwapLayout; }
         bind "f" { ToggleFloatingPanes; }
-   }
+    }
     shared_except "normal" "locked" "entersearch" {
         bind "enter" { SwitchToMode "normal"; }
     }
@@ -386,7 +386,7 @@ pane_frames true
 // if it is already running or creates it otherwise.
 // Default: false
 // 
-// attach_to_session true
+attach_to_session true
  
 // Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
 // Options:

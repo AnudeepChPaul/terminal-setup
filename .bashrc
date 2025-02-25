@@ -70,3 +70,4 @@ function _init_tmux_session {
 
 _init_tmux_session master
 . "/Users/achandrapaul/.deno/env"
+. "$HOME/.cargo/env"

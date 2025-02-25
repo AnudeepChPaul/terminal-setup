@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+zellij options --session-name "Helix" --attach-to-session true --default-layout "${HOME}/.config/zellij/layouts/helix.kdl"
