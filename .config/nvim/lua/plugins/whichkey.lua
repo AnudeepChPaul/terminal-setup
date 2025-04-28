@@ -3,6 +3,6 @@ return {
   event = "VeryLazy",
   init = function(_, opts)
     local wk = require("which-key")
-    require("acp.keymap").register(wk, opts)
+    require("config.keymap").register(wk, opts)
   end,
 }

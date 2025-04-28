@@ -1,4 +1,13 @@
 return {
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    enabled = false,
+    main = "ibl",
+    opts = {
+      indent = { char = "┊" },
+    },
+  }, {
   "echasnovski/mini.indentscope",
   version = false, -- wait till new 0.7.0 release to put it back on semver
   enabled = false,
@@ -27,4 +36,5 @@ return {
       end,
     })
   end,
+}
 }

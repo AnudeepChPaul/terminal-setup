@@ -76,7 +76,8 @@ return {
       ensure_installed = {
         "lua_ls",
         "rust_analyzer",
-        "tsserver",
+        -- "tsserver",
+        "ts_ls"
       },
       handlers = {
         function(server_name) -- default handler (optional)
@@ -100,9 +101,9 @@ return {
           })
         end,
 
-        ["tsserver"] = function()
+        ["ts_ls"] = function()
           local lspconfig = require("lspconfig")
-          lspconfig.tsserver.setup({
+          lspconfig.ts_ls.setup({
             capabilities = capabilities,
             filetypes = {
               "javascript",

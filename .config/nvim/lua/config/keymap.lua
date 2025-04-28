@@ -6,7 +6,8 @@ vim.g.mapleader = " "
 --   vim.keymap.set(key, left, right, { noremap = true, silent = true, desc = desc })
 -- end
 
-local function register(wk, _opts)
+-- local function register(wk, _opts)
+local function register(wk)
   ---------------------
   -- General Keymaps
   ---------------------
