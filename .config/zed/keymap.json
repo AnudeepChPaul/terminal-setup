@@ -7,53 +7,90 @@
 // from the command palette.
 [
   {
-    "context": "Workspace",
-    "bindings": {}
-  },
-  {
-    "context": "Workspace && vim_mode == normal",
+    "use_key_equivalents": true,
     "bindings": {
-      "space space": "file_finder::Toggle",
-      "space f": "project_panel::ToggleFocus"
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "cmd-k cmd-d": "zed::OpenDefaultKeymap",
+      "cmd-k cmd-k": "zed::OpenKeymap",
+      "cmd-k cmd-s": "zed::OpenSettings",
+      "space space": "file_finder::Toggle"
     }
   },
+  // Normal mode
   {
-    "context": "Editor",
+    // "context": "Editor",
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
-      "ctrl-j": null
-    }
-  },
-  {
-    "context": "Editor && vim_mode == normal && vim_mode != insert",
-    "bindings": {
-      "space space": "file_finder::Toggle",
-      "space f": "project_panel::ToggleFocus",
+      "cmd-k": null,
       "cmd-k up": null,
       "cmd-k down": null,
       "cmd-k left": null,
       "cmd-k right": null,
-      "space s v": "pane::SplitLeft",
-      "space s h": "pane::SplitDown"
+      "cmd-.": null,
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "space s v": [
+        "workspace::SendKeystrokes",
+        "cmd-shift-p pane::SplitRight enter ctrl-l"
+      ],
+      "space s h": [
+        "workspace::SendKeystrokes",
+        "cmd-shift-p pane::SplitDown enter ctrl-j"
+      ],
+      "space 1": ["pane::ActivateItem", 0],
+      "space 2": ["pane::ActivateItem", 1],
+      "space 3": ["pane::ActivateItem", 2],
+      "space 4": ["pane::ActivateItem", 3],
+      "space 5": ["pane::ActivateItem", 4],
+      "space 6": ["pane::ActivateItem", 5],
+      "space 7": ["pane::ActivateItem", 6],
+      "space 8": ["pane::ActivateItem", 7],
+      "space 9": ["pane::ActivateItem", 8],
+      "space 0": "pane::ActivateLastItem",
+      "space e": "workspace::ToggleLeftDock",
+      "space m": "editor::DuplicateLineDown",
+      "ctrl-space": "editor::ShowCompletions",
+      "ctrl-shift-space": "editor::ShowWordCompletions",
+      "m a": "editor::ToggleCodeActions",
+      "m e": "editor::GoToDiagnostic",
+      "m shift-e": "editor::GoToPreviousDiagnostic",
+      "m i": "editor::ToggleInlineDiagnostics"
+    }
+  },
+  // NORMAL and VISUAL modes
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      ">": "editor::Indent",
+      "<": "editor::Backtab"
+    }
+  },
+  // VISUAL, VISUAL LINE, and VISUAL BLOCK modes
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "bindings": {
+      "g c": "editor::ToggleComments",
+      "Shift-j": "editor::MoveLineDown",
+      "Shift-k": "editor::MoveLineUp"
+    }
+  },
+  // vim motion
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !VimObject",
+    "bindings": {
+      "s": "vim::PushAddSurrounds"
     }
   },
   {
-    "context": "Pane && vim_mode == normal && vim_mode != insert",
+    "context": "Editor && vim_mode == insert",
     "bindings": {
-      "space space": "file_finder::Toggle",
-      "space f": "project_panel::ToggleFocus",
-      "cmd-k up": null,
-      "cmd-k down": null,
-      "cmd-k left": null,
-      "cmd-k right": null,
-      "space s v": "pane::SplitLeft",
-      "space s h": "pane::SplitDown"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == normal || vim_mode == insert",
-    "bindings": {
-      "esc esc": "workspace::SaveAll",
-      "ctrl-j": null
+      "ctrl-space": "editor::ShowCompletions",
+      "ctrl-shift-space": "editor::ShowWordCompletions"
     }
   },
   {
@@ -76,39 +113,44 @@
     }
   },
   {
-    "context": "Editor && vim_mode == visual",
+    "context": "ProjectPanel && not_editing",
+    "use_key_equivalents": true,
     "bindings": {
-      "Shift-j": "editor::MoveLineDown",
-      "Shift-k": "editor::MoveLineUp"
+      "space e": "workspace::ToggleLeftDock",
+      "left": "project_panel::CollapseSelectedEntry",
+      "right": "project_panel::ExpandSelectedEntry",
+      "n": "project_panel::NewFile",
+      "yy": "project_panel::Duplicate",
+      "a": "project_panel::NewDirectory",
+      "x": "project_panel::Cut",
+      "c": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      "y": "workspace::CopyPath",
+      "shift-y": "workspace::CopyRelativePath",
+      "d": ["project_panel::Trash", { "skip_prompt": false }],
+      "o": "project_panel::RevealInFileManager",
+      "e": "project_panel::OpenWithSystem",
+      "r": "project_panel::Rename",
+      "/": "project_panel::NewSearchInDirectory",
+      "shift-j": "menu::SelectNext",
+      "shift-k": "menu::SelectPrevious",
+      "escape": "menu::Cancel"
     }
   },
   {
-    "context": "ProjectPanel",
+    "context": "ProjectPanel && !not_editing",
+    "bindings": {}
+  },
+  {
+    "context": "Prompt",
     "use_key_equivalents": true,
     "bindings": {
-      "left": "project_panel::CollapseSelectedEntry",
-      "right": "project_panel::ExpandSelectedEntry",
-      "cmd-n": "project_panel::NewFile",
-      "cmd-d": "project_panel::Duplicate",
-      "alt-cmd-n": "project_panel::NewDirectory",
-      "cmd-x": "project_panel::Cut",
-      "cmd-c": "project_panel::Copy",
-      "cmd-v": "project_panel::Paste",
-      "cmd-alt-c": "workspace::CopyPath",
-      "alt-cmd-shift-c": "workspace::CopyRelativePath",
-      "enter": "project_panel::Rename",
-      "f2": "project_panel::Rename",
-      "backspace": ["project_panel::Trash", { "skip_prompt": false }],
-      "delete": ["project_panel::Trash", { "skip_prompt": false }],
-      "cmd-backspace": ["project_panel::Trash", { "skip_prompt": true }],
-      "cmd-delete": ["project_panel::Delete", { "skip_prompt": false }],
-      "alt-cmd-r": "project_panel::RevealInFileManager",
-      "ctrl-shift-enter": "project_panel::OpenWithSystem",
-      "cmd-alt-backspace": ["project_panel::Delete", { "skip_prompt": false }],
-      "cmd-shift-f": "project_panel::NewSearchInDirectory",
-      "shift-down": "menu::SelectNext",
-      "shift-up": "menu::SelectPrevious",
-      "escape": "menu::Cancel"
+      "left": "menu::SelectPrevious",
+      "right": "menu::SelectNext",
+      "h": "menu::SelectPrevious",
+      "ctrl-h": "menu::SelectPrevious",
+      "l": "menu::SelectNext",
+      "ctrl-l": "menu::SelectNext"
     }
   }
 ]

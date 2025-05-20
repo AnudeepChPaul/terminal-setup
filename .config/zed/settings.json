@@ -7,16 +7,188 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "vim_mode": true,
+  "vim": {
+    "toggle_relative_line_numbers": true,
+    "use_system_clipboard": "always",
+    "use_smartcase_find": true,
+    "highlight_on_yank_duration": 75
+  },
+  "show_completions_on_input": true,
+  "restore_on_startup": "last_session",
+  "tab_bar": {
+    "show": false
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 14,
+  // "buffer_font_family": "UbuntuMono Nerd Font Mono",
+  "soft_wrap": "editor_width",
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware"
+  },
+  "centered_layout": {
+    "left_padding": 0.15,
+    "right_padding": 0.15
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  },
+  "preview_tabs": {
+    "enabled": true,
+    "enable_preview_from_file_finder": true,
+    "enable_preview_from_code_navigation": true
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "Ayu Light",
+    "dark": "Ultimate Dark Neo"
+  },
+  "command_aliases": {
+    "W": "w",
+    "Wq": "wq",
+    "Q": "q"
+  },
   "telemetry": {
     "diagnostics": false,
     "metrics": false
   },
-  "vim_mode": true,
-  "ui_font_size": 16,
-  "buffer_font_size": 14,
-  "theme": {
-    "mode": "dark",
-    "light": "_default",
-    "dark": "GitHub Dark Default"
+  "project_panel": {
+    "button": true,
+    "default_width": 240,
+    "dock": "left",
+    "entry_spacing": "comfortable",
+    "file_icons": true,
+    "folder_icons": true,
+    "git_status": true,
+    "indent_size": 20,
+    "auto_reveal_entries": true,
+    "auto_fold_dirs": true,
+    "scrollbar": {
+      "show": null
+    },
+    "show_diagnostics": "all",
+    "indent_guides": {
+      "show": "always"
+    }
+  },
+  "diagnostics": {
+    "include_warnings": true,
+    "inline": {
+      "enabled": true,
+      "update_debounce_ms": 150,
+      "padding": 4,
+      "min_column": 0,
+      "max_severity": null
+    },
+    "cargo": null
+  },
+  "auto_install_extensions": {
+    "html": true,
+    "dockerfile": true,
+    "toml": true,
+    "docker-compose": true,
+    "graphql": true
+  },
+  "languages": {
+    "TypeScript": {
+      // "language_servers": ["typescript-language-server", "!vtsls", "..."],
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "TSX": {
+      // "language_servers": ["typescript-language-server", "!vtsls", "..."],
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "JavaScript": {
+      // "language_servers": ["typescript-language-server", "!vtsls", "..."],
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    }
+  },
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        // For JavaScript:
+        "javascript": {
+          "tsserver": { "maxTsServerMemory": 16184 },
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "all",
+              "suppressWhenArgumentMatchesName": false
+            },
+            "parameterTypes": {
+              "enabled": true
+            },
+            "variableTypes": {
+              "enabled": true,
+              "suppressWhenTypeMatchesName": false
+            },
+            "propertyDeclarationTypes": {
+              "enabled": true
+            },
+            "functionLikeReturnTypes": {
+              "enabled": true
+            },
+            "enumMemberValues": {
+              "enabled": true
+            }
+          }
+        },
+        // For TypeScript:
+        "typescript": {
+          "tsserver": { "maxTsServerMemory": 16184 },
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "all",
+              "suppressWhenArgumentMatchesName": false
+            },
+            "parameterTypes": {
+              "enabled": true
+            },
+            "variableTypes": {
+              "enabled": true,
+              "suppressWhenTypeMatchesName": false
+            },
+            "propertyDeclarationTypes": {
+              "enabled": true
+            },
+            "functionLikeReturnTypes": {
+              "enabled": true
+            },
+            "enumMemberValues": {
+              "enabled": true
+            }
+          }
+        }
+      }
+    },
+
+    "json-language-server": {
+      "settings": {
+        "json": {
+          "schemas": [
+            {
+              "fileMatch": ["*/*.luarc.json"],
+              "url": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json"
+            }
+          ]
+        }
+      }
+    }
   }
 }
