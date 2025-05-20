@@ -1,0 +1,114 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {}
+  },
+  {
+    "context": "Workspace && vim_mode == normal",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space f": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-j": null
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && vim_mode != insert",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space f": "project_panel::ToggleFocus",
+      "cmd-k up": null,
+      "cmd-k down": null,
+      "cmd-k left": null,
+      "cmd-k right": null,
+      "space s v": "pane::SplitLeft",
+      "space s h": "pane::SplitDown"
+    }
+  },
+  {
+    "context": "Pane && vim_mode == normal && vim_mode != insert",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space f": "project_panel::ToggleFocus",
+      "cmd-k up": null,
+      "cmd-k down": null,
+      "cmd-k left": null,
+      "cmd-k right": null,
+      "space s v": "pane::SplitLeft",
+      "space s h": "pane::SplitDown"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal || vim_mode == insert",
+    "bindings": {
+      "esc esc": "workspace::SaveAll",
+      "ctrl-j": null
+    }
+  },
+  {
+    "context": "Editor && showing_code_actions",
+    "use_key_equivalents": true,
+    "bindings": {
+      "enter": "editor::ConfirmCodeAction"
+    }
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-k": "editor::ContextMenuPrevious",
+      "ctrl-p": "editor::ContextMenuPrevious",
+      "ctrl-j": "editor::ContextMenuNext",
+      "ctrl-n": "editor::ContextMenuNext",
+      "pageup": "editor::ContextMenuFirst",
+      "pagedown": "editor::ContextMenuLast"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "Shift-j": "editor::MoveLineDown",
+      "Shift-k": "editor::MoveLineUp"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "use_key_equivalents": true,
+    "bindings": {
+      "left": "project_panel::CollapseSelectedEntry",
+      "right": "project_panel::ExpandSelectedEntry",
+      "cmd-n": "project_panel::NewFile",
+      "cmd-d": "project_panel::Duplicate",
+      "alt-cmd-n": "project_panel::NewDirectory",
+      "cmd-x": "project_panel::Cut",
+      "cmd-c": "project_panel::Copy",
+      "cmd-v": "project_panel::Paste",
+      "cmd-alt-c": "workspace::CopyPath",
+      "alt-cmd-shift-c": "workspace::CopyRelativePath",
+      "enter": "project_panel::Rename",
+      "f2": "project_panel::Rename",
+      "backspace": ["project_panel::Trash", { "skip_prompt": false }],
+      "delete": ["project_panel::Trash", { "skip_prompt": false }],
+      "cmd-backspace": ["project_panel::Trash", { "skip_prompt": true }],
+      "cmd-delete": ["project_panel::Delete", { "skip_prompt": false }],
+      "alt-cmd-r": "project_panel::RevealInFileManager",
+      "ctrl-shift-enter": "project_panel::OpenWithSystem",
+      "cmd-alt-backspace": ["project_panel::Delete", { "skip_prompt": false }],
+      "cmd-shift-f": "project_panel::NewSearchInDirectory",
+      "shift-down": "menu::SelectNext",
+      "shift-up": "menu::SelectPrevious",
+      "escape": "menu::Cancel"
+    }
+  }
+]
