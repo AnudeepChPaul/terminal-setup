@@ -20,6 +20,10 @@ return {
     },
   },
   {
+    "christoomey/vim-tmux-navigator",
+    event = { "VimEnter" },
+  },
+  {
     "kylechui/nvim-surround",
     version = "*",
     event = { "InsertEnter" },

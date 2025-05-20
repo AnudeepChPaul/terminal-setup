@@ -4,6 +4,11 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # export ZDOTDIR=$HOME/.config/zsh;
 
 # setting up PATH variables
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
 export GO_PATH=$HOME/go
 export MAVEN_PATH=$HOME/bin/apache-maven-3.8.8/
 export PYTHON_PATH=/usr/local/bin/python
@@ -331,6 +336,11 @@ function y() {
 		builtin cd -- "$cwd"
 	fi
 	rm -f -- "$tmp"
+}
+
+
+function _xcode_setup_() {
+  sudo xcode-select --switch /Applications/Xcode.app
 }
 
 
