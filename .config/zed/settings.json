@@ -20,9 +20,12 @@
   "tab_bar": {
     "show": false
   },
+  "outline_panel": {},
   "ui_font_size": 16,
   "buffer_font_size": 14,
-  // "buffer_font_family": "UbuntuMono Nerd Font Mono",
+  "buffer_font_family": "Fira Code",
+  "ui_font_family": "Fira Code",
+  "buffer_font_fallbacks": [".SystemUIFont"],
   "soft_wrap": "editor_width",
   "indent_guides": {
     "enabled": true,
@@ -43,7 +46,7 @@
   },
   "theme": {
     "mode": "dark",
-    "light": "Ayu Light",
+    "light": "Soothing Light",
     "dark": "Soothing Dark"
   },
   "command_aliases": {
@@ -55,11 +58,16 @@
     "diagnostics": false,
     "metrics": false
   },
+  "git_panel": {
+    "button": false,
+    "default_width": 360,
+    "status_style": "label_color"
+  },
   "project_panel": {
-    "button": true,
-    "default_width": 240,
-    "dock": "left",
-    "entry_spacing": "comfortable",
+    "button": false,
+    "default_width": 400,
+    "dock": "right",
+    "entry_spacing": "standard",
     "file_icons": true,
     "folder_icons": true,
     "git_status": true,

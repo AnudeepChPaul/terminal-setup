@@ -19,15 +19,19 @@
       "cmd-k cmd-d": "zed::OpenDefaultKeymap",
       "cmd-k cmd-k": "zed::OpenKeymap",
       "cmd-k cmd-s": "zed::OpenSettings",
-      "shift shift": "file_finder::Toggle"
+      "shift shift": "file_finder::Toggle",
+      "ctrl-g": "git_panel::ToggleFocus",
+      "ctrl-e": "project_panel::ToggleFocus",
+      "ctrl-w": "workspace::CloseAllDocks"
     }
   },
   {
     "context": "Editor",
     "use_key_equivalents": true,
     "bindings": {
+      ">": null,
+      "<": null,
       "cmd-d": null,
-      "g r n": null,
       "cmd-k": null,
       "cmd-k up": null,
       "cmd-k down": null,
@@ -39,7 +43,7 @@
   },
   // Normal mode
   {
-    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
       "ctrl-c": ["workspace::SendKeystrokes", "escape escape escape escape"],
       "cmd-k cmd-d": "zed::OpenDefaultKeymap",
@@ -47,10 +51,6 @@
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-s": "editor::SelectNext",
-      "ctrl-a": "editor::SelectAllMatches",
-      ">": "editor::Indent",
-      "<": "editor::Backtab",
       "space s v": [
         "workspace::SendKeystrokes",
         "cmd-shift-p pane::SplitRight enter ctrl-l"
@@ -69,7 +69,6 @@
       "space 8": ["pane::ActivateItem", 7],
       "space 9": ["pane::ActivateItem", 8],
       "space 0": "pane::ActivateLastItem",
-      "space e": "workspace::ToggleLeftDock",
       "space m": "editor::DuplicateLineDown",
       "ctrl-space": "editor::ShowCompletions",
       "ctrl-shift-space": "editor::ShowWordCompletions",
@@ -79,7 +78,9 @@
       "m shift-e": "editor::GoToPreviousDiagnostic",
       "m i": "editor::ToggleInlineDiagnostics",
       "+": "vim::Increment",
-      "-": "vim::Decrement"
+      "-": "vim::Decrement",
+      "ctrl-g": "git_panel::ToggleFocus",
+      "ctrl-e": "project_panel::ToggleFocus"
     }
   },
   // VISUAL, VISUAL LINE, and VISUAL BLOCK modes
@@ -89,13 +90,9 @@
       "ctrl-c": ["workspace::SendKeystrokes", "escape escape escape escape"],
       ">": "editor::Indent",
       "<": "editor::Backtab",
-      "ctrl-s": "editor::SelectNext",
-      "ctrl-a": "editor::SelectAllMatches",
       "g c": "editor::ToggleComments",
       "Shift-j": "editor::MoveLineDown",
-      "Shift-k": "editor::MoveLineUp",
-      "+": "vim::Increment",
-      "-": "vim::Decrement"
+      "Shift-k": "editor::MoveLineUp"
     }
   },
   {
@@ -126,26 +123,25 @@
       "ctrl-k": "editor::ContextMenuPrevious",
       "ctrl-p": "editor::ContextMenuPrevious",
       "ctrl-j": "editor::ContextMenuNext",
-      "ctrl-n": "editor::ContextMenuNext",
-      "0": "editor::ContextMenuFirst",
-      "1": "editor::ContextMenuLast"
+      "ctrl-n": "editor::ContextMenuNext"
     }
   },
   {
     "context": "ProjectPanel && not_editing",
     "use_key_equivalents": true,
     "bindings": {
-      "space e": "workspace::ToggleLeftDock",
+      "ctrl-e": "workspace::ToggleRightDock",
+      "ctrl-c": ["workspace::SendKeystrokes", "cmd-alt-y"],
       "left": "project_panel::CollapseSelectedEntry",
       "right": "project_panel::ExpandSelectedEntry",
       "n": "project_panel::NewFile",
-      "yy": "project_panel::Duplicate",
+      "D": "project_panel::Duplicate",
       "a": "project_panel::NewDirectory",
       "x": "project_panel::Cut",
-      "c": "project_panel::Copy",
+      "y": "project_panel::Copy",
       "p": "project_panel::Paste",
-      "y": "workspace::CopyPath",
-      "shift-y": "workspace::CopyRelativePath",
+      "c": "workspace::CopyPath",
+      "shift-c": "workspace::CopyRelativePath",
       "d": ["project_panel::Trash", { "skip_prompt": false }],
       "o": "project_panel::RevealInFileManager",
       "e": "project_panel::OpenWithSystem",
@@ -177,6 +173,20 @@
     "bindings": {
       "ctrl-k": "menu::SelectPrevious",
       "ctrl-j": "menu::SelectNext"
+    }
+  },
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "ctrl-g": "git_panel::Close",
+      "ctrl-e": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "GitPanel > Editor",
+    "bindings": {
+      "ctrl-g": "git_panel::Close",
+      "ctrl-e": "project_panel::ToggleFocus"
     }
   }
 ]
