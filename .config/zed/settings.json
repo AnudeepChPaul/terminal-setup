@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "show_edit_predictions": false,
   "vim_mode": true,
   "vim": {
     "toggle_relative_line_numbers": true,
@@ -43,7 +44,7 @@
   "theme": {
     "mode": "dark",
     "light": "Ayu Light",
-    "dark": "Ultimate Dark Neo"
+    "dark": "Soothing Dark"
   },
   "command_aliases": {
     "W": "w",
@@ -73,6 +74,15 @@
       "show": "always"
     }
   },
+  "inlay_hints": {
+    "enabled": true,
+    "show_background": false,
+    "show_value_hints": true,
+    "show_type_hints": true,
+    "show_other_hints": true,
+    "show_parameter_hints": true
+  },
+  "pane_split_direction_vertical": "right",
   "diagnostics": {
     "include_warnings": true,
     "inline": {
