@@ -7,11 +7,13 @@
 // from the command palette.
 [
   {
-    "context": "Workspace && vim_mode != insert",
+    "context": "Workspace",
     "use_key_equivalents": true,
     "bindings": {
       "cmd-d": null,
-      "ctrl-c": ["workspace::SendKeystrokes", "esc esc esc esc"],
+      "cmd-r": null,
+      "cmd-b": null,
+      "ctrl-c": ["workspace::SendKeystrokes", "escape escape escape"],
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-h": "workspace::ActivatePaneLeft",
@@ -32,20 +34,22 @@
       ">": null,
       "<": null,
       "cmd-d": null,
+      "cmd-.": null,
+      "ctrl-:": null,
+      "cmd-r": null,
+      "cmd-b": null,
       "cmd-k": null,
       "cmd-k up": null,
       "cmd-k down": null,
       "cmd-k left": null,
-      "cmd-k right": null,
-      "cmd-.": null,
-      "ctrl-:": null
+      "cmd-k right": null
     }
   },
   // Normal mode
   {
     "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
-      "ctrl-c": ["workspace::SendKeystrokes", "escape escape escape escape"],
+      "ctrl-c": ["workspace::SendKeystrokes", "escape escape escape"],
       "cmd-k cmd-d": "zed::OpenDefaultKeymap",
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
@@ -186,7 +190,8 @@
     "context": "GitPanel > Editor",
     "bindings": {
       "ctrl-g": "git_panel::Close",
-      "ctrl-e": "project_panel::ToggleFocus"
+      "ctrl-e": "project_panel::ToggleFocus",
+      "ctrl-c": "git_panel::Close"
     }
   }
 ]
