@@ -7,7 +7,7 @@
 // from the command palette.
 [
   {
-    "context": "Workspace",
+    "context": "Workspace || Editor",
     "use_key_equivalents": true,
     "bindings": {
       "cmd-d": null,
@@ -22,27 +22,44 @@
       "cmd-k cmd-k": "zed::OpenKeymap",
       "cmd-k cmd-s": "zed::OpenSettings",
       "shift shift": "file_finder::Toggle",
-      "ctrl-g": "git_panel::ToggleFocus",
+      "ctrl-g g": "git_panel::ToggleFocus",
       "ctrl-e": "project_panel::ToggleFocus",
-      "ctrl-w": "workspace::CloseAllDocks"
-    }
-  },
-  {
-    "context": "Editor",
-    "use_key_equivalents": true,
-    "bindings": {
-      ">": null,
-      "<": null,
-      "cmd-d": null,
-      "cmd-.": null,
-      "ctrl-:": null,
-      "cmd-r": null,
-      "cmd-b": null,
-      "cmd-k": null,
-      "cmd-k up": null,
-      "cmd-k down": null,
-      "cmd-k left": null,
-      "cmd-k right": null
+      "ctrl-q": "workspace::CloseAllDocks",
+      "ctrl-f": [
+        "task::Spawn",
+        {
+          "reveal_target": "center",
+          "task_name": "search:files"
+        }
+      ],
+      "ctrl-t": [
+        "task::Spawn",
+        {
+          "reveal_target": "center",
+          "task_name": "search:text"
+        }
+      ],
+      "ctrl-p": [
+        "task::Spawn",
+        {
+          "reveal_target": "center",
+          "task_name": "search:project"
+        }
+      ],
+      "ctrl-m": [
+        "task::Spawn",
+        {
+          "reveal_target": "center",
+          "task_name": "search:dotfiles"
+        }
+      ],
+      "ctrl-n": [
+        "task::Spawn",
+        {
+          "reveal_target": "center",
+          "task_name": "search:dotfiles"
+        }
+      ]
     }
   },
   // Normal mode
@@ -55,6 +72,9 @@
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-g g": "git_panel::ToggleFocus",
+      "ctrl-e": "project_panel::ToggleFocus",
+      "ctrl-a": ["workspace::SendKeystrokes", "gg gg v shift-g"],
       "space s v": [
         "workspace::SendKeystrokes",
         "cmd-shift-p pane::SplitRight enter ctrl-l"
@@ -82,9 +102,7 @@
       "m shift-e": "editor::GoToPreviousDiagnostic",
       "m i": "editor::ToggleInlineDiagnostics",
       "+": "vim::Increment",
-      "-": "vim::Decrement",
-      "ctrl-g": "git_panel::ToggleFocus",
-      "ctrl-e": "project_panel::ToggleFocus"
+      "-": "vim::Decrement"
     }
   },
   // VISUAL, VISUAL LINE, and VISUAL BLOCK modes
@@ -182,16 +200,32 @@
   {
     "context": "GitPanel",
     "bindings": {
-      "ctrl-g": "git_panel::Close",
+      "ctrl-g g": "git_panel::Close",
       "ctrl-e": "project_panel::ToggleFocus"
     }
   },
   {
     "context": "GitPanel > Editor",
     "bindings": {
-      "ctrl-g": "git_panel::Close",
+      "ctrl-g g": "git_panel::Close",
       "ctrl-e": "project_panel::ToggleFocus",
       "ctrl-c": "git_panel::Close"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-j": ["workspace::SendKeystrokes", "down"],
+      "ctrl-k": ["workspace::SendKeystrokes", "up"]
+    }
+  },
+  {
+    "context": "PromptLibrary",
+    "use_key_equivalents": true,
+    "bindings": {
+      "cmd-n": "rules_library::NewRule",
+      "cmd-shift-s": "rules_library::ToggleDefaultRule",
+      "ctrl-w": "workspace::CloseWindow"
     }
   }
 ]

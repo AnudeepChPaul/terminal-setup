@@ -8,6 +8,8 @@
       "appearance": "dark",
       "style": {
         "background": "#000000",
+        "terminal.background": "#000000",
+        "terminal.ansi.background": "#000000",
         "elevated_surface.background": "#000000",
         "surface.background": "#000000",
         "element.background": "#000000",

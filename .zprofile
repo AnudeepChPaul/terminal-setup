@@ -2,6 +2,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Prezto Dir
 # export ZDOTDIR=$HOME/.config/zsh;
+EDITOR='zed'
 
 # setting up PATH variables
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
@@ -51,7 +52,7 @@ if [[ -f "$CUSTOM_FILE" ]]; then
     source "$CUSTOM_FILE";
 fi
 
-export FZF_DEFAULT_OPTS="--height=81% --tac --layout=reverse --info=inline --border --margin=0 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'";
+# export FZF_DEFAULT_OPTS="--height=81% --tac --layout=reverse --info=inline --border --margin=0 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'";
 export FZF_DEFAULT_COMMAND="ls -a";
 export FZF__PREVIEW__COMMAND='bat --style=numbers --color=always --line-range :500 {}';
 export FZF__DIR__PREVIEW__COMMAND='tree -aC -I "${TREE__GLOBAL_IGNORE}" {} | head -700';
@@ -211,7 +212,7 @@ _f() {
     dir=$(find . -type f -maxdepth $depth | egrep -v "${TREE__GLOBAL_IGNORE}" | fzf-tmux -p --preview "${FZF__PREVIEW__COMMAND}");
 
     if [[ -f "$dir" ]]; then
-        eval "v $dir";
+        eval "$EDITOR $dir";
     fi
 }
 
