@@ -7,11 +7,18 @@
 // from the command palette.
 [
   {
+    "context": "Workspace",
+    "bindings": {
+      "alt-shift-enter": "toast::RunAction"
+    }
+  },
+  {
     "context": "Workspace || Editor",
     "use_key_equivalents": true,
     "bindings": {
       "cmd-d": null,
       "cmd-r": null,
+      "cmd-a": null,
       "cmd-b": null,
       "ctrl-c": ["workspace::SendKeystrokes", "escape escape escape"],
       "ctrl-j": "workspace::ActivatePaneDown",
@@ -23,6 +30,11 @@
       "cmd-k cmd-s": "zed::OpenSettings",
       "shift shift": "file_finder::Toggle",
       "ctrl-g g": "git_panel::ToggleFocus",
+      "ctrl-g b": "git::Branch",
+      "ctrl-g f": "git::Fetch",
+      "ctrl-g p": "git::Pull",
+      "ctrl-g P": "git::Push",
+      "ctrl-g F": "git::ForcePush",
       "ctrl-e": "project_panel::ToggleFocus",
       "ctrl-q": "workspace::CloseAllDocks",
       "ctrl-f": [
@@ -32,11 +44,25 @@
           "task_name": "search:files"
         }
       ],
+      "ctrl-shift-f": [
+        "task::Spawn",
+        {
+          "reveal_target": "center",
+          "task_name": "search:files:cwd"
+        }
+      ],
       "ctrl-t": [
         "task::Spawn",
         {
           "reveal_target": "center",
           "task_name": "search:text"
+        }
+      ],
+      "ctrl-shift-t": [
+        "task::Spawn",
+        {
+          "reveal_target": "center",
+          "task_name": "search:text:cwd"
         }
       ],
       "ctrl-p": [
@@ -53,11 +79,11 @@
           "task_name": "search:dotfiles"
         }
       ],
-      "ctrl-n": [
+      "ctrl-'": [
         "task::Spawn",
         {
           "reveal_target": "center",
-          "task_name": "search:dotfiles"
+          "task_name": "lazygit:open"
         }
       ]
     }
@@ -74,7 +100,7 @@
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-g g": "git_panel::ToggleFocus",
       "ctrl-e": "project_panel::ToggleFocus",
-      "ctrl-a": ["workspace::SendKeystrokes", "gg gg v shift-g"],
+      "ctrl-a": "editor::SelectAll",
       "space s v": [
         "workspace::SendKeystrokes",
         "cmd-shift-p pane::SplitRight enter ctrl-l"
@@ -155,7 +181,12 @@
       "ctrl-e": "workspace::ToggleRightDock",
       "ctrl-c": ["workspace::SendKeystrokes", "cmd-alt-y"],
       "left": "project_panel::CollapseSelectedEntry",
-      "right": "project_panel::ExpandSelectedEntry",
+      "h": "project_panel::CollapseSelectedEntry",
+      "l": "project_panel::ExpandSelectedEntry",
+      "ctrl-j": ["workspace::SendKeystrokes", "down"],
+      "ctrl-k": ["workspace::SendKeystrokes", "up"],
+      "ctrl-d": ["workspace::SendKeystrokes", "down down down down down"],
+      "ctrl-u": ["workspace::SendKeystrokes", "up up up up up"],
       "n": "project_panel::NewFile",
       "D": "project_panel::Duplicate",
       "a": "project_panel::NewDirectory",

@@ -58,7 +58,7 @@
         "editor.background": "#000000a1",
         "editor.gutter.background": "#000000a1",
         "editor.subheader.background": null,
-        "editor.active_line.background": null,
+        "editor.active_line.background": "#263238A1", // Blue gray 900
         "editor.highlighted_line.background": null,
         "editor.line_number": "#455A64", // Blue Grey 700
         "editor.active_line_number": "#FFFFFF",

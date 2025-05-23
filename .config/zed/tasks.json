@@ -1,7 +1,17 @@
 [
   {
     "label": "search:files",
-    "command": "zed \"$(tv files)\"",
+    "command": "zed \"$(tv files --input ${ZED_SELECTED_TEXT:-''} --select-1 --no-remote --custom-header 'Find files')\"",
+    "hide": "always",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "shell": {
+      "program": "sh"
+    }
+  },
+  {
+    "label": "search:files:cwd",
+    "command": "cd $ZED_DIRNAME; zed \"$(tv files --input ${ZED_SELECTED_TEXT:-''} --select-1 --no-remote --custom-header \"Find files in ${ZED_DIRNAME}\")\"",
     "hide": "always",
     "allow_concurrent_runs": false,
     "use_new_terminal": false,
@@ -11,7 +21,17 @@
   },
   {
     "label": "search:text",
-    "command": "zed \"$(tv text)\"",
+    "command": "zed \"$(tv text --input ${ZED_SELECTED_TEXT:-''} --select-1 --no-remote --custom-header 'Find in files')\"",
+    "hide": "always",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "shell": {
+      "program": "sh"
+    }
+  },
+  {
+    "label": "search:text:cwd",
+    "command": "cd $ZED_DIRNAME; zed \"$(tv text --input ${ZED_SELECTED_TEXT:-''} --select-1 --no-remote --custom-header \"Find in files in ${ZED_DIRNAME}\")\"",
     "hide": "always",
     "allow_concurrent_runs": false,
     "use_new_terminal": false,
@@ -21,7 +41,18 @@
   },
   {
     "label": "search:dotfiles",
-    "command": "zed \"$(tv my-dotfiles)\"",
+    "command": "zed \"$(tv my-dotfiles --input ${ZED_SELECTED_TEXT:-''} --select-1 --no-remote --custom-header 'Find dotfiles')\"",
+    "hide": "always",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "show_summary": true,
+    "shell": {
+      "program": "sh"
+    }
+  },
+  {
+    "label": "search:env",
+    "command": "zed \"$(tv env --input ${ZED_SELECTED_TEXT:-''} --select-1 --no-remote --custom-header 'Find shell env vars')\"",
     "hide": "always",
     "allow_concurrent_runs": false,
     "use_new_terminal": false,
@@ -30,8 +61,8 @@
     }
   },
   {
-    "label": "search:env",
-    "command": "zed \"$(tv env)\"",
+    "label": "lazygit:open",
+    "command": "NVM_DIR=\"$HOME/.nvm\" [ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\"; lazygit",
     "hide": "always",
     "allow_concurrent_runs": false,
     "use_new_terminal": false,

@@ -135,7 +135,7 @@ ZSH_HIGHLIGHT_STYLES[cursor]='standout'
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nvim'
 else
-  export EDITOR='hx'
+  export EDITOR='zed'
 fi
 
 source ~/.zprofile
@@ -157,12 +157,3 @@ bindkey '^g' clear-screen
 # bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
 # bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 # bindkey -M menuselect '\r' .accept-line
-
-eval "$(starship init zsh)"
-# nvm use default
-
-export PATH="/Users/anudeep/bin/Sencha/Cmd:$PATH"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

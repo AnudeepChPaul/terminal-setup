@@ -40,6 +40,7 @@ export PATH="${HOME}/.dotbare:${PATH}"
 export PATH="$PNPM_HOME:${PATH}"
 export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$HOME/Projects/github.com/mawww/kakoune/src"
 export PATH="${HOMEBREW_PREFIX}/opt/file-formula/bin:$PATH"
+export PATH="/Users/anudeep/bin/Sencha/Cmd:$PATH"
 
 export PYENV_ROOT="$HOME/.pyenv";
 export NVM_DIR="$HOME/.nvm";
@@ -346,3 +347,8 @@ function _xcode_setup_() {
 
 
 eval "$(pyenv init --path)"
+eval "$(starship init zsh)"
+# nvm use default
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
