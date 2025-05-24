@@ -21,7 +21,7 @@
   },
   {
     "label": "search:text",
-    "command": "zed \"$(tv text --input ${ZED_SELECTED_TEXT:-''} --select-1 --no-remote --custom-header 'Find in files')\"",
+    "command": "zed \"$(tv text --input ${ZED_SELECTED_TEXT:-''} --select-1 --no-remote --exact --custom-header 'Find in files')\"",
     "hide": "always",
     "allow_concurrent_runs": false,
     "use_new_terminal": false,
@@ -31,7 +31,7 @@
   },
   {
     "label": "search:text:cwd",
-    "command": "cd $ZED_DIRNAME; zed \"$(tv text --input ${ZED_SELECTED_TEXT:-''} --select-1 --no-remote --custom-header \"Find in files in ${ZED_DIRNAME}\")\"",
+    "command": "cd $ZED_DIRNAME; zed \"$(tv text --input ${ZED_SELECTED_TEXT:-''} --select-1 --exact --no-remote --custom-header \"Find in files in ${ZED_DIRNAME}\")\"",
     "hide": "always",
     "allow_concurrent_runs": false,
     "use_new_terminal": false,

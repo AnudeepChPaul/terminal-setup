@@ -1,11 +1,3 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
   "tab_bar": {
     "show": false
@@ -31,8 +23,8 @@
     "coloring": "indent_aware"
   },
   "centered_layout": {
-    "left_padding": 0.15,
-    "right_padding": 0.15
+    "left_padding": 0.2,
+    "right_padding": 0.2
   },
   "tabs": {
     "file_icons": true,
@@ -67,6 +59,7 @@
       "show": "always"
     }
   },
+  "bottom_dock_layout": "left_aligned",
   "theme": {
     "mode": "dark",
     "light": "Soothing Light",
@@ -120,7 +113,6 @@
   },
   "languages": {
     "TypeScript": {
-      // "language_servers": ["typescript-language-server", "!vtsls", "..."],
       "formatter": {
         "external": {
           "command": "prettier",
@@ -129,7 +121,6 @@
       }
     },
     "TSX": {
-      // "language_servers": ["typescript-language-server", "!vtsls", "..."],
       "formatter": {
         "external": {
           "command": "prettier",
@@ -138,7 +129,6 @@
       }
     },
     "JavaScript": {
-      // "language_servers": ["typescript-language-server", "!vtsls", "..."],
       "formatter": {
         "external": {
           "command": "prettier",
@@ -204,7 +194,6 @@
         }
       }
     },
-
     "json-language-server": {
       "settings": {
         "json": {

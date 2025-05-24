@@ -1,34 +1,36 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
 [
   {
     "context": "Workspace",
     "bindings": {
-      "alt-shift-enter": "toast::RunAction"
+      "cmd-w": null,
+      "alt-Shift-enter": "toast::RunAction",
+      "ctrl-w": "workspace::CloseWindow"
     }
   },
   {
     "context": "Workspace || Editor",
-    "use_key_equivalents": true,
     "bindings": {
       "cmd-d": null,
       "cmd-r": null,
       "cmd-a": null,
       "cmd-b": null,
-      "ctrl-c": ["workspace::SendKeystrokes", "escape escape escape"],
+      "cmd-c": null,
+      "cmd-x": null,
+      "cmd-z": null,
+      "cmd-]": null,
+      "cmd-w": null,
+      "cmd-k cmd-d": "zed::OpenDefaultKeymap",
+      "cmd-k cmd-k": "zed::OpenKeymap",
+      "ctrl-w": ["pane::CloseActiveItem", { "close_pinned": false }],
+      "cmd-k cmd-s": "zed::OpenSettings",
+      "ctrl-c": ["workspace::SendKeystrokes", "escape"],
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-l": "workspace::ActivatePaneRight",
-      "cmd-k cmd-d": "zed::OpenDefaultKeymap",
-      "cmd-k cmd-k": "zed::OpenKeymap",
-      "cmd-k cmd-s": "zed::OpenSettings",
-      "shift shift": "file_finder::Toggle",
+      "ctrl-;": "editor::ToggleInlayHints",
+      "Shift Shift": "file_finder::Toggle",
+      "ctrl ctrl": "tab_switcher::Toggle",
       "ctrl-g g": "git_panel::ToggleFocus",
       "ctrl-g b": "git::Branch",
       "ctrl-g f": "git::Fetch",
@@ -37,6 +39,8 @@
       "ctrl-g F": "git::ForcePush",
       "ctrl-e": "project_panel::ToggleFocus",
       "ctrl-q": "workspace::CloseAllDocks",
+      "cmd-Shift-z": null,
+      "alt-Shift-up": null,
       "ctrl-f": [
         "task::Spawn",
         {
@@ -44,7 +48,7 @@
           "task_name": "search:files"
         }
       ],
-      "ctrl-shift-f": [
+      "ctrl-Shift-f": [
         "task::Spawn",
         {
           "reveal_target": "center",
@@ -58,7 +62,7 @@
           "task_name": "search:text"
         }
       ],
-      "ctrl-shift-t": [
+      "ctrl-Shift-t": [
         "task::Spawn",
         {
           "reveal_target": "center",
@@ -92,62 +96,76 @@
   {
     "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
-      "ctrl-c": ["workspace::SendKeystrokes", "escape escape escape"],
-      "cmd-k cmd-d": "zed::OpenDefaultKeymap",
-      "ctrl-j": "workspace::ActivatePaneDown",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-g g": "git_panel::ToggleFocus",
-      "ctrl-e": "project_panel::ToggleFocus",
-      "ctrl-a": "editor::SelectAll",
-      "space s v": [
-        "workspace::SendKeystrokes",
-        "cmd-shift-p pane::SplitRight enter ctrl-l"
-      ],
-      "space s h": [
-        "workspace::SendKeystrokes",
-        "cmd-shift-p pane::SplitDown enter ctrl-j"
-      ],
-      "space 1": ["pane::ActivateItem", 0],
-      "space 2": ["pane::ActivateItem", 1],
-      "space 3": ["pane::ActivateItem", 2],
-      "space 4": ["pane::ActivateItem", 3],
-      "space 5": ["pane::ActivateItem", 4],
-      "space 6": ["pane::ActivateItem", 5],
-      "space 7": ["pane::ActivateItem", 6],
-      "space 8": ["pane::ActivateItem", 7],
-      "space 9": ["pane::ActivateItem", 8],
-      "space 0": "pane::ActivateLastItem",
-      "space m": "editor::DuplicateLineDown",
+      "+": "vim::Increment",
+      "-": "vim::Decrement",
+      "u": "editor::Undo",
+      "p": "editor::Paste",
+      "ctrl-r": "editor::Redo",
+      "Shift-l": "editor::DuplicateLineDown",
+      "Shift-j": "editor::JoinLines",
+      "Shift-k": "editor::Hover",
       "ctrl-space": "editor::ShowCompletions",
-      "ctrl-shift-space": "editor::ShowWordCompletions",
+      "ctrl-Shift-space": "editor::ShowWordCompletions",
+      "ctrl-a": "editor::SelectAll",
+      "ctrl-w": "pane::CloseActiveItem",
+      "ctrl-k d": "editor::Format",
+      "space s v": "pane::SplitRight",
+      "space s h": "pane::SplitDown",
+      "space x": "pane::CloseActiveItem",
+      "g l": "editor::SplitSelectionIntoLines",
+      "g n": ["editor::SelectNext", { "replace_newest": false }],
+      "ctrl-s": ["editor::SelectNext", { "replace_newest": false }],
+      "g p": ["editor::SelectPrevious", { "replace_newest": false }],
+      "ctrl-Shift-s": ["editor::SelectPrevious", { "replace_newest": false }],
+      "g a": "editor::SelectAllMatches",
+      "g s": ["editor::SelectNext", { "replace_newest": true }],
+      "g u": "editor::UndoSelection",
+      "g c c": "editor::ToggleComments",
+      "g d": "editor::GoToDefinition",
+      "g Shift-d": "editor::GoToDefinitionSplit",
+      "g y": "editor::GoToDeclaration",
+      "g Shift-y": "editor::GoToDeclarationSplit",
+      "g i": "editor::GoToImplementation",
+      "g Shift-i": "editor::GoToImplementationSplit",
+      "g r": "editor::FindAllReferences",
+      "m q": "editor::RestartLanguageServer",
+      "m i": "editor::ToggleInlineDiagnostics",
+      "m o": "outline::Toggle",
       "m a": "editor::ToggleCodeActions",
       "m e": "editor::GoToDiagnostic",
+      "m Shift-e": "editor::GoToPreviousDiagnostic",
       "m r n": "editor::Rename",
-      "m shift-e": "editor::GoToPreviousDiagnostic",
-      "m i": "editor::ToggleInlineDiagnostics",
-      "+": "vim::Increment",
-      "-": "vim::Decrement"
+      "m c c": "editor::ConvertToLowerCamelCase",
+      "m c Shift-c": "editor::ConvertToUpperCamelCase",
+      "m c s": "editor::ConvertToSnakeCase",
+      "m c k": "editor::ConvertToKebabCase",
+      "m c l": "editor::ConvertToLowerCase",
+      "m c u": "editor::ConvertToUpperCase",
+      "m c t": "editor::ConvertToTitleCase",
+      "m c o": "editor::ConvertToOppositeCase",
+      "m s i": "editor::SortLinesCaseInsensitive",
+      "m s s": "editor::SortLinesCaseSensitive",
+      "m s r": "editor::ReverseLines"
     }
   },
   // VISUAL, VISUAL LINE, and VISUAL BLOCK modes
   {
     "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
     "bindings": {
-      "ctrl-c": ["workspace::SendKeystrokes", "escape escape escape escape"],
-      ">": "editor::Indent",
+      ">": "vim::Indent",
       "<": "editor::Backtab",
+      "ctrl-c": ["workspace::SendKeystrokes", "escape"],
       "g c": "editor::ToggleComments",
       "Shift-j": "editor::MoveLineDown",
-      "Shift-k": "editor::MoveLineUp"
+      "Shift-k": "editor::MoveLineUp",
+      "Shift-r": ["workspace::SendKeystrokes", "Shift : s /"]
     }
   },
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
       "ctrl-space": "editor::ShowCompletions",
-      "ctrl-shift-space": "editor::ShowWordCompletions"
+      "ctrl-Shift-space": "editor::ShowWordCompletions"
     }
   },
   // vim motion
@@ -159,14 +177,12 @@
   },
   {
     "context": "Editor && showing_code_actions",
-    "use_key_equivalents": true,
     "bindings": {
       "enter": "editor::ConfirmCodeAction"
     }
   },
   {
     "context": "Editor && (showing_code_actions || showing_completions)",
-    "use_key_equivalents": true,
     "bindings": {
       "ctrl-k": "editor::ContextMenuPrevious",
       "ctrl-p": "editor::ContextMenuPrevious",
@@ -176,17 +192,11 @@
   },
   {
     "context": "ProjectPanel && not_editing",
-    "use_key_equivalents": true,
     "bindings": {
-      "ctrl-e": "workspace::ToggleRightDock",
-      "ctrl-c": ["workspace::SendKeystrokes", "cmd-alt-y"],
+      "escape": "menu::Cancel",
       "left": "project_panel::CollapseSelectedEntry",
       "h": "project_panel::CollapseSelectedEntry",
       "l": "project_panel::ExpandSelectedEntry",
-      "ctrl-j": ["workspace::SendKeystrokes", "down"],
-      "ctrl-k": ["workspace::SendKeystrokes", "up"],
-      "ctrl-d": ["workspace::SendKeystrokes", "down down down down down"],
-      "ctrl-u": ["workspace::SendKeystrokes", "up up up up up"],
       "n": "project_panel::NewFile",
       "D": "project_panel::Duplicate",
       "a": "project_panel::NewDirectory",
@@ -194,15 +204,20 @@
       "y": "project_panel::Copy",
       "p": "project_panel::Paste",
       "c": "workspace::CopyPath",
-      "shift-c": "workspace::CopyRelativePath",
       "d": ["project_panel::Trash", { "skip_prompt": false }],
       "o": "project_panel::RevealInFileManager",
       "e": "project_panel::OpenWithSystem",
       "r": "project_panel::Rename",
       "/": "project_panel::NewSearchInDirectory",
-      "shift-j": "menu::SelectNext",
-      "shift-k": "menu::SelectPrevious",
-      "escape": "menu::Cancel"
+      "ctrl-e": "workspace::ToggleRightDock",
+      "ctrl-c": ["workspace::SendKeystrokes", "cmd-alt-y"],
+      "ctrl-j": ["workspace::SendKeystrokes", "down"],
+      "ctrl-k": ["workspace::SendKeystrokes", "up"],
+      "ctrl-d": ["workspace::SendKeystrokes", "down down down down down"],
+      "ctrl-u": ["workspace::SendKeystrokes", "up up up up up"],
+      "Shift-c": "workspace::CopyRelativePath",
+      "Shift-j": "menu::SelectNext",
+      "Shift-k": "menu::SelectPrevious"
     }
   },
   {
@@ -211,13 +226,12 @@
   },
   {
     "context": "Prompt",
-    "use_key_equivalents": true,
     "bindings": {
       "left": "menu::SelectPrevious",
       "right": "menu::SelectNext",
       "h": "menu::SelectPrevious",
-      "ctrl-h": "menu::SelectPrevious",
       "l": "menu::SelectNext",
+      "ctrl-h": "menu::SelectPrevious",
       "ctrl-l": "menu::SelectNext"
     }
   },
@@ -252,11 +266,29 @@
   },
   {
     "context": "PromptLibrary",
-    "use_key_equivalents": true,
     "bindings": {
       "cmd-n": "rules_library::NewRule",
-      "cmd-shift-s": "rules_library::ToggleDefaultRule",
+      "cmd-Shift-s": "rules_library::ToggleDefaultRule",
       "ctrl-w": "workspace::CloseWindow"
+    }
+  },
+  {
+    "context": "TabSwitcher > Picker",
+    "bindings": {
+      "ctrl-Shift-tab": null,
+      "ctrl-up": null,
+      "ctrl-down": null,
+      "ctrl-backspace": null,
+      "ctrl-esc": "tab_switcher::Toggle",
+      "ctrl-q": "tab_switcher::Toggle",
+      "ctrl-k": "menu::SelectPrevious",
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-x": "tab_switcher::CloseSelectedItem",
+      "esc": "tab_switcher::Toggle",
+      "q": "tab_switcher::Toggle",
+      "k": "menu::SelectPrevious",
+      "j": "menu::SelectNext",
+      "x": "tab_switcher::CloseSelectedItem"
     }
   }
 ]
