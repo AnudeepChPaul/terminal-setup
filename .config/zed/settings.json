@@ -12,6 +12,7 @@
   "outline_panel": {
     "auto_fold_dirs": true
   },
+  "confirm_quit": true,
   "ui_font_size": 14,
   "buffer_font_size": 13,
   "buffer_font_family": "Fira Code",
@@ -82,6 +83,7 @@
     "use_smartcase_find": true,
     "highlight_on_yank_duration": 75
   },
+  "formatter": "prettier",
   "show_completions_on_input": true,
   "restore_on_startup": "last_session",
   "inlay_hints": {
@@ -135,6 +137,14 @@
           "arguments": ["--stdin-filepath", "{buffer_path}"]
         }
       }
+    },
+    "JSX": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
     }
   },
   "lsp": {
@@ -142,6 +152,9 @@
       "settings": {
         // For JavaScript:
         "javascript": {
+          "preferences": {
+            "importModuleSpecifier": "non-relative"
+          },
           "tsserver": { "maxTsServerMemory": 16184 },
           "inlayHints": {
             "parameterNames": {
@@ -168,6 +181,9 @@
         },
         // For TypeScript:
         "typescript": {
+          "preferences": {
+            "importModuleSpecifier": "non-relative"
+          },
           "tsserver": { "maxTsServerMemory": 16184 },
           "inlayHints": {
             "parameterNames": {

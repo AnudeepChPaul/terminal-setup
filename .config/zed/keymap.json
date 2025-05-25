@@ -99,7 +99,7 @@
       "+": "vim::Increment",
       "-": "vim::Decrement",
       "u": "editor::Undo",
-      "p": "editor::Paste",
+      "p": "vim::Paste",
       "ctrl-r": "editor::Redo",
       "Shift-l": "editor::DuplicateLineDown",
       "Shift-j": "editor::JoinLines",
@@ -152,7 +152,7 @@
   {
     "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
     "bindings": {
-      ">": "vim::Indent",
+      ">": "editor::Indent",
       "<": "editor::Backtab",
       "ctrl-c": ["workspace::SendKeystrokes", "escape"],
       "g c": "editor::ToggleComments",
@@ -194,12 +194,12 @@
     "context": "ProjectPanel && not_editing",
     "bindings": {
       "escape": "menu::Cancel",
+      "n": "project_panel::NewDirectory",
+      "a": "project_panel::NewFile",
       "left": "project_panel::CollapseSelectedEntry",
       "h": "project_panel::CollapseSelectedEntry",
       "l": "project_panel::ExpandSelectedEntry",
-      "n": "project_panel::NewFile",
       "D": "project_panel::Duplicate",
-      "a": "project_panel::NewDirectory",
       "x": "project_panel::Cut",
       "y": "project_panel::Copy",
       "p": "project_panel::Paste",
@@ -216,13 +216,17 @@
       "ctrl-d": ["workspace::SendKeystrokes", "down down down down down"],
       "ctrl-u": ["workspace::SendKeystrokes", "up up up up up"],
       "Shift-c": "workspace::CopyRelativePath",
+      "Space": "menu::Cancel",
       "Shift-j": "menu::SelectNext",
       "Shift-k": "menu::SelectPrevious"
     }
   },
   {
-    "context": "ProjectPanel && !not_editing",
-    "bindings": {}
+    "context": "ProjectPanel > Editor",
+    "bindings": {
+      "ctrl-h": "editor::MoveLeft",
+      "ctrl-l": "editor::MoveRight"
+    }
   },
   {
     "context": "Prompt",
