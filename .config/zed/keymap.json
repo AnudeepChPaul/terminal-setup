@@ -240,6 +240,15 @@
     }
   },
   {
+    "context": "Picker",
+    "bindings": {
+      "ctrl-k": "menu::SelectPrevious",
+      "k": "menu::SelectPrevious",
+      "ctrl-j": "menu::SelectNext",
+      "j": "menu::SelectNext"
+    }
+  },
+  {
     "context": "Picker > Editor",
     "bindings": {
       "ctrl-k": "menu::SelectPrevious",
