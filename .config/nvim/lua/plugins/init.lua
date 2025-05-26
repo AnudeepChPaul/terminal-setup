@@ -38,4 +38,8 @@ return {
       require("inc_rename").setup()
     end,
   },
+  {
+    "arthurxavierx/vim-caser",
+    event = { "BufRead", "BufNewFile" },
+  }
 }
