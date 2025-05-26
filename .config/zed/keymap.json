@@ -83,11 +83,18 @@
           "task_name": "search:dotfiles"
         }
       ],
-      "ctrl-'": [
+      "ctrl-g o": [
         "task::Spawn",
         {
           "reveal_target": "center",
           "task_name": "lazygit:open"
+        }
+      ],
+      "ctrl-g d": [
+        "task::Spawn",
+        {
+          "reveal_target": "center",
+          "task_name": "search:git:mod-files"
         }
       ]
     }

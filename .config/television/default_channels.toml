@@ -19,6 +19,11 @@ name = "git-branch"
 source_command = "git --no-pager branch --all --format=\"%(refname:short)\""
 preview_command = "git show -p --stat --pretty=fuller --color=always {0}"
 
+[[cable_channel]]
+name = "git-mod-files"
+source_command = "git status -s --no-column | cut -d' ' -f3"
+preview_command = "bat --color=always --style=numbers {0}"
+
 # Docker
 [[cable_channel]]
 name = "docker-images"

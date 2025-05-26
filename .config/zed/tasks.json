@@ -61,8 +61,18 @@
     }
   },
   {
+    "label": "search:git:mod-files",
+    "command": "zed \"$(tv git-mod-files --select-1 --no-remote --custom-header 'Find git files')\"",
+    "hide": "always",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "shell": {
+      "program": "sh"
+    }
+  },
+  {
     "label": "lazygit:open",
-    "command": "NVM_DIR=\"$HOME/.nvm\" [ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\"; lazygit",
+    "command": "NVM_DIR=\"$HOME/.nvm\" [ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\"; nvm use; lazygit",
     "hide": "always",
     "allow_concurrent_runs": false,
     "use_new_terminal": false,
