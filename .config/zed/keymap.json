@@ -19,18 +19,20 @@
       "cmd-z": null,
       "cmd-]": null,
       "cmd-w": null,
+      "cmd-Shift-z": null,
+      "alt-Shift-up": null,
       "cmd-k cmd-d": "zed::OpenDefaultKeymap",
       "cmd-k cmd-k": "zed::OpenKeymap",
-      "ctrl-w": ["pane::CloseActiveItem", { "close_pinned": false }],
       "cmd-k cmd-s": "zed::OpenSettings",
+      "ctrl-w": ["pane::CloseActiveItem", { "close_pinned": false }],
+      "ctrl-f ctrl-f": "file_finder::Toggle",
+      "ctrl-f ctrl-b": "tab_switcher::Toggle",
       "ctrl-c": ["workspace::SendKeystrokes", "escape"],
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-;": "editor::ToggleInlayHints",
-      "Shift Shift": "file_finder::Toggle",
-      "ctrl ctrl": "tab_switcher::Toggle",
       "ctrl-g g": "git_panel::ToggleFocus",
       "ctrl-g b": "git::Branch",
       "ctrl-g f": "git::Fetch",
@@ -39,44 +41,28 @@
       "ctrl-g F": "git::ForcePush",
       "ctrl-e": "project_panel::ToggleFocus",
       "ctrl-q": "workspace::CloseAllDocks",
-      "cmd-Shift-z": null,
-      "alt-Shift-up": null,
-      "ctrl-f": [
-        "task::Spawn",
-        {
-          "reveal_target": "center",
-          "task_name": "search:files"
-        }
-      ],
-      "ctrl-Shift-f": [
+      "ctrl-f f": [
         "task::Spawn",
         {
           "reveal_target": "center",
           "task_name": "search:files:cwd"
         }
       ],
-      "ctrl-t": [
+      "ctrl-f ctrl-j": [
         "task::Spawn",
         {
           "reveal_target": "center",
           "task_name": "search:text"
         }
       ],
-      "ctrl-Shift-t": [
+      "ctrl-f j": [
         "task::Spawn",
         {
           "reveal_target": "center",
           "task_name": "search:text:cwd"
         }
       ],
-      "ctrl-p": [
-        "task::Spawn",
-        {
-          "reveal_target": "center",
-          "task_name": "search:project"
-        }
-      ],
-      "ctrl-m": [
+      "ctrl-f ctrl-m": [
         "task::Spawn",
         {
           "reveal_target": "center",

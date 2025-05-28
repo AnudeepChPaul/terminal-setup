@@ -151,6 +151,12 @@ function _K.smart_shift()
 	vim.opt.shiftwidth = vim.lsp.util.get_effective_tabstop()
 end
 
+function _K.toggle_virtual_text()
+	vim.diagnostic.config({
+		virtual_text = not vim.diagnostic.config().virtual_text,
+	})
+end
+
 -- Keymaps and functions for trouble plugin
 function _K.toggle_trouble()
 	require("trouble").toggle()
@@ -196,6 +202,13 @@ end
 _T.grep_word_under_cursor = function()
 	require("telescope-live-grep-args.shortcuts").grep_word_under_cursor({
 		prompt_title = "Searching for " .. vim.fn.expand("<cword>"),
+	})
+end
+
+_T.grep_word_under_cursor_cwd = function()
+	require("telescope-live-grep-args.shortcuts").grep_word_under_cursor({
+		cwd = vim.fn.expand("%:p:h"),
+		prompt_title = "Searching for " .. vim.fn.expand("<cword>") .. " in " .. vim.fn.expand("%"),
 	})
 end
 
@@ -311,9 +324,9 @@ return {
 		{ "<Left>", "<nop>", desc = "No operation" },
 		{ "<Right>", "<nop>", desc = "No operation" },
 		{ "Q", "<nop>", desc = "No operation" },
-		{ ";s", _H.nav_next, desc = "Goto next harpoon file" },
-		{ ";a", _H.add_file, desc = "Add file to harpoon quick list" },
+		{ "<c-w>", ":q<cr>", desc = "Close window/panel" },
 		{ ";s", _H.quick_menu, desc = "Toggle harpoon quick menu" },
+		{ ";a", _H.add_file, desc = "Add file to harpoon quick list" },
 		{ ";1", _H.goto_one, desc = "Goto 1st harpoon file" },
 		{ ";2", _H.goto_two, desc = "Goto 2nd harpoon file" },
 		{ ";3", _H.goto_three, desc = "Goto 3rd harpoon file" },
@@ -324,13 +337,13 @@ return {
 		{ ";8", _H.goto_eight, desc = "Goto 8th harpoon file" },
 		{ ";9", _H.goto_nine, desc = "Goto 9th harpoon file" },
 		{ "H", ":nohl<CR>", desc = "Clear search highlights" },
-		{ "sv", "<C-w>v", desc = "Split window vertically" },
-		{ "ss", "<C-w>s", desc = "Split window horizontally" },
-		{ "se", "<C-w>=", desc = "Split windows equal hight & width" },
-		{ "sx", vim.cmd.close, desc = "Close current split window" },
-		{ "bx", vim.cmd.bd, desc = "Close current buffer" },
-		{ "tt", vim.cmd.tabnew, desc = "Opens new tab" },
-		{ "tx", vim.cmd.tabclose, desc = "Close newly opened tab" },
+		{ "<space>sv", "<C-w>v", desc = "Split window vertically" },
+		{ "<space>ss", "<C-w>s", desc = "Split window horizontally" },
+		{ "<space>se", "<C-w>=", desc = "Split windows equal hight & width" },
+		{ "<space>sx", vim.cmd.close, desc = "Close current split window" },
+		{ "<space>bx", vim.cmd.bd, desc = "Close current buffer" },
+		{ "<space>tt", vim.cmd.tabnew, desc = "Opens new tab" },
+		{ "<space>tx", vim.cmd.tabclose, desc = "Close newly opened tab" },
 		{
 			"L",
 			'V"-y"-p',
@@ -415,12 +428,15 @@ return {
 		{ "<leader>r", ":s/", desc = "Replaces search term within selection" },
 		{ "<C-\\>", "<ESC><ESC><ESC>", desc = "Escape" },
 		{ "<C-c>", "<ESC>", desc = "Escape" },
-		{ "md", _K.format_buffer, desc = "Formats the buffer with smart indent" },
 		{ "K", vim.lsp.buf.hover, desc = "Impersonates hover effect" },
+		{ "md", _K.format_buffer, desc = "Formats the buffer with smart indent" },
+		{ "mq", vim.cmd.LspRestart, desc = "Lsp restart" },
 		{ "mrl", vim.lsp.buf.rename, desc = "Lsp renaming without highlighting" },
 		{ "mrn", ":IncRename ", desc = "Lsp renaming with highlighting" },
-		{ "gR", vim.lsp.buf.references, desc = "Find symbol references" },
-		{ "mq", vim.cmd.LspRestart, desc = " mapping to restart lsp if necessary" },
+		{ "msrn", ":Lspsaga rename", desc = "Lspsaga renaming with highlighting" },
+		{ "msi", ":Lspsaga incoming_calls<cr>", desc = "Lspsaga incoming calls" },
+		{ "mso", ":Lspsaga outgoing_calls<cr>", desc = "Lspsaga outgoing calls" },
+		{ "msk", ":Lspsaga peek_definition<cr>", desc = "Lspsaga peek definition/hover" },
 		{
 			"me",
 			_K.goto_next_diagnostic,
@@ -428,7 +444,8 @@ return {
 		},
 		{ "mE", _K.goto_next_error, desc = "Goto next error" },
 		{ "ma", _K.code_action, desc = "Shows code action for cursor" },
-		{ "ms", _K.signature_help, desc = "LspSaga shows signature help" },
+		{ "mk", _K.signature_help, desc = "LspSaga shows signature help" },
+		{ "mi", _K.toggle_virtual_text, desc = "LspSaga toggle virtual text" },
 		{ "mo", _K.outline, desc = "LspSaga show sugnature outline" },
 		{ "ml", _K.show_line_diagnostics, desc = "LspSaga show line diagnostics" },
 		{ "mL", _K.show_cursor_diagnostics, desc = "LspSaga show cursor diagnostics" },
@@ -440,31 +457,51 @@ return {
 			desc = "Change case to snake_case",
 			mode = { "n", "v", "x" },
 		},
-		{ "gr", _K.find_references, desc = "Find LspSaga symbol references" },
+		{ "gr", ":Lspsaga finder def+ref+tyd<cr>", desc = "Lspsaga references+definition+type_definition " },
+		{ "gR", vim.lsp.buf.references, desc = "Find symbol references" },
 		{ "gp", _K.peek_definition, desc = "Peek at symbol defintion" },
 		{ "gt", _K.peek_type_definition, desc = "Peek at symbol type definition" },
-		{ "gi", _K.goto_implementations, desc = "Goto buffer implementation" },
+		{ "gi", ":Lspsaga finder imp<cr>", desc = "Lspsage goto_implementations" },
 		{ "gD", _K.goto_declaration, desc = "Goto buffer declaration.." },
 		{ "gd", _K.goto_definition, desc = "Goto buffer definition.." },
-		{ "<leader>sp", _T.find_files, desc = "Find Files (root dir)" },
+		{ "<c-f><c-r>", _T.resume, desc = "Resume" },
 		{ "<c-f><c-f>", _T.find_files, desc = "Find Files (root dir)" },
 		{ "<c-f>f", _T.find_files_in_cwd, desc = "Find files in (current dir) cwd" },
-		{ "<c-f><c-r>", _T.resume, desc = "Resume" },
-		{ "<c-f><c-k>", _T.grep_word_under_cursor, desc = "Grep with current word(root dir)" },
-		{ "<c-f><c-j>", _T.telescope_live_grep, desc = "Grep (root dir)" },
-		{ "<c-f>j", _T.telescope_live_grep_cwd, desc = "Grep (current dir) cwd" },
-		{ "<c-f><c-b>", _T.switch_buffer, desc = "List and Switch Buffer" },
-		{ "<leader>sc", _T.command_history, desc = "Command History" },
-		{ "<c-f><c-;>", _T.recents, desc = "Recent" },
+		{
+			"<c-f><c-j>",
+			function()
+				local word = vim.fn.expand("<cword>")
+				if word ~= nil and string.len(word) >= 2 then
+					_T.grep_word_under_cursor()
+				else
+					_T.telescope_live_grep()
+				end
+			end,
+			desc = "Grep with current word(root dir)",
+			mode = { "n", "v", "x" },
+		},
+		{
+			"<c-f><c-k>",
+			function()
+				local word = vim.fn.expand("<cword>")
+				if word ~= nil and string.len(word) >= 2 then
+					_T.grep_word_under_cursor_cwd()
+				else
+					_T.telescope_live_grep_cwd()
+				end
+			end,
+			desc = "Grep (current dir) cwd",
+		},
 		{ "<c-f>k", _T.telescope_keymaps, desc = "Find Key Maps" },
-		{ "<leader>sm", _T.marks, desc = "Jump to Mark" },
-		{ "<leader>sM", _T.man_pages, desc = "Man Pages" },
+		{ "<c-f>b", _T.switch_buffer, desc = "List and Switch Buffer" },
+		{ "<c-f>h", _T.command_history, desc = "Command History" },
+		{ "<c-f><c-b>", _T.recents, desc = "Recent" },
+		{ "<c-f>m", _T.marks, desc = "Jump to Mark" },
+		{ "<c-f>M", _T.man_pages, desc = "Man Pages" },
 		{ "<c-f><c-h>", _T.help_tags, desc = "Help Pages" },
-		{ "<leader>sb", _T.search_symbol, desc = "Search LSP Workspace Symbols" },
 		{ "<leader>sH", _T.highlight_groups, desc = "Search Highlight Groups" },
-		{ "<leader>qf", _T.find_in_quickfix, desc = "Find in Quick Fix" },
+		{ "<c-f><c-l>", _T.find_in_quickfix, desc = "Find in Quick Fix" },
 		{ "<c-f><c-m>", _T.find_dot_files, desc = "Find in dotfiles" },
-		{ "<leader>qf", _T.find_in_quickfix, desc = "Find in Quick Fix" },
 		{ "<c-g><c-f>", _T.git_files, desc = "Find Files (git-files)" },
 		{
 			"<c-s>k",
