@@ -21,12 +21,13 @@
       "cmd-w": null,
       "cmd-Shift-z": null,
       "alt-Shift-up": null,
-      "cmd-k cmd-d": "zed::OpenDefaultKeymap",
-      "cmd-k cmd-k": "zed::OpenKeymap",
-      "cmd-k cmd-s": "zed::OpenSettings",
+      "ctrl-s": null,
+      "ctrl-s k": "zed::OpenKeymap",
+      "ctrl-s d": "zed::OpenDefaultKeymap",
+      "ctrl-s p": "zed::OpenSettings",
       "ctrl-w": ["pane::CloseActiveItem", { "close_pinned": false }],
       "ctrl-f ctrl-f": "file_finder::Toggle",
-      "ctrl-f ctrl-b": "tab_switcher::Toggle",
+      "ctrl-f b": "tab_switcher::Toggle",
       "ctrl-c": ["workspace::SendKeystrokes", "escape"],
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
@@ -107,7 +108,6 @@
       "space x": "pane::CloseActiveItem",
       "g l": "editor::SplitSelectionIntoLines",
       "g n": ["editor::SelectNext", { "replace_newest": false }],
-      "ctrl-s": ["editor::SelectNext", { "replace_newest": false }],
       "g p": ["editor::SelectPrevious", { "replace_newest": false }],
       "ctrl-Shift-s": ["editor::SelectPrevious", { "replace_newest": false }],
       "g a": "editor::SelectAllMatches",
@@ -147,6 +147,7 @@
     "bindings": {
       ">": "editor::Indent",
       "<": "editor::Backtab",
+      "ctrl-s": null,
       "ctrl-c": ["workspace::SendKeystrokes", "escape"],
       "g c": "editor::ToggleComments",
       "Shift-j": "editor::MoveLineDown",
@@ -157,6 +158,7 @@
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
+      "ctrl-s": null,
       "ctrl-space": "editor::ShowCompletions",
       "ctrl-Shift-space": "editor::ShowWordCompletions"
     }

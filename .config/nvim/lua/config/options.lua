@@ -35,7 +35,7 @@ vim.opt.autoindent = true
 vim.opt.breakindent = true
 vim.opt.smartindent = true
 vim.opt.list = true
-vim.opt.listchars = { space = " ", eol = "↵", tab = "  " }
+vim.opt.listchars = { space = " ", eol = "↵" }
 vim.opt.foldenable = true
 vim.opt.foldlevel = 9
 vim.opt.foldmethod = "indent"
