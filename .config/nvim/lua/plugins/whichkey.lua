@@ -311,11 +311,6 @@ end
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
-	opts = {
-		show_help = true, -- show a help message in the command line for using WhichKey
-		show_keys = true,
-		debug = false,
-	},
 	init = function()
 		local wk = require("which-key")
 		local tree_exists, api = pcall(require, "nvim-tree")

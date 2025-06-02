@@ -2,29 +2,29 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufRead", "BufNewFile" },
 	dependencies = {
-		{
-			"nvimdev/lspsaga.nvim",
-			config = function()
-				require("lspsaga").setup({
-					ui = {
-						enable = false,
-						virtual_text = false,
-						code_action = "",
-					},
-					outline = {
-						keys = {
-							jump = "<cr>",
-						},
-					},
-					callhierarchy = {
-						keys = {
-							edit = "<cr>",
-						},
-					},
-					typehierarchy = { keys = { edit = "<cr>" } },
-				})
-			end,
-		},
+		-- {
+		-- 	"nvimdev/lspsaga.nvim",
+		-- 	config = function()
+		-- 		require("lspsaga").setup({
+		-- 			ui = {
+		-- 				enable = false,
+		-- 				virtual_text = false,
+		-- 				code_action = "",
+		-- 			},
+		-- 			outline = {
+		-- 				keys = {
+		-- 					jump = "<cr>",
+		-- 				},
+		-- 			},
+		-- 			callhierarchy = {
+		-- 				keys = {
+		-- 					edit = "<cr>",
+		-- 				},
+		-- 			},
+		-- 			typehierarchy = { keys = { edit = "<cr>" } },
+		-- 		})
+		-- 	end,
+		-- },
 		{
 			"williamboman/mason.nvim",
 		},
@@ -129,7 +129,80 @@ return {
 				end,
 				["vtsls"] = function()
 					require("lspconfig.configs").vtsls = require("vtsls").lspconfig
-					require("lspconfig").vtsls.setup({})
+					local l_config = {}
+					require("lspconfig").vtsls.setup({
+						filetypes = {
+							"javascript",
+							"javascriptreact",
+							"javascript.jsx",
+							"typescript",
+							"typescriptreact",
+							"typescript.tsx",
+						},
+						settings = {
+							typescript = {
+								preferences = {
+									importModuleSpecifier = "non-relative",
+								},
+								tsserver = { maxTsServerMemory = 16184 },
+								inlayHints = {
+									parameterNames = {
+										enabled = "all",
+										suppressWhenArgumentMatchesName = false,
+									},
+									parameterTypes = {
+										enabled = true,
+									},
+									variableTypes = {
+										enabled = true,
+										suppressWhenTypeMatchesName = false,
+									},
+									propertyDeclarationTypes = {
+										enabled = true,
+									},
+									functionLikeReturnTypes = {
+										enabled = true,
+									},
+									enumMemberValues = {
+										enabled = true,
+									},
+								},
+								updateImportsOnFileMove = "always",
+							},
+							javascript = {
+								preferences = {
+									importModuleSpecifier = "non-relative",
+								},
+								tsserver = { maxTsServerMemory = 16184 },
+								inlayHints = {
+									parameterNames = {
+										enabled = "all",
+										suppressWhenArgumentMatchesName = false,
+									},
+									parameterTypes = {
+										enabled = true,
+									},
+									variableTypes = {
+										enabled = true,
+										suppressWhenTypeMatchesName = false,
+									},
+									propertyDeclarationTypes = {
+										enabled = true,
+									},
+									functionLikeReturnTypes = {
+										enabled = true,
+									},
+									enumMemberValues = {
+										enabled = true,
+									},
+								},
+								updateImportsOnFileMove = "always",
+							},
+							vtsls = {
+								enableMoveToFileCodeAction = true,
+							},
+						},
+					})
 				end,
 
 				-- ["ts_ls"] = function()
