@@ -30,9 +30,11 @@ require("lazy").setup({
 		lazy = true,
 	},
 	spec = {
+		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		{ import = "plugins" },
 	},
 	checker = { enabled = false },
+	install = { colorscheme = { "habamax" } },
 	change_detection = { notify = false },
 	performance = {
 		rtp = {
