@@ -24,6 +24,11 @@ vim.opt.rtp:prepend(lazypath)
 
 require("config.options")
 
+vim.g.snacks_animate = false
+vim.g.lazyvim_cmp = false
+vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
+vim.g.trouble_lualine = false
+
 -- Setup lazy.nvim
 require("lazy").setup({
     defaults = {
