@@ -25,6 +25,7 @@
       "ctrl-s k": "zed::OpenKeymap",
       "ctrl-s d": "zed::OpenDefaultKeymap",
       "ctrl-s p": "zed::OpenSettings",
+      "ctrl-s o": "projects::OpenRecent",
       "ctrl-w": ["pane::CloseActiveItem", { "close_pinned": false }],
       "ctrl-f ctrl-f": "file_finder::Toggle",
       "ctrl-f b": "tab_switcher::Toggle",

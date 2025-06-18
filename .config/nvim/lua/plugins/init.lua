@@ -1,121 +1,132 @@
 return {
-	{
-		"nvim-lua/plenary.nvim",
-		name = "plenary",
-		lazy = false,
-	},
-	{ "nvim-tree/nvim-web-devicons", lazy = true },
-	{
-		"ThePrimeagen/harpoon",
-		lazy = true,
-	},
-	{
-		"jiaoshijie/undotree",
-		dependencies = "nvim-lua/plenary.nvim",
-		config = function()
-			require("undotree").setup()
-		end,
-		keys = { -- load the plugin only when using it's keybinding:
-			{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
-		},
-	},
-	{
-		"christoomey/vim-tmux-navigator",
-		event = { "VimEnter" },
-	},
-	{
-		"kylechui/nvim-surround",
-		version = "*",
-		event = { "InsertEnter" },
-		config = function()
-			require("nvim-surround").setup()
-		end,
-	},
-	{
-		"smjonas/inc-rename.nvim",
-		event = { "BufRead", "BufNewFile" },
-		config = function()
-			require("inc_rename").setup()
-		end,
-	},
-	{
-		"arthurxavierx/vim-caser",
-		event = { "BufRead", "BufNewFile" },
-	},
-	{
-		"dstein64/vim-startuptime",
-		-- lazy-load on a command
-		cmd = "StartupTime",
-		-- init is called during startup. Configuration for vim plugins typically should be set in an init function
-		init = function()
-			vim.g.startuptime_tries = 10
-		end,
-	},
-	-- {
-	-- 	"nvimdev/dashboard-nvim",
-	-- 	lazy = false, -- As https://github.com/nvimdev/dashboard-nvim/pull/450, dashboard-nvim shouldn't be lazy-loaded to properly handle stdin.
-	-- 	opts = function()
-	-- 		local logo = [[
-	--         ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-	--         ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z
-	--         ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z
-	--         ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z
-	--         ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
-	--         ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
-	--    ]]
-	--
-	-- 		logo = string.rep("\n", 8) .. logo .. "\n\n"
-	--
-	-- 		local opts = {
-	-- 			theme = "doom",
-	-- 			hide = {
-	-- 				-- this is taken care of by lualine
-	-- 				-- enabling this messes up the actual laststatus setting after loading a file
-	-- 				statusline = false,
-	-- 			},
-	-- 			config = {
-	-- 				header = vim.split(logo, "\n"),
-	--        -- stylua: ignore
-	--        center = {
-	--          { action = 'lua LazyVim.pick()()',                           desc = " Find File",       icon = " ", key = "f" },
-	--          { action = "ene | startinsert",                              desc = " New File",        icon = " ", key = "n" },
-	--          { action = 'lua LazyVim.pick("oldfiles")()',                 desc = " Recent Files",    icon = " ", key = "r" },
-	--          { action = 'lua LazyVim.pick("live_grep")()',                desc = " Find Text",       icon = " ", key = "g" },
-	--          { action = 'lua LazyVim.pick.config_files()()',              desc = " Config",          icon = " ", key = "c" },
-	--          { action = 'lua require("persistence").load()',              desc = " Restore Session", icon = " ", key = "s" },
-	--          { action = "LazyExtras",                                     desc = " Lazy Extras",     icon = " ", key = "x" },
-	--          { action = "Lazy",                                           desc = " Lazy",            icon = "󰒲 ", key = "l" },
-	--          { action = function() vim.api.nvim_input("<cmd>qa<cr>") end, desc = " Quit",            icon = " ", key = "q" },
-	--        },
-	-- 				footer = function()
-	-- 					local stats = require("lazy").stats()
-	-- 					local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-	-- 					return {
-	-- 						"⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
-	-- 					}
-	-- 				end,
-	-- 			},
-	-- 		}
-	--
-	-- 		for _, button in ipairs(opts.config.center) do
-	-- 			button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
-	-- 			button.key_format = "  %s"
-	-- 		end
-	--
-	-- 		-- open dashboard after closing lazy
-	-- 		if vim.o.filetype == "lazy" then
-	-- 			vim.api.nvim_create_autocmd("WinClosed", {
-	-- 				pattern = tostring(vim.api.nvim_get_current_win()),
-	-- 				once = true,
-	-- 				callback = function()
-	-- 					vim.schedule(function()
-	-- 						vim.api.nvim_exec_autocmds("UIEnter", { group = "dashboard" })
-	-- 					end)
-	-- 				end,
-	-- 			})
-	-- 		end
-	--
-	-- 		return opts
-	-- 	end,
-	-- },
+    {
+        "nvim-lua/plenary.nvim",
+        lazy = false,
+    },
+    {
+        "folke/snacks.nvim",
+        lazy = false,
+        opts = {
+            bigfile = { enabled = true },
+            dashboard = { enabled = false },
+            explorer = {
+                enabled = true,
+                tree = true,
+                follow_file = true,
+                jump = { close = false },
+                config = function(opts)
+                    return require("snacks.picker.source.explorer").setup(opts)
+                end,
+                win = {
+                    list = {
+                        keys = {
+                            [">"] = "explorer_focus",
+                            ["."] = "explorer_focus",
+                            ["<"] = "explorer_up",
+                            ["<BS>"] = "explorer_up",
+                            ["q"] = "explorer_close",
+                            ["I"] = "toggle_ignored",
+                            ["H"] = "toggle_hidden",
+                        },
+                    },
+                },
+            },
+            indent = { enabled = true },
+            input = { enabled = true },
+            notifier = {
+                enabled = true,
+                timeout = 3000,
+            },
+            picker = { enabled = true },
+            quickfile = { enabled = true },
+            scope = { enabled = true },
+            scroll = { enabled = false },
+            statuscolumn = { enabled = false },
+            words = { enabled = true },
+            styles = { enabled = false },
+        },
+    },
+    { "nvim-tree/nvim-web-devicons", lazy = true },
+    {
+        "ThePrimeagen/harpoon",
+        lazy = true,
+    },
+    {
+        "jiaoshijie/undotree",
+        dependencies = "nvim-lua/plenary.nvim",
+        config = function()
+            require("undotree").setup()
+        end,
+        keys = { -- load the plugin only when using it's keybinding:
+            { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+        },
+    },
+    {
+        "christoomey/vim-tmux-navigator",
+        event = { "VimEnter" },
+    },
+    {
+        "kylechui/nvim-surround",
+        version = "*",
+        event = { "InsertEnter" },
+        config = function()
+            require("nvim-surround").setup()
+        end,
+    },
+    {
+        "smjonas/inc-rename.nvim",
+        event = { "BufRead", "BufNewFile" },
+        config = function()
+            require("inc_rename").setup()
+        end,
+    },
+    {
+        "RRethy/vim-illuminate",
+        event = { "BufRead", "BufNewFile" },
+    },
+    {
+        "arthurxavierx/vim-caser",
+        event = { "BufRead", "BufNewFile" },
+    },
+    {
+        "stevearc/overseer.nvim",
+        event = { "BufRead", "BufNewFile" },
+        opts = {},
+    },
+    {
+        "dstein64/vim-startuptime",
+        -- lazy-load on a command
+        cmd = "StartupTime",
+        -- init is called during startup. Configuration for vim plugins typically should be set in an init function
+        init = function()
+            vim.g.startuptime_tries = 10
+        end,
+    },
+    {
+        "tpope/vim-fugitive",
+        event = "VimEnter",
+    },
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        build = ":Copilot auth",
+        event = "BufReadPost",
+        opts = {
+            suggestion = {
+                enabled = not vim.g.ai_cmp,
+                auto_trigger = true,
+                hide_during_completion = vim.g.ai_cmp,
+                keymap = {
+                    accept = "<tab>",
+                    next = "<c-j>",
+                    prev = "<c-k>",
+                },
+            },
+            panel = { enabled = false },
+            filetypes = {
+                markdown = true,
+                help = true,
+            },
+        },
+    },
 }
