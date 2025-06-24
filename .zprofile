@@ -86,7 +86,7 @@ tx=36:"
 # Setting up aliases
 alias al='alias | less' # List all aliases
 alias as='alias | grep' # Search aliases
-alias _rg='rg --column --line-number --no-heading --color=always --smart-case' # Search aliases
+alias _rg='rg --column --line-number --no-heading --color=always --smart-case --glob "!{**/node_modules/**,!*-lock.yaml}"' # Search aliases
 
 alias _pv='python3 -m venv ./venv'
 
