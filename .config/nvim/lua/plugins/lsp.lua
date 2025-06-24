@@ -2,29 +2,29 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufRead", "BufNewFile" },
     dependencies = {
-        -- {
-        -- 	"nvimdev/lspsaga.nvim",
-        -- 	config = function()
-        -- 		require("lspsaga").setup({
-        -- 			ui = {
-        -- 				enable = false,
-        -- 				virtual_text = false,
-        -- 				code_action = "",
-        -- 			},
-        -- 			outline = {
-        -- 				keys = {
-        -- 					jump = "<cr>",
-        -- 				},
-        -- 			},
-        -- 			callhierarchy = {
-        -- 				keys = {
-        -- 					edit = "<cr>",
-        -- 				},
-        -- 			},
-        -- 			typehierarchy = { keys = { edit = "<cr>" } },
-        -- 		})
-        -- 	end,
-        -- },
+        {
+        	"nvimdev/lspsaga.nvim",
+        	config = function()
+        		require("lspsaga").setup({
+        			ui = {
+        				enable = false,
+        				virtual_text = false,
+        				code_action = "",
+        			},
+        			outline = {
+        				keys = {
+        					jump = "<cr>",
+        				},
+        			},
+        			callhierarchy = {
+        				keys = {
+        					edit = "<cr>",
+        				},
+        			},
+        			typehierarchy = { keys = { edit = "<cr>" } },
+        		})
+        	end,
+        },
         {
             "williamboman/mason.nvim",
         },

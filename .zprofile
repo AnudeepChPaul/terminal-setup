@@ -2,7 +2,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Prezto Dir
 # export ZDOTDIR=$HOME/.config/zsh;
-EDITOR='zed'
+EDITOR='nvim'
 
 # setting up PATH variables
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
@@ -86,6 +86,7 @@ tx=36:"
 # Setting up aliases
 alias al='alias | less' # List all aliases
 alias as='alias | grep' # Search aliases
+alias _rg='rg --column --line-number --no-heading --color=always --smart-case' # Search aliases
 
 alias _pv='python3 -m venv ./venv'
 
@@ -338,6 +339,11 @@ function y() {
 		builtin cd -- "$cwd"
 	fi
 	rm -f -- "$tmp"
+}
+
+function nvim_cleanup____ () {
+rm -rf ~/.local/share/nvim
+rm -rf ~/.local/state/nvim
 }
 
 
