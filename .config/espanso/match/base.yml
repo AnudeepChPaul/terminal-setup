@@ -1,0 +1,33 @@
+matches:
+  - trigger: "%ml"
+    replace: |
+      me@anudeep.pro
+
+  - trigger: "%fn"
+    replace: () => { }
+
+  - trigger: "%gsu"
+    replace: "git push --set-upstream origin "
+
+  - trigger: "%gc"
+    replace: "git commit -m \""
+  
+  - trigger: "%ll"
+    replace: "{{mytime}} — #log"
+    vars:
+      - name: mytime
+        type: date
+        params:
+          format: "%d-%B-%Y"
+          offset: 0
+          locale: en_IN
+
+  - trigger: "%tt"
+    replace: "{{mytime}} —> "
+    vars:
+      - name: mytime
+        type: date
+        params:
+          format: "%H:%M"
+          offset: 0
+          locale: en_IN
