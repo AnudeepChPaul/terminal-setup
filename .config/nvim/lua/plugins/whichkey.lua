@@ -234,6 +234,15 @@ _T.find_files_in_cwd = function()
   }))
 end
 
+_T.find_notes = function()
+  require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({
+    cwd = "~/Notes",
+    file_ignore_patterns = { ".*%.git/.*", ".*%.obsidian/.*", "Icon", ".*%DS_Store" },
+    previewer = false,
+    prompt_title = "Searching Obsidian vault"
+  }))
+end
+
 _T.switch_buffer = function()
   require("telescope.builtin").buffers({
     sort_mru = true,
@@ -394,15 +403,14 @@ return {
         "mzJ`z",
         desc = "Bring botton line at the current line end",
       },
-      { "<space>e",   "<cmd>lua Snacks.explorer()<cr>",              desc = "Snaks file explorer" },
-      { "<c-a>",      "gg<S-v>G",                                    desc = "Select all words" },
-      { "<c-d>",      "<C-d>zz",                                     desc = "Scrolls down with cursor at centre" },
-      { "<c-u>",      "<C-u>zz",                                     desc = "Scrolls up with cursor at centre" },
-      { "<c-h>",      ":TmuxNavigateLeft<CR>",                       desc = "Tmux navigate left" },
-      { "<c-j>",      ":TmuxNavigateDown<CR>",                       desc = "Tmux navigate down",                silent = true },
-      { "<c-k>",      ":TmuxNavigateUp<CR>",                         desc = "Tmux navigate up" },
-      { "<c-l>",      ":TmuxNavigateRight<CR>",                      desc = "Tmux navigate right" },
-      { "<c-f><c-n>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", desc = "New tmux session" },
+      { "<space>e", "<cmd>lua Snacks.explorer()<cr>", desc = "Snaks file explorer" },
+      { "<c-a>",    "gg<S-v>G",                       desc = "Select all words" },
+      { "<c-d>",    "<C-d>zz",                        desc = "Scrolls down with cursor at centre" },
+      { "<c-u>",    "<C-u>zz",                        desc = "Scrolls up with cursor at centre" },
+      { "<c-h>",    ":TmuxNavigateLeft<CR>",          desc = "Tmux navigate left" },
+      { "<c-j>",    ":TmuxNavigateDown<CR>",          desc = "Tmux navigate down",                silent = true },
+      { "<c-k>",    ":TmuxNavigateUp<CR>",            desc = "Tmux navigate up" },
+      { "<c-l>",    ":TmuxNavigateRight<CR>",         desc = "Tmux navigate right" },
       {
         "n",
         "nzzzv",
@@ -567,6 +575,7 @@ return {
       { "<c-f><c-r>", _T.resume,                         desc = "Resume" },
       { "<c-f><c-f>", _T.find_files,                     desc = "Find Files (root dir)" },
       { "<c-f>f",     _T.find_files_in_cwd,              desc = "Find files in (current dir) cwd" },
+      { "<c-f><c-n>", _T.find_notes,                     desc = "Find obsidian notes" },
       {
         "<c-f><c-j>",
         function()
