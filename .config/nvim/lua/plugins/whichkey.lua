@@ -212,6 +212,13 @@ _T.grep_word_under_cursor_cwd = function()
   })
 end
 
+_T.find_in_dot_files = function()
+  require("telescope").extensions.live_grep_args.live_grep_args({
+    cwd = "~/.config/nvim/",
+    prompt_title = "Search in dotfiles",
+  })
+end
+
 _T.find_dot_files = function()
   require("telescope.builtin").find_files({
     cwd = "~/.config",
@@ -457,6 +464,8 @@ return {
         desc = "Paste's a line without copying the replacement",
         mode = { "v", "x" },
       },
+
+      { "<leader>u", "<cmd>UndotreeToggle<cr>",      desc = "Toggle undotree" },
       { "<leader>r", ":s/",                          desc = "Replaces search term within selection" },
       { "<C-\\>",    "<ESC><ESC><ESC>",              desc = "Escape" },
       { "<C-c>",     "<ESC>",                        desc = "Escape" },
@@ -612,11 +621,16 @@ return {
         "<c-f>c",
         function()
           require("telescope.builtin").find_files({
-            prompt_title = "Find files",
+            prompt_title = "Find neovim config",
             cwd = "~/.config/nvim/",
           })
         end,
-        desc = "Find Key Maps",
+        desc = "Find neovim config",
+      },
+      {
+        "<c-f><c-c>",
+        _T.find_in_dot_files,
+        desc = "Search in neovim config",
       },
       { "<c-f>b",     _T.switch_buffer,                                                      desc = "List and Switch Buffer" },
       { "<c-f>h",     "<cmd>lua Snacks.picker.command_history({ layout= 'telescope' })<cr>", desc = "Command History" },

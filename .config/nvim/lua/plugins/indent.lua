@@ -4,7 +4,12 @@ return {
 		main = "ibl",
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		opts = {
-			exclude = { filetypes = { "dashboard", "text", "neotree", "telescope" } },
+			indent = { char = "│" },
+			scope = { enabled = true },
+			exclude = {
+				filetypes = { "dashboard", "text", "neotree", "telescope", "help", "lazy", "NvimTree", "terminal" },
+				buftypes = { "terminal", "nofile" },
+			},
 		},
 	},
 }

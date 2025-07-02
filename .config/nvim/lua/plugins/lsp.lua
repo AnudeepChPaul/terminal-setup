@@ -1,268 +1,208 @@
 return {
-    "neovim/nvim-lspconfig",
-    event = { "BufRead", "BufNewFile" },
-    dependencies = {
-        {
-        	"nvimdev/lspsaga.nvim",
-        	config = function()
-        		require("lspsaga").setup({
-        			ui = {
-        				enable = false,
-        				virtual_text = false,
-        				code_action = "",
-        			},
-        			outline = {
-        				keys = {
-        					jump = "<cr>",
-        				},
-        			},
-        			callhierarchy = {
-        				keys = {
-        					edit = "<cr>",
-        				},
-        			},
-        			typehierarchy = { keys = { edit = "<cr>" } },
-        		})
-        	end,
-        },
-        {
-            "williamboman/mason.nvim",
-        },
-        "williamboman/mason-lspconfig.nvim",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "hrsh7th/nvim-cmp",
-        "hrsh7th/cmp-nvim-lsp",
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
-        "onsails/lspkind.nvim",
-        "j-hui/fidget.nvim",
-        "yioneko/nvim-vtsls",
-        {
-            "stevearc/conform.nvim",
-            opts = {
-                formatters_by_ft = {
-                    ["javascript"] = { "prettier" },
-                    ["javascriptreact"] = { "prettier" },
-                    ["typescript"] = { "prettier" },
-                    ["typescriptreact"] = { "prettier" },
-                    ["vue"] = { "prettier" },
-                    ["css"] = { "prettier" },
-                    ["scss"] = { "prettier" },
-                    ["less"] = { "prettier" },
-                    ["html"] = { "prettier" },
-                    ["json"] = { "prettier" },
-                    ["jsonc"] = { "prettier" },
-                    ["yaml"] = { "prettier" },
-                    ["markdown"] = { "prettier" },
-                    ["markdown.mdx"] = { "prettier" },
-                    ["graphql"] = { "prettier" },
-                    ["handlebars"] = { "prettier" },
-                    lua = { "stylua" },
-                    python = { "isort", "black" },
-                    ["*"] = { "codespell" },
-                    -- Use the "_" filetype to run formatters on filetypes that don't
-                    -- have other formatters configured.
-                    ["_"] = { "trim_whitespace" },
-                },
-                format_on_save = {
-                    lsp_fallback = true,
-                    timeout_ms = 500,
-                },
-            },
-        },
-    },
+	{
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate",
+		config = true,
+		lazy = false,
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		event = { "BufRead", "BufNewFile" },
+		config = function()
+			require("mason-lspconfig").setup({
+				ensure_installed = { "ts_ls", "jsonls", "lua_ls", "marksman", "html", "cssls", "emmet_ls" },
+				automatic_installation = true,
+			})
+			require("mason").setup({
+				ui = {
+					border = "rounded",
+					icons = {
+						package_installed = "✓",
+						package_pending = "➜",
+						package_uninstalled = "✗",
+					},
+				},
+			})
+		end,
+	},
 
-    config = function(_, opts)
-        require("fidget").setup({})
+	{
+		"hrsh7th/nvim-cmp",
+		event = { "BufRead", "BufNewFile" },
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"L3MON4D3/LuaSnip",
+			"hrsh7th/cmp-nvim-lsp",
+			"onsails/lspkind.nvim",
+		},
+		config = function()
+			local cmp = require("cmp")
+			local lspkind = require("lspkind")
+			cmp.setup({
+				snippet = {
+					expand = function(args)
+						require("luasnip").lsp_expand(args.body)
+					end,
+				},
+				mapping = cmp.mapping.preset.insert({
+					["<C-Space>"] = cmp.mapping.complete(),
+				}),
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol_text",
+						maxwidth = 50,
+						ellipsis_char = "...",
+					}),
+				},
+				sources = {
+					{ name = "nvim_lsp" },
+					{ name = "buffer" },
+					{ name = "path" },
+				},
+			})
+		end,
+	},
+	{
+		"neovim/nvim-lspconfig",
+		event = { "BufRead", "BufNewFile" },
+		dependencies = {
+			"b0o/schemastore.nvim",
+		},
+		config = function(_)
+			local lspconfig = require("lspconfig")
+			local capabilities = vim.tbl_deep_extend(
+				"force",
+				{},
+				vim.lsp.protocol.make_client_capabilities(),
+				require("cmp_nvim_lsp").default_capabilities()
+			)
 
-        local cmp = require("cmp")
-        local kind = require("lspkind")
-        local cmp_lsp = require("cmp_nvim_lsp")
+			-- Lua
+			lspconfig.lua_ls.setup({
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim", "require" },
+						},
+						workspace = {
+							library = vim.api.nvim_get_runtime_file("", true),
+							checkThirdParty = false,
+						},
+					},
+				},
+			})
 
-        local capabilities = vim.tbl_deep_extend(
-            "force",
-            {},
-            vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities()
-        )
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+				settings = {
+					completions = {
+						completeFunctionCalls = true,
+					},
+					typescript = {
+						format = {
+							enable = true,
+						},
+						inlayHints = {
+							importModuleSpecifierPreference = "non-relative",
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
+					},
+					javascript = {
+						format = {
+							enable = true,
+						},
+						inlayHints = {
+							importModuleSpecifierPreference = "non-relative",
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
+					},
+				},
+			})
 
-        require("mason").setup({
-            ui = {
-                icons = {
-                    package_installed = "✓",
-                    package_pending = "➜",
-                    package_uninstalled = "✗",
-                },
-            },
-        })
-        require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-                "vtsls",
-            },
-            handlers = {
-                function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup({
-                        capabilities = capabilities,
-                        autostart = true,
-                    })
-                end,
-                ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup({
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { "vim", "it", "describe", "before_each", "after_each" },
-                                },
-                            },
-                        },
-                    })
-                end,
-                ["vtsls"] = function()
-                    require("lspconfig.configs").vtsls = require("vtsls").lspconfig
-                    require("lspconfig").vtsls.setup({
-                        capabilities = capabilities,
-                        filetypes = {
-                            "javascript",
-                            "javascriptreact",
-                            "javascript.jsx",
-                            "typescript",
-                            "typescriptreact",
-                            "typescript.tsx",
-                        },
-                        settings = {
-                            typescript = {
-                                preferences = {
-                                    importModuleSpecifier = "non-relative",
-                                },
-                                tsserver = { maxTsServerMemory = 20000 },
-                                inlayHints = {
-                                    parameterNames = {
-                                        enabled = "all",
-                                        suppressWhenArgumentMatchesName = false,
-                                    },
-                                    parameterTypes = {
-                                        enabled = true,
-                                    },
-                                    variableTypes = {
-                                        enabled = true,
-                                        suppressWhenTypeMatchesName = false,
-                                    },
-                                    propertyDeclarationTypes = {
-                                        enabled = true,
-                                    },
-                                    functionLikeReturnTypes = {
-                                        enabled = true,
-                                    },
-                                    enumMemberValues = {
-                                        enabled = true,
-                                    },
-                                },
-                                updateImportsOnFileMove = "always",
-                            },
-                            javascript = {
-                                preferences = {
-                                    importModuleSpecifier = "non-relative",
-                                },
-                                tsserver = { maxTsServerMemory = 20000 },
-                                inlayHints = {
-                                    parameterNames = {
-                                        enabled = "all",
-                                        suppressWhenArgumentMatchesName = false,
-                                    },
-                                    parameterTypes = {
-                                        enabled = true,
-                                    },
-                                    variableTypes = {
-                                        enabled = true,
-                                        suppressWhenTypeMatchesName = false,
-                                    },
-                                    propertyDeclarationTypes = {
-                                        enabled = true,
-                                    },
-                                    functionLikeReturnTypes = {
-                                        enabled = true,
-                                    },
-                                    enumMemberValues = {
-                                        enabled = true,
-                                    },
-                                },
-                                updateImportsOnFileMove = "always",
-                            },
-                            vtsls = {
-                                enableMoveToFileCodeAction = true,
-                            },
-                        },
-                    })
-                end,
-            },
-        })
+			-- JSON
+			lspconfig.jsonls.setup({
+				capabilities = capabilities,
+				settings = {
+					json = {
+						schemas = require("schemastore").json.schemas(),
+						validate = { enable = true },
+					},
+				},
+			})
 
-        local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-        cmp.setup({
-            completion = {
-                completeopt = "menu,menuone,preview,noselect",
-            },
-            snippet = {
-                expand = function(args)
-                    require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-                end,
-            },
-            mapping = cmp.mapping.preset.insert({
-                ["<C-Space>"] = cmp.mapping.complete(),
-                ["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
-                ["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
-                ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-                ["<CR>"] = cmp.mapping.confirm(),
-                ["<S-CR>"] = cmp.mapping.confirm({
-                    behavior = cmp.ConfirmBehavior.Replace,
-                    select = true,
-                }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-                ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                ["<C-c>"] = function(fallback)
-                    cmp.mapping.abort()
-                    fallback()
-                end,
-                ["<C-CR>"] = function(fallback)
-                    cmp.abort()
-                    fallback()
-                end,
-            }),
-            sources = cmp.config.sources({
-                { name = "nvim_lsp" },
-                { name = "luasnip" },
-                { name = "path" },
-                { name = "buffer" },
-            }),
-            formatting = {
-                format = kind.cmp_format({
-                    mode = "text_symbol",
-                    maxwidth = 64,
-                    ellipsis_char = "...",
-                    show_labelDetails = true,
-                    before = function(entry, vim_item)
-                        return vim_item
-                    end,
-                }),
-            },
-        })
-
-        vim.diagnostic.config({
-            float = {
-                focusable = false,
-                style = "minimal",
-                border = "rounded",
-                source = "always",
-                header = "",
-                prefix = "",
-            },
-        })
-    end,
+			lspconfig.marksman.setup({ capabilities = capabilities })
+			lspconfig.html.setup({ capabilities = capabilities })
+			lspconfig.cssls.setup({ capabilities = capabilities })
+			lspconfig.emmet_ls.setup({
+				capabilities = capabilities,
+				filetypes = {
+					"html",
+					"css",
+					"scss",
+					"javascript",
+					"javascriptreact",
+					"typescriptreact",
+					"vue",
+					"svelte",
+					"xml",
+				},
+				init_options = {
+					html = {
+						options = {
+							["bem.enabled"] = true,
+						},
+					},
+				},
+			})
+		end,
+	},
+	{
+		"stevearc/conform.nvim",
+		event = { "BufRead", "BufNewFile" },
+		opts = {
+			formatters_by_ft = {
+				["javascript"] = { "prettier" },
+				["javascriptreact"] = { "prettier" },
+				["typescript"] = { "prettier" },
+				["typescriptreact"] = { "prettier" },
+				["vue"] = { "prettier" },
+				["css"] = { "prettier" },
+				["scss"] = { "prettier" },
+				["less"] = { "prettier" },
+				["html"] = { "prettier" },
+				["json"] = { "prettier" },
+				["jsonc"] = { "prettier" },
+				["yaml"] = { "prettier" },
+				["markdown"] = { "prettier" },
+				["markdown.mdx"] = { "prettier" },
+				["graphql"] = { "prettier" },
+				["handlebars"] = { "prettier" },
+				lua = { "stylua" },
+				python = { "isort", "black" },
+				["*"] = { "codespell" },
+				-- Use the "_" filetype to run formatters on filetypes that don't
+				-- have other formatters configured.
+				["_"] = { "trim_whitespace" },
+			},
+			format_on_save = {
+				lsp_fallback = true,
+				timeout_ms = 500,
+			},
+		},
+	},
 }
