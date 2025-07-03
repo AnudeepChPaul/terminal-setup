@@ -1,16 +1,26 @@
 matches:
   - trigger: "%ml"
-    replace: |
-      me@anudeep.pro
+    replace: me@anudeep.pro
 
   - trigger: "%fn"
     replace: () => { }
 
-  - trigger: "%gsu"
+  - trigger: "%gp"
     replace: "git push --set-upstream origin "
 
+  - trigger: "%gf"
+    replace: "git fetch origin; git pull --rebase origin "
+
   - trigger: "%gc"
-    replace: "git commit -m \""
+    form: |
+      Commit type:
+      - feat
+      - fix
+      - docs
+      - refactor
+      - chore
+      Subject:
+    replace: "git commit -m \"{{form1}}: {{form2}}"
   
   - trigger: "%ll"
     replace: "{{mytime}} — #log"
@@ -31,3 +41,16 @@ matches:
           format: "%H:%M"
           offset: 0
           locale: en_IN
+
+  - trigger: "%ws"
+    replace: "curl wttr.in"
+
+  - trigger: "%ip"
+    replace: "curl ifconfig.me"
+
+  - trigger: "%dj"
+    replace: "curl -H \"Accept: text/plain\" https://icanhazdadjoke.com; echo"
+
+  - trigger: "%hl"
+    replace: "atuin login -u achandrapaul"
+

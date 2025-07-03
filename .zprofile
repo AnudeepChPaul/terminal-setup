@@ -128,8 +128,6 @@ alias p="pnpm";
 alias plz="fc -l -1 | cut -d' ' -f2- | xargs sudo"
 alias cpwd='pwd | pbcopy'
 alias pa='pbpaste'
-alias rn='ranger'
-alias j='zellij'
 
 # zellij
 alias zpipe='zellij pipe -p'
@@ -162,7 +160,6 @@ alias pnpx="pnpm dlx"
 
 # Don't google
 alias myip="curl ifconfig.me"
-alias whatismyip="curl ifconfig.me"
 alias ws="curl wttr.in"
 alias wss="curl 'wttr.in?format=3'"
 alias dadjoke='curl -H "Accept: text/plain" https://icanhazdadjoke.com/; echo'
@@ -174,15 +171,6 @@ alias ots='owl tubes --backend envoy stop'
 # sencha
 alias saw="sencha app watch"
 alias sag="sencha app generate"
-
-# pomodoro
-alias work="timer 60m && terminal-notifier -message 'Drink a lot of water! 🧉💧'\
-        -title 'Work Timer is up! Take a Break 😊'\
-        -sound Crystal"
-
-alias rest="timer 10m && terminal-notifier -message 'Just check your slack once!'\
-        -title 'Break is over! Get back to work 😬'\
-        -sound Crystal"
 
 function trw {
   tmux rename-window "${1:-zsh|exec}";
@@ -358,3 +346,5 @@ eval "$(starship init zsh)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f "$HOME/.secrets" ] && source "$HOME/.secrets"

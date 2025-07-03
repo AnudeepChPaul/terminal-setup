@@ -159,3 +159,4 @@ bindkey '^g' clear-screen
 # bindkey -M menuselect '\r' .accept-line
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(atuin init zsh)"
