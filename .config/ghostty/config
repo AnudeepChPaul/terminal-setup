@@ -1,0 +1,361 @@
+font-family = Ubuntu Nerd Font Mono
+font-style = default
+font-size = 14
+theme = Dracula
+
+background = #000000
+background-opacity = 0.81
+background-blur = 25
+
+window-padding-x = 5
+window-padding-y = 5
+window-theme = dark
+window-width = 167
+window-height = 47
+window-decoration = false
+# maximize = true
+# fullscreen = true
+
+cursor-style = block
+cursor-style-blink = true
+mouse-hide-while-typing = true
+
+command =
+initial-command =
+
+scrollback-limit = 10000000
+link-url = true
+
+working-directory = home
+
+clipboard-read = allow
+
+clipboard-write = allow
+shell-integration = zsh
+shell-integration-features = true
+
+macos-titlebar-style = hidden
+
+macos-option-as-alt = true
+
+# Whether to enable the macOS window shadow. The default value is true.
+# With some window managers and window transparency settings, you may
+# find false more visually appealing.
+macos-window-shadow = false
+
+# If true, Ghostty on macOS will automatically enable the "Secure Input"
+# feature when it detects that a password prompt is being displayed.
+#
+# "Secure Input" is a macOS security feature that prevents applications from
+# reading keyboard events. This can always be enabled manually using the
+# `Ghostty > Secure Keyboard Entry` menu item.
+#
+# Note that automatic password prompt detection is based on heuristics
+# and may not always work as expected. Specifically, it does not work
+# over SSH connections, but there may be other cases where it also
+# doesn't work.
+#
+# A reason to disable this feature is if you find that it is interfering
+# with legitimate accessibility software (or software that uses the
+# accessibility APIs), since secure input prevents any application from
+# reading keyboard events.
+macos-auto-secure-input = true
+
+# If true, Ghostty will show a graphical indication when secure input is
+# enabled. This indication is generally recommended to know when secure input
+# is enabled.
+#
+# Normally, secure input is only active when a password prompt is displayed
+# or it is manually (and typically temporarily) enabled. However, if you
+# always have secure input enabled, the indication can be distracting and
+# you may want to disable it.
+macos-secure-input-indication = true
+
+# Customize the macOS app icon.
+#
+# This only affects the icon that appears in the dock, application
+# switcher, etc. This does not affect the icon in Finder because
+# that is controlled by a hardcoded value in the signed application
+# bundle and can't be changed at runtime. For more details on what
+# exactly is affected, see the `NSApplication.icon` Apple documentation;
+# that is the API that is being used to set the icon.
+#
+# Valid values:
+#
+#  * `official` - Use the official Ghostty icon.
+#  * `blueprint`, `chalkboard`, `microchip`, `glass`, `holographic`,
+#    `paper`, `retro`, `xray` - Official variants of the Ghostty icon
+#    hand-created by artists (no AI).
+#  * `custom-style` - Use the official Ghostty icon but with custom
+#    styles applied to various layers. The custom styles must be
+#    specified using the additional `macos-icon`-prefixed configurations.
+#    The `macos-icon-ghost-color` and `macos-icon-screen-color`
+#    configurations are required for this style.
+#
+# WARNING: The `custom-style` option is _experimental_. We may change
+# the format of the custom styles in the future. We're still finalizing
+# the exact layers and customization options that will be available.
+#
+# Other caveats:
+#
+#   * The icon in the update dialog will always be the official icon.
+#     This is because the update dialog is managed through a
+#     separate framework and cannot be customized without significant
+#     effort.
+#
+macos-icon = official
+
+# The material to use for the frame of the macOS app icon.
+#
+# Valid values:
+#
+#  * `aluminum` - A brushed aluminum frame. This is the default.
+#  * `beige` - A classic 90's computer beige frame.
+#  * `plastic` - A glossy, dark plastic frame.
+#  * `chrome` - A shiny chrome frame.
+#
+# This only has an effect when `macos-icon` is set to `custom-style`.
+macos-icon-frame = aluminum
+
+# The color of the ghost in the macOS app icon.
+#
+# Note: This configuration is required when `macos-icon` is set to
+# `custom-style`.
+#
+# This only has an effect when `macos-icon` is set to `custom-style`.
+#
+# Specified as either hex (`#RRGGBB` or `RRGGBB`) or a named X11 color.
+macos-icon-ghost-color =
+
+# The color of the screen in the macOS app icon.
+#
+# The screen is a gradient so you can specify multiple colors that
+# make up the gradient. Comma-separated colors may be specified as
+# as either hex (`#RRGGBB` or `RRGGBB`) or as named X11 colors.
+#
+# Note: This configuration is required when `macos-icon` is set to
+# `custom-style`.
+#
+# This only has an effect when `macos-icon` is set to `custom-style`.
+macos-icon-screen-color =
+
+# Put every surface (tab, split, window) into a dedicated Linux cgroup.
+#
+# This makes it so that resource management can be done on a per-surface
+# granularity. For example, if a shell program is using too much memory,
+# only that shell will be killed by the oom monitor instead of the entire
+# Ghostty process. Similarly, if a shell program is using too much CPU,
+# only that surface will be CPU-throttled.
+#
+# This will cause startup times to be slower (a hundred milliseconds or so),
+# so the default value is "single-instance." In single-instance mode, only
+# one instance of Ghostty is running (see gtk-single-instance) so the startup
+# time is a one-time cost. Additionally, single instance Ghostty is much
+# more likely to have many windows, tabs, etc. so cgroup isolation is a
+# big benefit.
+#
+# This feature requires systemd. If systemd is unavailable, cgroup
+# initialization will fail. By default, this will not prevent Ghostty
+# from working (see linux-cgroup-hard-fail).
+#
+# Valid values are:
+#
+#   * `never` - Never use cgroups.
+#   * `always` - Always use cgroups.
+#   * `single-instance` - Enable cgroups only for Ghostty instances launched
+#     as single-instance applications (see gtk-single-instance).
+#
+linux-cgroup = single-instance
+
+# Memory limit for any individual terminal process (tab, split, window,
+# etc.) in bytes. If this is unset then no memory limit will be set.
+#
+# Note that this sets the "memory.high" configuration for the memory
+# controller, which is a soft limit. You should configure something like
+# systemd-oom to handle killing processes that have too much memory
+# pressure.
+linux-cgroup-memory-limit =
+
+# Number of processes limit for any individual terminal process (tab, split,
+# window, etc.). If this is unset then no limit will be set.
+#
+# Note that this sets the "pids.max" configuration for the process number
+# controller, which is a hard limit.
+linux-cgroup-processes-limit =
+
+# If this is false, then any cgroup initialization (for linux-cgroup)
+# will be allowed to fail and the failure is ignored. This is useful if
+# you view cgroup isolation as a "nice to have" and not a critical resource
+# management feature, because Ghostty startup will not fail if cgroup APIs
+# fail.
+#
+# If this is true, then any cgroup initialization failure will cause
+# Ghostty to exit or new surfaces to not be created.
+#
+# Note: This currently only affects cgroup initialization. Subprocesses
+# must always be able to move themselves into an isolated cgroup.
+linux-cgroup-hard-fail = false
+
+# Enable or disable GTK's OpenGL debugging logs. The default is `true` for
+# debug builds, `false` for all others.
+gtk-opengl-debug = false
+
+# Obsolete configuration that should not be set. This was deprecated in
+# Ghostty 1.1.3 and no longer has any effect. The configuration key will
+# be fully removed in 1.2.0. You can manually override the GSK renderer
+# using standard environment variables such as `GSK_RENDERER` (from GTK).
+gtk-gsk-renderer = default
+
+# If `true`, the Ghostty GTK application will run in single-instance mode:
+# each new `ghostty` process launched will result in a new window if there is
+# already a running process.
+#
+# If `false`, each new ghostty process will launch a separate application.
+#
+# The default value is `desktop` which will default to `true` if Ghostty
+# detects that it was launched from the `.desktop` file such as an app
+# launcher (like Gnome Shell)  or by D-Bus activation. If Ghostty is launched
+# from the command line, it will default to `false`.
+#
+# Note that debug builds of Ghostty have a separate single-instance ID
+# so you can test single instance without conflicting with release builds.
+gtk-single-instance = desktop
+
+# When enabled, the full GTK titlebar is displayed instead of your window
+# manager's simple titlebar. The behavior of this option will vary with your
+# window manager.
+#
+# This option does nothing when `window-decoration` is false or when running
+# under macOS.
+#
+# Changing this value at runtime and reloading the configuration will only
+# affect new windows.
+gtk-titlebar = true
+
+# Determines the side of the screen that the GTK tab bar will stick to.
+# Top, bottom, left, right, and hidden are supported. The default is top.
+#
+# If this option has value `left` or `right` when using Adwaita, it falls
+# back to `top`. `hidden`, meaning that tabs don't exist, is not supported
+# without using Adwaita, falling back to `top`.
+#
+# When `hidden` is set and Adwaita is enabled, a tab button displaying the
+# number of tabs will appear in the title bar. It has the ability to open a
+# tab overview for displaying tabs. Alternatively, you can use the
+# `toggle_tab_overview` action in a keybind if your window doesn't have a
+# title bar, or you can switch tabs with keybinds.
+gtk-tabs-location = top
+
+# If this is `true`, the titlebar will be hidden when the window is maximized,
+# and shown when the titlebar is unmaximized. GTK only.
+gtk-titlebar-hide-when-maximized = false
+
+# Determines the appearance of the top and bottom bars when using the
+# Adwaita tab bar. This requires `gtk-adwaita` to be enabled (it is
+# by default).
+#
+# Valid values are:
+#
+#  * `flat` - Top and bottom bars are flat with the terminal window.
+#  * `raised` - Top and bottom bars cast a shadow on the terminal area.
+#  * `raised-border` - Similar to `raised` but the shadow is replaced with a
+#    more subtle border.
+#
+# Changing this value at runtime will only affect new windows.
+adw-toolbar-style = raised
+
+# If `true` (default), then the Ghostty GTK tabs will be "wide." Wide tabs
+# are the new typical Gnome style where tabs fill their available space.
+# If you set this to `false` then tabs will only take up space they need,
+# which is the old style.
+gtk-wide-tabs = true
+
+# If `true` (default), Ghostty will enable Adwaita theme support. This
+# will make `window-theme` work properly and will also allow Ghostty to
+# properly respond to system theme changes, light/dark mode changing, etc.
+# This requires a GTK4 desktop with a GTK4 theme.
+#
+# If you are running GTK3 or have a GTK3 theme, you may have to set this
+# to false to get your theme picked up properly. Having this set to true
+# with GTK3 should not cause any problems, but it may not work exactly as
+# expected.
+#
+# This configuration only has an effect if Ghostty was built with
+# Adwaita support.
+gtk-adwaita = true
+
+# Custom CSS files to be loaded.
+#
+# This configuration can be repeated multiple times to load multiple files.
+# Prepend a ? character to the file path to suppress errors if the file does
+# not exist. If you want to include a file that begins with a literal ?
+# character, surround the file path in double quotes (").
+# The file size limit for a single stylesheet is 5MiB.
+gtk-custom-css =
+
+# If `true` (default), applications running in the terminal can show desktop
+# notifications using certain escape sequences such as OSC 9 or OSC 777.
+desktop-notifications = true
+
+# If `true`, the bold text will use the bright color palette.
+bold-is-bright = false
+
+# This will be used to set the `TERM` environment variable.
+# HACK: We set this with an `xterm` prefix because vim uses that to enable key
+# protocols (specifically this will enable `modifyOtherKeys`), among other
+# features. An option exists in vim to modify this: `:set
+# keyprotocol=ghostty:kitty`, however a bug in the implementation prevents it
+# from working properly. https://github.com/vim/vim/pull/13211 fixes this.
+term = xterm-ghostty
+
+# String to send when we receive `ENQ` (`0x05`) from the command that we are
+# running. Defaults to an empty string if not set.
+enquiry-response =
+
+# Control the auto-update functionality of Ghostty. This is only supported
+# on macOS currently, since Linux builds are distributed via package
+# managers that are not centrally controlled by Ghostty.
+#
+# Checking or downloading an update does not send any information to
+# the project beyond standard network information mandated by the
+# underlying protocols. To put it another way: Ghostty doesn't explicitly
+# add any tracking to the update process. The update process works by
+# downloading information about the latest version and comparing it
+# client-side to the current version.
+#
+# Valid values are:
+#
+#  * `off` - Disable auto-updates.
+#  * `check` - Check for updates and notify the user if an update is
+#    available, but do not automatically download or install the update.
+#  * `download` - Check for updates, automatically download the update,
+#    notify the user, but do not automatically install the update.
+#
+# If unset, we defer to Sparkle's default behavior, which respects the
+# preference stored in the standard user defaults (`defaults(1)`).
+#
+# Changing this value at runtime works after a small delay.
+auto-update =
+
+# The release channel to use for auto-updates.
+#
+# The default value of this matches the release channel of the currently
+# running Ghostty version. If you download a pre-release version of Ghostty
+# then this will be set to `tip` and you will receive pre-release updates.
+# If you download a stable version of Ghostty then this will be set to
+# `stable` and you will receive stable updates.
+#
+# Valid values are:
+#
+#  * `stable` - Stable, tagged releases such as "1.0.0".
+#  * `tip` - Pre-release versions generated from each commit to the
+#    main branch. This is the version that was in use during private
+#    beta testing by thousands of people. It is generally stable but
+#    will likely have more bugs than the stable channel.
+#
+# Changing this configuration requires a full restart of
+# Ghostty to take effect.
+#
+# This only works on macOS since only macOS has an auto-update feature.
+auto-update-channel =
+

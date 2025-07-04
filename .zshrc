@@ -160,3 +160,9 @@ bindkey '^g' clear-screen
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(atuin init zsh)"
+
+case "$TERM_PROGRAM" in
+  ghostty|iTerm.app)
+    [[ -z $TMUX ]] && (tmux attach -t ghost || tmux new -s ghost)
+    ;;
+esac

@@ -5,11 +5,23 @@ matches:
   - trigger: "%fn"
     replace: () => { }
 
-  - trigger: "%gp"
+  - trigger: "%gP"
     replace: "git push --set-upstream origin "
+
+  - trigger: "%gp"
+    replace: "git pull --rebase origin "
 
   - trigger: "%gf"
     replace: "git fetch origin; git pull --rebase origin "
+
+  - trigger: "%dP"
+    replace: "db push --set-upstream origin "
+
+  - trigger: "%dp"
+    replace: "db pull --rebase origin "
+
+  - trigger: "%df"
+    replace: "db fetch origin; git pull --rebase origin "
 
   - trigger: "%gc"
     form: |
