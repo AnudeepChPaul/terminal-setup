@@ -8,14 +8,23 @@ matches:
   - trigger: "%gP"
     replace: "git push --set-upstream origin "
 
+  - trigger: "%gU"
+    replace: "git push origin main"
+
   - trigger: "%gp"
     replace: "git pull --rebase origin "
 
   - trigger: "%gf"
     replace: "git fetch origin; git pull --rebase origin "
 
+  - trigger: "%gc"
+    replace: git commit -m "
+
   - trigger: "%dP"
     replace: "db push --set-upstream origin "
+
+  - trigger: "%dU"
+    replace: "db push origin main"
 
   - trigger: "%dp"
     replace: "db pull --rebase origin "
@@ -23,16 +32,9 @@ matches:
   - trigger: "%df"
     replace: "db fetch origin; git pull --rebase origin "
 
-  - trigger: "%gc"
-    form: |
-      Commit type:
-      - feat
-      - fix
-      - docs
-      - refactor
-      - chore
-      Subject:
-    replace: "git commit -m \"{{form1}}: {{form2}}"
+  - trigger: "%dc"
+    replace: db commit -m " 
+
   
   - trigger: "%ll"
     replace: "{{mytime}} — #log"
