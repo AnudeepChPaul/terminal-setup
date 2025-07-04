@@ -5,6 +5,12 @@ matches:
   - trigger: "%fn"
     replace: () => { }
 
+  - trigger: "%ee"
+    replace: "espanso edit"
+
+  - trigger: "%gs"
+    replace: "git switch "
+
   - trigger: "%gP"
     replace: "git push --set-upstream origin "
 
@@ -33,9 +39,8 @@ matches:
     replace: "db fetch origin; git pull --rebase origin "
 
   - trigger: "%dc"
-    replace: db commit -m " 
+    replace: db commit -m "
 
-  
   - trigger: "%ll"
     replace: "{{mytime}} — #log"
     vars:
@@ -63,8 +68,7 @@ matches:
     replace: "curl ifconfig.me"
 
   - trigger: "%dj"
-    replace: "curl -H \"Accept: text/plain\" https://icanhazdadjoke.com; echo"
+    replace: 'curl -H "Accept: text/plain" https://icanhazdadjoke.com; echo'
 
   - trigger: "%hl"
     replace: "atuin login -u achandrapaul"
-
