@@ -1,47 +1,47 @@
 matches:
-  - trigger: "-ml"
+  - trigger: "*ml"
     replace: me@anudeep.pro
 
-  - trigger: "-fn"
+  - trigger: "*fn"
     replace: () => { }
 
-  - trigger: "-ee"
+  - trigger: "*ee"
     replace: "espanso edit"
 
-  - trigger: "-gs"
+  - trigger: "*gs"
     replace: "git switch "
 
-  - trigger: "-gP"
+  - trigger: "*gU"
     replace: "git push --set-upstream origin "
 
-  - trigger: "-gU"
+  - trigger: "*gP"
     replace: "git push origin main"
 
-  - trigger: "-gp"
+  - trigger: "*gp"
     replace: "git pull --rebase origin "
 
-  - trigger: "-gf"
+  - trigger: "*gf"
     replace: "git fetch origin; git pull --rebase origin "
 
-  - trigger: "-gc"
+  - trigger: "*gc"
     replace: git commit -m "
 
-  - trigger: "-dP"
+  - trigger: "*dP"
     replace: "db push --set-upstream origin "
 
-  - trigger: "-dU"
+  - trigger: "*dU"
     replace: "db push origin main"
 
-  - trigger: "-dp"
+  - trigger: "*dp"
     replace: "db pull --rebase origin "
 
-  - trigger: "-df"
+  - trigger: "*df"
     replace: "db fetch origin; git pull --rebase origin "
 
-  - trigger: "-dc"
+  - trigger: "*dc"
     replace: db commit -m "
 
-  - trigger: "-ll"
+  - trigger: "*ll"
     replace: "{{mytime}} — #log"
     vars:
       - name: mytime
@@ -51,7 +51,7 @@ matches:
           offset: 0
           locale: en_IN
 
-  - trigger: "-tt"
+  - trigger: "*tt"
     replace: "{{mytime}} —> "
     vars:
       - name: mytime
@@ -61,14 +61,14 @@ matches:
           offset: 0
           locale: en_IN
 
-  - trigger: "-ws"
+  - trigger: "*ws"
     replace: "curl wttr.in"
 
-  - trigger: "-ip"
+  - trigger: "*ip"
     replace: "curl ifconfig.me"
 
-  - trigger: "-dj"
+  - trigger: "*dj"
     replace: 'curl -H "Accept: text/plain" https://icanhazdadjoke.com; echo'
 
-  - trigger: "-hl"
+  - trigger: "*hl"
     replace: "atuin login -u achandrapaul"
