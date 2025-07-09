@@ -9,7 +9,7 @@ matches:
     replace: "espanso edit"
 
   - trigger: "*gs"
-    replace: "git switch "
+    replace: "git switch -c"
 
   - trigger: "*gU"
     replace: "git push --set-upstream origin "
