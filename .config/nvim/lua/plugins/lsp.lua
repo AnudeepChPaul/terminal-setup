@@ -1,3 +1,14 @@
+-- Set global snippet path early
+vim.g.snippet_dir = vim.fn.stdpath("config") .. "/lua/snippets"
+
+vim.api.nvim_create_user_command("ReloadSnippets", function()
+	require("luasnip").cleanup()
+	require("luasnip.loaders.from_lua").lazy_load({
+		paths = vim.g.snippet_dir,
+	})
+	vim.notify("🔁 Snippets reloaded!", vim.log.levels.INFO)
+end, {})
+
 return {
 	{
 		"williamboman/mason.nvim",
@@ -14,44 +25,56 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"L3MON4D3/LuaSnip",
-			"hrsh7th/cmp-nvim-lsp",
+			"saadparwaiz1/cmp_luasnip",
 			"onsails/lspkind.nvim",
-			"hrsh7th/vim-vsnip", -- Snippet engine
-			"hrsh7th/cmp-vsnip",
 		},
 		config = function()
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			local luasnip = require("luasnip")
 
+			require("luasnip").cleanup()
+			require("luasnip.loaders.from_lua").lazy_load({
+				paths = vim.g.snippet_dir,
+			})
+
 			cmp.setup({
 				snippet = {
 					expand = function(args)
-						vim.fn["vsnip#anonymous"](args.body)
+						luasnip.lsp_expand(args.body)
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-j>"] = cmp.mapping.select_next_item(),
 					["<C-k>"] = cmp.mapping.select_prev_item(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-c>"] = cmp.mapping.abort(),
 					["<Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.expand_or_jumpable() then
+						if cmp.visible() then
+							cmp.select_next_item()
+						elseif luasnip.expand_or_jumpable() then
 							luasnip.expand_or_jump()
 						else
 							fallback()
 						end
 					end, { "i", "s" }),
 					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.jumpable(-1) then
+						if cmp.visible() then
+							cmp.select_prev_item()
+						elseif luasnip.jumpable(-1) then
 							luasnip.jump(-1)
 						else
 							fallback()
 						end
 					end, { "i", "s" }),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<C-b>"] = cmp.mapping.scroll_docs(-4),
+					["<C-f>"] = cmp.mapping.scroll_docs(4),
+					["<C-c>"] = function(fallback)
+						if cmp.visible() then
+							cmp.abort()
+						end
+						vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "n", true)
+					end,
 				}),
 				formatting = {
 					format = lspkind.cmp_format({
@@ -60,11 +83,15 @@ return {
 						ellipsis_char = "...",
 					}),
 				},
+				-- Optional: open menu as you type
+				completion = {
+					completeopt = "menu,menuone,noinsert",
+				},
 				sources = {
+					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
 					{ name = "path" },
-					{ name = "vsnip" },
 				},
 			})
 		end,
@@ -249,7 +276,7 @@ return {
 				auto_trigger = true,
 				hide_during_completion = vim.g.ai_cmp,
 				keymap = {
-					accept = "<tab>",
+					accept = "<c-l>",
 					next = "<c-j>",
 					prev = "<c-k>",
 				},

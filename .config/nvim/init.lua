@@ -1,9 +1,6 @@
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-vim.g.caser_prefix = "mc"
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -22,14 +19,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+vim.g.caser_prefix = "mc"
+
 require("config.options")
 
 vim.g.snacks_animate = false
 vim.g.lazyvim_cmp = false
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 vim.g.trouble_lualine = false
-
-vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/lua/snippets"
+vim.g.snippet_dir = vim.fn.stdpath("config") .. "/lua/snippets"
 
 -- Setup lazy.nvim
 require("lazy").setup({
