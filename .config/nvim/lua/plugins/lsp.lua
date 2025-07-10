@@ -16,6 +16,8 @@ return {
 			"L3MON4D3/LuaSnip",
 			"hrsh7th/cmp-nvim-lsp",
 			"onsails/lspkind.nvim",
+			"hrsh7th/vim-vsnip", -- Snippet engine
+			"hrsh7th/cmp-vsnip",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -25,7 +27,7 @@ return {
 			cmp.setup({
 				snippet = {
 					expand = function(args)
-						luasnip.lsp_expand(args.body)
+						vim.fn["vsnip#anonymous"](args.body)
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
@@ -62,6 +64,7 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
 					{ name = "path" },
+					{ name = "vsnip" },
 				},
 			})
 		end,

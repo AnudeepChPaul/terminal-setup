@@ -1,0 +1,26 @@
+{
+  "Arrow Function": {
+    "prefix": "fn",
+    "body": [
+      "const $1 = ($2) => {",
+      "  $0",
+      "};"
+    ],
+    "description": "Arrow function expression"
+  },
+  "Typed Functional Component": {
+    "prefix": "trfc",
+    "body": [
+      "import React from 'react';\n",
+      "interface ${1}Props {",
+      "  // Define your props here",
+      "}\n",
+      "const ${1:Component}: React.FC<${1}Props> = (props: ${1}Props) => {",
+      "  return (",
+      "    <div>$0</div>",
+      "  );",
+      "};"
+    ],
+    "description": "Typed React Functional Component"
+  }
+}
