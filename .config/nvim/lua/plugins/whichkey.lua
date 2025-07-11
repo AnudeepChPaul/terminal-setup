@@ -70,7 +70,7 @@ function _K.goto_next_diagnostic()
 end
 
 function _K.goto_next_error()
-  vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+  vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})
 end
 
 function _K.outline()
@@ -164,7 +164,7 @@ end
 
 function _K.goto_next_trouble()
   if require("trouble").is_open() then
-    require("trouble").next({ skip_groups = true, jump = true })
+    require("trouble").next({skip_groups = true, jump = true})
   else
     local ok, err = pcall(vim.cmd.cnext)
     if not ok then
@@ -175,7 +175,7 @@ end
 
 function _K.goto_prev_trouble()
   if require("trouble").is_open() then
-    require("trouble").previous({ skip_groups = true, jump = true })
+    require("trouble").previous({skip_groups = true, jump = true})
   else
     local ok, err = pcall(vim.cmd.cprevious)
     if not ok then
@@ -244,9 +244,9 @@ end
 _T.find_notes = function()
   require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({
     cwd = "~/Notes",
-    file_ignore_patterns = { ".*%.git/.*", ".*%.obsidian/.*", "Icon", ".*%DS_Store" },
+    file_ignore_patterns = {".*%.git/.*", ".*%.obsidian/.*", "Icon", ".*%DS_Store"},
     previewer = false,
-    prompt_title = "Searching Obsidian vault"
+    prompt_title = "Searching Obsidian vault",
   }))
 end
 
@@ -337,28 +337,28 @@ return {
       {
         "<c-/>",
         function()
-          require("which-key").show({ global = true, loop = true })
+          require("which-key").show({global = true, loop = true})
         end,
         desc = "Buffer Local Keymaps (which-key)",
       },
-      { "<Up>",    "<nop>",       desc = "No operation" },
-      { "<Down>",  "<nop>",       desc = "No operation" },
-      { "<Left>",  "<nop>",       desc = "No operation" },
-      { "<Right>", "<nop>",       desc = "No operation" },
-      { "Q",       "<nop>",       desc = "No operation" },
-      { "<c-w>",   ":q<cr>",      desc = "Close window/panel" },
-      { ";s",      _H.quick_menu, desc = "Toggle harpoon quick menu" },
-      { ";a",      _H.add_file,   desc = "Add file to harpoon quick list" },
-      { ";1",      _H.goto_one,   desc = "Goto 1st harpoon file" },
-      { ";2",      _H.goto_two,   desc = "Goto 2nd harpoon file" },
-      { ";3",      _H.goto_three, desc = "Goto 3rd harpoon file" },
-      { ";4",      _H.goto_four,  desc = "Goto 4th harpoon file" },
-      { ";5",      _H.goto_five,  desc = "Goto 5th harpoon file" },
-      { ";6",      _H.goto_six,   desc = "Goto 6th harpoon file" },
-      { ";7",      _H.goto_seven, desc = "Goto 7th harpoon file" },
-      { ";8",      _H.goto_eight, desc = "Goto 8th harpoon file" },
-      { ";9",      _H.goto_nine,  desc = "Goto 9th harpoon file" },
-      { "H",       ":nohl<CR>",   desc = "Clear search highlights" },
+      {"<Up>", "<nop>", desc = "No operation"},
+      {"<Down>", "<nop>", desc = "No operation"},
+      {"<Left>", "<nop>", desc = "No operation"},
+      {"<Right>", "<nop>", desc = "No operation"},
+      {"Q", "<nop>", desc = "No operation"},
+      {"<c-w>", ":q<cr>", desc = "Close window/panel"},
+      {";s", _H.quick_menu, desc = "Toggle harpoon quick menu"},
+      {";a", _H.add_file, desc = "Add file to harpoon quick list"},
+      {";1", _H.goto_one, desc = "Goto 1st harpoon file"},
+      {";2", _H.goto_two, desc = "Goto 2nd harpoon file"},
+      {";3", _H.goto_three, desc = "Goto 3rd harpoon file"},
+      {";4", _H.goto_four, desc = "Goto 4th harpoon file"},
+      {";5", _H.goto_five, desc = "Goto 5th harpoon file"},
+      {";6", _H.goto_six, desc = "Goto 6th harpoon file"},
+      {";7", _H.goto_seven, desc = "Goto 7th harpoon file"},
+      {";8", _H.goto_eight, desc = "Goto 8th harpoon file"},
+      {";9", _H.goto_nine, desc = "Goto 9th harpoon file"},
+      {"H", ":nohl<CR>", desc = "Clear search highlights"},
       {
         "<space>sp",
         function()
@@ -366,13 +366,13 @@ return {
         end,
         desc = "Switch Projects",
       },
-      { "<space>sv", "<C-w>v",         desc = "Split window vertically" },
-      { "<space>ss", "<C-w>s",         desc = "Split window horizontally" },
-      { "<space>se", "<C-w>=",         desc = "Split windows equal hight & width" },
-      { "<space>sx", vim.cmd.close,    desc = "Close current split window" },
-      { "<space>bx", vim.cmd.bd,       desc = "Close current buffer" },
-      { "<space>tt", vim.cmd.tabnew,   desc = "Opens new tab" },
-      { "<space>tx", vim.cmd.tabclose, desc = "Close newly opened tab" },
+      {"<space>sv", "<C-w>v", desc = "Split window vertically"},
+      {"<space>ss", "<C-w>s", desc = "Split window horizontally"},
+      {"<space>se", "<C-w>=", desc = "Split windows equal hight & width"},
+      {"<space>sx", vim.cmd.close, desc = "Close current split window"},
+      {"<space>bx", vim.cmd.bd, desc = "Close current buffer"},
+      {"<space>tt", vim.cmd.tabnew, desc = "Opens new tab"},
+      {"<space>tx", vim.cmd.tabclose, desc = "Close newly opened tab"},
       {
         "L",
         'V"-y"-p',
@@ -394,30 +394,30 @@ return {
         ":set list!<CR>",
         desc = "Toggles list characters like Tab, space, newline",
       },
-      { "<space>lr", ":set rnu!<CR>",             desc = "Toggles relative numbering" },
+      {"<space>lr", ":set rnu!<CR>", desc = "Toggles relative numbering"},
       {
         "x",
         '"_x',
         desc = "Delete single character without copying into register",
       },
-      { "U",         "<C-r>",                     desc = "Redo" },
-      { "dw",        'vb"_d',                     desc = "Delete word backwards" },
-      { "cp",        ':let @*=expand("%:p")<CR>', desc = "Delete word backwards" },
-      { "+",         "<C-a>",                     desc = "Increment number" },
-      { "-",         "<C-x>",                     desc = "Decrement number" },
+      {"U", "<C-r>", desc = "Redo"},
+      {"dw", 'vb"_d', desc = "Delete word backwards"},
+      {"cp", ':let @*=expand("%:p")<CR>', desc = "Delete word backwards"},
+      {"+", "<C-a>", desc = "Increment number"},
+      {"-", "<C-x>", desc = "Decrement number"},
       {
         "J",
         "mzJ`z",
         desc = "Bring botton line at the current line end",
       },
-      { "<space>e", "<cmd>lua Snacks.explorer()<cr>", desc = "Snaks file explorer" },
-      { "<c-a>",    "gg<S-v>G",                       desc = "Select all words" },
-      { "<c-d>",    "<C-d>zz",                        desc = "Scrolls down with cursor at centre" },
-      { "<c-u>",    "<C-u>zz",                        desc = "Scrolls up with cursor at centre" },
-      { "<c-h>",    ":TmuxNavigateLeft<CR>",          desc = "Tmux navigate left" },
-      { "<c-j>",    ":TmuxNavigateDown<CR>",          desc = "Tmux navigate down",                silent = true },
-      { "<c-k>",    ":TmuxNavigateUp<CR>",            desc = "Tmux navigate up" },
-      { "<c-l>",    ":TmuxNavigateRight<CR>",         desc = "Tmux navigate right" },
+      {"<space>e", "<cmd>lua Snacks.explorer()<cr>", desc = "Snaks file explorer"},
+      {"<c-a>", "gg<S-v>G", desc = "Select all words"},
+      {"<c-d>", "<C-d>zz", desc = "Scrolls down with cursor at centre"},
+      {"<c-u>", "<C-u>zz", desc = "Scrolls up with cursor at centre"},
+      {"<c-h>", ":TmuxNavigateLeft<CR>", desc = "Tmux navigate left"},
+      {"<c-j>", ":TmuxNavigateDown<CR>", desc = "Tmux navigate down", silent = true},
+      {"<c-k>", ":TmuxNavigateUp<CR>", desc = "Tmux navigate up"},
+      {"<c-l>", ":TmuxNavigateRight<CR>", desc = "Tmux navigate right"},
       {
         "n",
         "nzzzv",
@@ -428,83 +428,83 @@ return {
         "Nzzzv",
         desc = "Goto previous seach occurrence with cursor at center",
       },
-      { "<S-Left>",  "<C-w><",      desc = "Expand Split window left" },
-      { "<S-Right>", "<C-w>>",      desc = "Expand Split window right" },
-      { "<S-Up>",    "<C-w>+",      desc = "Expand Split window up" },
-      { "<S-Down>",  "<C-w>-",      desc = "Expand Split window down" },
-      { "<S-TAB>",   vim.cmd.bnext, desc = "Move to load next buffer" },
-      { "<C-\\>",    "<ESC><ESC>",  desc = "Escape" },
+      {"<S-Left>", "<C-w><", desc = "Expand Split window left"},
+      {"<S-Right>", "<C-w>>", desc = "Expand Split window right"},
+      {"<S-Up>", "<C-w>+", desc = "Expand Split window up"},
+      {"<S-Down>", "<C-w>-", desc = "Expand Split window down"},
+      {"<S-TAB>", vim.cmd.bnext, desc = "Move to load next buffer"},
+      {"<C-\\>", "<ESC><ESC>", desc = "Escape"},
       {
         "J",
         ":m '>+1<CR>gv=gv",
         desc = "Moves line one down",
-        mode = { "v", "x" },
+        mode = {"v", "x"},
       },
       {
         "K",
         ":m '<-2<CR>gv=gv",
         desc = "Moves line one up",
-        mode = { "v", "x" },
+        mode = {"v", "x"},
       },
       {
         "<",
         "<gv",
         desc = "Indents left",
-        mode = { "v", "x" },
+        mode = {"v", "x"},
       },
       {
         ">",
         ">gv",
         desc = "Indents right",
-        mode = { "v", "x" },
+        mode = {"v", "x"},
       },
       {
         "p",
         '"_dP"',
         desc = "Paste's a line without copying the replacement",
-        mode = { "v", "x" },
+        mode = {"v", "x"},
       },
 
-      { "<leader>u", "<cmd>UndotreeToggle<cr>",      desc = "Toggle undotree" },
-      { "<leader>r", ":s/",                          desc = "Replaces search term within selection" },
-      { "<C-\\>",    "<ESC><ESC><ESC>",              desc = "Escape" },
-      { "<C-c>",     "<ESC>",                        desc = "Escape" },
-      { "K",         vim.lsp.buf.hover,              desc = "Impersonates hover effect" },
-      { "md",        _K.format_buffer,               desc = "Formats the buffer with smart indent" },
-      { "mq",        vim.cmd.LspRestart,             desc = "Lsp restart" },
-      { "msrn",      ":Lspsaga rename",              desc = "Lspsaga renaming with highlighting" },
-      { "msi",       ":Lspsaga incoming_calls<cr>",  desc = "Lspsaga incoming calls" },
-      { "mso",       ":Lspsaga outgoing_calls<cr>",  desc = "Lspsaga outgoing calls" },
-      { "msk",       ":Lspsaga peek_definition<cr>", desc = "Lspsaga peek definition/hover" },
+      {"<leader>u", "<cmd>UndotreeToggle<cr>", desc = "Toggle undotree"},
+      {"<leader>r", ":s/", desc = "Replaces search term within selection"},
+      {"<C-\\>", "<ESC><ESC><ESC>", desc = "Escape"},
+      {"<C-c>", "<ESC>", desc = "Escape"},
+      {"K", vim.lsp.buf.hover, desc = "Impersonates hover effect"},
+      {"md", _K.format_buffer, desc = "Formats the buffer with smart indent"},
+      {"mq", vim.cmd.LspRestart, desc = "Lsp restart"},
+      {"msrn", ":Lspsaga rename", desc = "Lspsaga renaming with highlighting"},
+      {"msi", ":Lspsaga incoming_calls<cr>", desc = "Lspsaga incoming calls"},
+      {"mso", ":Lspsaga outgoing_calls<cr>", desc = "Lspsaga outgoing calls"},
+      {"msk", ":Lspsaga peek_definition<cr>", desc = "Lspsaga peek definition/hover"},
       {
         "me",
         _K.goto_next_diagnostic,
         desc = "Goto next diagnostic (including error, info, warning etc)",
       },
-      { "mE", _K.goto_next_error,            desc = "Goto next error" },
-      { "ma", _K.code_action,                desc = "Shows code action for cursor" },
-      { "mk", _K.signature_help,             desc = "LspSaga shows signature help" },
-      { "mt", _K.toggle_virtual_text,        desc = "LspSaga toggle virtual text" },
-      { "mo", _K.outline,                    desc = "LspSaga show sugnature outline" },
-      { "ml", _K.show_line_diagnostics,      desc = "LspSaga show line diagnostics" },
-      { "mL", _K.show_cursor_diagnostics,    desc = "LspSaga show cursor diagnostics" },
-      { "mf", _K.show_buf_diagnostics,       desc = "LspSaga show buffer diagnostics" },
-      { "mw", _K.show_workspace_diagnostics, desc = "LspSaga show workspace diagnostics" },
+      {"mE", _K.goto_next_error, desc = "Goto next error"},
+      {"ma", _K.code_action, desc = "Shows code action for cursor"},
+      {"mk", _K.signature_help, desc = "LspSaga shows signature help"},
+      {"mt", _K.toggle_virtual_text, desc = "LspSaga toggle virtual text"},
+      {"mo", _K.outline, desc = "LspSaga show sugnature outline"},
+      {"ml", _K.show_line_diagnostics, desc = "LspSaga show line diagnostics"},
+      {"mL", _K.show_cursor_diagnostics, desc = "LspSaga show cursor diagnostics"},
+      {"mf", _K.show_buf_diagnostics, desc = "LspSaga show buffer diagnostics"},
+      {"mw", _K.show_workspace_diagnostics, desc = "LspSaga show workspace diagnostics"},
       {
         "mcs",
         "<Plug>CaserVSnakeCase",
         desc = "Change case to snake_case",
-        mode = { "n", "v", "x" },
+        mode = {"n", "v", "x"},
       },
-      { "mr",  "",                 desc = "+refactor",                        mode = { "n", "v" } },
-      { "mrl", vim.lsp.buf.rename, desc = "Lsp renaming without highlighting" },
-      { "mrn", ":IncRename ",      desc = "Lsp renaming with highlighting" },
+      {"mr", "", desc = "+refactor", mode = {"n", "v"}},
+      {"mrl", vim.lsp.buf.rename, desc = "Lsp renaming without highlighting"},
+      {"mrn", ":IncRename ", desc = "Lsp renaming with highlighting"},
       {
         "mri",
         function()
           require("refactoring").refactor("Inline Variable")
         end,
-        mode = { "n", "v" },
+        mode = {"n", "v"},
         desc = "Inline Variable",
       },
       {
@@ -524,14 +524,14 @@ return {
       {
         "mrP",
         function()
-          require("refactoring").debug.printf({ below = false })
+          require("refactoring").debug.printf({below = false})
         end,
         desc = "Debug Print",
       },
       {
         "mrp",
         function()
-          require("refactoring").debug.print_var({ normal = true })
+          require("refactoring").debug.print_var({normal = true})
         end,
         desc = "Debug Print Variable",
       },
@@ -574,17 +574,17 @@ return {
         mode = "v",
         desc = "Debug Print Variable",
       },
-      { "gr",         ":Lspsaga finder def+ref+tyd<cr>", desc = "Lspsaga references+definition+type_definition " },
-      { "gR",         vim.lsp.buf.references,            desc = "Find symbol references" },
-      { "gp",         _K.peek_definition,                desc = "Peek at symbol defintion" },
-      { "gt",         _K.peek_type_definition,           desc = "Peek at symbol type definition" },
-      { "gi",         ":Lspsaga finder imp<cr>",         desc = "Lspsage goto_implementations" },
-      { "gD",         _K.goto_declaration,               desc = "Goto buffer declaration.." },
-      { "gd",         _K.goto_definition,                desc = "Goto buffer definition.." },
-      { "<c-f><c-r>", _T.resume,                         desc = "Resume" },
-      { "<c-f><c-f>", _T.find_files,                     desc = "Find Files (root dir)" },
-      { "<c-f>f",     _T.find_files_in_cwd,              desc = "Find files in (current dir) cwd" },
-      { "<c-f><c-n>", _T.find_notes,                     desc = "Find obsidian notes" },
+      {"gr", ":Lspsaga finder def+ref+tyd<cr>", desc = "Lspsaga references+definition+type_definition "},
+      {"gR", vim.lsp.buf.references, desc = "Find symbol references"},
+      {"gp", _K.peek_definition, desc = "Peek at symbol defintion"},
+      {"gt", _K.peek_type_definition, desc = "Peek at symbol type definition"},
+      {"gi", ":Lspsaga finder imp<cr>", desc = "Lspsage goto_implementations"},
+      {"gD", _K.goto_declaration, desc = "Goto buffer declaration.."},
+      {"gd", _K.goto_definition, desc = "Goto buffer definition.."},
+      {"<c-f><c-r>", _T.resume, desc = "Resume"},
+      {"<c-f><c-f>", _T.find_files, desc = "Find Files (root dir)"},
+      {"<c-f>f", _T.find_files_in_cwd, desc = "Find files in (current dir) cwd"},
+      {"<c-f><c-n>", _T.find_notes, desc = "Find obsidian notes"},
       {
         "<c-f><c-j>",
         function()
@@ -596,7 +596,7 @@ return {
           end
         end,
         desc = "Grep with current word(root dir)",
-        mode = { "n", "v", "x" },
+        mode = {"n", "v", "x"},
         silent = true,
         noremap = true,
         nowait = true,
@@ -616,7 +616,7 @@ return {
         noremap = true,
         nowait = true,
       },
-      { "<c-f>k",     "<cmd>lua Snacks.picker.keymaps({ layout= 'telescope' })<cr>",         desc = "Find Key Maps" },
+      {"<c-f>k", "<cmd>lua Snacks.picker.keymaps({ layout= 'telescope' })<cr>", desc = "Find Key Maps"},
       {
         "<c-f>c",
         function()
@@ -632,15 +632,15 @@ return {
         _T.find_in_dot_files,
         desc = "Search in neovim config",
       },
-      { "<c-f>b",     _T.switch_buffer,                                                      desc = "List and Switch Buffer" },
-      { "<c-f>h",     "<cmd>lua Snacks.picker.command_history({ layout= 'telescope' })<cr>", desc = "Command History" },
-      { "<c-f><c-b>", "<cmd>lua Snacks.picker.recent({ layout= 'telescope' })<cr>",          desc = "Recent" },
-      { "<c-f>m",     _T.marks,                                                              desc = "Jump to Mark" },
-      { "<c-f>M",     _T.man_pages,                                                          desc = "Man Pages" },
-      { "<c-f><c-h>", _T.help_tags,                                                          desc = "Help Pages" },
-      { "<leader>sH", _T.highlight_groups,                                                   desc = "Search Highlight Groups" },
-      { "<c-f><c-l>", _T.find_in_quickfix,                                                   desc = "Find in Quick Fix" },
-      { "<c-f><c-m>", _T.find_dot_files,                                                     desc = "Find in dotfiles" },
+      {"<c-f>b", _T.switch_buffer, desc = "List and Switch Buffer"},
+      {"<c-f>h", "<cmd>lua Snacks.picker.command_history({ layout= 'telescope' })<cr>", desc = "Command History"},
+      {"<c-f><c-b>", "<cmd>lua Snacks.picker.recent({ layout= 'telescope' })<cr>", desc = "Recent"},
+      {"<c-f>m", _T.marks, desc = "Jump to Mark"},
+      {"<c-f>M", _T.man_pages, desc = "Man Pages"},
+      {"<c-f><c-h>", _T.help_tags, desc = "Help Pages"},
+      {"<leader>sH", _T.highlight_groups, desc = "Search Highlight Groups"},
+      {"<c-f><c-l>", _T.find_in_quickfix, desc = "Find in Quick Fix"},
+      {"<c-f><c-m>", _T.find_dot_files, desc = "Find in dotfiles"},
       {
         "<c-g><c-o>",
         function()
@@ -655,12 +655,12 @@ return {
         end,
         desc = "Open git repo in browser",
       },
-      { "<c-g><c-f>", _T.git_files,                    desc = "Find Files (git-files)" },
-      { "<c-g>p",     ":Git pull origin<cr>",          desc = "Git pull origin" },
-      { "<c-g>f",     ":Git fetch",                    desc = "Git fetch" },
-      { "<c-g><c-p>", ":Git pull origin --rebase<cr>", desc = "Git pull origin --rebase" },
-      { "<c-g>P",     ":Git push<cr>",                 desc = "git push" },
-      { "<c-g>Pf",    ":Git push --force<cr>",         desc = "Git push --force" },
+      {"<c-g><c-f>", _T.git_files, desc = "Find Files (git-files)"},
+      {"<c-g>p", ":Git pull origin<cr>", desc = "Git pull origin"},
+      {"<c-g>f", ":Git fetch", desc = "Git fetch"},
+      {"<c-g><c-p>", ":Git pull origin --rebase<cr>", desc = "Git pull origin --rebase"},
+      {"<c-g>P", ":Git push<cr>", desc = "git push"},
+      {"<c-g>Pf", ":Git push --force<cr>", desc = "Git push --force"},
       {
         "<c-s>k",
         ":e ~/.config/nvim/lua/plugins/whichkey.lua<cr>",
@@ -721,6 +721,9 @@ return {
         end,
         desc = "Replace in files (Spectre)",
       },
+      {
+        "<c-x>", ":QfRemoveCurrent<cr>", desc = "Remove current entry from quickfix list",
+      },
     }, {
       silent = true,
       noremap = true,
@@ -728,15 +731,15 @@ return {
 
     if tree_exists then
       wk.add({
-        { "<c-e>", api.tree.toggle, desc = "Toggle file explorer" },
+        {"<c-e>", api.tree.toggle, desc = "Toggle file explorer"},
         {
           "<space>fl",
           function()
-            api.tree.open({ find_file = true })
+            api.tree.open({find_file = true})
           end,
           desc = "Toggle file explorer",
         },
-      }, { mode = "n" })
+      }, {mode = "n"})
     else
       wk.add({
         {
@@ -749,7 +752,7 @@ return {
           ":Neotree position=float reveal=true reveal_force_cwd <cr>",
           desc = "Toggle file explorer",
         },
-      }, { mode = "n" })
+      }, {mode = "n"})
     end
   end,
 }
