@@ -26,10 +26,10 @@ matches:
   - trigger: "*gc"
     replace: git commit -m "
 
-  - trigger: "*dP"
+  - trigger: "*dU"
     replace: "db push --set-upstream origin "
 
-  - trigger: "*dU"
+  - trigger: "*dP"
     replace: "db push origin main"
 
   - trigger: "*dp"

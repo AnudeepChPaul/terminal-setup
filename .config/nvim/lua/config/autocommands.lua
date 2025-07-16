@@ -4,9 +4,26 @@ vim.api.nvim_create_user_command("QfRemoveCurrent", function()
     return
   end
 
+  -- Get current cursor line in quickfix window
+  local line = vim.fn.line(".")
+  local total = vim.fn.line("$")
+
   local qf_list = vim.fn.getqflist()
   table.remove(qf_list, vim.fn.line("."))
+
+  -- Replace quickfix list with updated one
   vim.fn.setqflist(qf_list, "r")
+
+  -- Restore cursor position in quickfix window
+  -- If last line was removed, move cursor up
+  local new_total = #qf_list
+  if new_total == 0 then
+    vim.cmd("cclose")
+    return
+  end
+
+  local new_line = math.min(line, new_total)
+  vim.api.nvim_win_set_cursor(0, {new_line, 0})
 end, {})
 
 vim.api.nvim_create_user_command("QfDedup", function()
