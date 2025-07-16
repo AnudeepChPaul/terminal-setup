@@ -15,7 +15,7 @@ matches:
     replace: "git push --set-upstream origin "
 
   - trigger: "*gP"
-    replace: "git push origin main"
+    replace: "git push origin "
 
   - trigger: "*gp"
     replace: "git pull --rebase origin "
