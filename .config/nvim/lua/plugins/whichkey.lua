@@ -346,7 +346,7 @@ return {
       {"<Left>", "<nop>", desc = "No operation"},
       {"<Right>", "<nop>", desc = "No operation"},
       {"Q", "<nop>", desc = "No operation"},
-      {"<c-w>", ":q<cr>", desc = "Close window/panel"},
+      {"<c-q>", ":q<cr>", desc = "Close window/panel"},
       {";s", _H.quick_menu, desc = "Toggle harpoon quick menu"},
       {";a", _H.add_file, desc = "Add file to harpoon quick list"},
       {";1", _H.goto_one, desc = "Goto 1st harpoon file"},

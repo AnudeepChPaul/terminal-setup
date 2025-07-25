@@ -8,8 +8,11 @@ matches:
   - trigger: "*ee"
     replace: "espanso edit"
 
-  - trigger: "*gs"
+  - trigger: "*gsc"
     replace: "git switch -c"
+
+  - trigger: "*gss"
+    replace: "git switch "
 
   - trigger: "*gU"
     replace: "git push --set-upstream origin "
@@ -24,7 +27,7 @@ matches:
     replace: "git fetch origin; git pull --rebase origin "
 
   - trigger: "*gc"
-    replace: git commit -m "
+    replace: 'git commit -m "FLEXADMIN-$|$'
 
   - trigger: "*dU"
     replace: "db push --set-upstream origin "
@@ -64,6 +67,12 @@ matches:
   - trigger: "*ws"
     replace: "curl wttr.in"
 
+  - trigger: "*ots"
+    replace: "owl tubes --backend envoy stop"
+
+  - trigger: "*otr"
+    replace: "owl tubes --backend envoy stop; owl tubes --backend envoy render flex-admin-api identity conversations-api flex-admin-unify-manager --stage"
+
   - trigger: "*ip"
     replace: "curl ifconfig.me"
 
@@ -72,3 +81,38 @@ matches:
 
   - trigger: "*hl"
     replace: "atuin login -u achandrapaul"
+
+  - trigger: "*hs"
+    replace: "atuin sync"
+
+  - trigger: "*nu"
+    replace: "nvm use"
+
+  - trigger: "*yns"
+    replace: 'yarn; NODE_OPTIONS="--max-old-space-size=12192" yarn start'
+
+  - trigger: "*ys"
+    replace: "yarn; yarn start"
+
+  - trigger: "*rc"
+    replace: |
+      import React from "react";
+
+      type {{x.name}}Props = {
+        $|$
+      };
+
+      const {{x.name}}: React.FC<{{x.name}}Props> = ({}) => {
+        return (
+          <div>
+            {{x.name}} component
+          </div>
+        );
+      };
+
+      export default {{x.name}};
+    vars:
+      - name: x
+        type: form
+        params:
+          layout: "Component Name: [[name]]"
