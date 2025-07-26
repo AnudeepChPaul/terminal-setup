@@ -1,4 +1,5 @@
 {
+    "global": { "check_for_updates_on_startup": false },
     "profiles": [
         {
             "complex_modifications": {
@@ -9,10 +10,7 @@
                             {
                                 "from": {
                                     "key_code": "z",
-                                    "modifiers": {
-                                        "mandatory": ["left_option", "left_control"],
-                                        "optional": ["left_shift"]
-                                    }
+                                    "modifiers": { "mandatory": ["left_option", "left_control", "left_shift", "left_command"] }
                                 },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "dev.zed.Zed" } } }],
                                 "type": "basic"
@@ -25,10 +23,7 @@
                             {
                                 "from": {
                                     "key_code": "f",
-                                    "modifiers": {
-                                        "mandatory": ["left_option", "left_control"],
-                                        "optional": ["left_shift"]
-                                    }
+                                    "modifiers": { "mandatory": ["left_option", "left_control", "left_shift", "left_command"] }
                                 },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "com.apple.finder" } } }],
                                 "type": "basic"
@@ -41,10 +36,7 @@
                             {
                                 "from": {
                                     "key_code": "b",
-                                    "modifiers": {
-                                        "mandatory": ["left_option", "left_control"],
-                                        "optional": ["left_shift"]
-                                    }
+                                    "modifiers": { "mandatory": ["left_option", "left_control", "left_shift", "left_command"] }
                                 },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "io.zsa.keymapp" } } }],
                                 "type": "basic"
@@ -57,10 +49,7 @@
                             {
                                 "from": {
                                     "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": ["left_option", "left_control"],
-                                        "optional": ["left_shift"]
-                                    }
+                                    "modifiers": { "mandatory": ["left_option", "left_control", "left_shift", "left_command"] }
                                 },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "org.pqrs.Karabiner-Elements.Settings" } } }],
                                 "type": "basic"
@@ -73,10 +62,7 @@
                             {
                                 "from": {
                                     "key_code": "c",
-                                    "modifiers": {
-                                        "mandatory": ["left_option", "left_control"],
-                                        "optional": ["left_shift"]
-                                    }
+                                    "modifiers": { "mandatory": ["left_option", "left_control", "left_shift", "left_command"] }
                                 },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "com.openai.chat" } } }],
                                 "type": "basic"
@@ -89,10 +75,7 @@
                             {
                                 "from": {
                                     "key_code": "s",
-                                    "modifiers": {
-                                        "mandatory": ["left_option", "left_control"],
-                                        "optional": ["left_shift"]
-                                    }
+                                    "modifiers": { "mandatory": ["left_option", "left_control", "left_shift", "left_command"] }
                                 },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "com.apple.Safari" } } }],
                                 "type": "basic"
@@ -105,10 +88,7 @@
                             {
                                 "from": {
                                     "key_code": "g",
-                                    "modifiers": {
-                                        "mandatory": ["left_option", "left_control"],
-                                        "optional": ["left_shift"]
-                                    }
+                                    "modifiers": { "mandatory": ["left_option", "left_control", "left_shift", "left_command"] }
                                 },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "com.google.Chrome" } } }],
                                 "type": "basic"
@@ -121,10 +101,7 @@
                             {
                                 "from": {
                                     "key_code": "t",
-                                    "modifiers": {
-                                        "mandatory": ["left_option", "left_control"],
-                                        "optional": ["left_shift"]
-                                    }
+                                    "modifiers": { "mandatory": ["left_option", "left_control", "left_shift", "left_command"] }
                                 },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "com.mitchellh.ghostty" } } }],
                                 "type": "basic"
@@ -137,10 +114,7 @@
                             {
                                 "from": {
                                     "key_code": "p",
-                                    "modifiers": {
-                                        "mandatory": ["left_option", "left_control"],
-                                        "optional": ["left_shift"]
-                                    }
+                                    "modifiers": { "mandatory": ["left_option", "left_control", "left_shift", "left_command"] }
                                 },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "com.apple.systempreferences" } } }],
                                 "type": "basic"
@@ -185,7 +159,7 @@
                     ]
                 }
             ],
-            "name": "Default profile",
+            "name": "Pro Profile",
             "selected": true,
             "virtual_hid_keyboard": {
                 "country_code": 0,
