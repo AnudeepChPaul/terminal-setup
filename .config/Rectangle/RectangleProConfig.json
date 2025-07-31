@@ -31,17 +31,11 @@
     "alwaysAccountForStage" : {
       "int" : 0
     },
-    "alwaysAllowThrow" : {
-      "int" : 0
-    },
     "analogAdjacentResizing" : {
       "int" : 0
     },
-    "appLayoutsHideOtherApps" : {
-      "int" : 0
-    },
     "appSpecs" : {
-      "string" : "[{\"bringToFront\":true,\"isGroup\":true,\"children\":[{\"bundleId\":\"~global\",\"loc\":5,\"w\":\"0.5\",\"display\":0,\"id\":78,\"h\":\"1\"},{\"bundleId\":\"~global\",\"loc\":6,\"h\":\"1\",\"id\":85,\"w\":\"0.5\"}],\"id\":67,\"shortcut\":{\"modifierFlags\":786432,\"keyCode\":19},\"name\":\"Vertical Stack\",\"loc\":0},{\"children\":[{\"w\":\"0.5\",\"id\":95,\"loc\":3,\"bundleId\":\"~global\",\"isSnapTarget\":true,\"h\":\"1\"},{\"w\":\"0.5\",\"loc\":6,\"id\":101,\"h\":\"0.5\",\"bundleId\":\"~global\",\"isSnapTarget\":true},{\"bundleId\":\"~global\",\"h\":\"0.5\",\"isSnapTarget\":true,\"loc\":8,\"id\":106,\"w\":\"0.5\"}],\"name\":\"BSP\",\"isGroup\":true,\"loc\":0,\"id\":90,\"shortcut\":{\"keyCode\":20,\"modifierFlags\":786432}}]"
+      "string" : "[{\"name\":\"Vertical Stack\",\"bringToFront\":true,\"loc\":0,\"shortcut\":{\"keyCode\":19,\"modifierFlags\":786432},\"isGroup\":true,\"id\":67,\"children\":[{\"loc\":5,\"w\":\"0.5\",\"bundleId\":\"~global\",\"id\":78,\"h\":\"1\",\"display\":0},{\"bundleId\":\"~global\",\"w\":\"0.5\",\"id\":85,\"h\":\"1\",\"loc\":6}]},{\"children\":[{\"isSnapTarget\":true,\"loc\":3,\"w\":\"0.5\",\"h\":\"1\",\"bundleId\":\"~global\",\"id\":95},{\"isSnapTarget\":true,\"loc\":6,\"w\":\"0.5\",\"h\":\"0.5\",\"bundleId\":\"~global\",\"id\":101},{\"isSnapTarget\":true,\"loc\":8,\"w\":\"0.5\",\"h\":\"0.5\",\"bundleId\":\"~global\",\"id\":106}],\"id\":90,\"loc\":0,\"name\":\"BSP\",\"shortcut\":{\"keyCode\":11,\"modifierFlags\":786432},\"isGroup\":true},{\"children\":[{\"y\":\"392\",\"h\":\"556\",\"display\":-3,\"loc\":9,\"x\":\"3832\",\"bundleId\":\"io.zsa.keymapp\",\"id\":118,\"w\":\"1111\"},{\"y\":\"-440\",\"h\":\"1379\",\"display\":-3,\"loc\":9,\"x\":\"1521\",\"bundleId\":\"com.mitchellh.ghostty\",\"id\":119,\"w\":\"2303\"},{\"y\":\"-449\",\"h\":\"832\",\"display\":-3,\"loc\":9,\"x\":\"3830\",\"bundleId\":\"com.openai.chat\",\"id\":120,\"w\":\"1113\"}],\"id\":125,\"loc\":0,\"name\":\"TerminalLayout\",\"shortcut\":{\"modifierFlags\":786432,\"keyCode\":17},\"isGroup\":true}]"
     },
     "applyGapToEdges" : {
       "int" : 0
@@ -70,12 +64,6 @@
     "checkFullScreen" : {
       "int" : 0
     },
-    "clickMoveMouseButton" : {
-      "int" : 0
-    },
-    "clickResizeMouseButton" : {
-      "int" : 0
-    },
     "contextMenuModifiers" : {
       "int" : 0
     },
@@ -91,14 +79,8 @@
     "curtainChangeSize" : {
       "int" : 0
     },
-    "cycleSizesIsChanged" : {
-      "bool" : false
-    },
     "disabledApps" : {
 
-    },
-    "dockSizePollSeconds" : {
-      "double" : 0
     },
     "doubleClickTitleBar" : {
       "int" : 0
@@ -140,13 +122,10 @@
       "int" : 0
     },
     "gapSize" : {
-      "double" : 9
+      "float" : 9
     },
     "gestures" : {
 
-    },
-    "hapticFeedbackOnSnap" : {
-      "int" : 0
     },
     "helperRelaunch" : {
       "int" : 3
@@ -167,9 +146,6 @@
       "int" : 0
     },
     "ignoredSnapAreas" : {
-      "int" : 0
-    },
-    "keyboardShortcutsEnabled" : {
       "int" : 0
     },
     "landscapeSnapAreas" : {
@@ -226,9 +202,6 @@
     "moveCursorAcrossDisplays" : {
       "int" : 1
     },
-    "moveSpecsWhenDisplayMoves" : {
-      "int" : 0
-    },
     "multiWindowAllDisplays" : {
       "int" : 0
     },
@@ -248,12 +221,6 @@
       "float" : 20
     },
     "obtainWindowOnClick" : {
-      "int" : 0
-    },
-    "performRepeatOnThrow" : {
-      "int" : 0
-    },
-    "portraitLeftRightIsTopBottom" : {
       "int" : 0
     },
     "portraitSnapAreas" : {
@@ -290,7 +257,7 @@
       "int" : 2
     },
     "reticleColor" : {
-      "string" : "{\"blue\":0.2,\"alpha\":0.5,\"red\":0.8,\"green\":0.3}"
+      "string" : "{\"blue\":0.2,\"green\":0.3,\"red\":0.8,\"alpha\":0.5}"
     },
     "reticleDisplayMinDist" : {
       "float" : 0
@@ -322,9 +289,6 @@
     "screenEdgeGapTop" : {
       "float" : 0
     },
-    "screenEdgeGapTopNotch" : {
-      "float" : 0
-    },
     "screenEdgeGapsOnMainScreenOnly" : {
       "bool" : false
     },
@@ -336,9 +300,6 @@
     },
     "scrollTriggerIncrements" : {
       "float" : 0.1
-    },
-    "selectedCycleSizes" : {
-      "int" : 0
     },
     "shortEdgeSnapAreaSize" : {
       "float" : 145
@@ -430,9 +391,6 @@
     "systemWideMouseDown" : {
       "int" : 0
     },
-    "systemWideMouseDownApps" : {
-
-    },
     "throwFrontmost" : {
       "int" : 0
     },
@@ -460,16 +418,7 @@
     "togggleTodoShortcut" : {
 
     },
-    "toggleShortcutsShortcut" : {
-
-    },
     "traverseSingleScreen" : {
-      "int" : 0
-    },
-    "unhideStashToOriginal" : {
-      "int" : 0
-    },
-    "unhideStashedWhenFrontmost" : {
       "int" : 0
     },
     "unsnapRestore" : {
@@ -487,17 +436,11 @@
     "winModFlags" : {
       "int" : 0
     },
-    "windowPollSeconds" : {
-      "double" : 0.5
-    },
     "windowSnapping" : {
       "int" : 0
     },
     "windowStopVelocity" : {
       "float" : 3
-    },
-    "windowThrowIgnoresWidgets" : {
-      "int" : 0
     },
     "windowToFront" : {
       "int" : 0
@@ -588,10 +531,6 @@
       "keyCode" : 27,
       "modifierFlags" : 786432
     },
-    "tidy" : {
-      "keyCode" : 17,
-      "modifierFlags" : 786432
-    },
     "tile2x2" : {
       "keyCode" : 21,
       "modifierFlags" : 786432
@@ -609,6 +548,6 @@
       "modifierFlags" : 786432
     }
   },
-  "timestamp" : 775315641.810134,
-  "version" : "192"
+  "timestamp" : 775639279.236193,
+  "version" : "157"
 }
