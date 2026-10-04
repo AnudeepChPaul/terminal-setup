@@ -1,0 +1,52 @@
+#!/bin/sh
+set -eu
+
+repo_root=$(git rev-parse --show-toplevel)
+git_dir=$(git rev-parse --git-dir)
+encrypted_flag="$git_dir/encrypted-on-commit"
+report_file=$(mktemp)
+trap 'rm -f "$report_file"' EXIT
+rm -f "$encrypted_flag"
+
+scan_staged() {
+    gitleaks git --pre-commit --staged --redact --no-banner --log-level error \
+        --report-format json --report-path "$report_file" "$repo_root" >/dev/null
+}
+
+if scan_staged; then
+    exit 0
+fi
+
+offending_files=$(python3 -c 'import json,sys; print("\n".join(sorted({f["File"] for f in json.load(open(sys.argv[1]))})))' "$report_file")
+if [ -z "$offending_files" ]; then
+    echo "pre-commit: gitleaks failed without findings" >&2
+    exit 1
+fi
+
+if [ ! -f "$HOME/.config/chezmoi/key.txt" ]; then
+    echo "pre-commit: secrets found but age key is missing; commit blocked" >&2
+    exit 1
+fi
+
+echo "$offending_files" | while IFS= read -r source_file; do
+    case "$source_file" in
+        *.tmpl)
+            echo "pre-commit: secret in template $source_file; move it to encrypted data, commit blocked" >&2
+            exit 1
+            ;;
+    esac
+    source_dir=$(dirname "$source_file")
+    encrypted_file="$source_dir/encrypted_$(basename "$source_file").age"
+    git show ":$source_file" | chezmoi encrypt > "$repo_root/$encrypted_file"
+    git rm --cached --quiet "$source_file"
+    rm -f "$repo_root/$source_file"
+    git add "$repo_root/$encrypted_file"
+    echo "pre-commit: secret found in $source_file, committed as $encrypted_file instead" >&2
+done
+
+if ! scan_staged; then
+    echo "pre-commit: secrets remain after encryption; commit blocked" >&2
+    exit 1
+fi
+
+touch "$encrypted_flag"

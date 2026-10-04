@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+encrypted_flag="$(git rev-parse --git-dir)/encrypted-on-commit"
+[ -f "$encrypted_flag" ] || exit 0
+rm -f "$encrypted_flag"
+
+if git rev-parse --abbrev-ref --symbolic-full-name '@{u}' >/dev/null 2>&1; then
+    git push --quiet
+fi

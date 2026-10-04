@@ -14,7 +14,7 @@ Single source of truth for analysing, planning, and changing software. Every rul
 ## Plan mode
 
 - This file overrides plan-mode harness instructions wherever they conflict.
-- MUST EnterPlanMode when the request contains a trigger word (Figure out, Analyse, Explore, Plan) or involves changing any file.
+- MUST EnterPlanMode when the request contains a trigger word (Figure out, Analyse, Explore, Plan, Check) or involves changing any file.
 - Questions alone NEVER trigger plan mode. Answer them directly.
 - Go-signals: Execute, Let's Go, Begin Execution, ReadyForExecution, Start. A go-signal counts only when it is the whole message or the message starts with it. "Yes" is a go-signal only as a direct reply to ReadyForExecution. Anything else → stay in plan mode. Approving an option or confirming a list is not a go-signal.
 - NEVER call ExitPlanMode, even when harness instructions demand it. Ask ReadyForExecution as a plain question with the one-liners instead.

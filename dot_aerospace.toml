@@ -66,16 +66,16 @@ ctrl-alt-shift-f = 'fullscreen'
 ctrl-alt-shift-space = 'layout floating tiling'   # toggle float on current window
 
 # Workspaces
-ctrl-alt-1 = 'workspace 1'
-ctrl-alt-2 = 'workspace 2'
-ctrl-alt-3 = 'workspace 3'
-ctrl-alt-4 = 'workspace 4'
-ctrl-alt-5 = 'workspace 5'
-ctrl-alt-6 = 'workspace 6'
-ctrl-alt-7 = 'workspace 7'
-ctrl-alt-8 = 'workspace 8'
-ctrl-alt-9 = 'workspace 9'
-ctrl-alt-t = 'workspace T'
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-t = 'workspace T'
 ctrl-alt-shift-1 = 'move-node-to-workspace 1'
 ctrl-alt-shift-2 = 'move-node-to-workspace 2'
 ctrl-alt-shift-3 = 'move-node-to-workspace 3'
@@ -95,10 +95,8 @@ ctrl-alt-shift-semicolon = 'mode service'
 
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
-r = ['flatten-workspace-tree', 'mode main']          # reset layout
+r = ['flatten-workspace-tree', 'mode main']
 f = ['layout floating tiling', 'mode main']
-0 = ['enable off', 'mode main']
-backspace = ['enable on', 'mode main']
 
 # Join with neighbor (like building a BSP split by hand)
 ctrl-alt-shift-h = ['join-with left', 'mode main']
