@@ -1,0 +1,7 @@
+#!/bin/sh
+# plist hash: {{ include "private_Library/private_LaunchAgents/com.achandrapaul.chezmoi-drift.plist.tmpl" | sha256sum }}
+
+agent_label="com.achandrapaul.chezmoi-drift"
+agent_plist="$HOME/Library/LaunchAgents/$agent_label.plist"
+launchctl bootout "gui/$(id -u)/$agent_label" 2>/dev/null || true
+launchctl bootstrap "gui/$(id -u)" "$agent_plist"

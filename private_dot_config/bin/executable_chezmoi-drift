@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+drift_marker="${XDG_CACHE_HOME:-$HOME/.cache}/chezmoi-drift"
+mkdir -p "$(dirname "$drift_marker")"
+drift_report=$(chezmoi status --exclude scripts 2>/dev/null) || exit 0
+
+if [ -n "$drift_report" ]; then
+    printf '%s\n' "$drift_report" > "$drift_marker"
+else
+    rm -f "$drift_marker"
+fi
