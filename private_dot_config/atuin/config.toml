@@ -43,7 +43,7 @@ search_mode = "fuzzy"
 ## which filter mode to use by default
 ## possible values: "global", "host", "session", "directory", "workspace"
 ## consider using search.filters to customize the enablement and order of filter modes
-# filter_mode = "global"
+filter_mode = "workspace"
 
 ## With workspace filtering enabled, Atuin will filter for commands executed
 ## in any directory within a git repository tree (default: false).
@@ -51,7 +51,7 @@ search_mode = "fuzzy"
 ## To use workspace mode by default when available, set this to true and
 ## set filter_mode to "workspace" or leave it unspecified and
 ## set search.filters to include "workspace" before other filter modes.
-# workspaces = false
+workspaces = true
 
 ## which filter mode to use when atuin is invoked from a shell up-key binding
 ## the accepted values are identical to those of "filter_mode"
@@ -233,7 +233,7 @@ records = true
 ## auto: length of the selected command.
 ## static: length of the longest command stored in the history.
 ## fixed: use max_preview_height as fixed height.
-# strategy = "auto"
+strategy = "auto"
 
 [daemon]
 ## Enables using the daemon to sync. Requires the daemon to be running in the background. Start it with `atuin daemon`
@@ -275,4 +275,4 @@ records = true
 ## The list of enabled filter modes, in order of priority.
 ## The "workspace" mode is skipped when not in a workspace or workspaces = false.
 ## Default filter mode can be overridden with the filter_mode setting.
-# filters = [ "global", "host", "session", "workspace", "directory" ]
+filters = ["workspace", "global", "directory"]
