@@ -6,7 +6,7 @@ mkdir -p "$(dirname "$drift_marker")"
 drift_report=$(chezmoi status --exclude scripts) || exit 0
 
 if [ -n "$drift_report" ]; then
-    printf '%s\n' "$drift_report" > "$drift_marker"
+    printf '%s\n' "$drift_report" | wc -l | tr -d ' ' > "$drift_marker"
 else
     rm -f "$drift_marker"
 fi

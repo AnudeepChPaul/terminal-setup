@@ -271,11 +271,8 @@ format = '[$symbol($version )]($style) '
 disabled = true
 format = '[$symbol($version )]($style) '
 
-[custom.chezmoi]
-when = 'test -s "$HOME/.cache/chezmoi-drift"'
-command = 'n=0; while read -r _; do n=$((n+1)); done < "$HOME/.cache/chezmoi-drift"; echo $n'
-shell = ['sh']
+[env_var.CHEZMOI_DRIFT]
 symbol = '⟳ '
 style = 'bold yellow'
-format = '[$symbol$output]($style) '
+format = '[$symbol$env_value]($style) '
 description = 'Files out of sync with chezmoi'

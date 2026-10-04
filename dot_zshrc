@@ -241,3 +241,14 @@ esac
 # other widget definition. In the omz path, omz's plugin loop already did it.
 source "$HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 eval "$(mise activate zsh)"
+
+_chezmoi_drift_precmd() {
+  local drift_count
+  if [[ -s "$HOME/.cache/chezmoi-drift" ]] && read -r drift_count < "$HOME/.cache/chezmoi-drift"; then
+    export CHEZMOI_DRIFT=$drift_count
+  else
+    unset CHEZMOI_DRIFT
+  fi
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _chezmoi_drift_precmd
