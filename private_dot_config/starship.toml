@@ -273,7 +273,7 @@ format = '[$symbol($version )]($style) '
 
 [custom.chezmoi]
 when = 'test -s "$HOME/.cache/chezmoi-drift"'
-command = 'wc -l < "$HOME/.cache/chezmoi-drift" | tr -d " "'
+command = 'n=0; while read -r _; do n=$((n+1)); done < "$HOME/.cache/chezmoi-drift"; echo $n'
 shell = ['sh']
 symbol = '⟳ '
 style = 'bold yellow'
