@@ -1,0 +1,272 @@
+
+# Get editor completions based on the config schema
+'$schema' = 'https://starship.rs/config-schema.json'
+
+
+# Prompt appearance
+add_newline = false
+
+format = '''
+[](bold green)$directory $fill $all
+[╰$character](bold green)'''
+
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 10
+
+command_timeout = 90
+
+[character] # available characters: ❯ ▶ ▶▶
+success_symbol = '[▶](bold #50fa7b)'
+# error_symbol = "[λ](bold #ff5555)"
+
+[line_break]
+disabled = true
+
+[fill]
+symbol = ' '
+
+
+#### Utility Modules ####
+[hostname]
+style = "bold #bd93f9"
+
+[username]
+format = "[$user]($style) on "
+style_user = "bold #8be9fd"
+
+[package]
+disabled = true
+
+[directory]
+fish_style_pwd_dir_length=1
+style = "bold #50fa7b"
+
+[git_branch]
+truncation_length = 15
+always_show_remote=true
+truncation_symbol = ''
+style = "bold #ff79c6"
+
+[git_commit]
+commit_hash_length = 6
+only_detached = false
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = '[ PICKING](bold red)'
+
+[git_status]
+disabled = true
+style = "bold #ff5555"
+
+[memory_usage]
+format = '$symbol [${ram}( \\| ${swap})]($style) '
+disabled = true
+threshold = -1
+symbol = ' '
+style = 'bold dimmed green'
+
+[cmd_duration]
+min_time=50
+
+[bun]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[c]
+disabled = true
+format = '[$symbol($version(-$name) )]($style) '
+
+[cmake]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[cobol]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[conda]
+disabled = true
+format = '[$symbol$environment]($style) '
+
+[crystal]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[daml]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[dart]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[deno]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[docker_context]
+disabled = true
+format = '[$symbol$context]($style) '
+
+[dotnet]
+disabled = true
+format = '[$symbol($version )(🎯 $tfm )]($style) '
+
+[elixir]
+disabled = true
+format = '[$symbol($version \(OTP $otp_version\) )]($style) '
+
+[elm]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[erlang]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[fennel]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[golang]
+disabled = true
+format = '[$symbol($version )]($style) '
+symbol = ''
+
+[guix_shell]
+disabled = true
+format = '[$symbol]($style) '
+
+[gradle]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[haskell]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[haxe]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[helm]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[java]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[julia]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[kotlin]
+disabled = true
+format = '[$symbol($version )]($style) '
+symbol = ''
+
+[lua]
+disabled = true
+symbol = ''
+format = '[$symbol($version )]($style) '
+
+[meson]
+disabled = true
+format = '[$symbol$project ]($style) '
+
+[nim]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[nodejs]
+# Disabled: this module shells out to `node --version`, and node's interpreter
+# startup is ~55ms — it was 74ms of a 79ms prompt in any node repo (now ~20ms).
+# _nvmrc_auto_use already pins the version to the repo's .nvmrc; use `node -v`.
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[ocaml]
+disabled = true
+format = '[$symbol($version )(\($switch_indicator$switch_name\) )]($style) '
+
+[opa]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[perl]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[php]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[pulumi]
+disabled = true
+format = '[$symbol($username@)$stack]($style) '
+
+[purescript]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[python]
+format = '[${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )]($style) '
+symbol = ''
+
+[rlang]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[raku]
+disabled = true
+format = '[$symbol($version-$vm_version )]($style) '
+
+[red]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[ruby]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[rust]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[scala]
+disabled = true
+format = '[${symbol}(${version} )]($style) '
+
+[solidity]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[spack]
+disabled = true
+format = '[$symbol $environment ]($style) '
+
+[swift]
+disabled = true
+format = '[$symbol($version) ]($style) '
+
+[terraform]
+disabled = true
+format = '[$symbol $workspace ]($style) '
+
+[typst]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[vagrant]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[vlang]
+disabled = true
+format = '[$symbol($version )]($style) '
+
+[zig]
+disabled = true
+format = '[$symbol($version )]($style) '

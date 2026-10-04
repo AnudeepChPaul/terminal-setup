@@ -1,0 +1,143 @@
+# AeroSpace config, modeled on your Rectangle Pro setup.
+# Install:  brew install --cask nikitabobko/tap/aerospace
+# Save as:  ~/.config/aerospace/aerospace.toml  (or ~/.aerospace.toml)
+# Reload:   ctrl-alt-shift-; then Esc   (or `aerospace reload-config`)
+#
+# If AeroSpace complains about config-version, compare against the default config
+# for your installed version: `aerospace config --config-path` and the docs.
+config-version = 2
+
+start-at-login = true
+after-login-command = []
+after-startup-command = []
+
+# Tree normalization (keeps nesting sane)
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+accordion-padding = 30
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'   # tall on portrait, wide on landscape
+
+automatically-unhide-macos-hidden-apps = false
+key-mapping.preset = 'qwerty'
+
+# Rectangle Pro: gapSize 9, applyGapToEdges off -> no outer gap
+[gaps]
+inner.horizontal = 9
+inner.vertical   = 9
+outer.left   = 9
+outer.right  = 9
+outer.top    = 9
+outer.bottom = 9
+
+# Workspace T (terminal layout) lives on a secondary monitor.
+# Change 'secondary' to 'main', or a monitor name pattern, to suit your desk.
+[workspace-to-monitor-force-assignment]
+T = 'secondary'
+1 = 'main'
+2 = 'main'
+3 = 'main'
+
+# ---- Keybindings ---------------------------------------------------------
+# Uses ctrl-alt; clear clashing Rectangle Pro ctrl+alt shortcuts in its settings.
+[mode.main.binding]
+
+# Focus (vim keys)
+ctrl-alt-h = 'focus left'
+ctrl-alt-j = 'focus down'
+ctrl-alt-k = 'focus up'
+ctrl-alt-l = 'focus right'
+
+# Move window
+ctrl-alt-shift-h = 'move left'
+ctrl-alt-shift-j = 'move down'
+ctrl-alt-shift-k = 'move up'
+ctrl-alt-shift-l = 'move right'
+
+# Resize
+ctrl-alt-minus = 'resize smart -50'
+ctrl-alt-equal = 'resize smart +50'
+
+# Layouts
+ctrl-alt-slash = 'layout tiles horizontal vertical'
+ctrl-alt-comma = 'layout accordion horizontal vertical'
+ctrl-alt-shift-f = 'fullscreen'
+ctrl-alt-shift-space = 'layout floating tiling'   # toggle float on current window
+
+# Workspaces
+ctrl-alt-1 = 'workspace 1'
+ctrl-alt-2 = 'workspace 2'
+ctrl-alt-3 = 'workspace 3'
+ctrl-alt-4 = 'workspace 4'
+ctrl-alt-5 = 'workspace 5'
+ctrl-alt-6 = 'workspace 6'
+ctrl-alt-7 = 'workspace 7'
+ctrl-alt-8 = 'workspace 8'
+ctrl-alt-9 = 'workspace 9'
+ctrl-alt-t = 'workspace T'
+ctrl-alt-shift-1 = 'move-node-to-workspace 1'
+ctrl-alt-shift-2 = 'move-node-to-workspace 2'
+ctrl-alt-shift-3 = 'move-node-to-workspace 3'
+ctrl-alt-shift-4 = 'move-node-to-workspace 4'
+ctrl-alt-shift-5 = 'move-node-to-workspace 5'
+ctrl-alt-shift-6 = 'move-node-to-workspace 6'
+ctrl-alt-shift-7 = 'move-node-to-workspace 7'
+ctrl-alt-shift-8 = 'move-node-to-workspace 8'
+ctrl-alt-shift-9 = 'move-node-to-workspace 9'
+ctrl-alt-shift-t = 'move-node-to-workspace T'
+
+ctrl-alt-tab = 'workspace-back-and-forth'
+ctrl-alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# Service mode
+ctrl-alt-shift-semicolon = 'mode service'
+
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main']          # reset layout
+f = ['layout floating tiling', 'mode main']
+0 = ['enable off', 'mode main']
+backspace = ['enable on', 'mode main']
+
+# Join with neighbor (like building a BSP split by hand)
+ctrl-alt-shift-h = ['join-with left', 'mode main']
+ctrl-alt-shift-j = ['join-with down', 'mode main']
+ctrl-alt-shift-k = ['join-with up', 'mode main']
+ctrl-alt-shift-l = ['join-with right', 'mode main']
+
+# ---- Window rules --------------------------------------------------------
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace 1']
+
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'   # Arc
+run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = ['move-node-to-workspace 3']
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+if.app-id = 'us.zoom.xos'
+run = ['move-node-to-workspace 5']
+
+# Floating apps (Rectangle Pro can still move these)
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = ['layout floating']
+

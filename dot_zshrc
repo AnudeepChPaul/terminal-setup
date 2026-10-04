@@ -1,0 +1,243 @@
+source "$HOME/.config/zsh/no-omz.zsh"
+
+# Sets cursor to blinking block
+[[ -o interactive && -t 1 ]] && printf '\e[5 q'
+
+zstyle ':completion:*' file-sort modification
+zstyle :compinstall filename "$HOME/.zshrc"
+
+autoload -Uz zkbd
+
+# atuin owns interactive history (^R and up-arrow). zsh's own history is kept
+# only for `!!`, `fc`, and the `plz` alias — hence the unsetopt, which also
+# overrides oh-my-zsh/lib/history.zsh:48.
+HISTFILE=~/.histfile
+HISTSIZE=50000
+SAVEHIST=50000
+setopt autocd extendedglob
+setopt hist_ignore_space hist_ignore_all_dups hist_reduce_blanks
+unsetopt share_history
+
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1        # skip widget re-binding on every precmd
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20     # no suggestion work on large pasted buffers
+# Dracula Theme (for zsh-syntax-highlighting)
+#
+# https://github.com/zenorocha/dracula-theme
+#
+# Copyright 2021, All rights reserved
+#
+# Code licensed under the MIT license
+# http://zenorocha.mit-license.org
+#
+# @author George Pickering <@bigpick>
+# @author Zeno Rocha <hi@zenorocha.com>
+# Paste this files contents inside your ~/.zshrc before you activate zsh-syntax-highlighting
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main cursor)
+typeset -gA ZSH_HIGHLIGHT_STYLES
+# Default groupings per, https://spec.draculatheme.com, try to logically separate
+# possible ZSH_HIGHLIGHT_STYLES settings accordingly...?
+#
+# Italics not yet supported by zsh; potentially soon:
+#    https://github.com/zsh-users/zsh-syntax-highlighting/issues/432
+#    https://www.zsh.org/mla/workers/2021/msg00678.html
+# ... in hopes that they will, labelling accordingly with ,italic where appropriate
+#
+# Main highlighter styling: https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md
+#
+## General
+### Diffs
+### Markup
+## Classes
+## Comments
+ZSH_HIGHLIGHT_STYLES[comment]='fg=#6272A4'
+## Constants
+## Entitites
+## Functions/methods
+ZSH_HIGHLIGHT_STYLES[alias]='fg=#50FA7B'
+ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=#50FA7B'
+ZSH_HIGHLIGHT_STYLES[global-alias]='fg=#50FA7B'
+ZSH_HIGHLIGHT_STYLES[function]='fg=#50FA7B'
+ZSH_HIGHLIGHT_STYLES[command]='fg=#50FA7B'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=#50FA7B,italic'
+ZSH_HIGHLIGHT_STYLES[autodirectory]='fg=#FFB86C,italic'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=#FFB86C'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=#FFB86C'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=#BD93F9'
+## Keywords
+## Built ins
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=#8BE9FD'
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=#8BE9FD'
+ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=#8BE9FD'
+## Punctuation
+ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=#FF79C6'
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter-unquoted]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]='fg=#FF79C6'
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=#FF79C6'
+ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]='fg=#FF79C6'
+## Serializable / Configuration Languages
+## Storage
+## Strings
+ZSH_HIGHLIGHT_STYLES[command-substitution-quoted]='fg=#F1FA8C'
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter-quoted]='fg=#F1FA8C'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=#F1FA8C'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument-unclosed]='fg=#FF5555'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=#F1FA8C'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]='fg=#FF5555'
+ZSH_HIGHLIGHT_STYLES[rc-quote]='fg=#F1FA8C'
+## Variables
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument-unclosed]='fg=#FF5555'
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[assign]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[named-fd]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[numeric-fd]='fg=#F8F8F2'
+## No category relevant in spec
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#FF5555'
+ZSH_HIGHLIGHT_STYLES[path]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=#FF79C6'
+ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]='fg=#FF79C6'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=#BD93F9'
+#ZSH_HIGHLIGHT_STYLES[command-substitution]='fg=?'
+#ZSH_HIGHLIGHT_STYLES[command-substitution-unquoted]='fg=?'
+#ZSH_HIGHLIGHT_STYLES[process-substitution]='fg=?'
+#ZSH_HIGHLIGHT_STYLES[arithmetic-expansion]='fg=?'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument-unclosed]='fg=#FF5555'
+ZSH_HIGHLIGHT_STYLES[redirection]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[arg0]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[default]='fg=#F8F8F2'
+ZSH_HIGHLIGHT_STYLES[cursor]='standout'
+
+source ~/.zprofile
+# eval "$(zoxide init zsh)"
+_zcache zoxide init zsh
+
+# --- vi mode ---------------------------------------------------------------
+bindkey -v
+export KEYTIMEOUT=5   # 50ms. At 10ms there is no margin for ESC-prefixed
+                      # Alt-keys (Alt-C, Alt-e); Esc into vicmd still feels instant.
+
+# `v` in command mode opens the line in $EDITOR, as in vim
+autoload -Uz edit-command-line; zle -N edit-command-line
+bindkey -M vicmd 'v' edit-command-line
+
+# text objects: ci" ca' di( ya[ ...  (not enabled by default in zsh)
+autoload -Uz select-bracketed select-quoted
+zle -N select-bracketed; zle -N select-quoted
+for km in viopp visual; do
+  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; bindkey -M $km $c select-bracketed
+  for c in {a,i}${(s..)^:-\'\"\`};       bindkey -M $km $c select-quoted
+done
+
+# vim-surround: ys / cs / ds, and S in visual mode
+autoload -Uz surround
+zle -N delete-surround surround
+zle -N add-surround surround
+zle -N change-surround surround
+bindkey -M vicmd 'ys' add-surround
+bindkey -M vicmd 'cs' change-surround
+bindkey -M vicmd 'ds' delete-surround
+bindkey -M visual 'S' add-surround
+
+# repeat-last-f/t with ; and , (vi defaults zsh omits)
+bindkey -M vicmd ';' vi-repeat-find
+bindkey -M vicmd ',' vi-rev-repeat-find
+
+# cursor shape follows the mode
+function zle-keymap-select {
+  case $KEYMAP in
+    vicmd) printf '\e[2 q';;   # block
+    *)     printf '\e[5 q';;   # blinking bar
+  esac
+}
+zle -N zle-keymap-select
+function zle-line-init { printf '\e[5 q' }
+zle -N zle-line-init
+
+# --- fzf ------------------------------------------------------------------
+# Sourced BEFORE atuin so atuin keeps ^R. fzf also grabs ^T and Tab; both are
+# reassigned immediately after.
+# source <(fzf --zsh)
+_zcache fzf --zsh
+bindkey -r '^T'
+bindkey '^F' fzf-file-widget          # fzf file picker (^T stays tmux)
+bindkey '^I' fzf-tab-complete         # fzf-tab owns Tab, not fzf-completion
+
+# --- fzf-tab previews -----------------------------------------------------
+# directories via eza, files via bat, diffs via delta
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons $realpath'
+zstyle ':fzf-tab:complete:*:*'  fzf-preview \
+  '[[ -d $realpath ]] && eza -1 --color=always --icons $realpath || bat -n --color=always --line-range :200 $realpath 2>/dev/null'
+zstyle ':fzf-tab:complete:git-(add|diff|restore|checkout):*' fzf-preview \
+  'git diff --color=always -- $word | delta'
+zstyle ':fzf-tab:complete:git-(log|show):*' fzf-preview \
+  'git log --color=always --oneline --graph $word'
+
+# render in a tmux popup; , / . switch completion groups
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' popup-min-size 80 12
+zstyle ':fzf-tab:*' switch-group ',' '.'
+zstyle ':fzf-tab:*' continuous-trigger '/'
+
+# --- fzf editor widgets ---------------------------------------------------
+# ^F inserts a path; Alt-c searches contents and opens nvim at the line.
+# Follows fzf's own widget pattern (read < /dev/tty, redisplay on cancel,
+# push-line/accept-line/reset-prompt).
+
+# Alt-c — search contents with rg, open at the matching line.
+# rg needs -H or it omits the filename when a single file matches.
+fzf-rg-widget() {
+  setopt localoptions pipefail no_aliases 2>/dev/null
+  local rgcmd='rg -H --column --line-number --no-heading --color=always --smart-case'
+  local hit
+  hit=$(fzf --ansi --disabled --height 70% --reverse --border --prompt 'rg> ' \
+        --delimiter : \
+        --bind "start:reload:$rgcmd {q} || true" \
+        --bind "change:reload:sleep 0.1; $rgcmd {q} || true" \
+        --preview 'bat --color=always --highlight-line {2} --line-range :300 {1}' \
+        --preview-window 'right,60%,+{2}/3' < /dev/tty)
+  if [[ -z $hit ]]; then zle redisplay; return 0; fi
+  local f=${hit%%:*} l=${${hit#*:}%%:*}
+  zle push-line
+  BUFFER="${EDITOR:-nvim} +${l} ${(q)f}"
+  zle accept-line
+  local ret=$?
+  unset hit f l
+  zle reset-prompt
+  return $ret
+}
+# Execute "command a" on Ctrl+N
+# zle -N _run_command_digest_app
+# bindkey '^N' _run_command_digest_app
+zle -N fzf-rg-widget
+bindkey '\ec' fzf-rg-widget    # content search (takes \ec from fzf's default)
+bindkey '\ee' fzf-cd-widget    # cd (fzf's own widget, moved off \ec)
+
+# --- tmux -----------------------------------------------------------------
+bindkey -s "^y" '_tmux_manager^M'
+bindkey -s "^t" '_tmux_smart_attach_^M'
+bindkey '^[OM' accept-line
+bindkey '^g' clear-screen
+
+# bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+# bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+# bindkey -M menuselect '\r' .accept-line
+
+# eval "$(atuin init zsh)"
+_zcache atuin init zsh
+
+case "$TERM_PROGRAM" in
+  ghostty)
+    [[ -z $TMUX ]] && tmux new-session -A -s ghost
+    ;;
+esac
+
+# zsh-syntax-highlighting wraps ZLE widgets, so it must be sourced after every
+# other widget definition. In the omz path, omz's plugin loop already did it.
+source "$HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+eval "$(mise activate zsh)"

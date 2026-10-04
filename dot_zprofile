@@ -1,0 +1,333 @@
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+export EDITOR='nvim'
+
+# setting up PATH variables
+export JAVA_HOME="$HOME/.local/share/mise/installs/java/temurin-21"
+
+export GO_PATH=$HOME/go
+
+export PATH="$PATH:$GO_PATH/bin:/usr/local/bin"
+export PATH="$HOME/.krew/bin:$PATH"
+
+export GHQ_ROOT="$HOME/Projects"
+export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+
+# Homebrew setup
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+export PATH="${HOME}/.config/bin:${PATH}"
+export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+
+CUSTOM_FILE="$HOME/.custom_env";
+
+if [[ -f "$CUSTOM_FILE" ]]; then
+    source "$CUSTOM_FILE";
+fi
+
+# export FZF_DEFAULT_OPTS="--height=81% --tac --layout=reverse --info=inline --border --margin=0 --padding=1 --bind='ctrl-y:execute-silent(echo {+} | pbcopy)'";
+export FZF_DEFAULT_COMMAND="ls -a";
+
+# man pages through bat
+export MANPAGER="sh -c 'col -bx | bat -l man -p'";
+export BAT_THEME="Dracula";
+export FZF__PREVIEW__COMMAND='bat --style=numbers --color=always --line-range :500 {}';
+export FZF__DIR__PREVIEW__COMMAND='tree -aC -I "${TREE__GLOBAL_IGNORE}" {} | head -700';
+export TREE__GLOBAL_IGNORE="node_modules|.history|webpack|.next|.idea|.gradle|.vscode";
+export FZF__SMART__PREVIEW__COMMAND="[ -d {} ] && $FZF__DIR__PREVIEW__COMMAND || $FZF__PREVIEW__COMMAND";
+
+#### ------------------------------
+#### eza - Color Scheme Definitions
+#### ------------------------------
+export EZA_COLORS="\
+uu=36:\
+gu=37:\
+sn=32:\
+sb=32:\
+da=34:\
+ur=34:\
+uw=35:\
+ux=36:\
+ue=36:\
+gr=34:\
+gw=35:\
+gx=36:\
+tr=34:\
+tw=35:\
+tx=36:"
+
+# Setting up aliases
+alias al='alias | less' # List all aliases
+alias as='alias | grep' # Search aliases
+alias _rg='rg --column --line-number --no-heading --color=always --smart-case --glob "!{**/node_modules/**,*-lock.yaml,*.lock,package-lock.json,yarn.lock}"' # Search aliases
+
+alias _pv='python3 -m venv ./venv'
+
+alias l='eza --long --all --header --classify --group-directories-first'
+
+alias c='clear'
+alias ..="cd ..";
+alias ...="cd ../../";
+alias ....="cd ../../../";
+alias .....="cd ../../../../";
+alias ......="cd ../../../../../";
+
+alias d3="cd $HOME/Projects";
+
+alias _s="sudo";
+alias _sn="sudo nano";
+alias _sv="sudo nvim";
+alias v="nvim";
+# alias vi="nvim";
+# alias vim="nvim";
+
+# git shortcuts
+alias gc="git clone";
+alias gs="git status";
+alias gsw="git switch";
+alias gfp="git fetch; git pull"
+alias glsm="git ls-files --modified --others --exclude-standard"
+alias gdf="git diff --staged --name-status"
+alias gdf="git diff --staged"
+
+alias conf="_sv -O ~/.zprofile ~/.zshrc";
+alias o="ack --sort-files --color";
+alias vg='lazygit';
+alias cm="chezmoi";
+alias p="pnpm";
+plz() {   # re-run the previous command under sudo, with confirmation
+  local last=$(fc -ln -1)
+  [[ -n $last ]] || { print -u2 "plz: no previous command"; return 1 }
+  print -r -- "sudo $last"
+  read -q "?run this as root? [y/N] " || { print; return 1 }
+  print
+  eval "sudo $last"
+}
+alias cpwd='pwd | pbcopy'
+alias pa='pbpaste'
+
+# tmux shortcuts
+alias tka='tmux kill-server';
+alias tks='tmux kill-session -t';
+
+# docker shorthands
+alias de="docker exec -u root -it";
+alias dils="docker image ls";
+alias dvls="docker volume ls";
+alias dcls="docker container ls";
+alias dnls="docker network ls";
+alias dirm="docker image rm";
+alias dvrm="docker volume rm";
+alias dcrm="docker container rm";
+alias dnrm="docker network rm";
+alias dira='docker image rm $(docker image ls -q)';
+alias dvra='docker volume rm $(docker volume ls -q)';
+alias dcra='docker container rm $(docker container ls -q)';
+alias dnra='docker network rm $(docker network ls -q)';
+
+alias pnpx="pnpm dlx"
+
+# Don't google
+alias myip="curl ifconfig.me"
+alias ws="curl wttr.in"
+alias wss="curl 'wttr.in?format=3'"
+alias dadjoke='curl -H "Accept: text/plain" https://icanhazdadjoke.com/; echo'
+alias news='curl hkkr.in'
+alias ask="$HOME/.config/custom_scripts/cheat.sh"
+
+function trw {
+  tmux rename-window "${1:-zsh|exec}";
+}
+
+function t2 {   # renamed from tree: the real /opt/homebrew/bin/tree is now reachable
+  eza -aF --tree -L="${1:-2}" --icons;
+}
+
+_uninstall_homebrew() {
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)";
+}
+
+# Setting up shorthands for big boys
+_r() {
+    # [[ -n $TMUX ]] && tmux source ~/.config/tmux/tmux.conf;
+    exec zsh;
+}
+
+# _f / _d / _a retired: superseded by fzf's ^F (file picker) and Alt-C (cd).
+# They eval'd unquoted fzf output (filename injection) and _a tested $1 not $dir.
+
+_i() {
+    stat -f "%N -%z -%R" $1;
+}
+
+portinfo() {   # renamed from _port: _* is zsh's completion namespace
+
+    echo "LSOF";
+    lsof -nP -i:"$1";
+    echo "NETSTAT";
+    netstat -avn | grep "$1";
+}
+
+_pid() {
+   ps -ef | grep -v grep | grep -i "$1" | awk '{print $2}';
+}
+
+
+_cleanup_dc() {
+    docker info || return 1;
+    docker compose down || return 1;
+    docker container prune --force;
+    docker image prune --all --force;
+    docker volume prune --force;
+}
+
+_tn() {   # $1 = session name, $2 = optional exact path (used in preference to zoxide)
+    local session_name="$1" session_dir="$2"
+    [[ -n $session_name ]] || return 1
+    [[ -d $session_dir ]] || session_dir=$(zoxide query "$session_name" 2>/dev/null)
+    [[ -d $session_dir ]] || session_dir=$PWD
+
+    tmux new-session -s "$session_name" -n "main:${session_name}" -c "$session_dir" -d 2>/dev/null
+    tmux attach -t "$session_name" 2>/dev/null || tmux switchc -t "$session_name" 2>/dev/null
+}
+
+_ide () {
+  tmux split-window -v -p 30;
+  tmux split-window -h -p 40;
+}
+
+function _tmux_manager() {
+  if [[ -z "$GHQ_ROOT" ]]; then
+   return;
+  fi
+  ghq list -p | fzf-tmux -p -h 50% -w 70% | read dir_full_path
+
+  basename "$dir_full_path" 2> /dev/null | tr . _ | read dir_name
+
+  if [[ -z "$dir_name" ]]; then
+    return;
+  fi
+
+  _tn $dir_name $dir_full_path
+}
+
+function _tmux_smart_attach_ () {
+  session=`tmux list-sessions | fzf-tmux -p +s --tac | cut -d ':' -f1`
+
+  if [[ -z "$session" ]]; then
+    echo "aborting";
+    return
+  fi
+
+  tmux attach -t $session || tmux switch-client -t $session
+}
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+function nvim_cleanup____ () {
+rm -rf ~/.local/share/nvim
+rm -rf ~/.local/state/nvim
+}
+
+
+function _xcode_setup_() {
+  sudo xcode-select --switch /Applications/Xcode.app
+}
+
+_run_command_digest_app() {
+    if [[ -n "$TMUX" ]]; then
+        tmux display-popup -E -w 80% -h 80% "digest"
+        zle redisplay
+    else
+      BUFFER="digest"
+    fi
+    zle accept-line
+}
+
+# Guard only the expensive eval so `source ~/.zprofile` still reloads
+# aliases and functions after an edit.
+if [[ -z $_ZPROFILE_EVALS_DONE ]]; then
+  _ZPROFILE_EVALS_DONE=1
+  # eval "$(starship init zsh)"
+  _zcache starship init zsh
+  # direnv hook removed: it cost ~22ms on EVERY prompt and there are no .envrc
+  # files anywhere. direnv is still installed — restore with:
+  #   _zcache direnv hook zsh
+fi
+
+[ -f "$HOME/.zprofile.local" ] && source "$HOME/.zprofile.local"
+
+rerun() {
+  local delay=${RERUN_DELAY:-3}
+  local max_retries=${RERUN_MAX:-0}
+  local count=0
+  local child_pid input
+
+  setopt localoptions monitor
+
+  _kill_tree() {
+    local pid=$1
+    pkill -TERM -P $pid 2>/dev/null
+    kill -TERM -$pid 2>/dev/null || kill -TERM $pid 2>/dev/null
+  }
+
+  _cleanup() {
+    [[ -n "$child_pid" ]] && _kill_tree $child_pid
+    unfunction _kill_tree _cleanup 2>/dev/null
+    trap - INT TERM
+  }
+
+  trap '_cleanup; echo; return 130' INT TERM
+
+  while true; do
+    "$@" &
+    child_pid=$!
+
+    while kill -0 $child_pid 2>/dev/null; do
+      if read -t 1 -r input 2>/dev/null; then
+        if [[ "$input" == "rs" ]]; then
+          printf "\n🔄 Restarting...\n"
+          _kill_tree $child_pid
+          wait $child_pid 2>/dev/null
+          count=0
+          continue 2
+        fi
+      fi
+    done
+
+    wait $child_pid
+    local code=$?
+
+    [[ $code -eq 0 ]] && break
+
+    ((count++))
+    if [[ $max_retries -gt 0 && $count -ge $max_retries ]]; then
+      printf "\n❌ Max retries (%d) reached.\n" "$max_retries"
+      _cleanup
+      return $code
+    fi
+
+    printf "\n⚠️ Exit %d. Retry #%d in %ds... [rs + Enter = restart, Ctrl+C = quit]\n" "$code" "$count" "$delay"
+
+    for ((i=0; i<delay; i++)); do
+      if read -t 1 -r input 2>/dev/null && [[ "$input" == "rs" ]]; then
+        break
+      fi
+    done
+  done
+
+  _cleanup
+}
+

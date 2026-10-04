@@ -1,0 +1,164 @@
+[bootstrap.packages]
+"brew:bash" = { os = "macos" }
+"brew:git" = { os = "macos" }
+"brew:tmux" = { os = "macos" }
+"brew:htop" = { os = "macos" }
+"brew:tree" = { os = "macos" }
+"brew:ack" = { os = "macos" }
+"brew:eza" = { os = "macos" }
+"brew:gnupg" = { os = "macos" }
+"brew:gnu-sed" = { os = "macos" }
+"brew:trash" = { os = "macos" }
+"brew:ffmpeg" = { os = "macos" }
+"brew:imagemagick" = { os = "macos" }
+"brew:graphviz" = { os = "macos" }
+"brew:poppler" = { os = "macos" }
+"brew:docker" = { os = "macos" }
+"brew:curl" = { os = "macos" }
+"brew:ansible" = { os = "macos" }
+"brew:docker-compose" = { os = "macos" }
+"brew:docutils" = { os = "macos" }
+"brew:entr" = { os = "macos" }
+"brew:hr" = { os = "macos" }
+"brew:keyring" = { os = "macos" }
+"brew:mdcat" = { os = "macos" }
+"brew:md5sha1sum" = { os = "macos" }
+"brew:ranger" = { os = "macos" }
+"brew:rpm" = { os = "macos" }
+"brew:sevenzip" = { os = "macos" }
+"brew:wget" = { os = "macos" }
+"brew:ykman" = { os = "macos" }
+"brew:ykpers" = { os = "macos" }
+
+"brew-cask:ghostty" = { os = "macos" }
+"brew-cask:karabiner-elements" = { os = "macos" }
+"brew-cask:raycast" = { os = "macos" }
+"brew-cask:jordanbaird-ice" = { os = "macos" }
+"brew-cask:espanso" = { os = "macos" }
+"brew-cask:bruno" = { os = "macos" }
+"brew-cask:copilot-cli" = { os = "macos" }
+
+"brew-cask:font-hack-nerd-font" = { os = ["macos", "linux"] }
+"brew-cask:font-symbols-only-nerd-font" = { os = ["macos", "linux"] }
+"brew-cask:font-ubuntu-mono-nerd-font" = { os = ["macos", "linux"] }
+"brew-cask:font-fira-code-nerd-font" = { os = ["macos", "linux"] }
+
+"apt:zsh" = "latest"
+"apt:git" = "latest"
+"apt:tmux" = "latest"
+"apt:htop" = "latest"
+"apt:tree" = "latest"
+"apt:ack" = "latest"
+"apt:eza" = "latest"
+"apt:build-essential" = "latest"
+"apt:unzip" = "latest"
+"apt:gnupg" = "latest"
+"apt:curl" = "latest"
+"apt:xclip" = "latest"
+"apt:wl-clipboard" = "latest"
+"apt:ffmpeg" = "latest"
+"apt:imagemagick" = "latest"
+"apt:graphviz" = "latest"
+"apt:poppler-utils" = "latest"
+"apt:docker.io" = "latest"
+
+"zypper:zsh" = "latest"
+"zypper:git" = "latest"
+"zypper:tmux" = "latest"
+"zypper:htop" = "latest"
+"zypper:tree" = "latest"
+"zypper:ack" = "latest"
+"zypper:eza" = "latest"
+"zypper:make" = "latest"
+"zypper:gcc" = "latest"
+"zypper:unzip" = "latest"
+"zypper:gpg2" = "latest"
+"zypper:curl" = "latest"
+"zypper:xclip" = "latest"
+"zypper:wl-clipboard" = "latest"
+"zypper:ffmpeg" = "latest"
+"zypper:ImageMagick" = "latest"
+"zypper:graphviz" = "latest"
+"zypper:poppler-tools" = "latest"
+"zypper:docker" = "latest"
+
+"pacman:zsh" = "latest"
+"pacman:git" = "latest"
+"pacman:tmux" = "latest"
+"pacman:htop" = "latest"
+"pacman:tree" = "latest"
+"pacman:ack" = "latest"
+"pacman:eza" = "latest"
+"pacman:base-devel" = "latest"
+"pacman:unzip" = "latest"
+"pacman:gnupg" = "latest"
+"pacman:curl" = "latest"
+"pacman:xclip" = "latest"
+"pacman:wl-clipboard" = "latest"
+"pacman:ffmpeg" = "latest"
+"pacman:imagemagick" = "latest"
+"pacman:graphviz" = "latest"
+"pacman:poppler" = "latest"
+"pacman:docker" = "latest"
+
+[bootstrap.hooks]
+pre-dotfiles = '''
+set -e
+[ -d "$HOME/.local/share/chezmoi/.git" ] || { echo "dotfiles missing at ~/.local/share/chezmoi, run kickstart.sh first" >&2; exit 1; }
+'''
+post-dotfiles = '''
+set -e
+{% if os() == "macos" %}export PATH="/opt/homebrew/bin:$PATH"{% endif %}
+tpm_dir="$HOME/.config/tmux/plugins/tpm"
+if [ ! -f "$tpm_dir/tpm" ]; then
+  rm -rf "$tpm_dir"
+  git clone --depth 1 https://github.com/tmux-plugins/tpm "$tpm_dir"
+fi
+"$tpm_dir/bin/install_plugins"
+'''
+post-tools = '''
+set -e
+{% if os() == "macos" %}export PATH="/opt/homebrew/bin:$PATH"{% endif %}
+[ -d "$HOME/.local/share/nvim/lazy/lazy.nvim" ] || mise exec -- bash "$HOME/.config/zsh/bootstrap-plugins.sh" --nvim
+{% if os() == "macos" %}brew list --cask aerospace >/dev/null 2>&1 || brew install --cask nikitabobko/tap/aerospace{% endif %}
+mise exec -- npm ls -g @openai/codex >/dev/null 2>&1 || mise exec -- npm install -g @openai/codex
+mise run zsh-completions-update || echo "zsh completions: some tools failed, rerun mise run zsh-completions-update" >&2
+'''
+
+[tasks.bootstrap]
+description = "Login shell and git signing setup"
+run = '''
+set -e
+if [ "$(basename "${SHELL:-}")" != "zsh" ]; then
+  zsh_path="$(command -v zsh)"
+  grep -qx "$zsh_path" /etc/shells || echo "$zsh_path" | sudo tee -a /etc/shells >/dev/null
+  chsh -s "$zsh_path"
+fi
+
+allowed_signers="$HOME/.config/git/allowed_signers"
+signing_email="$(git config --global --includes user.email || true)"
+signing_key="$(cat "$HOME/.ssh/id_ed25519.pub" 2>/dev/null | awk '{print $1" "$2}')"
+if [ -n "$signing_email" ] && [ -n "$signing_key" ] && ! grep -qF "$signing_key" "$allowed_signers" 2>/dev/null; then
+  echo "$signing_email $signing_key" >> "$allowed_signers"
+fi
+'''
+
+[tasks.publish-kickstart]
+description = "Publish ~/kickstart.sh to GitHub Pages"
+quiet = true
+run = '''
+set -e
+pages_repo="${GHQ_ROOT:-$HOME/Projects}/github.com/AnudeepChPaul/AnudeepChPaul.github.io"
+[ -d "$pages_repo/.git" ] || git clone git@github.com:AnudeepChPaul/AnudeepChPaul.github.io.git "$pages_repo"
+git -C "$pages_repo" pull --ff-only --quiet || true
+cp "$HOME/kickstart.sh" "$pages_repo/kickstart.sh"
+touch "$pages_repo/.nojekyll"
+git -C "$pages_repo" add kickstart.sh .nojekyll
+if git -C "$pages_repo" diff --cached --quiet; then
+  echo "kickstart.sh already published"
+else
+  git -C "$pages_repo" commit --quiet -m "Update kickstart script"
+  git -C "$pages_repo" push --quiet origin HEAD:main
+  echo "published https://anudeepchpaul.github.io/kickstart.sh"
+fi
+'''

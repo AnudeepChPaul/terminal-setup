@@ -1,0 +1,121 @@
+[tools]
+chezmoi = "latest"
+neovim = "latest"
+node = "24"
+python = "3.14"
+go = "latest"
+lua-language-server = "latest"
+marksman = "latest"
+gofumpt = "latest"
+stylua = "latest"
+semver = "latest"
+"npm:prettier" = "latest"
+"go:golang.org/x/tools/gopls" = "latest"
+"go:golang.org/x/tools/cmd/goimports" = "latest"
+"go:github.com/incu6us/goimports-reviser/v3" = "latest"
+"pipx:python-lsp-server" = "latest"
+"npm:typescript-language-server" = "latest"
+"npm:typescript" = "6"
+"npm:vscode-langservers-extracted" = "latest"
+pnpm = "latest"
+yarn = "latest"
+just = "latest"
+"npm:ts-node" = "latest"
+"npm:jest" = "latest"
+"npm:emmet-ls" = "latest"
+"npm:commitizen" = "latest"
+"npm:nx" = "latest"
+bat = "latest"
+fd = "latest"
+ripgrep = "latest"
+fzf = "latest"
+zoxide = "latest"
+atuin = "latest"
+starship = "latest"
+lazygit = "latest"
+delta = "latest"
+gh = "latest"
+ghq = "latest"
+jq = "latest"
+yq = "latest"
+glow = "latest"
+yazi = "latest"
+television = "latest"
+broot = "latest"
+direnv = "latest"
+uv = "latest"
+kubectl = "latest"
+helm = "latest"
+kubectx = "latest"
+terraform = "latest"
+awscli = "latest"
+lazydocker = "latest"
+caddy = "latest"
+k6 = "latest"
+nushell = "latest"
+git-lfs = "latest"
+protoc = "latest"
+java = "temurin-21"
+golangci-lint = "latest"
+protoc-gen-go = "latest"
+"go:github.com/rakyll/hey" = "latest"
+"go:github.com/mitranim/gow" = "latest"
+
+[tasks.zsh-plugins-update]
+description = "Re-pin zsh plugins in .chezmoiexternal.toml to upstream HEAD"
+run = '''
+set -e
+source_dir="$(chezmoi source-path)"
+external_file="$source_dir/.chezmoiexternal.toml"
+grep -oE 'https://github.com/[^/]+/[^/]+/archive/[0-9a-f]{40}' "$external_file" | while read -r archive_url; do
+  repo_path="${archive_url#https://github.com/}"
+  repo_path="${repo_path%/archive/*}"
+  pinned_sha="${archive_url##*/}"
+  latest_sha="$(git ls-remote "https://github.com/$repo_path" HEAD | cut -f1)"
+  [ -n "$latest_sha" ] || { echo "$repo_path: could not resolve HEAD" >&2; exit 1; }
+  if [ "$pinned_sha" = "$latest_sha" ]; then
+    echo "$repo_path up to date"
+  else
+    sed -i.bak "s/$pinned_sha/$latest_sha/" "$external_file" && rm "$external_file.bak"
+    echo "$repo_path $(printf %.7s "$pinned_sha") -> $(printf %.7s "$latest_sha")"
+  fi
+done
+chezmoi apply "$HOME/.zsh/plugins"
+if ! git -C "$source_dir" diff --quiet -- .chezmoiexternal.toml; then
+  git -C "$source_dir" commit -qm "Update zsh plugins" -- .chezmoiexternal.toml
+  git -C "$source_dir" push -q
+fi
+'''
+
+[tasks.zsh-completions-update]
+description = "Regenerate cached zsh completions in ~/.zsh/completions"
+run = '''
+completions_dir="$HOME/.zsh/completions"
+mkdir -p "$completions_dir"
+failed=0
+while read -r tool_name generate_command; do
+  if ! command -v "$tool_name" >/dev/null; then
+    echo "$tool_name not installed, skipping"
+    continue
+  fi
+  target_file="$completions_dir/_$tool_name"
+  if sh -c "$generate_command" > "$target_file.tmp" 2>/dev/null && [ -s "$target_file.tmp" ]; then
+    mv "$target_file.tmp" "$target_file"
+    echo "$tool_name ok"
+  else
+    rm -f "$target_file.tmp"
+    echo "$tool_name failed" >&2
+    failed=1
+  fi
+done <<'TOOLS'
+kubectl kubectl completion zsh
+helm helm completion zsh
+gh gh completion -s zsh
+docker docker completion zsh
+yq yq shell-completion zsh
+delta delta --generate-completion zsh
+mise mise completion zsh
+TOOLS
+rm -f "${XDG_CACHE_HOME:-$HOME/.cache}"/zsh/zcompdump-*
+exit $failed
+'''

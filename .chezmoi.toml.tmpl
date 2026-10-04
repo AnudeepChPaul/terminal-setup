@@ -1,0 +1,13 @@
+{{- $email := promptStringOnce . "email" "Git signing email" -}}
+encryption = "age"
+
+[age]
+  identity = "~/.config/chezmoi/key.txt"
+  recipient = "age1avzu2sdk89le45azskxrj27v7l54z403nwd82jq75cdd89rd4fksjw3tpk"
+
+[git]
+  autoCommit = true
+  autoPush = true
+
+[data]
+  email = {{ $email | quote }}

@@ -1,0 +1,32 @@
+[core]
+	pager = delta
+	excludesfile = ~/.config/git/ignore
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	line-numbers = true
+	syntax-theme = Dracula
+[merge]
+	conflictStyle = zdiff3
+[rerere]
+	enabled = true
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+[include]
+	path = ~/.config/git/config.local

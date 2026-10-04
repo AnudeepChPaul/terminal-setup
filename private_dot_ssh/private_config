@@ -1,0 +1,4 @@
+Include ~/.ssh/config.local
+
+Host *
+  HashKnownHosts yes

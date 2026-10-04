@@ -1,0 +1,252 @@
+version: '3'
+
+networks:
+  homeserv_docker:
+    driver: ${homeserv_network_mode}
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    networks:
+      - homeserv_docker
+    ports:
+      - '8000:8000'
+      - '9443:9443'
+    restart: 'always'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '${homeserv_volume_base}/portainer:/data'
+    command:
+      --ssl
+      --sslcert ${services_portainer_cert}
+      --sslkey ${services_portainer_key}
+
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    restart: 'always'
+    networks:
+      - homeserv_docker
+    ports:
+      - '3999:3000'
+    volumes:
+      - '${homeserv_volume_base}/grafana:/var/lib/grafana'
+      - '${homeserv_volume_base}/grafana/log:/var/log/grafana'
+      - '${homeserv_volume_base}/grafana/grafana.ini:/etc/grafana/grafana.ini'
+    environment:
+      - GF_AUTH_GENERIC_OAUTH_ENABLED=${services_grafana_AUTH_GENERIC_OAUTH_ENABLED}
+      - GF_AUTH_GENERIC_OAUTH_NAME=${services_grafana_AUTH_GENERIC_OAUTH_NAME}
+      - GF_AUTH_GENERIC_OAUTH_CLIENT_ID=${services_grafana_AUTH_GENERIC_OAUTH_CLIENT_ID}
+      - GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET=${services_grafana_AUTH_GENERIC_OAUTH_CLIENT_SECRET}
+      - GF_AUTH_GENERIC_OAUTH_SCOPES=${services_grafana_AUTH_GENERIC_OAUTH_SCOPES}
+      - GF_AUTH_GENERIC_OAUTH_AUTH_URL=${services_grafana_AUTH_GENERIC_OAUTH_AUTH_URL}
+      - GF_AUTH_GENERIC_OAUTH_TOKEN_URL=${services_grafana_AUTH_GENERIC_OAUTH_TOKEN_URL}
+      - GF_AUTH_GENERIC_OAUTH_API_URL=${services_grafana_AUTH_GENERIC_OAUTH_API_URL}
+      - GF_AUTH_SIGNOUT_REDIRECT_URL=${services_grafana_AUTH_SIGNOUT_REDIRECT_URL}
+      - GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH=${services_grafana_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH}
+      - GF_AUTH_OAUTH_AUTO_LOGIN=${services_grafana_AUTH_OAUTH_AUTO_LOGIN}
+
+  vault:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: 'always'
+    networks:
+      - homeserv_docker
+    ports:
+      - '8080:80'
+      - '3012:3012'
+    volumes:
+      - '${homeserv_volume_base}/vault:/data'
+    environment:
+      - DOMAIN=${services_vault_DOMAIN}
+      - ROCKET_PORT=${services_vault_ROCKET_PORT}
+      - WEBSOCKET_ENABLED=${services_vault_WEBSOCKET_ENABLED}
+      - ROCKET_ADDRESS=${services_vault_ROCKET_ADDRESS}
+      - ROCKET_PROFILE=${services_vault_ROCKET_PROFILE}
+
+  outline:
+    image: outlinewiki/outline
+    container_name: outline
+    networks:
+      - homeserv_docker
+    environment:
+      - UTILS_SECRET=${services_outline_UTILS_SECRET}
+      - SECRET_KEY=${services_outline_SECRET_KEY}
+      - NODE_ENV=${services_outline_NODE_ENV}
+      - URL=${services_outline_URL}
+      - PORT=${services_outline_PORT}
+      - DATABASE_URL=${services_outline_DATABASE_URL}
+      - DATABASE_URL_TEST=${services_outline_DATABASE_URL_TEST}
+      - REDIS_URL=${services_outline_REDIS_URL}
+      - PGSSLMODE=${services_outline_PGSSLMODE}
+      - FORCE_HTTPS=${services_outline_FORCE_HTTPS}
+      - OIDC_CLIENT_ID=${services_outline_OIDC_CLIENT_ID}
+      - OIDC_CLIENT_SECRET=${services_outline_OIDC_CLIENT_SECRET}
+      - OIDC_AUTH_URI=${services_outline_OIDC_AUTH_URI}
+      - OIDC_TOKEN_URI=${services_outline_OIDC_TOKEN_URI}
+      - OIDC_USERINFO_URI=${services_outline_OIDC_USERINFO_URI}
+      - OIDC_DISPLAY_NAME=${services_outline_OIDC_DISPLAY_NAME}
+      - OIDC_SCOPES=${services_outline_OIDC_SCOPES}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+      - minio
+
+  redis:
+    container_name: redis
+    image: redis
+    restart: 'always'
+    networks:
+      - homeserv_docker
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis.conf:/redis.conf
+    command: ["redis-server", "/redis.conf"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: 'always'
+    networks:
+      - homeserv_docker
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${services_postgres_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${services_postgres_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${services_postgres_POSTGRES_DB}
+    volumes:
+      - ${homeserv_volume_base}/database-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U anudeepchandrapaul -d postgres'"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  minio:
+    container_name: minio
+    image: quay.io/minio/minio
+    networks:
+      - homeserv_docker
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    restart: 'always'
+    environment:
+      - MINIO_ROOT_USER=${services_minio_MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${services_minio_MINIO_ROOT_PASSWORD}
+    entrypoint: sh
+    command: -c 'minio server /data --console-address ":9001"'
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ${homeserv_volume_base}/storage-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  dbeaver:
+    image: dbeaver/cloudbeaver:latest
+    container_name: dbeaver
+    networks:
+      - homeserv_docker
+    ports:
+      - "8978:8978"
+    restart: always
+    volumes:
+      - "${homeserv_volume_base}/dbeaver:/opt/cloudbeaver/workspace"
+
+  whooogle:
+    image: benbusby/whoogle-search:latest
+    container_name: whoogle
+    networks:
+      - homeserv_docker
+    ports:
+      - "5000:5000"
+    restart: always
+    security_opt:
+      - no-new-privileges
+    cap_drop:
+      - ALL
+    pids_limit: 50
+    mem_limit: 256mb
+    memswap_limit: 256mb
+    volumes:
+      - "${homeserv_volume_base}/whoogle:/config"
+
+  authentik:
+    container_name: authentik
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2022.11.3}
+    restart: always
+    networks:
+      - homeserv_docker
+    command: server
+    environment:
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgres
+      AUTHENTIK_POSTGRESQL__USER: ${services_postgres_POSTGRES_USER}
+      AUTHENTIK_POSTGRESQL__NAME: ${services_authentik_DB_NAME}
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${services_postgres_POSTGRES_PASSWORD}
+      AUTHENTIK_SECRET_KEY: ${services_authentik_SECRET_KEY}
+      AUTHENTIK_AUTHENTIK__GEOIP: ${services_authentik_AUTHENTIK__GEOIP}
+    volumes:
+      - ${homeserv_volume_base}/authentik/media:/media
+      - ${homeserv_volume_base}/authentik/custom-templates:/templates
+      - ${homeserv_volume_base}/geoip:/geoip
+    ports:
+      - "0.0.0.0:${AUTHENTIK_PORT_HTTP:-7000}:9000"
+      - "0.0.0.0:${AUTHENTIK_PORT_HTTPS:-7443}:9443"
+
+  authentik_worker:
+    container_name: authentik_worker
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2022.11.3}
+    restart: always
+    networks:
+      - homeserv_docker
+    command: worker
+    environment:
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgres
+      AUTHENTIK_POSTGRESQL__USER: ${services_postgres_POSTGRES_USER}
+      AUTHENTIK_POSTGRESQL__NAME: ${services_authentik_DB_NAME}
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${services_postgres_POSTGRES_PASSWORD}
+      AUTHENTIK_SECRET_KEY: ${services_authentik_SECRET_KEY}
+      AUTHENTIK_AUTHENTIK__GEOIP: ${services_authentik_AUTHENTIK__GEOIP}
+    # `user: root` and the docker socket volume are optional.
+    # See more for the docker socket integration here:
+    # https://goauthentik.io/docs/outposts/integrations/docker
+    # Removing `user: root` also prevents the worker from fixing the permissions
+    # on the mounted folders, so when removing this make sure the folders have the correct UID/GID
+    # (1000:1000 by default)
+    user: root
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${homeserv_volume_base}/authentik/media:/media
+      - ${homeserv_volume_base}/authentik/certs:/certs
+      - ${homeserv_volume_base}/authentik/custom-templates:/templates
+      - ${homeserv_volume_base}/geoip:/geoip
+  
+  geoipupdate:
+    container_name: geoipupdate
+    image: "maxmindinc/geoipupdate:latest"
+    networks:
+      - homeserv_docker
+    volumes:
+      - "${homeserv_volume_base}/geoip:/usr/share/GeoIP"
+    environment:
+      GEOIPUPDATE_EDITION_IDS: "GeoLite2-City"
+      GEOIPUPDATE_FREQUENCY: "8"
+      GEOIPUPDATE_ACCOUNT_ID: ${services_authentik_GEOIPUPDATE_ACCOUNT_ID}
+      GEOIPUPDATE_LICENSE_KEY: ${services_authentik_GEOIPUPDATE_LICENSE_KEY}

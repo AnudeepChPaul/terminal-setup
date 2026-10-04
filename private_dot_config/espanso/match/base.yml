@@ -1,0 +1,137 @@
+matches:
+  - trigger: "*helloPrompt"
+    replace: "Hello, how can I assist you today?"
+
+  - trigger: "*ml"
+    replace: me@anudeep.pro
+
+  - trigger: "*fn"
+    replace: () => { }
+
+  - trigger: "*ee"
+    replace: "espanso edit"
+
+  - trigger: "*gsc"
+    replace: "git switch -c FUE-$|$"
+
+  - trigger: "*gss"
+    replace: "git switch "
+
+  - trigger: "*gU"
+    replace: "git push --set-upstream origin FUE-$|$"
+
+  - trigger: "*gP"
+    replace: "git push origin "
+
+  - trigger: "*gPU"
+    replace: "git push --set-upstream origin FUE-$|$ --force"
+
+  - trigger: "*gpr"
+    replace: "git pull --rebase origin "
+
+  - trigger: "*gpp"
+    replace: "git pull origin "
+
+  - trigger: "*gfp"
+    replace: "git fetch; git pull"
+
+  - trigger: "*gfr"
+    replace: "git fetch origin; git pull --rebase origin "
+
+  - trigger: "*gc"
+    replace: git commit -m "FUE-$|$"
+
+  - trigger: "*dU"
+    replace: "db push --set-upstream origin "
+
+  - trigger: "*dP"
+    replace: "db push origin main"
+
+  - trigger: "*dp"
+    replace: "db pull --rebase origin "
+
+  - trigger: "*df"
+    replace: "db fetch origin; git pull --rebase origin "
+
+  - trigger: "*dc"
+    replace: db commit -m "FUE-$|$"
+
+  - trigger: "*tq"
+
+    replace: telepresence quit
+
+  - trigger: "*ts"
+    replace: telepresence
+
+  - trigger: "*ll"
+    replace: "{{mytime}} — #log"
+    vars:
+      - name: mytime
+        type: date
+        params:
+          format: "%d-%B-%Y"
+          offset: 0
+          locale: en_IN
+
+  - trigger: "*tt"
+    replace: "{{mytime}} —> "
+    vars:
+      - name: mytime
+        type: date
+        params:
+          format: "%H:%M"
+          offset: 0
+          locale: en_IN
+
+  - trigger: "*ws"
+    replace: "curl wttr.in"
+
+  - trigger: "*ip"
+    replace: "curl ifconfig.me"
+
+  - trigger: "*dj"
+    replace: 'curl -H "Accept: text/plain" https://icanhazdadjoke.com; echo'
+
+  - trigger: "*hl"
+    replace: "atuin login -u achandrapaul"
+
+  - trigger: "*hs"
+    replace: "atuin sync"
+
+  - trigger: "*nu"
+    replace: "nvm use"
+
+  - trigger: "*nd"
+    replace: "nvm use default"
+
+  - trigger: "*yns"
+    replace: 'yarn; NODE_OPTIONS="--max-old-space-size=12192" yarn start'
+
+  - trigger: "*yno"
+    replace: 'yarn; NODE_OPTIONS="--max-old-space-size=12192" yarn dev-server:otk'
+
+  - trigger: "*ys"
+    replace: "yarn; yarn start"
+
+  - trigger: "*rc"
+    replace: |
+      import React from "react";
+
+      type {{x.name}}Props = {
+        $|$
+      };
+
+      const {{x.name}}: React.FC<{{x.name}}Props> = ({}) => {
+        return (
+          <div>
+            {{x.name}} component
+          </div>
+        );
+      };
+
+      export default {{x.name}};
+    vars:
+      - name: x
+        type: form
+        params:
+          layout: "Component Name: [[name]]"

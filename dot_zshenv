@@ -1,0 +1,30 @@
+typeset -U path PATH fpath FPATH
+
+# Cached tool completions (kubectl, helm, gh, docker, yq, delta, mise).
+# Regenerate after upgrades: mise run zsh-completions-update
+fpath=("$HOME/.zsh/completions" $fpath)
+
+# Cached tool inits: sourcing a file beats forking the tool on every shell (~90ms).
+# Auto-regenerates when the tool binary is newer than its cache, or the cache is
+# missing/empty. To force a rebuild: rm -rf ~/.zsh/cache
+_ZSH_CACHE="$HOME/.zsh/cache"
+_zcache() {   # _zcache <tool> <init args...>
+  local f="$_ZSH_CACHE/$1.zsh" bin=$commands[$1]
+  [[ -n $bin ]] || return 0
+  [[ -s $f && ! $bin -nt $f ]] || { mkdir -p $_ZSH_CACHE; $bin "${@:2}" >| $f }
+  source $f
+}
+
+# BEGIN LOCAL BIN PATH INCLUDE
+export PATH="$PATH:$HOME/.local/bin"
+# END LOCAL BIN PATH INCLUDE
+# BEGIN ZSCALER CA CERTIFICATE
+if [[ -z "$NODE_EXTRA_CA_CERTS" && -r "$HOME/.claude/zscaler-ca.pem" ]]; then
+  export NODE_EXTRA_CA_CERTS="$HOME/.claude/zscaler-ca.pem"
+fi
+# END ZSCALER CA CERTIFICATE
+
+
+_markdown() {
+  caddy run --config $HOME/Projects/github.com/AnudeepChPaul/markdown_plans/CaddyFile
+}
