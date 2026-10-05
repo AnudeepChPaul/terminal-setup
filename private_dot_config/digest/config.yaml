@@ -26,14 +26,14 @@ janitor_patterns:
   - GlobalProtectLogs*.tgz
 jobs:
   - name: branch reaper
-    dry-run-command: "~/.config/terminal_apps/bin/app branch-reaper --dry-run --root ~/Projects/"
-    command: "~/.config/terminal_apps/bin/app branch-reaper --root ~/Projects/"
+    dry-run-command: "digest branch-reaper --dry-run --root ~/Projects/"
+    command: "digest branch-reaper --root ~/Projects/"
   - name: janitor
-    dry-run-command: "~/.config/terminal_apps/bin/app janitor --dry-run --root ~ --root ~/Projects/ --root ~/digest/reviews/"
-    command: "~/.config/terminal_apps/bin/app janitor --root ~ --root ~/Projects/"
+    dry-run-command: "digest janitor --dry-run --root ~ --root ~/Projects/ --root ~/digest/reviews/"
+    command: "digest janitor --root ~ --root ~/Projects/"
   - name: repo sync
-    dry-run-command: "~/.config/terminal_apps/bin/app repo-sync --dry-run --root ~/Projects/"
-    command: "~/.config/terminal_apps/bin/app repo-sync --root ~/Projects/"
+    dry-run-command: "digest repo-sync --dry-run --root ~/Projects/"
+    command: "digest repo-sync --root ~/Projects/"
 
 brag_command: claude -p
 brag_prompts:
