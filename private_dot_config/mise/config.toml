@@ -61,6 +61,7 @@ golangci-lint = "latest"
 protoc-gen-go = "latest"
 "go:github.com/rakyll/hey" = "latest"
 "go:github.com/mitranim/gow" = "latest"
+maven = "latest"
 
 [tasks.zsh-plugins-update]
 description = "Re-pin zsh plugins in .chezmoiexternal.toml to upstream HEAD"
