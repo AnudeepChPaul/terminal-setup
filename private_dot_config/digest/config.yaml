@@ -1,0 +1,36 @@
+notes_dir: ~/digest/notes
+git_repository_roots:
+  - ~/Projects/code.hq.twilio.com/flex/flex-admin-api/
+  - ~/Projects/github.com/twilio/twilio-webchat-react-app/
+  - ~/Projects/github.com/twilio-internal/flex-admin-console-e2e-tests/
+  - ~/Projects/github.com/twilio-internal/flex-admin-api-deploy/
+  - ~/Projects/github.com/twilio-internal/console/
+  - ~/Projects/github.com/twilio-internal/one-console/
+  - ~/Projects/github.com/twilio-internal/otk-mesh-config/
+git_lookback_days: 3
+pr_quantity_per_repo: 20
+git_commits_cmd: git log -n 50 --since="{since}" --until="{until}" --pretty=format:%h|%s
+git_auto_sync_interval: 3600s
+review_root: ~/digest/reviews
+review_command: 'claude -p "/review-toolkit:review {url} --emit findings-json --emit-to {findings}" --permission-mode auto'
+green_only: true
+jira_base_url: ""
+
+janitor_patterns:
+  - java_error_in_*.log
+  - hs_err_pid*.log
+  - jbr_err_pid*.log
+  - "*.hprof"
+  - java[0-9].log
+  - "*.pre-dump.bak"
+  - GlobalProtectLogs*.tgz
+jobs:
+  - name: branch reaper
+    dry-run-command: "~/.config/terminal_apps/bin/app branch-reaper --dry-run --root ~/Projects/"
+    command: "~/.config/terminal_apps/bin/app branch-reaper --root ~/Projects/"
+  - name: janitor
+    dry-run-command: "~/.config/terminal_apps/bin/app janitor --dry-run --root ~ --root ~/Projects/ --root ~/digest/reviews/"
+    command: "~/.config/terminal_apps/bin/app janitor --root ~ --root ~/Projects/"
+  - name: repo sync
+    dry-run-command: "~/.config/terminal_apps/bin/app repo-sync --dry-run --root ~/Projects/"
+    command: "~/.config/terminal_apps/bin/app repo-sync --root ~/Projects/"
