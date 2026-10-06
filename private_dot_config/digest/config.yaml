@@ -35,10 +35,10 @@ jobs:
     dry-run-command: "digest repo-sync --dry-run --root ~/Projects/"
     command: "digest repo-sync --root ~/Projects/"
 
-brag_command: claude -p
 brag_prompts:
   - Below are facts about my work for one ISO week. They are the only source of truth; never invent work, metrics or people.
-  - Write a concise, impact-focused brag summary as grouped bullet points under a '## Summary' heading. Do not repeat the facts verbatim. Output only markdown.
+  - If required, you can always refer to PR description for more knowledge.
+  - Write a concise, strong impact-focused brag summary as grouped bullet points under a '## Summary' heading. Do not repeat the facts verbatim. Output only markdown.
 month_brag_prompts:
   - Below are my weekly brags (summaries and facts) for one month. They are the only source of truth; never invent work, metrics or people.
   - Write a concise monthly brag under a '## Summary' heading, with 3-6 themed groups of bullets covering outcomes, my role and evidence (repos, PRs, dates). Output only markdown.
