@@ -24,131 +24,102 @@ return {
     end,
   },
   {
-    "hrsh7th/nvim-cmp",
-    -- InsertEnter only: cmp.setup.cmdline() is never called, so CmdlineEnter would
-    -- pull in cmp and six dependencies on every ":" for no completion at all.
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-      "onsails/lspkind.nvim",
-    },
+    "L3MON4D3/LuaSnip",
+    lazy = true,
     config = function()
-      local cmp = require("cmp")
-      local lspkind = require("lspkind")
-      local luasnip = require("luasnip")
-
       require("luasnip").cleanup()
       require("luasnip.loaders.from_lua").lazy_load({
         paths = vim.g.snippet_dir,
       })
-
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-j>"] = cmp.mapping.select_next_item(),
-          ["<C-k>"] = cmp.mapping.select_prev_item(),
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-c>"] = function(fallback)
-            if cmp.visible() then
-              cmp.abort()
-            end
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "n", true)
-          end,
-        }),
-        formatting = {
-          format = lspkind.cmp_format({
-            mode = "symbol_text",
-            maxwidth = 50,
-            ellipsis_char = "...",
-          }),
-        },
-        -- Optional: open menu as you type
-        completion = {
-          completeopt = "menu,menuone,noinsert",
-        },
-        sources = {
-          { name = "luasnip" },
-          { name = "nvim_lsp" },
-          { name = "buffer" },
-          { name = "path" },
-        },
-      })
     end,
+  },
+  {
+    "saghen/blink.cmp",
+    version = "1.*",
+    event = "InsertEnter",
+    dependencies = { "L3MON4D3/LuaSnip" },
+    opts = {
+      keymap = {
+        preset = "none",
+        -- Under tmux the terminal sends Ctrl+Space as NUL, which nvim reads as <C-@>.
+        ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-@>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-j>"] = { "select_next", "fallback" },
+        ["<C-k>"] = { "select_prev", "fallback" },
+        ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
+        ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+        ["<C-c>"] = {
+          function(blink)
+            blink.hide()
+          end,
+          "fallback",
+        },
+      },
+      -- The dracula fork styles nvim-cmp groups only, so borrow those.
+      appearance = { use_nvim_cmp_as_default = true },
+      completion = {
+        list = { selection = { preselect = true, auto_insert = false } },
+        documentation = { auto_show = true, auto_show_delay_ms = 200 },
+        menu = {
+          draw = {
+            columns = { { "kind_icon" }, { "label", "label_description", gap = 1 }, { "kind" } },
+          },
+        },
+      },
+      signature = { enabled = true },
+      snippets = { preset = "luasnip" },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
+      cmdline = { enabled = false },
+      fuzzy = { implementation = "prefer_rust_with_warning" },
+    },
   },
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "b0o/schemastore.nvim",
-      "hrsh7th/cmp-nvim-lsp",
+      "saghen/blink.cmp",
     },
     config = function()
-      local inlay_hints = {
-        importModuleSpecifierPreference = "non-relative",
-        includeInlayParameterNameHints = "all",
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-      }
-
       vim.lsp.config("*", {
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
       })
 
-      local tsserver_bin = vim.fn.exepath("tsserver")
-      local fallback_tsserver_lib = tsserver_bin ~= ""
-          and vim.fs.joinpath(vim.fs.dirname(vim.fs.dirname(tsserver_bin)), "typescript", "lib")
-        or nil
+      local inlay_hints = {
+        parameterNames = { enabled = "all", suppressWhenArgumentMatchesName = true },
+        parameterTypes = { enabled = true },
+        variableTypes = { enabled = true },
+        propertyDeclarationTypes = { enabled = true },
+        functionLikeReturnTypes = { enabled = true },
+        enumMemberValues = { enabled = true },
+      }
 
-      vim.lsp.config("ts_ls", {
-        init_options = {
-          tsserver = { fallbackPath = fallback_tsserver_lib },
-        },
+      local ts_language_settings = {
+        format = { enable = true },
+        inlayHints = inlay_hints,
+        preferences = { importModuleSpecifier = "non-relative" },
+        suggest = { completeFunctionCalls = true },
+        updateImportsOnFileMove = { enabled = "always" },
+      }
+
+      vim.lsp.config("vtsls", {
         settings = {
-          completions = {
-            completeFunctionCalls = true,
+          complete_function_calls = true,
+          vtsls = {
+            autoUseWorkspaceTsdk = true,
+            experimental = {
+              completion = { enableServerSideFuzzyMatch = true },
+            },
           },
-          typescript = {
-            format = { enable = true },
-            inlayHints = inlay_hints,
-          },
-          javascript = {
-            format = { enable = true },
-            inlayHints = inlay_hints,
-          },
+          typescript = vim.tbl_extend("force", ts_language_settings, {
+            tsserver = { maxTsServerMemory = 8192 },
+          }),
+          javascript = ts_language_settings,
         },
       })
 
@@ -175,15 +146,50 @@ return {
         },
       })
 
-      -- Inlay hints are configured above but NOT switched on automatically:
-      -- toggle them per buffer with `mi`.
-      --
-      -- Why off by default: repos with an Nx solution-style tsconfig (files: [],
-      -- include: [], only references) make tsserver open a project containing no
-      -- files, so every inlayHint request throws "Could not find source file"
-      -- from getValidSourceFile. Seen in a large monorepo on TypeScript
-      -- 5.1.6. TO RE-ENABLE ON ATTACH: set this to true.
       local INLAY_HINTS_ON_ATTACH = true
+
+      local progress_by_client = vim.defaulttable()
+      local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+      vim.api.nvim_create_autocmd("LspProgress", {
+        group = vim.api.nvim_create_augroup("lsp_progress_notify", { clear = true }),
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          local value = args.data.params.value
+          if not client or type(value) ~= "table" then
+            return
+          end
+          local tasks = progress_by_client[client.id]
+          local token = args.data.params.token
+          local task_index = #tasks + 1
+          for index, task in ipairs(tasks) do
+            if task.token == token then
+              task_index = index
+              break
+            end
+          end
+          tasks[task_index] = {
+            token = token,
+            done = value.kind == "end",
+            message = string.format("[%3d%%] %s%s",
+              value.kind == "end" and 100 or value.percentage or 0,
+              value.title or "",
+              value.message and (" " .. value.message) or ""),
+          }
+          local lines = {}
+          progress_by_client[client.id] = vim.tbl_filter(function(task)
+            table.insert(lines, task.message)
+            return not task.done
+          end, tasks)
+          vim.notify(table.concat(lines, "\n"), vim.log.levels.INFO, {
+            id = "lsp_progress_" .. client.id,
+            title = client.name,
+            opts = function(notification)
+              notification.icon = #progress_by_client[client.id] == 0 and " "
+                or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+            end,
+          })
+        end,
+      })
 
       if INLAY_HINTS_ON_ATTACH then
         vim.api.nvim_create_autocmd("LspAttach", {
@@ -197,7 +203,7 @@ return {
         })
       end
 
-      vim.lsp.enable({ "ts_ls", "jsonls", "lua_ls", "marksman", "html", "cssls", "gopls", "pylsp" })
+      vim.lsp.enable({ "vtsls", "eslint", "graphql", "jsonls", "lua_ls", "marksman", "html", "cssls", "gopls", "pylsp" })
     end,
   },
   {

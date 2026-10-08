@@ -60,12 +60,16 @@ function _K.code_action()
   -- vim.cmd.Lspsaga("code_action", "++project")
 end
 
+local function open_diagnostic_float(_, bufnr)
+  vim.diagnostic.open_float({bufnr = bufnr, scope = "cursor", focus = false})
+end
+
 function _K.goto_next_diagnostic()
-  vim.diagnostic.jump({count = 1, float = true})
+  vim.diagnostic.jump({count = 1, on_jump = open_diagnostic_float})
 end
 
 function _K.goto_next_error()
-  vim.diagnostic.jump({count = 1, severity = vim.diagnostic.severity.ERROR, float = true})
+  vim.diagnostic.jump({count = 1, severity = vim.diagnostic.severity.ERROR, on_jump = open_diagnostic_float})
 end
 
 function _K.outline()
@@ -273,6 +277,11 @@ return {
   init = function()
     local wk = require("which-key")
 
+    -- nvim 0.11+ defaults grn/gra/grr/gri/grt/grx would make gr wait for timeoutlen
+    for _, default_lsp_map in ipairs({{"n", "grn"}, {"n", "gra"}, {"x", "gra"}, {"n", "grr"}, {"n", "gri"}, {"n", "grt"}, {"n", "grx"}}) do
+      pcall(vim.keymap.del, default_lsp_map[1], default_lsp_map[2])
+    end
+
     wk.add({
       silent = true,
       {
@@ -371,31 +380,31 @@ return {
         "J",
         ":m '>+1<CR>gv=gv",
         desc = "Moves line one down",
-        mode = {"v", "x"},
+        mode = "x",
       },
       {
         "K",
         ":m '<-2<CR>gv=gv",
         desc = "Moves line one up",
-        mode = {"v", "x"},
+        mode = "x",
       },
       {
         "<",
         "<gv",
         desc = "Indents left",
-        mode = {"v", "x"},
+        mode = "x",
       },
       {
         ">",
         ">gv",
         desc = "Indents right",
-        mode = {"v", "x"},
+        mode = "x",
       },
       {
         "p",
         '"_dP',
         desc = "Paste's a line without copying the replacement",
-        mode = {"v", "x"},
+        mode = "x",
       },
       {"<leader>u", "<cmd>UndotreeToggle<cr>", desc = "Toggle undotree"},
       {"<leader>r", ":s/", desc = "Replaces search term within selection"},
@@ -525,7 +534,7 @@ return {
           end
         end,
         desc = "Grep with current word(root dir)",
-        mode = {"n", "v", "x"},
+        mode = {"n", "x"},
         silent = true,
         noremap = true,
         nowait = true,

@@ -37,10 +37,6 @@ return {
     end,
   },
   {
-    "RRethy/vim-illuminate",
-    event = {"BufRead", "BufNewFile"},
-  },
-  {
     "arthurxavierx/vim-caser",
     -- g:caser_prefix is "mc" (init.lua), so mc is the prefix that must load it.
     keys = {{"mc", mode = {"n", "x"}}},

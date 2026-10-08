@@ -62,6 +62,9 @@ protoc-gen-go = "latest"
 "go:github.com/rakyll/hey" = "latest"
 "go:github.com/mitranim/gow" = "latest"
 maven = "latest"
+tree-sitter = "latest"
+"npm:@vtsls/language-server" = "latest"
+"npm:graphql-language-service-cli" = "latest"
 
 [tasks.zsh-plugins-update]
 description = "Re-pin zsh plugins in .chezmoiexternal.toml to upstream HEAD"
@@ -120,4 +123,13 @@ mise mise completion zsh
 TOOLS
 rm -f "${XDG_CACHE_HOME:-$HOME/.cache}"/zsh/zcompdump-*
 exit $failed
+'''
+
+[tasks.nvim-setup]
+description = "Set up nvim end to end via ~/.config/nvim/mise.toml"
+run = '''
+set -e
+nvim_config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
+mise trust "$nvim_config_dir/mise.toml"
+mise -C "$nvim_config_dir" run setup
 '''

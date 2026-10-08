@@ -1,8 +1,6 @@
-local disable_function = function(lang)
-	if lang == "vimdoc" then
-		return true
-	end
-end
+local parsers = require("config.treesitter_parsers")
+
+local skipped_filetypes = { help = true, vimdoc = true }
 
 return {
 	{
@@ -15,18 +13,10 @@ return {
 	},
 	{
 	"nvim-treesitter/nvim-treesitter",
-	branch = "master", -- pinned: the main branch is a breaking API rewrite
+	-- main needs tree-sitter CLI >= 0.26.1 on PATH for :TSInstall; master breaks on nvim 0.12
+	branch = "main",
+	lazy = false,
 	build = ":TSUpdate",
-	event = { "BufRead", "BufNewFile" },
-	init = function(plugin)
-		-- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
-		-- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-		-- no longer trigger the **nvim-treeitter** module to be loaded in time.
-		-- Luckily, the only thins that those plugins need are the custom queries, which we make available
-		-- during startup.
-		require("lazy.core.loader").add_to_rtp(plugin)
-		require("nvim-treesitter.query_predicates")
-	end,
 	dependencies = {
 		{
 			"nvim-treesitter/nvim-treesitter-context",
@@ -44,44 +34,25 @@ return {
 			},
 		},
 	},
-	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-	keys = {
-		{ "<C-y>", desc = "Increment selection" },
-		{ "<bs>", desc = "Decrement selection", mode = "x" },
-	},
-	opts = {
-		highlight = { enable = true, disable = disable_function },
-		indent = { enable = true },
-		ensure_installed = {
-			"bash",
-			"diff",
-			"html",
-			"javascript",
-			"tsx",
-			"typescript",
-			"jsdoc",
-			"json",
-			"jsonc",
-			"lua",
-			"luadoc",
-			"markdown",
-			"markdown_inline",
-			"python",
-			"toml",
-			"yaml",
-		},
-		incremental_selection = {
-			enable = true,
-			keymaps = {
-				init_selection = "<C-y>",
-				node_incremental = "<C-y>",
-				scope_incremental = false,
-				node_decremental = "<bs>",
-			},
-		},
-	},
-	config = function(_, opts)
-		require("nvim-treesitter.configs").setup(opts)
+	config = function()
+		require("nvim-treesitter").install(parsers)
+		vim.treesitter.language.register("json", "jsonc")
+
+		vim.api.nvim_create_autocmd("FileType", {
+			group = vim.api.nvim_create_augroup("treesitter_start", { clear = true }),
+			callback = function(args)
+				if skipped_filetypes[args.match] then
+					return
+				end
+				if pcall(vim.treesitter.start, args.buf) then
+					vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end
+			end,
+		})
+
+		vim.keymap.set("n", "<C-y>", "van", { remap = true, desc = "Increment selection" })
+		vim.keymap.set("x", "<C-y>", "an", { remap = true, desc = "Increment selection" })
+		vim.keymap.set("x", "<bs>", "in", { remap = true, desc = "Decrement selection" })
 	end,
-},
+	},
 }

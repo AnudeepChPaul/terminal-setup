@@ -2,6 +2,15 @@
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
 
+-- Tools from ~/.config/nvim/mise.toml, recorded by `mise run setup` in this directory.
+local mise_bin_paths_file = vim.fn.stdpath("state") .. "/mise-bin-paths"
+if vim.uv.fs_stat(mise_bin_paths_file) then
+  local bin_paths = vim.fn.readfile(mise_bin_paths_file)
+  if #bin_paths > 0 then
+    vim.env.PATH = table.concat(bin_paths, ":") .. ":" .. vim.env.PATH
+  end
+end
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -38,6 +47,7 @@ require("lazy").setup({
     {import = "plugins"},
   },
   checker = {enabled = false},
+  rocks = {enabled = false},
   install = {colorscheme = {"rose-pine", "tokyonight"}},
   change_detection = {notify = false},
   performance = {
