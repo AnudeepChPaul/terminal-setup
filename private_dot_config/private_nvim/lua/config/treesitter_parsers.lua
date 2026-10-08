@@ -1,0 +1,17 @@
+return {
+	"bash",
+	"diff",
+	"html",
+	"javascript",
+	"tsx",
+	"typescript",
+	"jsdoc",
+	"json",
+	"lua",
+	"luadoc",
+	"markdown",
+	"markdown_inline",
+	"python",
+	"toml",
+	"yaml",
+}
