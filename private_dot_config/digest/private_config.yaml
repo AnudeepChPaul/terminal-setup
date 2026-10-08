@@ -1,0 +1,95 @@
+digest_root: ~/digest
+# claude is the only supported tool; digest builds every claude -p command from it
+ai_tool_type: claude
+# notes_today | notes_yesterday; unset or empty section selects the first item
+selection_default: notes_today
+# false hides every git section and stops all git and GitHub fetching
+show_git: true
+git_repository_roots:
+  - ~/Projects/code.hq.twilio.com/flex/flex-admin-api/
+  - ~/Projects/github.com/twilio/twilio-webchat-react-app/
+  - ~/Projects/github.com/twilio-internal/flex-admin-console-e2e-tests/
+  - ~/Projects/github.com/twilio-internal/flex-admin-api-deploy/
+  - ~/Projects/github.com/twilio-internal/console/
+  - ~/Projects/github.com/twilio-internal/one-console/
+  - ~/Projects/github.com/twilio-internal/otk-mesh-config/
+  - ~/Projects/code.hq.twilio.com/twilio/lazarus
+# days that count for your streak and get summaries; weeks always run Monday to Sunday
+work_days: [mon, tue, wed, thu, fri]
+# morning and evening summary notifications (24h HH:MM); empty turns one off
+digest_notifications:
+  morning: "10:50"
+  evening: "20:00"
+# a small key hint under the selected row after a moment of idle
+show_key_hints: true
+# terminal app opened when you click a notification
+terminal_app: "com.mitchellh.ghostty"
+# selected | always; @ action tags and PR tags always show, other tags only on the selected row unless always
+show_tags: selected
+pr_quantity_per_repo: 20
+show_daily_commits: true
+git_auto_sync_interval: 3600s
+green_only: true
+jira_base_url: ""
+
+janitor_patterns:
+  - java_error_in_*.log
+  - hs_err_pid*.log
+  - jbr_err_pid*.log
+  - "*.hprof"
+  - java[0-9].log
+  - "*.pre-dump.bak"
+  - GlobalProtectLogs*.tgz
+jobs:
+  - name: branch reaper
+    dry-run-command: "digest branch-reaper --dry-run --root ~/Projects/"
+    command: "digest branch-reaper --root ~/Projects/"
+  - name: janitor
+    dry-run-command: "digest janitor --dry-run --root ~ --root ~/Projects/ --root ~/digest/reviews/"
+    command: "digest janitor --root ~ --root ~/Projects/"
+  - name: repo sync
+    dry-run-command: "digest repo-sync --dry-run --root ~/Projects/"
+    command: "digest repo-sync --root ~/Projects/"
+
+# empty prompts use digest's built-in defaults
+brag_prompts: ""
+month_brag_prompts: ""
+performance_review_prompts: ""
+
+automations:
+  # Jira ticket; only jira-inator is allowed, its token is checked when installed
+  - name: jira
+    plugins:
+      - jira-inator
+    match:
+      - create a ticket
+      - create ticket
+      - create a jira
+      - create jira
+      - jira ticket
+    draft_prompt: ""
+    create_prompt: ""
+  # Confluence page; only confluence-inator is allowed, its token is checked when installed
+  - name: confluence
+    plugins:
+      - confluence-inator
+    match:
+      - create a confluence
+      - confluence page
+      - confluence doc
+    draft_prompt: ""
+    create_prompt: ""
+  # Google Doc; only the claude.ai Google Drive connector is allowed
+  - name: google doc
+    plugins:
+      - claude_ai_Google_Drive
+    match:
+      - create a google doc
+      - google doc
+    draft_prompt: ""
+    create_prompt: ""
+  # PR review; never offered on @, run by digest for pending PRs
+  - name: pr review
+    plugins:
+      - review-toolkit
+    prompt: ""
