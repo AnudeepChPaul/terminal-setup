@@ -1,0 +1,107 @@
+[tools]
+neovim = "0.12.5"
+node = "24.21.0"
+python = "3.14.8"
+uv = "0.12.22"
+go = "1.27.1"
+tree-sitter = "0.27.0"
+ripgrep = "15.2.0"
+lazygit = "0.65.1"
+lua-language-server = "3.19.1"
+marksman = "2026-02-08"
+stylua = "2.5.2"
+"npm:prettier" = "3.9.9"
+"npm:@vtsls/language-server" = "0.3.0"
+"npm:vscode-langservers-extracted" = "4.10.0"
+"npm:graphql-language-service-cli" = "3.5.0"
+"go:golang.org/x/tools/gopls" = "0.23.0"
+"pipx:python-lsp-server" = "1.15.0"
+
+[tasks.setup]
+description = "Install nvim's tools, plugins, parsers and binaries, then health-check"
+dir = "{{ config_root }}"
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+
+step() { printf '\n==> %s\n' "$1"; }
+fail() { printf 'error: %s\n' "$1" >&2; exit 1; }
+
+step "System prerequisites"
+missing_system_tools=""
+for system_tool in git curl tar cc make; do
+  command -v "$system_tool" >/dev/null || missing_system_tools="$missing_system_tools $system_tool"
+done
+if [ -n "$missing_system_tools" ]; then
+  case "$(uname -s)" in
+    Darwin) install_hint="xcode-select --install" ;;
+    Linux) install_hint="install them with your package manager (e.g. build-essential / base-devel)" ;;
+    *) install_hint="install them with your package manager" ;;
+  esac
+  fail "missing$missing_system_tools; $install_hint"
+fi
+
+if ! command -v trash >/dev/null; then
+  if [ "$(uname -s)" = "Darwin" ]; then
+    command -v brew >/dev/null || fail "trash is missing and Homebrew is not installed"
+    brew install trash
+  else
+    echo "warning: 'trash' not found; neo-tree delete needs it" >&2
+  fi
+fi
+
+step "mise tools"
+mise install
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/nvim"
+mkdir -p "$state_dir"
+pinned_tools=$(mise ls --local --current | awk '{print $1 "@" $2}')
+# shellcheck disable=SC2086
+mise bin-paths $pinned_tools > "$state_dir/mise-bin-paths"
+export PATH="$(paste -sd: "$state_dir/mise-bin-paths"):$PATH"
+
+missing_executables=""
+for executable in nvim node python3 go tree-sitter rg lazygit lua-language-server marksman stylua \
+  prettier vtsls vscode-eslint-language-server vscode-json-language-server \
+  vscode-html-language-server vscode-css-language-server graphql-lsp gopls pylsp; do
+  command -v "$executable" >/dev/null || missing_executables="$missing_executables $executable"
+done
+[ -z "$missing_executables" ] || fail "not on PATH after mise install:$missing_executables"
+
+step "Plugins (lazy-lock.json)"
+nvim --headless "+Lazy! restore" +qa
+nvim --headless -c 'lua
+  local missing = {}
+  for _, plugin in ipairs(require("lazy").plugins()) do
+    if not plugin._.installed then table.insert(missing, plugin.name) end
+  end
+  if #missing > 0 then io.stderr:write("missing plugins: " .. table.concat(missing, ", ") .. "\n") vim.cmd("cquit 1") end' -c qa
+fzf_native_dir="$(nvim --headless -c 'lua io.stdout:write(vim.fn.stdpath("data"))' -c qa)/lazy/telescope-fzf-native.nvim"
+if [ ! -f "$fzf_native_dir/build/libfzf.so" ]; then
+  make -C "$fzf_native_dir"
+fi
+
+step "Treesitter parsers"
+nvim --headless -c 'lua
+  local parsers = require("config.treesitter_parsers")
+  require("nvim-treesitter").install(parsers):wait(600000)
+  local installed = require("nvim-treesitter").get_installed()
+  local missing = vim.tbl_filter(function(parser) return not vim.tbl_contains(installed, parser) end, parsers)
+  if #missing > 0 then io.stderr:write("missing parsers: " .. table.concat(missing, ", ") .. "\n") vim.cmd("cquit 1") end' -c qa
+
+step "blink.cmp fuzzy binary"
+nvim --headless -c 'lua
+  local finished, download_error = false, nil
+  require("blink.cmp.fuzzy.download").ensure_downloaded(function(err) download_error = err finished = true end)
+  vim.wait(120000, function() return finished end, 200)
+  if not finished or download_error then io.stderr:write("blink download failed: " .. tostring(download_error) .. "\n") vim.cmd("cquit 1") end' -c qa
+
+step "Health"
+health_report="$state_dir/setup-health.txt"
+nvim --headless "+checkhealth lazy nvim-treesitter vim.lsp" "+w! $health_report" +qa
+health_errors=$(grep -c "ERROR" "$health_report" || true)
+health_warnings=$(grep -c "WARNING" "$health_report" || true)
+echo "checkhealth: $health_errors errors, $health_warnings warnings ($health_report)"
+[ "$health_errors" -eq 0 ] || { grep -n "ERROR" "$health_report" >&2; exit 1; }
+
+step "Done"
+'''
